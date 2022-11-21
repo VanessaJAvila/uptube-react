@@ -1,3 +1,10 @@
+
+//export default defaultBackendURL = ´localhost:4000´
+//export default videosURL = defaultBackendURL + ´video´
+// fazer um file se possivel com todos os endpoints vindos da base de dados e chamar depois nos files necessarios
+
+
+
 import {useEffect, useState} from "react";
 import axios from "axios";
 
