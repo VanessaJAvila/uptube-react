@@ -1,9 +1,12 @@
 import "./Header.scss";
-import logo from "./logoUpTube.png";
+import logo from "./logo.png";
 
 function Header() {
     return <div className={"Header"}>
-        <img src={logo}/>
+        <div className={"logo"}>
+        <img src={logo} alt ="logo UpTube"/>
+        <span>UpTube</span>
+            </div>
     </div>
 }
 
