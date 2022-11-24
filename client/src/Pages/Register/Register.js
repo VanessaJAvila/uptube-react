@@ -2,7 +2,9 @@ import React, {useContext, useState} from "react";
 import axios from "axios";
 import {useHistory} from 'react-router-dom';
 import {UserContext} from "../../Providers/UserContext";
-import login from "../Login";
+//import login from "../Login";
+import "./Register.scss";
+import logo from "../../Layout/logo.svg";
 
 function Register() {
     const [newUserName, setNewUserName] = useState("");
@@ -40,31 +42,33 @@ function Register() {
     }
 
 
-    return <div>
-
-        <h1> Register </h1>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <input type="text" onChange={e => setNewUserName(e.target.value)} value={newUserName} id="name"
-                       name="name" placeholder="Nome completo" required/>
+    return <div className="register">
+        <div className="container">
+            <div className={"logo"}>
+                <img src={logo} alt ="logo UpTube"/>
             </div>
-            <div>
-                <input type="email" onChange={e => setNewUserEmail(e.target.value)} value={newUserEmail} id="email"
-                       name="email" placeholder="email" required/>
-            </div>
-            <div>
-                <input type="password" onChange={e => setNewUserPassword(e.target.value)} value={newUserPassword}
-                       id="password" name="password" placeholder="Password" required/>
-            </div>
-            <div>
-                <input type="password" onChange={e => setNewUserRepPassword(e.target.value)} value={newUserRepPassword}
-                       id="rep_password" name="rep_password" placeholder="Repetir Password" required/>
-            </div>
-            <button type="submit">Register</button>
-        </form>
-        <a href="/src/Pages/Login">Login</a>
-
-
+            <h1> Criar Conta </h1>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <input type="text" onChange={e => setNewUserName(e.target.value)} value={newUserName} id="name"
+                           name="name" placeholder="Nome completo" required/>
+                </div>
+                <div>
+                    <input type="email" onChange={e => setNewUserEmail(e.target.value)} value={newUserEmail} id="email"
+                           name="email" placeholder="email" required/>
+                </div>
+                <div>
+                    <input type="password" onChange={e => setNewUserPassword(e.target.value)} value={newUserPassword}
+                           id="password" name="password" placeholder="Password" required/>
+                </div>
+                <div>
+                    <input type="password" onChange={e => setNewUserRepPassword(e.target.value)} value={newUserRepPassword}
+                           id="rep_password" name="rep_password" placeholder="Repetir Password" required/>
+                </div>
+                <button type="submit">Registrar</button>
+            </form>
+            <a href="./Login">Fazer Login</a>
+        </div>
     </div>;
 }
 

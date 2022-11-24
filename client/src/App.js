@@ -7,26 +7,26 @@ import Home from "./Pages/Home.js";
 import Login from "./Pages/Login.js";
 import Register from "./Pages/Register/Register.js";
 import {UserContext} from "./Providers/UserContext";
-import React, { useState} from "react";
+import React, {useState} from "react";
 
 function App() {
-    const {user,setUser} = useState(null);
+    const [user, setUser] = useState(null);
 
-
+    console.log(user);
     return (
-            <BrowserRouter>
-                <UserContext.Provider value ={{user,setUser}}>
+        <BrowserRouter>
+            <UserContext.Provider value={{user, setUser}}>
                 <div className="App">
-                    <Header/>
+                    {user && <Header/>}
                     <Switch>
-                            {user && <Route path="/Home" component={Home}/>}
-                            {!user && <Route path="/Register" component={Register}/>}
-                            {!user && <Route path="/Login" component={Login}/>}
-                            <Redirect to={"/Register"}/>
+                        {user && <Route path="/Home" component={Home}/>}
+                        {!user && <Route path="/Register" component={Register}/>}
+                        {!user && <Route path="/Login" component={Login}/>}
+                        <Redirect to={"/Register"}/>
                     </Switch>
                 </div>
-                </UserContext.Provider>
-            </BrowserRouter>
+            </UserContext.Provider>
+        </BrowserRouter>
     )
 }
 

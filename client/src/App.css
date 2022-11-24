@@ -3,6 +3,7 @@
 .App {
     font-family: 'Josefin Sans', sans-serif;
     background-color: #13131A;
-    width:100%;
     height:800px;
+    max-width: 1000px;
+    padding-bottom: 10%;
 }

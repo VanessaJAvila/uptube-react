@@ -2,10 +2,9 @@ import "./Header.scss";
 import logo from "./logo.svg";
 import {useState} from "react";
 import axios from "axios";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import{faCircleUser} from "@fortawesome/free-regular-svg-icons"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
 function Header() {
 
     const [filter, setFilter] = useState("");
