@@ -1,13 +1,17 @@
-import {useState} from "react";
+import React, {useContext, useState} from "react";
 import axios from "axios";
 import {useHistory} from 'react-router-dom';
+import {UserContext} from "../../Providers/UserContext";
+import login from "../Login";
 
 function Register() {
     const [newUserName, setNewUserName] = useState("");
     const [newUserEmail, setNewUserEmail] = useState("");
     const [newUserPassword, setNewUserPassword] = useState("");
     const [newUserRepPassword, setNewUserRepPassword] = useState("");
+    const {user,setUser} = React.useContext(UserContext);
     const history = useHistory();
+    console.log(user, "user register");
 
     let handleSubmit = async (e) => {
 
@@ -58,7 +62,7 @@ function Register() {
             </div>
             <button type="submit">Register</button>
         </form>
-        <a href="/Login">Login</a>
+        <a href="/src/Pages/Login">Login</a>
 
 
     </div>;

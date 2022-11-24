@@ -1,15 +1,17 @@
 
 
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {useHistory} from "react-router-dom";
+import {Redirect, Route, useHistory} from "react-router-dom";
+import {UserContext} from "../Providers/UserContext";
+import Register from "./Register/Register";
 
 function Login() {
 
     const [newUserEmail, setNewUserEmail] = useState("");
     const [newUserPassword, setNewUserPassword] = useState("");
     const history = useHistory();
-
+    const {user, setUser} = React.useContext(UserContext);
     let handleSubmit = async (e) => {
 
         //history.push vai para pagina nova
@@ -25,17 +27,16 @@ function Login() {
             withCredentials: true
         })
             .then((res) => {
-                console.log(res.data.message)
-
-
-
-                history.replace("/Home")
+                console.log(res.data.user, "messagem login frontend");
+                setUser(res.data.user);
+                history.replace("/Home");
             }).catch((error) => {
-            console.log(error)
-            history.replace("/Login");
+            console.log(error, "messagem erro login frontend");
+          //  history.replace("/Login");
+            setUser(null);
         });
-
     }
+
 
 
 /*
@@ -61,7 +62,7 @@ function Login() {
             </div>
             <button type="submit">Login</button>
         </form>
-        <a href="/Register">Register</a>
+        <a href="/Register/Register">Register</a>
 
 
 
