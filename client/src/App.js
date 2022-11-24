@@ -1,6 +1,8 @@
 import './App.css';
 
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
+import Header from "./Layout/Header";
+
 import Home from "./Pages/Home.js";
 import Login from "./Pages/Login.js";
 import Register from "./Pages/Register/Register.js";
@@ -15,6 +17,7 @@ function App() {
             <BrowserRouter>
                 <UserContext.Provider value ={{user,setUser}}>
                 <div className="App">
+                    <Header/>
                     <Switch>
                             {user && <Route path="/Home" component={Home}/>}
                             {!user && <Route path="/Register" component={Register}/>}
