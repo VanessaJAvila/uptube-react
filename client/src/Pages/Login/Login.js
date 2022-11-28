@@ -43,6 +43,10 @@ function Login() {
     }
 
 
+    if (user) {
+        return <Redirect to={"/Home"}/>;
+    }
+
 
 
 

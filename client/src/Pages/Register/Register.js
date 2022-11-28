@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import axios from "axios";
-import {useHistory} from 'react-router-dom';
+import {Redirect, useHistory} from 'react-router-dom';
 import {UserContext} from "../../Providers/UserContext";
 //import login from "../Login";
 import "./Register.scss";
@@ -35,7 +35,8 @@ function Register() {
             withCredentials: true
         })
             .then((res) => {
-                history.replace("/login")
+                setUser(newUser);
+                history.replace("/home");
             }).catch((error) => {
             console.log(error.response.data, "nao fizeste register");
             alert("error: "+ error.response.data)
@@ -43,6 +44,12 @@ function Register() {
         });
 
     }
+
+    if (user) {
+        return <Redirect to={"/Home"}/>;
+    }
+
+
 
 
     return <div className="register">
@@ -79,7 +86,7 @@ function Register() {
 
                 <button type="submit">Registar</button>
 
-                <a href="../Login/Login">Fazer Login</a>
+                <a href="../Login">Fazer Login</a>
 
                 <div className="google">
                     <button type="submit">Entrar com Google</button>

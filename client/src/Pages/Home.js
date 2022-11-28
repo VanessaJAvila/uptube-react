@@ -11,9 +11,10 @@ import {UserContext} from "../Providers/UserContext";
 
 
 function Home() {
+    const {user,setUser} = React.useContext(UserContext);
     const history = useHistory();
     const[videos,setVideos]=useState("");
-    const {user,setUser} = React.useContext(UserContext);
+
 
     useEffect(() => {
         axios.get('http://localhost:5000/video')
@@ -60,7 +61,7 @@ function Home() {
         })
             .then((res) => {
                 setUser(null);
-               // history.replace("/Login");
+               history.replace("/Login");
             }).catch((error) => {
             console.log(error)
             history.replace("/Home");
@@ -70,6 +71,10 @@ function Home() {
 
     if (!videos) {
         return <h1>Aguarda resultados</h1>;
+    }
+
+    if (!user) {
+        return   <Redirect to={"/Login"}/>;
     }
 
 
