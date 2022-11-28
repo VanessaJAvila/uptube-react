@@ -1,0 +1,93 @@
+
+.register{
+    padding: 10%;
+    .container{
+        padding: 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #1C1C24;
+        color: white;
+        border-radius: 25px;
+        .img{
+            width: 80%;
+            height: 100%;
+            margin-left: 21px;
+            margin-top: 10%;
+        }
+        .inputContainer{
+            margin-bottom: 15px;
+            background-color: #13131A;
+            width: 100%;
+            margin-top: 10px;
+            display: flex;
+            align-content: center;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 6px;
+            height: 30px;
+            border: none;
+            outline: none;
+            input{
+                width: 100%;
+                border: none;
+                outline: none;
+                margin-left: 10px;
+                background-color: #13131A;
+                color: white;
+            }
+            .icons{
+                margin-right:5px;
+                color: white;
+            }
+        }
+        .checkboxContainer{
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            label{
+                font-size: 12px;
+            }
+            .checkbox{
+                border: none;
+                outline: none;
+            }
+            a{
+                text-decoration: none;
+            }
+        }
+        button{
+            margin-top: 10px;
+            background-color: #1E75FF;
+            border-radius: 20px;
+            border: none;
+            padding: 8px;
+            width: 100%;
+            color: white;
+        }
+        a {
+            margin: 10px;
+            text-decoration: none;
+        }
+        .google{
+            width: 100%;
+            margin-top: 8%;
+            padding-top: 8%;
+            border-top-color: grey;
+            border-top-style: ridge;
+            border-top-width: 1px;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+
+
+}
+

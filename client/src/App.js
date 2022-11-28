@@ -1,28 +1,32 @@
-
 import './App.css';
 
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
-import Home from "./Pages/home.js";
 import Header from "./Layout/Header";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
 
+import Home from "./Pages/Home.js";
+import Login from "./Pages/Login/Login.js";
+import Register from "./Pages/Register/Register.js";
+import {UserContext} from "./Providers/UserContext";
+import React, {useState} from "react";
 
 function App() {
-    return (
+    const [user, setUser] = useState(null);
 
-            <BrowserRouter>
+    console.log(user);
+    return (
+        <BrowserRouter>
+            <UserContext.Provider value={{user, setUser}}>
                 <div className="App">
-                    <Header/>
+                    {user && <Header/>}
                     <Switch>
-                        <Route path="/Home" component={Home}/>
-                        <Route path="/Register" component={Register}/>
-                        <Route path="/Login" component={Login}/>
-                        <Redirect to={"/Home"}/>
+                        {user && <Route path="/Home" component={Home}/>}
+                        {user===null ? <Route path="/Register" component={Register}/> : <Redirect to={"/Home"}/>}
+                        {user===null ? <Route path="/Login" component={Login}/> : <Redirect to={"/Home"}/>}
+                        {user ? <Redirect to={"/Home"}/>: <Redirect to={"/Register"}/> }
                     </Switch>
                 </div>
-            </BrowserRouter>
-
+            </UserContext.Provider>
+        </BrowserRouter>
     )
 }
 
