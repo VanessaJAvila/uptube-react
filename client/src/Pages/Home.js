@@ -70,7 +70,7 @@ function Home() {
     }
 
     if (!videos) {
-        Header();
+        //Header();
         return <h1>Aguarda resultados</h1>;
     }
 
