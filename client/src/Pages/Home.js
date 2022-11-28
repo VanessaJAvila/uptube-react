@@ -4,16 +4,17 @@
 // fazer um file se possivel com todos os endpoints vindos da base de dados e chamar depois nos files necessarios
 import React,{useContext, useEffect, useState} from "react";
 import axios from "axios";
+import Header from "../Layout/Header";
 import {Redirect, useHistory} from "react-router-dom";
 import {UserContext} from "../Providers/UserContext";
-
-
+import header from "../Layout/Header";
 
 
 function Home() {
     const history = useHistory();
     const[videos,setVideos]=useState("");
     const {user,setUser} = React.useContext(UserContext);
+    //const[public, setPublic] =useState("");
 
     useEffect(() => {
         axios.get('http://localhost:5000/video')
@@ -43,13 +44,8 @@ function Home() {
             <a href="/Register">Register</a>
             <a href="/Login">Login</a>
         </div>;
-
     }
-
-
  */
-
-
 
     let handleSubmit = async (e) => {
         //history.push vai para pagina nova
@@ -67,13 +63,10 @@ function Home() {
         });
     }
 
-
     if (!videos) {
+        Header();
         return <h1>Aguarda resultados</h1>;
     }
-
-
-
 
     return <div>
         <h1> Bem-vindo(a) </h1>
@@ -92,7 +85,6 @@ function Home() {
             <input type="button" onClick={handleSubmit} value="Logout"/>
 
         </div>
-
 
     </div>;
 }

@@ -1,6 +1,7 @@
 import "./Header.scss";
+import {UserContext} from "../Providers/UserContext";
 import logo from "./logo.svg";
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +9,15 @@ import{faCircleUser} from "@fortawesome/free-regular-svg-icons"
 function Header() {
 
     const [filter, setFilter] = useState("");
+    const [search,setSearch] =  useState("");
+    const {user, setUser} = React.useContext(UserContext);
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/video', {params: {search}, withCredentials: true})
+            .then(response => {
+                setSearch(response.data)
+            });
+    }, []);
 
     return <div className={"Header"}>
         <div className={"logo"}>
@@ -20,7 +30,8 @@ function Header() {
                        placeholder={"Pesquisar"}
                        onChange={e => setFilter(e.target.value)}/>
             </div>
-        // If public homepage---->Login button
+
+        // If public homepage
 
         <div className={"login"}>
             <input className={"button"} type="button" value="Iniciar Sessão" onClick="msg()"/>
