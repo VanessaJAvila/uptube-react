@@ -21,10 +21,17 @@ function Header() {
                        placeholder={"Pesquisar"}
                        onChange={e => setFilter(e.target.value)}/>
             </div>
+        // If public homepage---->Login button
+
         <div className={"login"}>
             <input className={"button"} type="button" value="Iniciar Sessão" onClick="msg()"/>
             <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/>
         </div>
+
+        //If user homepage
+
+
+        //If mobile homepage
     </div>
 }
 
