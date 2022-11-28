@@ -4,7 +4,7 @@ import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import Header from "./Layout/Header";
 
 import Home from "./Pages/Home.js";
-import Login from "./Pages/Login.js";
+import Login from "./Pages/Login/Login.js";
 import Register from "./Pages/Register/Register.js";
 import {UserContext} from "./Providers/UserContext";
 import React, {useState} from "react";
@@ -20,9 +20,9 @@ function App() {
                     {user && <Header/>}
                     <Switch>
                         {user && <Route path="/Home" component={Home}/>}
-                        {!user && <Route path="/Register" component={Register}/>}
-                        {!user && <Route path="/Login" component={Login}/>}
-                        <Redirect to={"/Register"}/>
+                        {user===null ? <Route path="/Register" component={Register}/> : <Redirect to={"/Home"}/>}
+                        {user===null ? <Route path="/Login" component={Login}/> : <Redirect to={"/Home"}/>}
+                        {user ? <Redirect to={"/Home"}/>: <Redirect to={"/Register"}/> }
                     </Switch>
                 </div>
             </UserContext.Provider>

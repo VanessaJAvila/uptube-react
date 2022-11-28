@@ -52,25 +52,19 @@ function Home() {
 
 
     let handleSubmit = async (e) => {
-
         //history.push vai para pagina nova
         //history.replace nao permite voltar para a pagina anterior
         e.preventDefault();
-
-
-
         axios.post('http://localhost:5000/user/Logout', true, {
             withCredentials: true
         })
             .then((res) => {
-                console.log(res.data);
                 setUser(null);
                // history.replace("/Login");
             }).catch((error) => {
             console.log(error)
             history.replace("/Home");
         });
-
     }
 
 
@@ -79,10 +73,13 @@ function Home() {
     }
 
 
+
+
     return <div>
         <h1> Bem-vindo(a) </h1>
         <h3>Ao seu perfil</h3>
-        <h2>As minhas reservas</h2>
+        <h2>{user.name}</h2>
+
         <div>
             {
                 videos.map(video=>{
