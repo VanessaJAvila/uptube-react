@@ -10,6 +10,7 @@ import {UserContext, UserProvider} from "./Providers/UserContext";
 import React, {useState} from "react";
 import Recover from "./Pages/Recover Password/Recover";
 import RecoverBytoken from "./Pages/Recover Password/RecoverBytoken";
+import SideBar from "./Layout/SideBar";
 
 function App() {
 

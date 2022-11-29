@@ -6,7 +6,7 @@
   display:flex;
 
   .logo {
-    width: 395px;
+    width: 180px;
 
     img {
       width: 85px;
@@ -16,22 +16,21 @@
     }
   }
     .searching{
-      align-items: center;
+      padding-left: 5%;
       position: relative;
-      width: 900px;
+      width: 60%;
 
       .s-icon{
         position: absolute;
         display: flex;
         margin-top: 17px;
-        margin-left: 77%;
+        margin-left: 90%;
         font-size: 20px;
         color: rgba(248, 247, 247, 0.47);
       }
 
-
       .search{
-        width: 80%;
+        width: 100%;
         border-radius: 8px;
         margin-top: 10px;
         padding: 8px;
@@ -45,6 +44,7 @@
 
   .login {
     position: relative;
+    padding:0;
 
     .button {
       background-color: #1E75FF;
@@ -52,6 +52,7 @@
       border: none;
       padding: 8px;
       margin-top: 10px;
+      margin-left:85%;
       text-align: left;
       width: 162px;
       color: white;
@@ -62,7 +63,7 @@
       display:flex;
       position: absolute;
       color: white;
-      margin-left:136px;
+      margin-left:266px;
       margin-top:-24px;
       font-size: 20px;
     }

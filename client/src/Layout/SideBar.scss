@@ -1,0 +1,72 @@
+.SideBar {
+  background-color: #1C1C24;
+  width: 16%;
+  height: 100%;
+  padding-top: 15px;
+  padding-left: 10px;
+  display: block;
+  flex-direction: column;
+  color: rgba(248, 247, 247, 0.66);
+
+
+  .container-public-home {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 14%;
+
+
+    a {
+      color: lightgrey;
+      text-decoration: none;
+
+
+      .Início {
+        padding-bottom: 12px;
+
+      }
+
+      .Tendências {
+        padding-bottom: 12px;
+      }
+
+      .Canais {
+        padding-bottom: 12px;
+      }
+    }
+  }
+
+    .container-home {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      height: 14%;
+
+
+      a {
+        color: lightgrey;
+        text-decoration: none;
+
+
+        .Historico {
+          padding-bottom: 12px;
+        }
+
+        .Playlists {
+          padding-bottom: 12px;
+        }
+      }
+    }
+
+    .Tags {
+
+      button {
+        background-color: #1C1C24;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        border-radius: 4px;
+        color: lightgrey;
+        font-family: 'Josefin Sans', sans-serif;
+        padding: 4px;
+      }
+    } }
+
