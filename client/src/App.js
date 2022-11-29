@@ -8,6 +8,7 @@ import Login from "./Pages/Login/Login.js";
 import Register from "./Pages/Register/Register.js";
 import {UserContext, UserProvider} from "./Providers/UserContext";
 import React, {useState} from "react";
+import SideBar from "./Layout/SideBar";
 
 function App() {
 

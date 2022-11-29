@@ -6,10 +6,12 @@ import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import{faCircleUser} from "@fortawesome/free-regular-svg-icons"
+
 function Header() {
 
     const [filter, setFilter] = useState("");
     const [search,setSearch] =  useState("");
+    const [page, setPage] = useState(1);
     const {user, setUser} = React.useContext(UserContext);
 
     useEffect(() => {
@@ -18,6 +20,11 @@ function Header() {
                 setSearch(response.data)
             });
     }, []);
+
+    useEffect(() => {
+        setPage(1);
+    }, [filter])
+
 
     return <div className={"Header"}>
         <div className={"logo"}>
@@ -29,19 +36,14 @@ function Header() {
                        type="text"
                        placeholder={"Pesquisar"}
                        onChange={e => setFilter(e.target.value)}/>
+
             </div>
 
-        // If public homepage
-
         <div className={"login"}>
-            <input className={"button"} type="button" value="Iniciar Sessão" onClick="msg()"/>
-            <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/>
+                <input className={"button"} type="button" value="Iniciar Sessão" onClick="msg()"/>
+                <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/>
         </div>
 
-        //If user homepage
-
-
-        //If mobile homepage
     </div>
 }
 
