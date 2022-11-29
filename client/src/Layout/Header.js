@@ -36,9 +36,7 @@ function Header() {
                        type="text"
                        placeholder={"Pesquisar"}
                        onChange={e => setFilter(e.target.value)}/>
-
             </div>
-
         <div className={"login"}>
                 <input className={"button"} type="button" value="Iniciar Sessão" onClick="msg()"/>
                 <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/>
