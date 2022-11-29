@@ -2,21 +2,25 @@
 
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Redirect, Route, useHistory} from "react-router-dom";
+import {Redirect, Route, useHistory, useParams} from "react-router-dom";
 import {UserContext} from "../../Providers/UserContext";
 import Register from "../Register/Register";
-import "./Login.scss";
+
 
 import logo from "../../Layout/logo.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
 
-function Login() {
+function RecoverBytoken() {
 
-    const [newUserEmail, setNewUserEmail] = useState("");
-    const [newUserPassword, setNewUserPassword] = useState("");
+    const [userEmail, setUserEmail] = useState("");
+    const [userPassword, setUserPassword] = useState("");
+    const [userRepPassword, setUserRepPassword] = useState("");
     const history = useHistory();
     const {user, setUser} = React.useContext(UserContext);
+    const {token} = useParams();
+
+
     let handleSubmit = async (e) => {
 
         //history.push vai para pagina nova
@@ -24,21 +28,21 @@ function Login() {
         e.preventDefault();
 
         let newUser = {
-            email: newUserEmail,
-            password: newUserPassword
+            email: userEmail,
+            password: userPassword,
+            rep_password: userRepPassword
         }
 
-        axios.post('http://localhost:5000/user/Login', newUser, {
+        axios.post('http://localhost:5000/user/passwordrecovery/'+token, newUser, {
             withCredentials: true
         })
             .then((res) => {
-                console.log(res.data.user, "messagem login frontend");
+                alert("Password alterada com sucesso!");
                 setUser(res.data.user);
                 history.replace("/Home");
             }).catch((error) => {
-            console.log(error, "messagem erro login frontend");
-          //  history.replace("/Login");
             alert("error: Wrong Credentials!");
+             history.replace("/Recover");
         });
     }
 
@@ -55,31 +59,35 @@ function Login() {
 
 
 
-    return <div className = "login">
+
+
+    return <div className = "recoverBytoken">
 
         <div className="container">
             <div className={"logo"}>
                 <img src={logo} alt ="logo UpTube"/>
             </div>
-            <h1>Fazer Login </h1>
+            <h1>Recuperação de password</h1>
             <form onSubmit={handleSubmit}>
                 <div className="inputContainer">
-                    <input type="email" onChange={e => setNewUserEmail(e.target.value)} value={newUserEmail} id="email"
+                    <input type="email" onChange={e => setUserEmail(e.target.value)} value={userEmail} id="email"
                            name="email" placeholder="email" required/>
                     <FontAwesomeIcon className="icons" icon={faEnvelope}/>
                 </div>
                 <div className="inputContainer" id="pwContainer">
-                    <input type="password" onChange={e => setNewUserPassword(e.target.value)} value={newUserPassword}
+                    <input type="password" onChange={e => setUserPassword(e.target.value)} value={userPassword}
                            id="password" name="password" placeholder="Password" required/>
                     <FontAwesomeIcon className="icons" icon={faKey}/>
                 </div>
-                <a id="forgotPw" href="/RecoverPassword">Esqueceu-se da Password?</a>
-                <button type="submit">Login</button>
-                <a href="/Register">Criar Conta</a>
 
-                <div className="google">
-                    <button type="submit">Entrar com Google</button>
+                <div className="inputContainer">
+                    <input type="password" onChange={e => setUserRepPassword(e.target.value)} value={userRepPassword}
+                           id="rep_password" name="rep_password" placeholder="Repetir Password" required/>
+                    <FontAwesomeIcon className="icons" icon={faKey}/>
                 </div>
+
+                <button type="submit">Alterar Password</button>
+
             </form>
 
 
@@ -88,4 +96,4 @@ function Login() {
 
 }
 
-export default Login;
+export default RecoverBytoken;

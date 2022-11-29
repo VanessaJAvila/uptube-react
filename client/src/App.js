@@ -8,12 +8,13 @@ import Login from "./Pages/Login/Login.js";
 import Register from "./Pages/Register/Register.js";
 import {UserContext, UserProvider} from "./Providers/UserContext";
 import React, {useState} from "react";
+import Recover from "./Pages/Recover Password/Recover";
+import RecoverBytoken from "./Pages/Recover Password/RecoverBytoken";
 
 function App() {
 
     const {user,setUser} = React.useContext(UserContext);
 
-    console.log("app", user);
     return <UserProvider>
         <BrowserRouter>
 
@@ -23,8 +24,9 @@ function App() {
                         <Route path="/Home" component={Home}/>
                         <Route path="/Register" component={Register}/>
                         <Route path="/Login" component={Login}/>
+                        <Route path="/Recoverpassword/:token" component={RecoverBytoken}/>
+                        <Route path="/Recoverpassword" component={Recover}/>
                         <Redirect to={"/Login"}/>
-
                     </Switch>
                 </div>
 

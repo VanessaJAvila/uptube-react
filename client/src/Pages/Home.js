@@ -22,35 +22,6 @@ function Home() {
             .then(response => {setVideos(response.data);});
     }, []);
 
-    /*
-
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/user/sessao',{
-            withCredentials: true
-        })
-            .then(response => {
-                console.log(response.data.user, "user frontend");
-                setUser(response.data);
-            }).catch((error) => {
-            console.log(error, user,"erro sessao" );
-        });
-    }, []);
-*/
-/*
-    if (!user) {
-       // history.replace("/Login");
-        return <div> Tem que fazer Login
-            <Redirect to={"/Login"}/>
-            <a href="/Register">Register</a>
-            <a href="/Login">Login</a>
-        </div>;
-
-    }
-
-
- */
-
 
 
     let handleSubmit = async (e) => {
