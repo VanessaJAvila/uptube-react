@@ -1,56 +1,31 @@
-
 //export default defaultBackendURL = ´localhost:4000´
 //export default videosURL = defaultBackendURL + ´video´
 // fazer um file se possivel com todos os endpoints vindos da base de dados e chamar depois nos files necessarios
-import React,{useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import Header from "../Layout/Header";
 import {Redirect, useHistory} from "react-router-dom";
 import {UserContext} from "../Providers/UserContext";
 
 
-
-
 function Home() {
-    const {user,setUser} = React.useContext(UserContext);
+    const {user, setUser} = React.useContext(UserContext);
     const history = useHistory();
-    const[videos,setVideos]=useState("");
+    const [videos, setVideos] = useState("");
+    const [recommendations, setRecommendations] = useState([]);
     //const[public, setPublic] =useState("");
 
     useEffect(() => {
         axios.get('http://localhost:5000/video')
-            .then(response => {setVideos(response.data);});
-    }, []);
-
-    /*
-
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/user/sessao',{
-            withCredentials: true
-        })
             .then(response => {
-                console.log(response.data.user, "user frontend");
-                setUser(response.data);
-            }).catch((error) => {
-            console.log(error, user,"erro sessao" );
-        });
+                setVideos(response.data);
+            });
+        axios.get('http://localhost:5000/suggested/50popular')
+            .then(response => {
+                console.log('rsp', response)
+                setRecommendations(response.data);
+            }).catch(e => console.log(e)) ;
     }, []);
-*/
-/*
-    if (!user) {
-       // history.replace("/Login");
-        return <div> Tem que fazer Login
-            <Redirect to={"/Login"}/>
-            <a href="/Register">Register</a>
-            <a href="/Login">Login</a>
-        </div>;
-
-    }
-
-
- */
-
 
 
     let handleSubmit = async (e) => {
@@ -62,34 +37,33 @@ function Home() {
         })
             .then((res) => {
                 setUser(null);
-               history.replace("/Login");
+                history.replace("/Login");
             }).catch((error) => {
             console.log(error)
             history.replace("/Home");
         });
     }
 
-    if (!videos) {
+    /*if (!videos) {
         //Header();
         return <h1>Aguarda resultados</h1>;
     }
 
     if (!user) {
-        return   <Redirect to={"/Login"}/>;
-    }
+        return <Redirect to={"/Login"}/>;
+    }*/
 
-
-
-
+    console.log(recommendations)
+    //todo: <h2>{user?.name}</h2> crasha a página
     return <div>
         <h1> Bem-vindo(a) </h1>
         <h3>Ao seu perfil</h3>
-        <h2>{user.name}</h2>
+        <h2>{user?.name}</h2>
 
         <div>
             {
-                videos.map(video=>{
-                 return   <div>
+                recommendations.map(video => {
+                    return <div>
                         {video.title && <h1>{video.title}</h1>}
                     </div>
                 })
