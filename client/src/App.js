@@ -19,7 +19,8 @@ function App() {
         <BrowserRouter>
 
                 <div className="App">
-                    {user && <Header/>}
+                    {!user && <Header/>}
+                    {!user && <SideBar/>}
                     <Switch>
                         <Route path="/Home" component={Home}/>
                         <Route path="/Register" component={Register}/>

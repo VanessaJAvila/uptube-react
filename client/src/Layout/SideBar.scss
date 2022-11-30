@@ -7,32 +7,36 @@
   display: block;
   flex-direction: column;
   color: rgba(248, 247, 247, 0.66);
+  font-size: 12px;
+
+  .User{
+    display:flex;
+    background-color: #30303a;
+    border-radius: 8px;
+    border:1px solid dimgrey;
+    width:95%;
+    height: 30px;
+    margin-bottom: 13px;
+  }
 
 
   .container-public-home {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
     justify-content: space-evenly;
     height: 14%;
+    margin-bottom: 8%;
 
+    p{
+      margin-top: -12px;
+      margin-left: 23px;
+    }
 
     a {
       color: lightgrey;
       text-decoration: none;
 
-
-      .Início {
-        padding-bottom: 12px;
-
-      }
-
-      .Tendências {
-        padding-bottom: 12px;
-      }
-
-      .Canais {
-        padding-bottom: 12px;
-      }
     }
   }
 
@@ -40,25 +44,23 @@
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
+      cursor: pointer;
       height: 14%;
+      margin-top: -13%;
 
+      p{
+        margin-top: -12px;
+        margin-left: 23px;
+      }
 
       a {
         color: lightgrey;
         text-decoration: none;
-
-
-        .Historico {
-          padding-bottom: 12px;
-        }
-
-        .Playlists {
-          padding-bottom: 12px;
-        }
       }
     }
 
     .Tags {
+      cursor: pointer;
 
       button {
         background-color: #1C1C24;
@@ -68,5 +70,26 @@
         font-family: 'Josefin Sans', sans-serif;
         padding: 4px;
       }
-    } }
+    }
+
+  .container-home-2{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 15%;
+    margin-top: 100%;
+    cursor: pointer;
+
+    a {
+      color: lightgrey;
+      text-decoration: none;
+    }
+
+    p{
+      margin-top: -12px;
+      margin-left: 23px;
+    }
+
+  }
+}
 
