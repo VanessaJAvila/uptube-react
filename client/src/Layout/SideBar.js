@@ -13,6 +13,7 @@ import {
     faGear, faRightFromBracket
 } from "@fortawesome/free-solid-svg-icons";
 import {Link, useHistory} from "react-router-dom";
+import avatar from "../Assets/img1.jpg";
 
 
 function SideBar(props) {
@@ -22,15 +23,6 @@ function SideBar(props) {
     const [tags, setTags] = useState("")
     const history = useHistory();
 
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/user', {withCredentials: true})
-            .then(response => {
-                setUser(response.data.user)
-            })
-    }, []);
-
-    console.log(setUser)
 
     useEffect(() => {
         axios.get('http://localhost:5000/tags')
@@ -58,20 +50,20 @@ function SideBar(props) {
     }
 
     return <div className={"SideBar"}>
-        <div className={"User"}>
-            {user?.photo}
+        {user &&  <div className={"User"}><Link to={"./Pages/Profile/Profile"}>
+            <img className={"avatar"} src = {avatar}/>
                 <div className={"Name"}>
                     {user?.name}
-                <div className={"username"}>
+                    <div className={"username"}>
                     {user?.username}
                 </div>
-            </div>
-        </div>
+            </div></Link>
+        </div>}
 
         <div className={"container-public-home"}>
             <div className={"Início"}>
             <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faHouse}/></Link>
-                <p>Playlists</p>
+                <p>Início</p>
             </div>
         <div className={"Tendências"}>
             <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faFire}/></Link>
@@ -83,7 +75,7 @@ function SideBar(props) {
         </div>
         </div>
 
-        <div className={"container-home"}>
+        {user && <div className={"container-home"}>
             <div className={"Histórico"}>
             <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faClockRotateLeft}/></Link>
                 <p>Histórico</p>
@@ -92,7 +84,7 @@ function SideBar(props) {
             <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faPlay}/></Link>
             <p>Playlists</p>
         </div>
-        </div>
+        </div>}
         <div className={"Tags"}>
             <h4>Tags</h4>
             <div className={"tag"}>
@@ -105,7 +97,7 @@ function SideBar(props) {
             <button type="button">gastronomia</button>
             <button type="button">programação</button>
         </div>
-    <div className={"container-home-2"}>
+        {user &&  <div className={"container-home-2"}>
         <div className={"Estudio"}>
         <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faVideo}></FontAwesomeIcon></Link>
         <p>Estúdio</p>
@@ -118,7 +110,7 @@ function SideBar(props) {
             <FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon>
             <p>Terminar sessão</p>
             </div>
-    </div>
+    </div>}
     </div>
 
 }

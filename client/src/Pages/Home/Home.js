@@ -3,10 +3,10 @@
 // fazer um file se possivel com todos os endpoints vindos da base de dados e chamar depois nos files necessarios
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import Header from "../Layout/Header";
+import Header from "../../Layout/Header";
 import {Redirect, useHistory} from "react-router-dom";
-import {UserContext} from "../Providers/UserContext";
-import SideBar from "../Layout/SideBar";
+import {UserContext} from "../../Providers/UserContext";
+import SideBar from "../../Layout/SideBar";
 import "./Home.scss";
 
 
@@ -22,6 +22,9 @@ function Home() {
             .then(response => {
                 setVideos(response.data);
             });
+
+        console.log("video" + videos)
+
         axios.get('http://localhost:5000/suggested/50popular')
             .then(response => {
                 console.log('rsp', response)
@@ -53,13 +56,21 @@ function Home() {
         <Header/>
         <div className={"container-home"}>
             <div className={"Sidebar"}><SideBar/></div>
-        </div>
         <div className={"container-videos"}>
+            {!videos && <p>Loading</p>}
+            {videos && <>
+            {videos.length === 0 &&  <p> Sem Resultados</p>}
+            {videos.map (video => {
+                <p>{video.title}</p>
+            })}
+            </>}
+            </div>
         <h1> Bem-vindo(a) </h1>
         <h3>Ao seu perfil</h3>
         <h2>{user?.name}</h2>
         </div>
         <div>
+
             {
                 recommendations.map(video => {
                     return <div>
