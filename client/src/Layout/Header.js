@@ -14,6 +14,7 @@ function Header() {
     const [page, setPage] = useState(1);
     const {user, setUser} = React.useContext(UserContext);
 
+
     useEffect(() => {
         axios.get('http://localhost:3000/video', {params: {search}, withCredentials: true})
             .then(response => {
@@ -38,8 +39,9 @@ function Header() {
                        onChange={e => setFilter(e.target.value)}/>
             </div>
         <div className={"login"}>
-                <input className={"button"} type="button" value="Iniciar Sessão" onClick="msg()"/>
-                <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/>
+            <a href="/login">
+            <input className={"button"} type="button" value="Iniciar Sessão"/>
+                <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/></a>
         </div>
 
     </div>

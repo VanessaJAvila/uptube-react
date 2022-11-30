@@ -6,6 +6,8 @@ import axios from "axios";
 import Header from "../Layout/Header";
 import {Redirect, useHistory} from "react-router-dom";
 import {UserContext} from "../Providers/UserContext";
+import SideBar from "../Layout/SideBar";
+import "./Home.scss";
 
 
 function Home() {
@@ -44,22 +46,19 @@ function Home() {
         });
     }
 
-    /*if (!videos) {
-        //Header();
-        return <h1>Aguarda resultados</h1>;
-    }
-
-    if (!user) {
-        return <Redirect to={"/Login"}/>;
-    }*/
 
     console.log(recommendations)
     //todo: <h2>{user?.name}</h2> crasha a página
-    return <div>
+    return <div className={"container-home"}>
+        <Header/>
+        <div className={"container-home"}>
+            <div className={"Sidebar"}><SideBar/></div>
+        </div>
+        <div className={"container-videos"}>
         <h1> Bem-vindo(a) </h1>
         <h3>Ao seu perfil</h3>
         <h2>{user?.name}</h2>
-
+        </div>
         <div>
             {
                 recommendations.map(video => {
@@ -68,8 +67,6 @@ function Home() {
                     </div>
                 })
             }
-
-            <input type="button" onClick={handleSubmit} value="Logout"/>
 
         </div>
 

@@ -12,23 +12,25 @@ import {
     faVideo,
     faGear, faRightFromBracket
 } from "@fortawesome/free-solid-svg-icons";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 
 function SideBar(props) {
 
 
-    const [user,setUser] = useState();
-    {/*const {user, setUser} = React.useContext(UserContext);
-  const [tags, setTags] = useState([]);
+    const {user, setUser} = React.useContext(UserContext);
+    const [tags, setTags] = useState("")
+    const history = useHistory();
 
 
     useEffect(() => {
         axios.get('http://localhost:5000/user', {withCredentials: true})
-            .then(r => {
-                setUser(r.data.user)
+            .then(response => {
+                setUser(response.data.user)
             })
     }, []);
+
+    console.log(setUser)
 
     useEffect(() => {
         axios.get('http://localhost:5000/tags')
@@ -37,12 +39,31 @@ function SideBar(props) {
             });
     }, []);
 
-    console.log(setTags);*/}
+    console.log(setTags);
+
+    let handleSubmit = async (e) => {
+        //history.push vai para pagina nova
+        //history.replace nao permite voltar para a pagina anterior
+        e.preventDefault();
+        axios.post('http://localhost:5000/user/Logout', true, {
+            withCredentials: true
+        })
+            .then((res) => {
+                setUser(null);
+                history.replace("/Login");
+            }).catch((error) => {
+            console.log(error)
+            history.replace("/Home");
+        });
+    }
 
     return <div className={"SideBar"}>
         <div className={"User"}>
+            {user?.photo}
                 <div className={"Name"}>
+                    {user?.name}
                 <div className={"username"}>
+                    {user?.username}
                 </div>
             </div>
         </div>
@@ -93,8 +114,8 @@ function SideBar(props) {
             <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faGear}></FontAwesomeIcon></Link>
             <p>Definições</p>
             </div>
-        <div className={"Logout"}>
-            <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon></Link>
+        <div className={"Logout"} onClick={handleSubmit}>
+            <FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon>
             <p>Terminar sessão</p>
             </div>
     </div>
