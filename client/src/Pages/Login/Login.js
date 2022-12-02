@@ -17,6 +17,7 @@ function Login() {
     const [newUserPassword, setNewUserPassword] = useState("");
     const history = useHistory();
     const {user, setUser} = React.useContext(UserContext);
+    const {isLoading,setIsLoading} = React.useContext(UserContext);
     let handleSubmit = async (e) => {
 
         //history.push vai para pagina nova
@@ -34,6 +35,7 @@ function Login() {
             .then((res) => {
                 console.log(res.data.user, "messagem login frontend");
                 setUser(res.data.user);
+                setIsLoading(false)
                 history.replace("/Home");
             }).catch((error) => {
             console.log(error, "messagem erro login frontend");
@@ -42,18 +44,13 @@ function Login() {
         });
     }
 
-
+/*
     if (user) {
-        return <Redirect to={"/Home"}/>;
+        history.replace("/Home");
     }
 
 
-
-
-
-
-
-
+ */
 
     return <div className = "login">
 
@@ -78,7 +75,7 @@ function Login() {
                 <a href="/Register">Criar Conta</a>
 
                 <div className="google">
-                    <button type="submit">Entrar com Google</button>
+                    <button type="submit" >Entrar com Google</button>
                 </div>
             </form>
 

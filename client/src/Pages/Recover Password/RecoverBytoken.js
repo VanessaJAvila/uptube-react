@@ -9,7 +9,7 @@ import Register from "../Register/Register";
 
 import logo from "../../Layout/logo.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faKey} from "@fortawesome/free-solid-svg-icons";
 
 function RecoverBytoken() {
 
@@ -41,20 +41,17 @@ function RecoverBytoken() {
                 setUser(res.data.user);
                 history.replace("/Home");
             }).catch((error) => {
-            alert("error: Wrong Credentials!");
-             history.replace("/Recover");
+                alert("error: Wrong Credentials!");
+          //   history.replace("/Recover");
         });
     }
 
 
+
+
     if (user) {
-        return <Redirect to={"/Home"}/>;
+        history.replace("/Home");
     }
-
-
-
-
-
 
 
 

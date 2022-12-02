@@ -15,7 +15,6 @@ function Home() {
     const {user,setUser} = React.useContext(UserContext);
     const history = useHistory();
     const[videos,setVideos]=useState("");
-    //const[public, setPublic] =useState("");
 
     useEffect(() => {
         axios.get('http://localhost:5000/video')
@@ -39,23 +38,31 @@ function Home() {
             history.replace("/Home");
         });
     }
-
-    if (!videos) {
-        //Header();
-        return <h1>Aguarda resultados</h1>;
+/*
+    if (!auth) {
+        return  <h1>Aguarda resultados</h1>;
     }
 
     if (!user) {
-        return   <Redirect to={"/Login"}/>;
+      return  setAuth(false) &&  history.replace("/Login");
     }
+
+
+ */
+
+    if (!videos) {
+        return <h1>Aguarda resultados</h1>;
+    }
+
+
 
 
 
 
     return <div>
         <h1> Bem-vindo(a) </h1>
-        <h3>Ao seu perfil</h3>
-        <h2>{user.name}</h2>
+        <h3>Ao seu canal</h3>
+        { user&& <h2>{user.name}</h2>}
 
         <div>
             {
@@ -65,7 +72,7 @@ function Home() {
                     </div>
                 })
             }
-
+            <a href={"/Perfil"}>Perfil</a>
             <input type="button" onClick={handleSubmit} value="Logout"/>
 
         </div>
