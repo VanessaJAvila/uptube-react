@@ -20,18 +20,17 @@ function SideBar(props) {
 
 
     const {user, setUser} = React.useContext(UserContext);
-    const [tags, setTags] = useState("")
+    const [tags, setTags] = useState([])
     const history = useHistory();
 
 
     useEffect(() => {
         axios.get('http://localhost:5000/tags')
             .then(response => {
-                setTags(response.data.tags)
+                setTags(response.data)
             });
     }, []);
 
-    console.log(setTags);
 
     let handleSubmit = async (e) => {
         //history.push vai para pagina nova
@@ -88,10 +87,11 @@ function SideBar(props) {
         <div className={"Tags"}>
             <h4>Tags</h4>
             <div className={"tag"}>
-                {/*verificar endpoint correspondente
-                <Link to={"/videos/" + props.tag_id}>
-                    <button type="button">${props.name}</button>
-                </Link>*/}
+                    {tags.map (tag => {
+                        <Link to="/video">
+                    <button>${tag.name}</button>
+                        </Link>
+                    })}
             </div>
             <button type="button">animais</button>
             <button type="button">gastronomia</button>

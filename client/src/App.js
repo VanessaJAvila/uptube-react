@@ -9,6 +9,9 @@ import {UserContext, UserProvider} from "./Providers/UserContext";
 import React, {useState} from "react";
 import Recover from "./Pages/Recover Password/Recover";
 import RecoverBytoken from "./Pages/Recover Password/RecoverBytoken";
+import Header from "./Layout/Header";
+import SideBar from "./Layout/SideBar";
+import Channel from "./Pages/Channel/Channel";
 
 
 function App() {
@@ -17,7 +20,6 @@ function App() {
 
     return <UserProvider>
         <BrowserRouter>
-
                 <div className="App">
                     <Switch>
                         <Route path="/Home" component={Home}/>
@@ -26,8 +28,10 @@ function App() {
                         <Route path="/Login" component={Login}/>
                         <Route path="/Recoverpassword/:token" component={RecoverBytoken}/>
                         <Route path="/Recoverpassword" component={Recover}/>
+                        <Route path ="/Header" component ={Header}/>
+                        <Route path ="/SideBar" component ={SideBar}/>
+                        <Route path ="/Channel" component ={Channel}/>
                         <Redirect to={"/Login"}/>
-
                     </Switch>
                 </div>
 

@@ -11,23 +11,10 @@ import {Link} from "react-router-dom";
 
 function Header() {
 
-    const [filter, setFilter] = useState("");
-    const [search,setSearch] =  useState("");
     const [videos, setVideos] = useState([]);
-    const[page,setPage] = useState(1);
-    const {user, setUser} = React.useContext(UserContext);
+    const {user, setUser, filter, setFilter} = React.useContext(UserContext);
 
 
-    useEffect(() => {
-        axios.get('http://localhost:5000/video', {params: {page,search:filter}, withCredentials: true})
-            .then(response => setVideos( page === 1 ? response.data : [...videos, ...response.data]));
-    }, [page, filter]);
-
-    console.log(setSearch);
-
-    useEffect(() => {
-        setPage(1);
-    }, [filter])
 
 
     return <div className={"Header"}>
@@ -35,7 +22,7 @@ function Header() {
         <img src={logo} alt ="logo UpTube"/>
         </div>
             <div className={"searching"}>
-                <FontAwesomeIcon className={"s-icon"} icon={faMagnifyingGlass}/>
+                <FontAwesomeIcon type={"input"} onClick={setFilter} className={"s-icon"} icon={faMagnifyingGlass}/>
                 <input className={"search"}
                        type="text"
                        placeholder={"Pesquisar"}

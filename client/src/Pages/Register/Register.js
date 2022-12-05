@@ -2,12 +2,12 @@ import React, {useContext, useState} from "react";
 import axios from "axios";
 import {Redirect, useHistory} from 'react-router-dom';
 import {UserContext} from "../../Providers/UserContext";
+import Terms from "./Terms.js";
 //import login from "../Login";
 import "./Register.scss";
 import logo from "../../Layout/logo.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
-
 
 function Register() {
     const [newUserName, setNewUserName] = useState("");
@@ -15,6 +15,13 @@ function Register() {
     const [newUserPassword, setNewUserPassword] = useState("");
     const [newUserRepPassword, setNewUserRepPassword] = useState("");
     const {user,setUser} = React.useContext(UserContext);
+    const [popup,setPopUp] = useState(false);
+
+    const togglePopUp = () => {
+        setPopUp(!popup)
+    }
+
+
     const history = useHistory();
     console.log(user, "user register");
 
@@ -49,9 +56,6 @@ function Register() {
         return <Redirect to={"/Home"}/>;
     }
 
-
-
-
     return <div className="register">
         <div className="container">
             <div className={"logo"}>
@@ -80,8 +84,10 @@ function Register() {
                     <FontAwesomeIcon className="icons" icon={faKey}/>
                 </div>
                 <div className="checkboxContainer">
+                    {/*TODO verificar pq o popup abre e fecha instantaneamente sem receber o input do botao aceitar*/}
                     <input type="checkbox" id="terms" name="terms" value="terms"/>
-                    <label htmlFor="terms"> Aceito os<a href="#" >termos e condições</a></label>
+                    <label htmlFor="terms"> Aceito os<a href={"./Terms"} onClick={togglePopUp}>termos e condições</a></label>
+                        {popup && <Terms></Terms>}
                 </div>
 
                 <button type="submit">Registar</button>
