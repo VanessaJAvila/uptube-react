@@ -7,7 +7,6 @@ const UserContext = React.createContext("");
 const UserProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [videos, setVideos] = useState([]);
-    const [filter, setFilter] = useState("");
 
     useEffect(() => {
         axios.get('http://localhost:5000/user/sessao',{
@@ -22,7 +21,7 @@ const UserProvider = ({children}) => {
     }, []);
 
 
-    return <UserContext.Provider value={{user, setUser, videos,setVideos, filter,setFilter}}>
+    return <UserContext.Provider value={{user, setUser, videos,setVideos}}>
         {children}
     </UserContext.Provider>
 }

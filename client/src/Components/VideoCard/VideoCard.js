@@ -4,7 +4,7 @@ import "./VideoCard.scss"
 
 function VideoCard({title, date, duration, thumbnail, likes, comments, views, username, photo, type}){
     switch (type) {
-        case "recommendation":
+        case "geral":
             return (<div className="video-card">
             <div className="title">{title}</div>
             <div className="days-posted">há {getNumberOfDays(date, Date.now())} dias</div>

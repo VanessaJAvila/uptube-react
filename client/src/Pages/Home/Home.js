@@ -14,24 +14,18 @@ import VideoCard from "../../Components/VideoCard/VideoCard"
 function Home() {
     const {user, setUser} = React.useContext(UserContext);
     const history = useHistory();
-    const [videos, setVideos] = useState("");
+    const [videos, setVideos] = useState([]);
     const [recommendations, setRecommendations] = useState([]);
     //const[public, setPublic] =useState("");
 
     useEffect(() => {
-        axios.get('http://localhost:5000/video')
-            .then(response => {
-                setVideos(response.data);
-            });
-
-        console.log("video" + videos)
-
         axios.get('http://localhost:5000/suggested/50popular')
             .then(response => {
                 console.log('rsp', response)
                 setRecommendations(response.data);
             }).catch(e => console.log(e)) ;
     }, []);
+
 
 
     let handleSubmit = async (e) => {
@@ -49,28 +43,18 @@ function Home() {
             history.replace("/Home");
         });
     }
-
-
-    console.log(recommendations)
     //todo: <h2>{user?.name}</h2> crasha a página
-    return <div className={"container-home"}>
+    return <div className={"container-homepage"}>
         <Header/>
+       <SideBar/>
         <div className={"container-home"}>
-            <div className={"Sidebar"}><SideBar/></div>
-        <div className={"container-videos"}>
-            {!videos && <p>Loading</p>}
-            {videos && <>
-            {videos.length === 0 &&  <p> Sem Resultados</p>}
-            {videos.map (video => {
-                <p>{video.title}</p>
-            })}
-            </>}
+            <h1>Videos sugeridos</h1>
+
+            <div className="geral">
+                {recommendations.map((video, idx) => (<VideoCard type="geral" key={idx} {...video}/>))}
             </div>
-        <h1> Bem-vindo(a) </h1>
-        <h3>Ao seu perfil</h3>
-        <h2>{user?.name}</h2>
-            <div className="suggestions">
-                {recommendations.map((video, idx) => (<VideoCard type="recommendation" key={idx} {...video}/>))}
+            <div className={"see-more-btn"}>
+            <h3>Mostrar Mais</h3>
             </div>
         </div>
         </div>}

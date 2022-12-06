@@ -12,6 +12,7 @@ import RecoverBytoken from "./Pages/Recover Password/RecoverBytoken";
 import Header from "./Layout/Header";
 import SideBar from "./Layout/SideBar";
 import Channel from "./Pages/Channel/Channel";
+import Terms from "./Pages/Register/Terms";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                         <Route path ="/Header" component ={Header}/>
                         <Route path ="/SideBar" component ={SideBar}/>
                         <Route path ="/Channel" component ={Channel}/>
+                        <Route path ="/Terms" component ={Terms}/>
                         <Redirect to={"/Login"}/>
                     </Switch>
                 </div>

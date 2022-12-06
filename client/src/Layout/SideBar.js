@@ -74,7 +74,7 @@ function SideBar(props) {
         </div>
         </div>
 
-        {user && <div className={"container-home"}>
+        {user && <div className={"container-user"}>
             <div className={"Histórico"}>
             <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faClockRotateLeft}/></Link>
                 <p>Histórico</p>
