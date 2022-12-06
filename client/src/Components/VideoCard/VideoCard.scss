@@ -1,0 +1,51 @@
+.suggestions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 2%;
+  color: lightgrey;
+  .video-card{
+    .thumbnail{
+      width: 100%;
+      position: relative;
+      background-color: #1E75FF;
+      border-radius: 1em;
+    }
+    border-style: solid;
+    display: flex;
+    flex-direction: column;
+    width: 47%;
+    border-radius: 1em;
+    .contents{
+      padding: 1%;
+    .title{
+
+    }
+    .days-posted{
+
+    }
+    .length{
+
+    }
+
+    .likes{
+
+    }
+    .comments{
+
+    }
+    .views{
+
+    }
+    .username{
+
+    }
+    .user-photo{
+      background-color: red;
+      position: absolute;
+      border-radius: 50%;
+    }
+    }
+  }
+}

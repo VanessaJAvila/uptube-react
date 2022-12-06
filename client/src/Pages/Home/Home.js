@@ -8,6 +8,7 @@ import {Redirect, useHistory} from "react-router-dom";
 import {UserContext} from "../../Providers/UserContext";
 import SideBar from "../../Layout/SideBar";
 import "./Home.scss";
+import VideoCard from "../../Components/VideoCard/VideoCard"
 
 
 function Home() {
@@ -68,20 +69,10 @@ function Home() {
         <h1> Bem-vindo(a) </h1>
         <h3>Ao seu perfil</h3>
         <h2>{user?.name}</h2>
+            <div className="suggestions">
+                {recommendations.map((video, idx) => (<VideoCard type="recommendation" key={idx} {...video}/>))}
+            </div>
         </div>
-        <div>
-
-            {
-                recommendations.map(video => {
-                    return <div>
-                        {video.title && <h1>{video.title}</h1>}
-                    </div>
-                })
-            }
-
-        </div>
-
-    </div>;
-}
+        </div>}
 
 export default Home;

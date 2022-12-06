@@ -1,14 +1,63 @@
-.container-home {
-position:relative;
+.container-homepage {
+  display: flex;
+  flex-direction: column;
+  background-color: #13131A;
+  position: relative;
+  height: 100vh;
+  width:100vw;
 
 
+  .container-home {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: 60%;
+    margin-top: 6%;
+    margin-left: 19%;
+    position: relative;
+    background-color: #13131A;
+    color: white;
 
-  .container-videos{
-    width :30%;
-    background-color: dimgrey;
-    position:absolute;
-    margin-top: -24%;
-    margin-left: 30%;
 
+    .container-videos {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+      background-color: dimgrey;
+      position: absolute;
+      margin-left: 200px;
+    }
+
+    .container-channels {
+      display: flex;
+      width: 20%;
+      height: 60%;
+      margin-left: 77%;
+      border-radius: 15px;
+      background-color: #1C1C24;
+
+      .title {
+        position: relative;
+        margin-top: 15px;
+        text-align: left;
+        width: 300px;
+        height: 24px;
+        color: lightgrey;
+        border-bottom: 1px solid dimgrey;
+
+        h3 {
+          margin-top: 0;
+          margin-left: 11px;
+          font-size: 14px;
+        }
+      }
+
+      .suggestions-icon {
+        position: absolute;
+        margin-top: -29px;
+        margin-left: 215px;
+        color: lightgrey;
+      }
+    }
   }
 }
