@@ -15,6 +15,7 @@ function Register() {
     const [newUserPassword, setNewUserPassword] = useState("");
     const [newUserRepPassword, setNewUserRepPassword] = useState("");
     const {user,setUser} = React.useContext(UserContext);
+    const {isLoading,setIsLoading} = React.useContext(UserContext);
     const [popup,setPopUp] = useState(false);
 
     const togglePopUp = () => {
@@ -23,7 +24,7 @@ function Register() {
 
 
     const history = useHistory();
-    console.log(user, "user register");
+    console.log(user, "user register1");
 
     let handleSubmit = async (e) => {
 
@@ -43,7 +44,8 @@ function Register() {
         })
             .then((res) => {
                 setUser(newUser);
-                history.replace("/home");
+                setIsLoading(false);
+                history.replace("/Home");
             }).catch((error) => {
             console.log(error.response.data, "nao fizeste register");
             alert("error: "+ error.response.data)
@@ -52,9 +54,15 @@ function Register() {
 
     }
 
+
+/*
     if (user) {
-        return <Redirect to={"/Home"}/>;
+        history.replace("/home");
     }
+
+ */
+
+
 
     return <div className="register">
         <div className="container">

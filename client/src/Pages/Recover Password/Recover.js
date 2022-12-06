@@ -40,9 +40,8 @@ function Recover() {
 
 
     if (user) {
-        return <Redirect to={"/Home"}/>;
+        history.replace("/Home");
     }
-
 
 
 
