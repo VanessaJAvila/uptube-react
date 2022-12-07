@@ -35,7 +35,7 @@ function Login() {
             .then((res) => {
                 console.log(res.data.user, "messagem login frontend");
                 setUser(res.data.user);
-                setIsLoading(false)
+                //setIsLoading(false);
                 history.replace("/Home");
             }).catch((error) => {
             console.log(error, "messagem erro login frontend");

@@ -16,7 +16,7 @@ function Profile() {
     const [updateUserBio, setUpdateUserBio] = useState(user?.bio);
     const [updateUserHeader, setUpdateUserHeader] = useState(user?.header);
     const [updateUserBirthday, setUpdateUserBirthday] = useState(user?.birthday);
-
+    const [photoName, setPhotoName] = useState("");
 
 
    // const {isLoading,setIsLoading} = React.useContext(UserContext);
@@ -41,10 +41,9 @@ function Profile() {
         let newUser = {
             name: updateUserName,
             username: updateUserUsername,
-            photo: updateUserPhoto,
             bio: updateUserBio,
             header: updateUserHeader,
-            birthday: updateUserBirthday
+            birthday: updateUserBirthday,
         }
 
         axios.post('http://localhost:5000/user/'+user.user_id+'/edit', newUser, {
@@ -55,6 +54,24 @@ function Profile() {
                 history.replace("/Profile")
             }).catch((error) => {
             console.log(error.response.data, "nao fizeste edit profile");
+            alert("error: "+ error.response.data)
+            //  history.replace("/Register")
+        });
+
+        const formData = new FormData();
+        formData.append("photo", updateUserPhoto);
+        formData.append("photoName", photoName);
+
+
+        axios.post('http://localhost:5000/user/'+user.user_id+'/edit/upload',formData, {
+            withCredentials: true
+        })
+            .then((res) => {
+                console.log(res, "upload res");
+
+                history.replace("/Profile")
+            }).catch((error) => {
+            console.log(error.response.data, "nao editaste a photo");
             alert("error: "+ error.response.data)
             //  history.replace("/Register")
         });
@@ -101,7 +118,7 @@ function Profile() {
                 <div className="inputContainer">
                     <img alt="profile photo" src={user.photo} />
                     <label>Choose a profile picture:</label>
-                    <input type="file" id="photo" name="photo" accept="image/png, image/jpeg" onChange={e =>  console.log(e.target.files[0], "target") && setUpdateUserPhoto(e.target.files[0])}/>
+                    <input type="file" id="photo" name="photo" accept="image/png, image/jpeg" onChange={e =>  setUpdateUserPhoto(e.target.files[0]) && setPhotoName(e.target.files[0].name)}/>
                     <h2>{console.log(updateUserPhoto)}</h2>
                     <img alt="profile photo" src={updateUserPhoto} />
                 </div>

@@ -8,7 +8,7 @@ import {Redirect, useHistory} from "react-router-dom";
 import {UserContext} from "../../Providers/UserContext";
 import SideBar from "../../Layout/SideBar";
 import "./Home.scss";
-import VideoCard from "../../Components/VideoCard/VideoCard"
+import VideoCard from "../../components/VideoCard/VideoCard"
 
 
 function Home() {
@@ -24,11 +24,11 @@ function Home() {
                 setVideos(response.data);
             });
 
-        console.log("video" + videos)
+        console.log("video" + videos);
 
         axios.get('http://localhost:5000/suggested/50popular')
             .then(response => {
-                console.log('rsp', response)
+                console.log('rsp', response);
                 setRecommendations(response.data);
             }).catch(e => console.log(e)) ;
     }, []);

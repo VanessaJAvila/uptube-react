@@ -25,9 +25,6 @@ const UserProvider = ({children}) => {
 
 
     return <UserContext.Provider value={{user, setUser, videos,setVideos, filter,setFilter}}>
-
-
-    return <UserContext.Provider value={{user, setUser,isLoading,setIsLoading}}>
         {children}
     </UserContext.Provider>
 }
