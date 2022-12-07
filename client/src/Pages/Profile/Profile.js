@@ -2,7 +2,7 @@ import React, {useContext, useState} from "react";
 import axios from "axios";
 import {Redirect, useHistory} from 'react-router-dom';
 import {UserContext} from "../../Providers/UserContext";
-//import login from "../Login";
+import "./Profile.scss";
 import logo from "../../Layout/logo.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
@@ -115,26 +115,26 @@ function Profile() {
                     <FontAwesomeIcon className="icons" icon={faKey}/>
                 </div>
 
-                <div className="inputContainer">
+                <div className="inputContainer" id="avatar">
                     <img alt="profile photo" src={user.photo} />
                     <label>Choose a profile picture:</label>
                     <input type="file" id="photo" name="photo" accept="image/png, image/jpeg" onChange={e =>  setUpdateUserPhoto(e.target.files[0]) && setPhotoName(e.target.files[0].name)}/>
-                    <h2>{console.log(updateUserPhoto)}</h2>
+                    {console.log(updateUserPhoto)}
                     <img alt="profile photo" src={updateUserPhoto} />
                 </div>
 
 
-                <div className="inputContainer">
+                <div className="inputContainer" id="uheader" >
                     <img alt="header" src={user.header} />
                     <label>Choose a header picture:</label>
                     <input type="file" id="header" name="header" accept="image/png, image/jpeg" onChange={e => setUpdateUserHeader(e.target.value)}/>
                 </div>
 
-                <div className="inputContainer">
+                <div className="inputContainer" id="birthdate">
                     <label>Birthday</label>
                     <input type="date" onChange={e => setUpdateUserBirthday(e.target.value)} value={bday}
                            id="birthday" name="birthday" />
-                    <FontAwesomeIcon className="icons" icon={faKey}/>
+
                 </div>
 
 

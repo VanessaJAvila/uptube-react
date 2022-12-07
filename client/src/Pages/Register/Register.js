@@ -8,7 +8,7 @@ import "./Register.scss";
 import logo from "../../Layout/logo.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
-import Popup from "reactjs-popup";
+//import Popup from "reactjs-popup";
 
 function Register() {
     const [newUserName, setNewUserName] = useState("");

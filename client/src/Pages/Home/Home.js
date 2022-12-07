@@ -8,7 +8,7 @@ import {Redirect, useHistory} from "react-router-dom";
 import {UserContext} from "../../Providers/UserContext";
 import SideBar from "../../Layout/SideBar";
 import "./Home.scss";
-import VideoCard from "../../Components/VideoCard/VideoCard"
+import VideoCard from "../../components/VideoCard/VideoCard"
 import {faEllipsis, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
