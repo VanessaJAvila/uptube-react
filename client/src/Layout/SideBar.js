@@ -2,6 +2,7 @@ import "./SideBar.scss";
 import React, {useEffect, useState} from "react";
 import {UserContext} from "../Providers/UserContext";
 import axios from "axios";
+import Profile from "../Pages/Profile/Profile";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
     faHouse,
@@ -17,7 +18,6 @@ import avatar from "../Assets/img1.jpg";
 
 
 function SideBar(props) {
-
 
     const {user, setUser} = React.useContext(UserContext);
     const [tags, setTags] = useState([])
@@ -49,7 +49,7 @@ function SideBar(props) {
     }
 
     return <div className={"SideBar"}>
-        {user &&  <div className={"User"}><Link to={"./Pages/Profile/Profile"}>
+        {user &&  <div className={"User"}><Link to={"/Profile/"}>
             <img className={"avatar"} src = {avatar}/>
                 <div className={"Name"}>
                     {user?.name}
@@ -61,8 +61,8 @@ function SideBar(props) {
 
         <div className={"container-public-home"}>
             <div className={"Início"}>
-            <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faHouse}/></Link>
-                <p>Início</p>
+            <Link to={"./Home"}><FontAwesomeIcon icon={faHouse}/>
+                <p>Início</p></Link>
             </div>
         <div className={"Tendências"}>
             <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faFire}/></Link>
@@ -88,14 +88,11 @@ function SideBar(props) {
             <h4>Tags</h4>
             <div className={"tag"}>
                     {tags.map (tag => {
-                        <Link to="/video">
-                    <button>${tag.name}</button>
+                     return <Link to="/video">
+                    <button>{tag.name}</button>
                         </Link>
                     })}
             </div>
-            <button type="button">animais</button>
-            <button type="button">gastronomia</button>
-            <button type="button">programação</button>
         </div>
         {user &&  <div className={"container-home-2"}>
         <div className={"Estudio"}>
@@ -103,8 +100,8 @@ function SideBar(props) {
         <p>Estúdio</p>
             </div>
         <div className={"Definições"}>
-            <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faGear}></FontAwesomeIcon></Link>
-            <p>Definições</p>
+            <Link to={"/Profile"}><FontAwesomeIcon icon={faGear}></FontAwesomeIcon>
+            <p>Definições</p></Link>
             </div>
         <div className={"Logout"} onClick={handleSubmit}>
             <FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon>

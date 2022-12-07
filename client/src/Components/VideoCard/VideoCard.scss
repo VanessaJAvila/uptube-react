@@ -3,8 +3,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  padding: 2%;
   color: lightgrey;
+  margin-left: -10%;
   .video-card{
     .thumbnail{
       width: 100%;
@@ -15,10 +15,11 @@
     border-style: solid;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin-left: 10px;
-    margin-right: 11px;
-    margin-bottom: 18px;
+    justify-content: space-evenly;
+    margin-top: 2%;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-bottom: 2%;
     width: 34%;
     height: 83%;
     border-radius: 1em;

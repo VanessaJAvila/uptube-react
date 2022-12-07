@@ -44,6 +44,7 @@
         .checkboxContainer{
             margin-bottom: 10px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: space-between;
             width: 100%;
@@ -56,6 +57,7 @@
             }
             a{
                 text-decoration: none;
+                color:white;
             }
         }
         button{

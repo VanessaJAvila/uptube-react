@@ -9,6 +9,8 @@ import {UserContext} from "../../Providers/UserContext";
 import SideBar from "../../Layout/SideBar";
 import "./Home.scss";
 import VideoCard from "../../Components/VideoCard/VideoCard"
+import {faEllipsis, faUserPlus} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 function Home() {
@@ -53,9 +55,25 @@ function Home() {
             <div className="geral">
                 {recommendations.map((video, idx) => (<VideoCard type="geral" key={idx} {...video}/>))}
             </div>
+            <div className={"container-channels"}>
+                <div className={"title"}>
+                    <h3 >Canais Sugeridos</h3>
+                    <FontAwesomeIcon className={'suggestions-icon'} icon={faEllipsis}/>
+                </div>
             <div className={"see-more-btn"}>
             <h3>Mostrar Mais</h3>
             </div>
+            </div>
+            {user &&  <div className={"container-channels-2"}>
+                <div className={"title"}>
+                    <h3 >Canais Sugeridos</h3>
+                    <h3 className={"see-more"}>Ver todos</h3>
+                </div>
+                <div className={"add-channel"}>
+                    <FontAwesomeIcon className={'add-icon'} icon={faUserPlus}/>
+                    <h4>Seguir canal</h4>
+                </div>
+            </div>}
         </div>
         </div>}
 

@@ -3,23 +3,16 @@
   justify-content: center;
   align-items: center;
   background-color: #1C1C24;
-  width: 63%;
-  margin-left:18%;
+
 
   .popup-inner {
     position: relative;
-    border-radius:15px;
     background-color: whitesmoke;
     padding:5%;
     color:#1C1C24;
+      width: 300px;
+      height: 100px;
+      overflow-y: scroll;
 
-
-    .close-btn {
-      position: absolute;
-      display:flex;
-      align-items: flex-end;
-      justify-content: center;
-
-    }
   }
 }

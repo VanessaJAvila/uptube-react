@@ -24,13 +24,19 @@ function Header() {
 
     console.log(videos);
 
+    const handleChange = (e) => {
+        e.preventDefault();
+        setFilter(e.target.value);
+    };
+
 
     return <div className={"Header"}>
         <div className={"logo"}>
             <img src={logo} alt="logo UpTube"/>
         </div>
         <div className={"searching"}>
-            <FontAwesomeIcon className={"s-icon"} icon={faMagnifyingGlass}/>
+            <FontAwesomeIcon type={"input"} onClick={() => handleChange(filter)} className={"s-icon"}
+                             icon={faMagnifyingGlass}/>
             <input className={"search"}
                    type="text"
                    placeholder={"Pesquisar"}
@@ -49,8 +55,8 @@ function Header() {
                 <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/></a>
         </div>) : (<div className={"user-logged"}>
             <FontAwesomeIcon className={"b-icon"} icon={faBell}/>
-            <Link to={"./Pages/Profile/Profile"}><img className={"avatar"} src={avatar}/>
-                <FontAwesomeIcon className={"sort-icon"} icon={faSortDown}/></Link>
+            <Link to={"/Channel"}><img className={"avatar"} src={avatar} alt={"user-photo"}/></Link>
+               <Link to={"/Profile"}><FontAwesomeIcon className={"sort-icon"} icon={faSortDown}/></Link>
         </div>)}
     </div>
 }

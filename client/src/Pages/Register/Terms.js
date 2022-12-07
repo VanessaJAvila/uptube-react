@@ -1,14 +1,9 @@
 import "./Terms.scss";
-import {useState} from "react";
-import popup from "reactjs-popup";
+
 
 
 export default function Terms() {
-    const [popup, setPopUp] = useState(false);
 
-    const togglePopUp = () => {
-        setPopUp(!popup)
-    }
 
     return (<div className={"popup"}>
         <div className={"popup-inner"}>
@@ -60,14 +55,12 @@ export default function Terms() {
                     tempos, sem aviso prévio. Certifique-se de verificar os Termos de Uso atuais sempre que usar o Site.
                     Ao usar este site, você concorda em ficar vinculado à versão atual destes Termos de Uso.</p>
                 <h3>9. Lei aplicável</h3>
-                <p>Qualquer reclamação relacionada ao nosso site será regida pelas leis de INSERIR ESTADO DE RESIDÊNCIA
-                    OU INCORPORAÇÃO, independentemente de conflitos de provisões legais.</p>
+                <p>Qualquer reclamação relacionada ao nosso site será regida pelas leis de Portugal, independentemente
+                    de conflitos de provisões legais.</p>
                 <h3>10. Contato</h3>
                 <p>Em caso de dúvidas ou solicitações, entre em contato conosco:</p>
                 <h4>UpTube</h4>
                 <p>uptubeproject@gmail.com</p>
-
-        <button className={"close-btn"} onClick={togglePopUp}>Aceito</button>
         </div>
     </div>)
 

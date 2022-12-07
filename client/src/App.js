@@ -10,13 +10,11 @@ import React, {useState,useEffect} from "react";
 import Recover from "./Pages/Recover Password/Recover";
 import RecoverBytoken from "./Pages/Recover Password/RecoverBytoken";
 import Header from "./Layout/Header";
-import SideBar from "./Layout/SideBar";
 import Channel from "./Pages/Channel/Channel";
 import Terms from "./Pages/Register/Terms";
 import SideBar from "./Layout/SideBar";
-import axios from "axios";
-import {RequireAuth} from "./components/RequireAuth";
-import {NotRequireAuth} from "./components/NotRequireAuth";
+//import {RequireAuth} from "./components/RequireAuth";
+//import {NotRequireAuth} from "./components/NotRequireAuth";
 import Profile from "./Pages/Profile/Profile";
 
 
@@ -39,7 +37,7 @@ function App() {
                         <Route path ="/Header" component ={Header}/>
                         <Route path ="/SideBar" component ={SideBar}/>
                         <Route path ="/Channel" component ={Channel}/>
-                        <Route path ="/Terms" component ={Terms}/>
+                        {/*<Route path ="/Register" component ={Terms}/>*/}
                         <Redirect to={"/Login"}/>
                     </Switch>
                 </div>
