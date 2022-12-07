@@ -8,6 +8,7 @@ import "./Register.scss";
 import logo from "../../Layout/logo.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
+import Popup from "reactjs-popup";
 
 function Register() {
     const [newUserName, setNewUserName] = useState("");
@@ -21,7 +22,6 @@ function Register() {
     const togglePopUp = () => {
         setPopUp(!popup)
     }
-
 
     const history = useHistory();
     console.log(user, "user register1");
@@ -62,8 +62,6 @@ function Register() {
 
  */
 
-
-
     return <div className="register">
         <div className="container">
             <div className={"logo"}>
@@ -93,9 +91,9 @@ function Register() {
                 </div>
                 <div className="checkboxContainer">
                     {/*TODO verificar pq o popup abre e fecha instantaneamente sem receber o input do botao aceitar*/}
-                    <input type="checkbox" id="terms" name="terms" value="terms"/>
-                    <label htmlFor="terms"> Aceito os<a href={"./Terms"} onClick={togglePopUp}>termos e condições</a></label>
-                        {popup && <Terms></Terms>}
+                    <input type="checkbox" id="terms" name="terms" value="terms" onClick={togglePopUp}/>
+                    <label htmlFor="terms"> Aceito os<a href={"/Register"} onClick={togglePopUp}>termos e condições</a></label>
+                    {!popup && <Terms></Terms>}
                 </div>
 
                 <button type="submit">Registar</button>

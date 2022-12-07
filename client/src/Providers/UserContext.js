@@ -8,7 +8,6 @@ const UserProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [isLoading,setIsLoading]= useState(true);
     const [videos, setVideos] = useState([]);
-    const [filter, setFilter] = useState("");
 
     useEffect(() => {
         axios.get('http://localhost:5000/user/sessao',{

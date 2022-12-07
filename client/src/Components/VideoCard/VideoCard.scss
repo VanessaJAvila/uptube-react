@@ -1,10 +1,10 @@
-.suggestions {
+.geral {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 2%;
+  justify-content: space-evenly;
   color: lightgrey;
+  margin-left: -10%;
   .video-card{
     .thumbnail{
       width: 100%;
@@ -14,9 +14,16 @@
     }
     border-style: solid;
     display: flex;
-    flex-direction: column;
-    width: 47%;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 2%;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-bottom: 2%;
+    width: 34%;
+    height: 83%;
     border-radius: 1em;
+
     .contents{
       padding: 1%;
     .title{
