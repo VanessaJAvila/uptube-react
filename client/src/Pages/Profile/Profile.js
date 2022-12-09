@@ -6,6 +6,8 @@ import "./Profile.scss";
 import logo from "../../Layout/logo.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
+import Header from "../../Layout/Header";
+import SideBar from "../../Layout/SideBar";
 
 
 function Profile() {
@@ -17,6 +19,7 @@ function Profile() {
     const [updateUserHeader, setUpdateUserHeader] = useState(user?.header);
     const [updateUserBirthday, setUpdateUserBirthday] = useState(user?.birthday);
     const [photoName, setPhotoName] = useState("");
+    const [bdayState, setBdaystate] = useState(false);
 
 
    // const {isLoading,setIsLoading} = React.useContext(UserContext);
@@ -51,7 +54,7 @@ function Profile() {
         })
             .then((res) => {
                 setUser(newUser);
-                history.replace("/Profile")
+                window.location.reload(false);
             }).catch((error) => {
             console.log(error.response.data, "nao fizeste edit profile");
             alert("error: "+ error.response.data)
@@ -68,8 +71,7 @@ function Profile() {
         })
             .then((res) => {
                 console.log(res, "upload res");
-
-                history.replace("/Profile")
+                window.location.reload(false);
             }).catch((error) => {
             console.log(error.response.data, "nao editaste a photo");
             alert("error: "+ error.response.data)
@@ -89,10 +91,10 @@ function Profile() {
 
 
     return <div className="Profile">
+        <Header/>
+        <div className="container-profile" >
+        <SideBar/>
         <div className="container">
-            <div className={"logo"}>
-                <img src={logo} alt ="logo UpTube"/>
-            </div>
             <h1> Editar a Conta </h1>
             <form onSubmit={handleSubmit}>
                 <div className="inputContainer">
@@ -118,8 +120,8 @@ function Profile() {
                 <div className="inputContainer" id="avatar">
                     <img alt="profile photo" src={user.photo} />
                     <label>Choose a profile picture:</label>
-                    <input type="file" id="photo" name="photo" accept="image/png, image/jpeg" onChange={e =>  setUpdateUserPhoto(e.target.files[0]) && setPhotoName(e.target.files[0].name)}/>
-                    {console.log(updateUserPhoto)}
+                    <input type="file" id="photo" name="photo" accept="image/png, image/jpeg" onChange={e =>  setUpdateUserPhoto(e.target.files[0]) && setPhotoName(user.email)}/>
+
                     <img alt="profile photo" src={updateUserPhoto} />
                 </div>
 
@@ -132,8 +134,9 @@ function Profile() {
 
                 <div className="inputContainer" id="birthdate">
                     <label>Birthday</label>
-                    <input type="date" onChange={e => setUpdateUserBirthday(e.target.value)} value={bday}
-                           id="birthday" name="birthday" />
+                    {!bdayState&&<h2 onClick={() => setBdaystate(true)}>{bday} </h2>}
+                    {bdayState&&<input type="date" onChange={e => setUpdateUserBirthday(e.target.value)}
+                           id="birthday" name="birthday" />}
 
                 </div>
 
@@ -143,6 +146,7 @@ function Profile() {
 
             </form>
 
+        </div>
         </div>
     </div>;
 }
