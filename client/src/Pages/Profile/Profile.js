@@ -1,11 +1,11 @@
 import React, {useContext, useState} from "react";
 import axios from "axios";
-import {Redirect, useHistory} from 'react-router-dom';
+import {Link, Redirect, useHistory} from 'react-router-dom';
 import {UserContext} from "../../Providers/UserContext";
 import "./Profile.scss";
 import logo from "../../Layout/logo.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faGear, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
 import Header from "../../Layout/Header";
 import SideBar from "../../Layout/SideBar";
 
@@ -19,7 +19,9 @@ function Profile() {
     const [updateUserHeader, setUpdateUserHeader] = useState(user?.header);
     const [updateUserBirthday, setUpdateUserBirthday] = useState(user?.birthday);
     const [photoName, setPhotoName] = useState("");
+    const [headerName,setHeaderName] = useState("");
     const [bdayState, setBdaystate] = useState(false);
+    const [deleteState, setDeleteState] = useState(false);
 
 
    // const {isLoading,setIsLoading} = React.useContext(UserContext);
@@ -45,7 +47,6 @@ function Profile() {
             name: updateUserName,
             username: updateUserUsername,
             bio: updateUserBio,
-            header: updateUserHeader,
             birthday: updateUserBirthday,
         }
 
@@ -66,7 +67,24 @@ function Profile() {
         formData.append("photoName", photoName);
 
 
-        axios.post('http://localhost:5000/user/'+user.user_id+'/edit/upload',formData, {
+        axios.post('http://localhost:5000/user/'+user.user_id+'/edit/upload/avatar',formData, {
+            withCredentials: true
+        })
+            .then((res) => {
+                console.log(res, "upload res");
+                window.location.reload(false);
+            }).catch((error) => {
+            console.log(error.response.data, "nao editaste a photo");
+            alert("error: "+ error.response.data)
+            //  history.replace("/Register")
+        });
+
+
+        const formDataHead = new FormData();
+        formDataHead.append("photo", updateUserHeader);
+        formDataHead.append("photoName", headerName);
+
+        axios.post('http://localhost:5000/user/'+user.user_id+'/edit/upload/header',formDataHead, {
             withCredentials: true
         })
             .then((res) => {
@@ -121,15 +139,13 @@ function Profile() {
                     <img alt="profile photo" src={user.photo} />
                     <label>Choose a profile picture:</label>
                     <input type="file" id="photo" name="photo" accept="image/png, image/jpeg" onChange={e =>  setUpdateUserPhoto(e.target.files[0]) && setPhotoName(user.email)}/>
-
-                    <img alt="profile photo" src={updateUserPhoto} />
                 </div>
 
 
                 <div className="inputContainer" id="uheader" >
                     <img alt="header" src={user.header} />
                     <label>Choose a header picture:</label>
-                    <input type="file" id="header" name="header" accept="image/png, image/jpeg" onChange={e => setUpdateUserHeader(e.target.value)}/>
+                    <input type="file" id="header" name="header" accept="image/png, image/jpeg" onChange={e =>  setUpdateUserHeader(e.target.files[0]) && setHeaderName(user.email)}/>
                 </div>
 
                 <div className="inputContainer" id="birthdate">
@@ -139,6 +155,7 @@ function Profile() {
                            id="birthday" name="birthday" />}
 
                 </div>
+                <Link to={"/Delete"}><p>Tired of uptube? Delete your account?</p></Link>
 
 
                 <button type="submit">Gravar Alterações</button>

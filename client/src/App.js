@@ -16,6 +16,7 @@ import SideBar from "./Layout/SideBar";
 //import {RequireAuth} from "./components/RequireAuth";
 //import {NotRequireAuth} from "./components/NotRequireAuth";
 import Profile from "./Pages/Profile/Profile";
+import Delete from "./Pages/Delete/Delete";
 
 
 
@@ -37,6 +38,7 @@ function App() {
                         <Route path ="/Header" component ={Header}/>
                         <Route path ="/SideBar" component ={SideBar}/>
                         <Route path ="/Channel" component ={Channel}/>
+                        <Route path ="/Delete" component ={Delete}/>
                         {/*<Route path ="/Register" component ={Terms}/>*/}
                         <Redirect to={"/Login"}/>
                     </Switch>
