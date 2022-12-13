@@ -8,7 +8,7 @@ import {Redirect, useHistory} from "react-router-dom";
 import {UserContext} from "../../Providers/UserContext";
 import SideBar from "../../Layout/SideBar";
 import "./Home.scss";
-import VideoCard from "../../components/VideoCard/VideoCard"
+import VideoCard from "../../Components/VideoCard/VideoCard"
 import {faEllipsis, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
@@ -23,7 +23,7 @@ function Home() {
     useEffect(() => {
         axios.get('http://localhost:5000/suggested/50popular')
             .then(response => {
-                console.log('rsp', response);
+                console.log('rsp', response)
                 setRecommendations(response.data);
             }).catch(e => console.log(e)) ;
     }, []);
@@ -51,7 +51,6 @@ function Home() {
        <SideBar/>
         <div className={"container-home"}>
             <h1>Videos sugeridos</h1>
-
             <div className="geral">
                 {recommendations.map((video, idx) => (<VideoCard type="geral" key={idx} {...video}/>))}
             </div>

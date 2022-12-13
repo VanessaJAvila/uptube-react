@@ -1,9 +1,14 @@
 import "./Terms.scss";
-
+import {useState} from "react";
 
 
 export default function Terms() {
 
+    const [popup,setPopUp] = useState(true);
+
+    const togglePopUp = () => {
+        setPopUp(!popup)
+    }
 
     return (<div className={"popup"}>
         <div className={"popup-inner"}>
@@ -61,6 +66,8 @@ export default function Terms() {
                 <p>Em caso de dúvidas ou solicitações, entre em contato conosco:</p>
                 <h4>UpTube</h4>
                 <p>uptubeproject@gmail.com</p>
+
+            <button className={"btn"} onClick={togglePopUp}>Aceito</button>
         </div>
     </div>)
 

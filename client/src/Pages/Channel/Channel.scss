@@ -9,13 +9,14 @@
   .user-details {
 
     background-color: rgba(105, 105, 105, 0.4);
-    position: absolute;
-    width: 80%;
+    position: relative;
+    width: 81%;
     height: 30%;
-    margin-top: 5%;
-    margin-left: 18%;
-    border-radius: 10px;
+    margin-top: 4%;
+    margin-left: 17%;
+    border-radius: 10px 10px 0 0;
     color: white;
+    border-bottom: 2px solid dimgrey;
 
     .edit-channel{
       width: 11%;
@@ -45,13 +46,13 @@
     }
 
     h4{
-      margin-top: -7%;
+      margin-top: -4%;
       margin-left: 2%;
       position: absolute;
     }
 
     p{
-      margin-top: -4%;
+      margin-top: -2%;
       margin-left: 2%;
       position: absolute;
     }
@@ -71,8 +72,8 @@
   h2{
     color: lightgray;
     position: absolute;
-    margin-left: 19%;
-    margin-top: 22%;
+    margin-left: 17%;
+    margin-top: 20%;
     font-size: 15px;
   }
 
@@ -80,10 +81,42 @@
   .achievements{
     background-color:#1C1C24;
     position: absolute;
-    width: 80%;
+    width: 81%;
     height: 16%;
-    margin-top: 24%;
-    margin-left: 18%;
+    margin-top: 22%;
+    margin-left: 17%;
     border-radius:10px;
+
+    .follower, .rising-star{
+      width: 10%;
+      height: 73%;
+      margin-top: 1%;
+      margin-left: 2%;
+      border-radius:10px;
+    }
   }
+  .upload{
+    margin-top: 32%;
+  }
+  .container-uploads{
+    width: 81%;
+    height: 40%;
+    margin-top: 17%;
+    margin-left: 17%;
+    background-color: #30303a;
+  }
+
+  .playlist{
+    margin-top: 52%;
+    margin-left: 18%;
+  }
+
+  /*.container-playlists{
+    width: 81%;
+    height: 40%;
+    margin-top: 52%;
+    margin-left: 17%;
+    background-color: #30303a;
+  }*/
+
 }
