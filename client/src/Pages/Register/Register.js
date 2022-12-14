@@ -90,18 +90,17 @@ function Register() {
                     <FontAwesomeIcon className="icons" icon={faKey}/>
                 </div>
                 <div className="checkboxContainer">
-                    {/*TODO verificar o toggle button(Aceitar) do popup não fecha */}
                     <input type="checkbox" id="terms" name="terms" value ="terms"/>
                     <button className={"terms"} onClick={togglePopUp}> Aceito os termos e condições</button>
-                    {popup && <Terms></Terms>}
+                    {popup && <Terms closeTerms={()=>{
+                        setPopUp(false);
+                    }}/>}
                 </div>
-
                 <button type="submit">Registar</button>
-
                 <a href="../Login">Fazer Login</a>
-
                 <div className="google">
                     <button type="submit">Entrar com Google</button>
+
                 </div>
             </form>
 
