@@ -2,13 +2,12 @@ import "./Header.scss";
 import {UserContext} from "../Providers/UserContext";
 import logo from "./logo.svg";
 import React, {useEffect, useState} from "react";
-import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass, faSortDown} from "@fortawesome/free-solid-svg-icons";
 import {faCircleUser, faBell} from "@fortawesome/free-regular-svg-icons"
 import avatar from "../Assets/img1.jpg"
 import {Link} from "react-router-dom";
-import VideoCard from "../components/VideoCard/VideoCard";
+import VideoCard from "../Components/VideoCard/VideoCard";
 
 function Header() {
 
@@ -31,25 +30,26 @@ function Header() {
         setFilter(e.target.value);
     };
 
+    const {user, setUser,page,setPage,search,setSearch,videos,setVideos} = React.useContext(UserContext);
 
     return <div className={"Header"}>
         <div className={"logo"}>
             <img src={logo} alt="logo UpTube"/>
         </div>
         <div className={"searching"}>
-            <FontAwesomeIcon type={"input"} onClick={() => handleChange(filter)} className={"s-icon"}
-                             icon={faMagnifyingGlass}/>
+            <FontAwesomeIcon className={"s-icon"} icon={faMagnifyingGlass}/>
             <input className={"search"}
                    type="text"
                    placeholder={"Pesquisar"}
-                   onChange={e => setFilter(e.target.value)}/>
-        </div>
-        <div className={"search-results"}>
-            {!videos && <>
+                   onChange={e => setSearch(e.target.value)}/>
+             </div>
+        {/* <div className={"search-results"}>
+            {!videos && <p>A carregar...</p>}
+            {videos && <>
                 {videos.length === 0 && <p> Sem Resultados</p>}
                 {videos.map((v, idx) => (<VideoCard type="geral" key={idx} {...v}/>))}
             </>}
-        </div>
+        </div>*/}
 
         {!user ? (<div className={"login"}>
             <a href="/login">

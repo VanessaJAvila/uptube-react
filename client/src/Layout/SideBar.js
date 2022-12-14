@@ -17,7 +17,7 @@ import {Link, useHistory} from "react-router-dom";
 import avatar from "../Assets/img1.jpg";
 
 
-function SideBar(props) {
+function SideBar() {
 
     const {user, setUser} = React.useContext(UserContext);
     const [tags, setTags] = useState([])
@@ -30,6 +30,8 @@ function SideBar(props) {
                 setTags(response.data)
             });
     }, []);
+
+    console.log(tags)
 
 
     let handleSubmit = async (e) => {
@@ -49,7 +51,7 @@ function SideBar(props) {
     }
 
     return <div className={"SideBar"}>
-        {user && <div className={"User"}><Link to={"/Profile/"}>
+                {user && <div className={"User"}><Link to={"/Profile/"}>
             <img className={"avatar"} src={avatar}/>
             <div className={"Name"}>
                 {user?.name}
@@ -62,8 +64,8 @@ function SideBar(props) {
 
         <div className={"container-public-home"}>
             <div className={"Início"}>
-                <Link to={"./Home"}><FontAwesomeIcon icon={faHouse}/>
-                    <p>Início</p></Link>
+            <Link to={"/Home"}><FontAwesomeIcon icon={faHouse}/>
+                <p>Início</p></Link>
             </div>
             <div className={"Tendências"}>
                 <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faFire}/></Link>

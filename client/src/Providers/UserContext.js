@@ -8,6 +8,8 @@ const UserProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [isLoading,setIsLoading]= useState(true);
     const [videos, setVideos] = useState([]);
+    const [search,setSearch] =useState("");
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         axios.get('http://localhost:5000/user/sessao',{
@@ -24,7 +26,19 @@ const UserProvider = ({children}) => {
     }, []);
 
 
-    return <UserContext.Provider value={{user, setUser, videos,setVideos,isLoading}}>
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/video/search', {params: {page, search}, withCredentials: true})
+            .then(response => setVideos(page === 1 ? response.data : [...videos, ...response.data]))
+    }, [page,search]);
+
+
+    useEffect(() => {
+        setPage(1);
+    }, [search])
+
+
+    return <UserContext.Provider value={{user, setUser, videos,setVideos,isLoading,page,setPage, search,setSearch}}>
         {children}
     </UserContext.Provider>
 }

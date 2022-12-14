@@ -2,8 +2,7 @@ import "./Terms.scss";
 
 
 
-export default function Terms() {
-
+export default function Terms({closeTerms}) {
 
     return (<div className={"popup"}>
         <div className={"popup-inner"}>
@@ -61,6 +60,7 @@ export default function Terms() {
                 <p>Em caso de dúvidas ou solicitações, entre em contato conosco:</p>
                 <h4>UpTube</h4>
                 <p>uptubeproject@gmail.com</p>
+            <button className={"terms"} onClick={closeTerms}>Aceito</button>
         </div>
     </div>)
 

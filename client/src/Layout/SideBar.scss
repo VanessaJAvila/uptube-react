@@ -1,9 +1,11 @@
 .SideBar {
   background-color: #1C1C24;
+  position:fixed;
   width: 16%;
   height: 100vh;
-  padding-top: 15px;
+  padding-top: 2%;
   padding-left: 10px;
+  margin-top:3%;
   display: block;
   flex-direction: column;
   color: rgba(248, 247, 247, 0.66);

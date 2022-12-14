@@ -90,18 +90,17 @@ function Register() {
                     <FontAwesomeIcon className="icons" icon={faKey}/>
                 </div>
                 <div className="checkboxContainer">
-                    {/*TODO verificar pq o popup abre e fecha instantaneamente sem receber o input do botao aceitar*/}
-                    <input type="checkbox" id="terms" name="terms" value="terms" onClick={togglePopUp}/>
-                    <label htmlFor="terms"> Aceito os<a href={"/Register"} onClick={togglePopUp}>termos e condições</a></label>
-                    {!popup && <Terms></Terms>}
+                    <input type="checkbox" id="terms" name="terms" value ="terms"/>
+                    <button className={"terms"} onClick={togglePopUp}> Aceito os termos e condições</button>
+                    {popup && <Terms closeTerms={()=>{
+                        setPopUp(false);
+                    }}/>}
                 </div>
-
                 <button type="submit">Registar</button>
-
                 <a href="../Login">Fazer Login</a>
-
                 <div className="google">
                     <button type="submit">Entrar com Google</button>
+
                 </div>
             </form>
 
