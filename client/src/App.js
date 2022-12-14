@@ -17,6 +17,9 @@ import SideBar from "./Layout/SideBar";
 //import {NotRequireAuth} from "./components/NotRequireAuth";
 import Profile from "./Pages/Profile/Profile";
 import Delete from "./Pages/Delete/Delete";
+import Playlist from "./Pages/Playlist/Playlist";
+import {RequireAuth} from "./components/RequireAuth";
+import {NotRequireAuth} from "./components/NotRequireAuth";
 
 
 
@@ -30,17 +33,21 @@ function App() {
                     <Switch>
                         <Route path="/Home" component={Home}/>
                         <Route path="/Suggested" component={Suggested}/>
-                        <Route path="/Register" component={Register}/>
-                        <Route path="/Login" component={Login}/>
-                        <Route path="/Profile" component={Profile}/>
+                        <RequireAuth>
+                            <Route path="/Profile" component={Profile}/>
+                        </RequireAuth>
                         <Route path="/Recoverpassword/:token" component={RecoverBytoken}/>
                         <Route path="/Recoverpassword" component={Recover}/>
                         <Route path ="/Header" component ={Header}/>
                         <Route path ="/SideBar" component ={SideBar}/>
                         <Route path ="/Channel" component ={Channel}/>
                         <Route path ="/Delete" component ={Delete}/>
+                        <Route path ="/Playlist" component ={Playlist}/>
                         {/*<Route path ="/Register" component ={Terms}/>*/}
-                        <Redirect to={"/Login"}/>
+                        <NotRequireAuth>
+                            <Route path="/Register" component={Register}/>
+                            <Route path="/Login" component={Login}/>
+                        </NotRequireAuth>
                     </Switch>
                 </div>
 

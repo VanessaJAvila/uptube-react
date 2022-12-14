@@ -23,28 +23,13 @@ function Home() {
     useEffect(() => {
         axios.get('http://localhost:5000/suggested/50popular')
             .then(response => {
-                console.log('rsp', response);
+                //console.log('rsp', response);
                 setRecommendations(response.data);
             }).catch(e => console.log(e)) ;
     }, []);
 
 
 
-    let handleSubmit = async (e) => {
-        //history.push vai para pagina nova
-        //history.replace nao permite voltar para a pagina anterior
-        e.preventDefault();
-        axios.post('http://localhost:5000/user/Logout', true, {
-            withCredentials: true
-        })
-            .then((res) => {
-                setUser(null);
-                history.replace("/Login");
-            }).catch((error) => {
-            console.log(error)
-            history.replace("/Home");
-        });
-    }
     //todo: <h2>{user?.name}</h2> crasha a página
     return <div className={"container-homepage"}>
         <Header/>

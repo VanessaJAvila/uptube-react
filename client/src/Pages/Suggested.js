@@ -13,7 +13,7 @@ function Suggested() {
         axios.get(`http://localhost:3000/suggested/allvideos`)
             .then(response => {setAllVideos(response.data);});
     }, []);
-    console.log(userWatchedTags)
+    //console.log(userWatchedTags)
 
 
     return <p>oi</p>;

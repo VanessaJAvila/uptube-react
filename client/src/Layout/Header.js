@@ -18,11 +18,13 @@ function Header() {
 
 
     useEffect(() => {
-        axios.get('http://localhost:5000/video', {params: {search: filter}, withCredentials: true})
-            .then(response => setVideos(response.data))
+        if(filter) {
+            axios.get('http://localhost:5000/video', {params: {search: filter}, withCredentials: true})
+                .then(response => setVideos(response.data))
+        }
     }, [filter]);
 
-    console.log(videos);
+    ////console.log(videos);
 
     const handleChange = (e) => {
         e.preventDefault();

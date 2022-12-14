@@ -27,21 +27,18 @@ function Recover() {
             withCredentials: true
         })
             .then((res) => {
-                console.log(res.data, "Recuperar password");
+                //console.log(res.data, "Recuperar password");
                 alert("Enviado e-mail de recuperação de password")
                 setUser(res.data.user);
                 history.replace("/RecoverBytoken");
             }).catch((error) => {
-            console.log(error, "Falhou Recuperar password");
+            //console.log(error, "Falhou Recuperar password");
             //  history.replace("/Login");
             alert("error: Wrong Credentials!");
         });
     }
 
 
-    if (user) {
-        history.replace("/Home");
-    }
 
 
 
@@ -51,15 +48,16 @@ function Recover() {
             <div className={"logo"}>
                 <img src={logo} alt ="logo UpTube"/>
             </div>
-            <h1>Recuperar Password</h1>
+            {user? <h1>Alterar a Password</h1>:<h1>Recuperar Password</h1> }
+
             <form onSubmit={handleSubmit}>
                 <div className="inputContainer">
                     <input type="email" onChange={e => setNewUserEmail(e.target.value)} value={newUserEmail} id="email"
                            name="email" placeholder="email" required/>
                     <FontAwesomeIcon className="icons" icon={faEnvelope}/>
                 </div>
+                {user? <button type="submit">Enviar email de Alteração de password</button>:<button type="submit">Enviar email de Recuperação</button> }
 
-                <button type="submit">Enviar email de Recuperação</button>
             </form>
 
 

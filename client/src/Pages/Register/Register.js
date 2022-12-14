@@ -24,7 +24,7 @@ function Register() {
     }
 
     const history = useHistory();
-    console.log(user, "user register1");
+    //console.log(user, "user register1");
 
     let handleSubmit = async (e) => {
 
@@ -43,11 +43,11 @@ function Register() {
             withCredentials: true
         })
             .then((res) => {
-                setUser(newUser);
-                setIsLoading(false);
+                //console.log(res.data, "res data register");
+                setUser(res.data.user);
                 history.replace("/Home");
             }).catch((error) => {
-            console.log(error.response.data, "nao fizeste register");
+            //console.log(error.response.data, "nao fizeste register");
             alert("error: "+ error.response.data)
           //  history.replace("/Register")
         });

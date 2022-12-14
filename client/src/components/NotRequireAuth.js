@@ -3,9 +3,11 @@ import {UserContext} from "../Providers/UserContext";
 import {Redirect} from "react-router-dom";
 
 export const NotRequireAuth = ({children})=> {
-    const {user} = React.useContext(UserContext);
+    const {user, isLoading} = React.useContext(UserContext);
 
-    if(user){
+    if(isLoading) return <div>Loading...</div>
+
+    if(!isLoading && user){
         return <Redirect to={"/Home"}/>
     }
     return children

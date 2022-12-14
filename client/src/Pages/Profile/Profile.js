@@ -29,11 +29,6 @@ function Profile() {
     console.log(user, "user Profile");
 
 
-    if (!user) {
-        return <h2>Awaiting user....</h2>
-    }
-
-
 
 
     let handleSubmit = async (e) => {
@@ -53,11 +48,10 @@ function Profile() {
         axios.post('http://localhost:5000/user/'+user.user_id+'/edit', newUser, {
             withCredentials: true
         })
-            .then((res) => {
-                setUser(newUser);
-                window.location.reload(false);
-            }).catch((error) => {
-            console.log(error.response.data, "nao fizeste edit profile");
+        .then((res) => {
+            setUser(newUser);
+        }).catch((error) => {
+            //console.log(error.response.data, "nao fizeste edit profile");
             alert("error: "+ error.response.data)
             //  history.replace("/Register")
         });
@@ -71,10 +65,9 @@ function Profile() {
             withCredentials: true
         })
             .then((res) => {
-                console.log(res, "upload res");
-                window.location.reload(false);
+                //console.log(res, "upload res");
             }).catch((error) => {
-            console.log(error.response.data, "nao editaste a photo");
+            //console.log(error.response.data, "nao editaste a photo");
             alert("error: "+ error.response.data)
             //  history.replace("/Register")
         });
@@ -88,10 +81,9 @@ function Profile() {
             withCredentials: true
         })
             .then((res) => {
-                console.log(res, "upload res");
-                window.location.reload(false);
+                //console.log(res, "upload res");
             }).catch((error) => {
-            console.log(error.response.data, "nao editaste a photo");
+            //console.log(error.response.data, "nao editaste a photo");
             alert("error: "+ error.response.data)
             //  history.replace("/Register")
         });
@@ -155,14 +147,13 @@ function Profile() {
                            id="birthday" name="birthday" />}
 
                 </div>
-                <Link to={"/Delete"}><p>Tired of uptube? Delete your account?</p></Link>
-
 
                 <button type="submit">Gravar Alterações</button>
 
-
             </form>
+            <Link to={"/RecoverPassword"}><p>Change your password</p></Link>
 
+            <Link to={"/Delete"}><p>Tired of uptube? Delete your account?</p></Link>
         </div>
         </div>
     </div>;

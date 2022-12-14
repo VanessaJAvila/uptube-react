@@ -48,23 +48,13 @@ function RecoverBytoken() {
 
 
 
-
-    if (user) {
-        history.replace("/Home");
-    }
-
-
-
-
-
-
     return <div className = "recoverBytoken">
 
         <div className="container">
             <div className={"logo"}>
                 <img src={logo} alt ="logo UpTube"/>
             </div>
-            <h1>Recuperação de password</h1>
+            {user? <h1> Alteração de Password</h1>:<h1>Recuperação de password</h1>}
             <form onSubmit={handleSubmit}>
                 <div className="inputContainer">
                     <input type="email" onChange={e => setUserEmail(e.target.value)} value={userEmail} id="email"

@@ -33,12 +33,12 @@ function Login() {
             withCredentials: true
         })
             .then((res) => {
-                console.log(res.data.user, "messagem login frontend");
+                //console.log(res.data.user, "messagem login frontend");
                 setUser(res.data.user);
                 //setIsLoading(false);
                 history.replace("/Home");
             }).catch((error) => {
-            console.log(error, "messagem erro login frontend");
+            //console.log(error, "messagem erro login frontend");
           //  history.replace("/Login");
             alert("error: Wrong Credentials!");
         });

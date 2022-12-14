@@ -26,7 +26,7 @@ import axios from "axios";
              });
      }, []);
 
-     console.log(achis)
+     //console.log(achis)
 
          return <div className={'channel'}>
              <Header/>
