@@ -13,8 +13,6 @@ import Header from "./Layout/Header";
 import Channel from "./Pages/Channel/Channel";
 import Terms from "./Pages/Register/Terms";
 import SideBar from "./Layout/SideBar";
-//import {RequireAuth} from "./components/RequireAuth";
-//import {NotRequireAuth} from "./components/NotRequireAuth";
 import Profile from "./Pages/Profile/Profile";
 import Delete from "./Pages/Delete/Delete";
 import Playlist from "./Pages/Playlist/Playlist";
@@ -26,16 +24,21 @@ import {NotRequireAuth} from "./components/NotRequireAuth";
 function App() {
 
     const {user,setUser} = React.useContext(UserContext);
-
+ //  <RequireAuth></RequireAuth><NotRequireAuth> </NotRequireAuth>
     return <UserProvider>
         <BrowserRouter>
                 <div className="App">
                     <Switch>
                         <Route path="/Home" component={Home}/>
-                        <Route path="/Suggested" component={Suggested}/>
-                        <RequireAuth>
+
                             <Route path="/Profile" component={Profile}/>
-                        </RequireAuth>
+
+
+                        <Route path="/Register" component={Register}/>
+                        <Route path="/Login" component={Login}/>
+
+                        <Route path="/Suggested" component={Suggested}/>
+
                         <Route path="/Recoverpassword/:token" component={RecoverBytoken}/>
                         <Route path="/Recoverpassword" component={Recover}/>
                         <Route path ="/Header" component ={Header}/>
@@ -44,10 +47,9 @@ function App() {
                         <Route path ="/Delete" component ={Delete}/>
                         <Route path ="/Playlist" component ={Playlist}/>
                         {/*<Route path ="/Register" component ={Terms}/>*/}
-                        <NotRequireAuth>
-                            <Route path="/Register" component={Register}/>
-                            <Route path="/Login" component={Login}/>
-                        </NotRequireAuth>
+
+
+
                     </Switch>
                 </div>
 

@@ -9,7 +9,7 @@ import {useHistory} from "react-router-dom";
 import avatar from "../../Assets/img1.jpg";
 import Follower from "../../Assets/Follower.png";
 import RisingStar from "../../Assets/RisingStar_Silver.png";
-import VideoCard from "../../Components/VideoCard/VideoCard"
+import VideoCard from "../../components/VideoCard/VideoCard"
 import {faPenToSquare} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 

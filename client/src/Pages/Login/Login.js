@@ -17,7 +17,10 @@ function Login() {
     const [newUserPassword, setNewUserPassword] = useState("");
     const history = useHistory();
     const {user, setUser} = React.useContext(UserContext);
-    const {isLoading,setIsLoading} = React.useContext(UserContext);
+
+
+
+
     let handleSubmit = async (e) => {
 
         //history.push vai para pagina nova
@@ -33,13 +36,11 @@ function Login() {
             withCredentials: true
         })
             .then((res) => {
-                //console.log(res.data.user, "messagem login frontend");
+                console.log(res.data.user, "messagem login frontend");
                 setUser(res.data.user);
-                //setIsLoading(false);
                 history.replace("/Home");
             }).catch((error) => {
-            //console.log(error, "messagem erro login frontend");
-          //  history.replace("/Login");
+            console.log(error, "messagem erro login frontend");
             alert("error: Wrong Credentials!");
         });
     }

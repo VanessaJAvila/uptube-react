@@ -7,13 +7,13 @@ import {faMagnifyingGlass, faSortDown} from "@fortawesome/free-solid-svg-icons";
 import {faCircleUser, faBell} from "@fortawesome/free-regular-svg-icons"
 import avatar from "../Assets/img1.jpg"
 import {Link} from "react-router-dom";
-import VideoCard from "../Components/VideoCard/VideoCard";
+import VideoCard from "../components/VideoCard/VideoCard";
+import axios from "axios";
 
 function Header() {
 
     const [filter,setFilter] =useState("");
-    const [videos, setVideos] = useState([]);
-    const {user, setUser} = React.useContext(UserContext);
+    const {user, setUser,page,setPage,search,setSearch,videos,setVideos} = React.useContext(UserContext);
 
 
     useEffect(() => {
@@ -30,7 +30,7 @@ function Header() {
         setFilter(e.target.value);
     };
 
-    const {user, setUser,page,setPage,search,setSearch,videos,setVideos} = React.useContext(UserContext);
+
 
     return <div className={"Header"}>
         <div className={"logo"}>

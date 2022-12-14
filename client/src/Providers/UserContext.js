@@ -16,11 +16,11 @@ const UserProvider = ({children}) => {
             withCredentials: true
         })
         .then(response => {
-            //console.log(response.data.user, "user frontend");
+            console.log(response.data.user, "user frontend");
             setUser(response.data.user);
             setIsLoading(false);
         }).catch((error) => {
-            //console.log(error, user,"erro sessao" );
+            console.log(error,"erro sessao" );
             setIsLoading(false);
         });
     }, []);
