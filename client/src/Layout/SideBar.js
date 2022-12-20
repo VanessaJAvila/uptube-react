@@ -52,7 +52,7 @@ function SideBar() {
 
     return <div className={"SideBar"}>
                 {user && <div className={"User"}><Link to={"/Profile/"}>
-            <img className={"avatar"} src={avatar}/>
+                    <img className={"avatar"} src = {user?.photo} alt={"user-photo"}/>
             <div className={"Name"}>
                 {user?.name}
                 <div className={"username"}>

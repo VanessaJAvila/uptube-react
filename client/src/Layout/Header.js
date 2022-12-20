@@ -7,30 +7,12 @@ import {faMagnifyingGlass, faSortDown} from "@fortawesome/free-solid-svg-icons";
 import {faCircleUser, faBell} from "@fortawesome/free-regular-svg-icons"
 import avatar from "../Assets/img1.jpg"
 import {Link} from "react-router-dom";
-import VideoCard from "../components/VideoCard/VideoCard";
-import axios from "axios";
+import VideoCard from "../Components/VideoCard/VideoCard";
+import Redirect from "react-router-dom/es/Redirect";
 
 function Header() {
 
-    const [filter,setFilter] =useState("");
-    const {user, setUser,page,setPage,search,setSearch,videos,setVideos} = React.useContext(UserContext);
-
-
-    useEffect(() => {
-        if(filter) {
-            axios.get('http://localhost:5000/video', {params: {search: filter}, withCredentials: true})
-                .then(response => setVideos(response.data))
-        }
-    }, [filter]);
-
-    ////console.log(videos);
-
-    const handleChange = (e) => {
-        e.preventDefault();
-        setFilter(e.target.value);
-    };
-
-
+    const {user,setSearch,videos} = React.useContext(UserContext);
 
     return <div className={"Header"}>
         <div className={"logo"}>
@@ -41,15 +23,8 @@ function Header() {
             <input className={"search"}
                    type="text"
                    placeholder={"Pesquisar"}
-                   onChange={e => setSearch(e.target.value)}/>
+                   onChange={e => setSearch(e.target.value) && <Redirect to="/SearchResults"/>}/>
              </div>
-        {/* <div className={"search-results"}>
-            {!videos && <p>A carregar...</p>}
-            {videos && <>
-                {videos.length === 0 && <p> Sem Resultados</p>}
-                {videos.map((v, idx) => (<VideoCard type="geral" key={idx} {...v}/>))}
-            </>}
-        </div>*/}
 
         {!user ? (<div className={"login"}>
             <a href="/login">
@@ -57,7 +32,7 @@ function Header() {
                 <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/></a>
         </div>) : (<div className={"user-logged"}>
             <FontAwesomeIcon className={"b-icon"} icon={faBell}/>
-            <Link to={"/Channel"}><img className={"avatar"} src={avatar} alt={"user-photo"}/></Link>
+            <Link to={"/Channel"}> <img className={"avatar"} src = {user?.photo} alt={"user-photo"}/></Link>
                <Link to={"/Profile"}><FontAwesomeIcon className={"sort-icon"} icon={faSortDown}/></Link>
         </div>)}
     </div>

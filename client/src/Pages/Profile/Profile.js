@@ -27,6 +27,9 @@ function Profile() {
    // const {isLoading,setIsLoading} = React.useContext(UserContext);
     const history = useHistory();
     console.log(user, "user Profile");
+    if(!user){
+        return <h2>Awaiting user....</h2>
+    }
 
 
 
