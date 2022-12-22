@@ -1,17 +1,15 @@
 import './App.css';
-
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import Suggested from "./Pages/Suggested";
 import Home from "./Pages/Home/Home.js";
 import Login from "./Pages/Login/Login.js";
 import Register from "./Pages/Register/Register.js";
 import {UserContext, UserProvider} from "./Providers/UserContext";
-import React, {useState,useEffect} from "react";
+import React from "react";
 import Recover from "./Pages/Recover Password/Recover";
 import RecoverBytoken from "./Pages/Recover Password/RecoverBytoken";
 import Header from "./Layout/Header";
 import Channel from "./Pages/Channel/Channel";
-import Terms from "./Pages/Register/Terms";
 import SideBar from "./Layout/SideBar";
 import Profile from "./Pages/Profile/Profile";
 import Delete from "./Pages/Delete/Delete";
@@ -20,12 +18,15 @@ import {RequireAuth} from "./components/RequireAuth";
 import {NotRequireAuth} from "./components/NotRequireAuth";
 import playlist from "./Pages/Playlist/Playlist";
 
+import Playlist from "./Pages/Playlist/Playlist";
+
+import SearchResults from "./Pages/Search Results/SearchResults";
 
 
 function App() {
 
-    const {user,setUser} = React.useContext(UserContext);
- //  <RequireAuth></RequireAuth><NotRequireAuth> </NotRequireAuth>
+    const {user, setUser} = React.useContext(UserContext);
+    //  <RequireAuth></RequireAuth><NotRequireAuth> </NotRequireAuth>
     return <UserProvider>
         <BrowserRouter>
                 <div className="App">
@@ -44,7 +45,7 @@ function App() {
                         <Route path ="/Delete" component ={Delete}/>
                         <Route path ="/Playlists" component ={Playlists}/>
                         <Route path="/Playlist/:playlist_id" component={playlist}/>
-                        {/*<Route path ="/Register" component ={Terms}/>*/}
+                        <Route path="/SearchResults" component={SearchResults}/>
 
 
 

@@ -30,6 +30,10 @@
         margin-left: 89%;
         font-size: 20px;
         color: rgba(248, 247, 247, 0.47);
+
+        &.active, &:hover{
+          color: antiquewhite;
+        }
       }
 
       .search{
@@ -85,6 +89,10 @@
         margin-left: 10px;
         font-size: 20px;
         color: rgba(248, 247, 247, 0.47);
+
+        &.active, &:hover{
+          color: antiquewhite;
+        }
       }
 
       .avatar {
@@ -103,6 +111,10 @@
         margin-left: 80px;
         font-size: 20px;
         color: rgba(248, 247, 247, 0.47);
+
+        &.active, &:hover{
+          color: antiquewhite;
+        }
       }
     }
 

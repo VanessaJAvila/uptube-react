@@ -1,0 +1,28 @@
+.container-search-results{
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  .container-results{
+    margin-top: 3%;
+    margin-left: 19%;
+    margin-right: 8%;
+
+    .search-title{
+    color:rgba(248, 247, 247, 0.66);
+      padding-top: 11%;
+      margin-left: 2%;
+    }
+
+    .search-results{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-left:10px;
+      margin-right: 10px;
+    }
+  }
+
+
+
+}

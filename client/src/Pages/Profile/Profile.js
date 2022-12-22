@@ -23,6 +23,9 @@ function Profile() {
 
     const history = useHistory();
     console.log(user, "user Profile");
+    if(!user){
+        return <h2>Awaiting user....</h2>
+    }
 
     if (!user) {
         return <h2>Awaiting user....</h2>
