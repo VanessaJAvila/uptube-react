@@ -15,9 +15,10 @@ import Terms from "./Pages/Register/Terms";
 import SideBar from "./Layout/SideBar";
 import Profile from "./Pages/Profile/Profile";
 import Delete from "./Pages/Delete/Delete";
-import Playlist from "./Pages/Playlist/Playlist";
+import Playlists from "./Pages/Playlists/Playlists";
 import {RequireAuth} from "./components/RequireAuth";
 import {NotRequireAuth} from "./components/NotRequireAuth";
+import playlist from "./Pages/Playlist/Playlist";
 
 
 
@@ -29,23 +30,20 @@ function App() {
         <BrowserRouter>
                 <div className="App">
                     <Switch>
+
                         <Route path="/Home" component={Home}/>
-
-                            <Route path="/Profile" component={Profile}/>
-
-
+                        <Route path="/Profile" component={Profile}/>
                         <Route path="/Register" component={Register}/>
                         <Route path="/Login" component={Login}/>
-
                         <Route path="/Suggested" component={Suggested}/>
-
                         <Route path="/Recoverpassword/:token" component={RecoverBytoken}/>
                         <Route path="/Recoverpassword" component={Recover}/>
                         <Route path ="/Header" component ={Header}/>
                         <Route path ="/SideBar" component ={SideBar}/>
                         <Route path ="/Channel" component ={Channel}/>
                         <Route path ="/Delete" component ={Delete}/>
-                        <Route path ="/Playlist" component ={Playlist}/>
+                        <Route path ="/Playlists" component ={Playlists}/>
+                        <Route path="/Playlist/:playlist_id" component={playlist}/>
                         {/*<Route path ="/Register" component ={Terms}/>*/}
 
 

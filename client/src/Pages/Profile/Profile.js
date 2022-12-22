@@ -3,7 +3,6 @@ import axios from "axios";
 import {Link, Redirect, useHistory} from 'react-router-dom';
 import {UserContext} from "../../Providers/UserContext";
 import "./Profile.scss";
-import logo from "../../Layout/logo.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faGear, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
 import Header from "../../Layout/Header";
@@ -21,14 +20,13 @@ function Profile() {
     const [photoName, setPhotoName] = useState("");
     const [headerName,setHeaderName] = useState("");
     const [bdayState, setBdaystate] = useState(false);
-    const [deleteState, setDeleteState] = useState(false);
 
-
-   // const {isLoading,setIsLoading} = React.useContext(UserContext);
     const history = useHistory();
     console.log(user, "user Profile");
 
-
+    if (!user) {
+        return <h2>Awaiting user....</h2>
+    }
 
 
     let handleSubmit = async (e) => {
