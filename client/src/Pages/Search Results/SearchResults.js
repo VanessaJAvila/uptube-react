@@ -4,7 +4,7 @@ import SideBar from "../../Layout/SideBar";
 import React from "react";
 import {UserContext} from "../../Providers/UserContext";
 import {useHistory} from "react-router-dom";
-import VideoCard from "../../Components/VideoCard/VideoCard"
+import VideoCard from "../../Assets/Components/VideoCard/VideoCard"
 
 export default function SearchResults() {
     const {user,search,page, videos} = React.useContext(UserContext);

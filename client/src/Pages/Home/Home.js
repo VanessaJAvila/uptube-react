@@ -1,14 +1,14 @@
 //export default defaultBackendURL = ´localhost:4000´
 //export default videosURL = defaultBackendURL + ´video´
 // fazer um file se possivel com todos os endpoints vindos da base de dados e chamar depois nos files necessarios
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Header from "../../Layout/Header";
-import {Redirect, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {UserContext} from "../../Providers/UserContext";
 import SideBar from "../../Layout/SideBar";
 import "./Home.scss";
-import VideoCard from "../../Components/VideoCard/VideoCard";
+import VideoCard from "../../Assets/Components/VideoCard/VideoCard";
 import {faEllipsis, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import {UserContext} from "../Providers/UserContext";
+import {UserContext} from "../../Providers/UserContext";
 import {Redirect} from "react-router-dom";
 
 export const RequireAuth = ({children})=> {

@@ -7,7 +7,7 @@ import {faMagnifyingGlass, faSortDown} from "@fortawesome/free-solid-svg-icons";
 import {faCircleUser, faBell} from "@fortawesome/free-regular-svg-icons"
 import avatar from "../Assets/img1.jpg"
 import {Link} from "react-router-dom";
-import VideoCard from "../Components/VideoCard/VideoCard";
+import VideoCard from "../Assets/Components/VideoCard/VideoCard";
 import Redirect from "react-router-dom/es/Redirect";
 
 function Header() {

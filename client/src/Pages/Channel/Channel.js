@@ -8,7 +8,7 @@ import {useHistory} from "react-router-dom";
 import beloved from "../../Assets/beloved.svg";
 import stalker from "../../Assets/stalker.svg";
 import starting from "../../Assets/starting.svg";
-import VideoCard from "../../Components/VideoCard/VideoCard"
+import VideoCard from "../../Assets/Components/VideoCard/VideoCard"
 import {faPenToSquare} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 

@@ -1,4 +1,4 @@
-import {getNumberOfDays} from "../../Utils/getDateXDaysAgo";
+import {getNumberOfDays} from "../../../Utils/getDateXDaysAgo";
 import React from "react";
 import "./VideoCard.scss"
 

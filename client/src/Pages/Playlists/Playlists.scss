@@ -1,3 +1,7 @@
+.App{
+  height:100%;
+}
+
 .container-playlist{
   margin-left: 18%;
   padding-top: 4%;
@@ -7,7 +11,50 @@
   .box-playlist{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
     flex-direction: row;
+  }
+  .createPlaylist {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    button{
+      margin-top: 10px;
+      background-color: #1E75FF;
+      border-radius: 20px;
+      border: none;
+      padding: 8px;
+      width: 100%;
+      color: white;
+    }
+    a {
+      margin: 10px;
+      text-decoration: none;
+    }
+  }
+  .inputContainer{
+    margin-bottom: 15px;
+    background-color: #13131A;
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 6px;
+    height: 30px;
+    border: none;
+    input{
+      width: 100%;
+      border: none;
+      margin-left: 10px;
+      background-color: #13131A;
+      color: white;
+    }
+    .icons{
+      margin-right:5px;
+      color: white;
+    }
+
   }
 }

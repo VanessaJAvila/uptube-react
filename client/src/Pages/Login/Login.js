@@ -1,15 +1,14 @@
 
 
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
-import {Redirect, Route, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {UserContext} from "../../Providers/UserContext";
-import Register from "../Register/Register";
 import "./Login.scss";
 
 import logo from "../../Layout/logo.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faKey} from "@fortawesome/free-solid-svg-icons";
 
 function Login() {
 
