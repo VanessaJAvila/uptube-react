@@ -1,17 +1,18 @@
 import './App.css';
 
-
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import Suggested from "./Pages/Suggested";
 import Home from "./Pages/Home/Home.js";
 import Login from "./Pages/Login/Login.js";
 import Register from "./Pages/Register/Register.js";
 import {UserContext, UserProvider} from "./Providers/UserContext";
 import React from "react";
-import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import Recover from "./Pages/Recover Password/Recover";
 import RecoverBytoken from "./Pages/Recover Password/RecoverBytoken";
 import Header from "./Layout/Header";
 import Channel from "./Pages/Channel/Channel";
+import VideoStreamingPage from "./Pages/VideoStreamingPage/VideoStreamingPage";
+import {VideoUploader} from "./Components/VideoUploader/VideoUploader";
 import SideBar from "./Layout/SideBar";
 import Profile from "./Pages/Profile/Profile";
 import Delete from "./Pages/Delete/Delete";
@@ -32,7 +33,6 @@ function App() {
         <BrowserRouter>
                 <div className="App">
                     <Switch>
-
                         <Route path="/Home" component={Home}/>
                         <Route path="/Profile" component={Profile}/>
                         <Route path="/Register" component={Register}/>
@@ -50,6 +50,9 @@ function App() {
 
 
 
+                        <Route path ="/player/:id" component ={VideoStreamingPage}/>
+                        <Route path ="/studio" component ={VideoUploader}/>
+                        <Redirect to={"/Login"}/>
                     </Switch>
                 </div>
 
