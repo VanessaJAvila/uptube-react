@@ -23,6 +23,7 @@ import playlist from "./Pages/Playlist/Playlist";
 
 
 import SearchResults from "./Pages/Search Results/SearchResults";
+import WatchHistory from "./Pages/WatchHistory/WatchHistory";
 
 
 function App() {
@@ -47,11 +48,9 @@ function App() {
                         <Route path ="/Playlists" component ={Playlists}/>
                         <Route path="/Playlist/:playlist_id" component={playlist}/>
                         <Route path="/SearchResults" component={SearchResults}/>
-
-
-
                         <Route path ="/player/:id" component ={VideoStreamingPage}/>
                         <Route path ="/studio" component ={VideoUploader}/>
+                        <Route path ="/history" component ={WatchHistory}/>
                         <Redirect to={"/Login"}/>
                     </Switch>
                 </div>
