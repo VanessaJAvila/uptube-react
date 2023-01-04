@@ -12,13 +12,19 @@ const VideoStreamingPage = ({ video }) => {
     // The video tags
     const [tags, setTags] = useState([]);
 
+    // To check if the user subscribed
     const [subscribed, setSubscribed] = useState(false);
     // Existing video comments
     const [comments, setComments] = useState([])
     // New comment
     const [comment, setComment] = useState([]);
 
+    //Likes
     const [like, setLike] = useState([]);
+    const [liked, setLiked] = useState([]); // To check if the user liked the video
+
+
+
     const [dislike, setDislike] = useState([]);
 
     // Whether the component is currently loading the video
@@ -30,8 +36,9 @@ const VideoStreamingPage = ({ video }) => {
 
     // Retrieve the 'id' path parameter from the URL
     const {id} = useParams();
-
-    const {user} = React.useContext(UserContext);
+    const {user} = React.useContext(UserContext); //fetched logged user
+    const userId = user.user_id; //logged user id
+    const videoId = video.video_id;
     const {history} = useHistory();
 
     useEffect(() => {
@@ -74,10 +81,15 @@ const VideoStreamingPage = ({ video }) => {
                 setIsLoading(false);
             });
         const fetchSubscriptionStatus = async () => {
-            const response = await axios.get(`http://localhost:5000/subscriptions/$${user.user_id}/${video.video_id}`);
+            const response = await axios.get(`http://localhost:5000/subscriptions/${userId}/${videoId}`);
             setSubscribed(response.data.subscribed);
         };
         fetchSubscriptionStatus();
+        const fetchLikeStatus = async () => {
+            const response = await axios.get(`http://localhost:5000/reaction/like/${userId}/${videoId}`);
+            setLiked(response.data.liked);
+        };
+        fetchLikeStatus();
 
     }, [id]);
 
@@ -113,6 +125,30 @@ const VideoStreamingPage = ({ video }) => {
                 console.error(err);
             });
     }
+
+    const handleLikeButton = async (user_id, video_id) => {
+        try {
+            if (liked) {
+                // Unlike if user has already liked the video
+                await axios.delete(`http://localhost:5000/subscriptions/delete/${user_following_id}/${user_followed_id}`);
+                setSubscribed(false);
+                console.log('Successfully unsubscribed from channel');
+            }
+            else {
+                // Subscribe if user is not already subscribed
+                const response = await axios.post('http://localhost:5000/subscriptions/add', { user_following_id, user_followed_id });
+                if (response.data.success) {
+                    setSubscribed(true);
+                    console.log('Successfully subscribed to channel');
+                } else {
+                    console.log(response.data.error);
+                }
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
 
     const handleDislike = (userId, videoId) => {
         axios.post('http://localhost:5000/reaction/new', {
@@ -202,7 +238,7 @@ const VideoStreamingPage = ({ video }) => {
                                 <img className={"avatar"} src={video.avatar} alt={"user-photo"}/>
                                 <div className="username">{video.username}</div>
                                 <div className="subscribe">
-                                    <button onClick={() => handleSubscribe(user.user_id, video.video_id)}>{subscribed ? 'Unsubscribe' : 'Subscribe'}</button>
+                                    <button onClick={() => handleSubscribe(userId, videoId)}>{subscribed ? 'Unsubscribe' : 'Subscribe'}</button>
                                 </div>
 
                                 <div className="views">{video.views} visualizações</div>
@@ -211,12 +247,12 @@ const VideoStreamingPage = ({ video }) => {
                             <div className="reaction-buttons">
                                 <div className="likes-count">{video.likes} (likes)</div>
                                 <div className="like-button">
-                                    <button onClick={() => handleLike(user.user_id, video.video_id)}>Like</button>
+                                    <button onClick={() => handleLike(userId, videoId)}>Like</button>
                                     {like}
                                 </div>
                                 <div className="dislikes-count">{video.dislikes} (dislikes)</div>
                                 <div className="dislike-button">
-                                    <button onClick={() => handleDislike(user.user_id, video.video_id)}>Dislike</button>
+                                    <button onClick={() => handleDislike(userId, videoId)}>Dislike</button>
                                     {dislike}
                                 </div>
                             </div>
