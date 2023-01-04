@@ -16,7 +16,7 @@ export default function SearchResults() {
         <SideBar/>
         <div className={"container-results"}>
             <h4 className={"search-title"}>Resultados da pesquisa</h4>
-            <div className={"search-results"}>
+            <div className={"geral"}>
             {!videos && <p>A carregar...</p>}
             {videos && <>
                 {videos.length === 0 && <p className={"no results"}> Sem Resultados</p>}

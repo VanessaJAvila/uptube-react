@@ -5,14 +5,13 @@
   flex-direction: column;
   position: relative;
 
-
   .user-details {
     position: relative;
     background-color: #13131A;
     width: 81%;
     height: 30%;
     margin-top: 4%;
-    margin-left: 17%;
+    margin-left: 18%;
     border-bottom: 1px solid dimgrey;
     color: white;
 
@@ -29,6 +28,15 @@
       height: 97%;
       position: absolute;
       border-radius: 10px 10px 0 0;
+
+        .edit-bg-icon{
+          position: absolute;
+          margin-top: 6%;
+          margin-left: 50%;
+        }
+        a{
+          color:lightgray;
+        }
     }}
 
     .edit-user-details {
@@ -59,12 +67,29 @@
         }
       }
 
-
       .user-data {
-
         width: 95%;
         position: relative;
         margin-top: -7%;
+
+        a{
+          color:lightgray;
+        }
+
+        .edit-avatar-icon{
+          position: absolute;
+          margin-top: 17%;
+          margin-left: 92%;
+        }
+
+        .edit-user-data-icon{
+          position: absolute;
+          font-size: 12px;
+          margin-top: -5%;
+          margin-left: 14%;
+        }
+
+
 
         .avatar {
           width: 180px;
@@ -84,8 +109,10 @@
         }
 
         .bio {
-          margin-top: -3%;
+          margin-top: -2%;
           margin-left: 1%;
+          font-size: 10pt;
+
         }
         .stats-user {
           display: flex;
@@ -106,56 +133,180 @@
   h2 {
     color: lightgray;
     position: absolute;
-    margin-left: 17%;
+    margin-left: 19%;
     margin-top: 20%;
     font-size: 15px;
   }
 
+  .hide-icon{
+    font-size: 12px;
+  }
 
   .achievements {
+    display: flex;
     background-color: #1C1C24;
     position: absolute;
-    width: 81%;
+    width: 80%;
     height: 16%;
     margin-top: 22%;
-    margin-left: 17%;
+    margin-left: 19%;
     border-radius: 10px;
+    flex-wrap: nowrap;
 
-    .adoram-me, .começar {
-      width: 10%;
-      height: 73%;
+    .goldStalker{
+      background-color: #13131A;
+      width: 7%;
+      height: 87%;
       margin-top: 1%;
-      margin-left: 2%;
+      margin-left: 25%;
+      position: absolute;
       border-radius: 10px;
+
+      img.Stalker.ouro{
+        width: 76%;
+        margin-top: 9%;
+        margin-left: 11%;
+      }
+      p{
+        color: lightgray;
+        font-size: 10pt;
+        margin-top: 7%;
+        margin-left: 24%;
+      }
+    }
+
+    .bronzeInflu{
+      background-color: #13131A;
+      width: 7%;
+      height: 87%;
+      margin-top: 1%;
+      margin-left: 33%;
+      position: absolute;
+      border-radius: 10px;
+
+      img.Influencer.bronze{
+        width: 76%;
+        margin-top: 9%;
+        margin-left: 12%;
+        color:lightgray;
+      }
+
+      p{
+        color: lightgray;
+        font-size: 10pt;
+        margin-top: 7%;
+        margin-left: 17%;
+      }
+    }
+
+    .starting {
+      display: flex;
+      background-color: #13131A;
+      width: 7%;
+      height: 87%;
+      margin-top: 1%;
+      margin-left: 9%;
+      position: absolute;
+      border-radius: 10px;
+
+      p {
+        color: lightgray;
+        font-size: 10pt;
+        margin-top: 97%;
+        margin-left: 6%;
+      }
+
+
+
+      .começar {
+        width: 65%;
+        position: absolute;
+        margin-top: 14%;
+        margin-left: 15%;
+      }
+    }
+
+    .loved {
+      background-color: #13131A;
+      width: 7%;
+      height: 87%;
+      margin-top: 1%;
+      margin-left: 1%;
+      position: absolute;
+      border-radius: 10px;
+
+      p{
+        color: lightgray;
+        font-size: 10pt;
+        margin-top: 98%;
+        margin-left: 8%
+      }
+
+      img.adoram-me.ouro {
+        width: 75%;
+        position: absolute;
+        margin-top: 8%;
+        margin-left: 12%;
+        border-radius: 50%;
+        background: rgb(232, 206, 107);
+
+      }
+    }
+
+
+
+    .goldRising {
+      background-color: #13131A;
+      width: 7%;
+      height: 87%;
+      margin-top: 1%;
+      margin-left: 17%;
+      position: absolute;
+      border-radius: 10px;
+
+      img.Rising.ouro {
+        width: 76%;
+        margin-top: 9%;
+        margin-left: 11%;
+      }
+
+      p {
+        color: lightgray;
+        font-size: 10pt;
+        margin-top: 11%;
+        margin-left: 13%;
+      }
     }
   }
 
+
   .upload {
     margin-top: 32%;
+
   }
 
   .container-uploads {
     background-color: #1C1C24;
     position: absolute;
-    width: 81%;
+    width: 80%;
     height: 16%;
     margin-top: 34%;
-    margin-left: 17%;
+    margin-left: 19%;
     border-radius: 10px;
   }
 
   .playlist {
     margin-top: 43%;
-    margin-left: 17%;
+    margin-left: 19%;
   }
 
   .container-playlists {
     background-color: #1C1C24;
     position: absolute;
-    width: 81%;
+    width: 80%;
     height: 16%;
     margin-top: 45%;
-    margin-left: 17%;
+    margin-left: 19%;
     border-radius: 10px;
   }
 
@@ -172,16 +323,17 @@
       color: lightgray;
       position: absolute;
       margin-top: 1%;
+      margin-left: 3%;
     }
 
     .subs {
       display: flex;
       flex-direction: column;
       position: absolute;
-      width: 50%;
+      width: 39%;
       height: 100%;
       margin-top: 1%;
-      margin-left: 10%;
+      margin-left: 12%;
 
       .list {
         display: flex;
@@ -190,8 +342,14 @@
         color: lightgray;
 
         .channel{
-          margin-top:0;
-          margin-left: 2%;
+          margin-top: 10px;
+          margin-left: 4%;
+        }
+
+        .photo-chan{
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
         }
       }
     }
@@ -208,7 +366,7 @@
       flex-direction: column;
       position: absolute;
       width: 28%;
-      height: 79%;
+      height: 93%;
       margin-top: 1%;
       margin-left: 56%;
       border-radius:12px;

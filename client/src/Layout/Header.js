@@ -1,18 +1,23 @@
 import "./Header.scss";
 import {UserContext} from "../Providers/UserContext";
 import logo from "./logo.svg";
-import React, {useEffect, useState} from "react";
+import {Link, useHistory} from 'react-router-dom';
+import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass, faSortDown} from "@fortawesome/free-solid-svg-icons";
 import {faCircleUser, faBell} from "@fortawesome/free-regular-svg-icons"
-import avatar from "../Assets/img1.jpg"
-import {Link} from "react-router-dom";
-import VideoCard from "../Assets/Components/VideoCard/VideoCard";
-import Redirect from "react-router-dom/es/Redirect";
+
 
 function Header() {
 
-    const {user,setSearch,videos} = React.useContext(UserContext);
+    const {user,setSearch,search, videos} = React.useContext(UserContext)
+    const history = useHistory();
+
+    let handleSearch = async (e) => {
+        setSearch(e.target.value)
+        if(search) {
+            history.push("/SearchResults")
+        }}
 
     return <div className={"Header"}>
         <div className={"logo"}>
@@ -23,7 +28,8 @@ function Header() {
             <input className={"search"}
                    type="text"
                    placeholder={"Pesquisar"}
-                   onChange={e => setSearch(e.target.value) && <Redirect to="/SearchResults"/>}/>
+                   onChange={handleSearch}/>
+
              </div>
 
         {!user ? (<div className={"login"}>

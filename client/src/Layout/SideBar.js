@@ -1,5 +1,5 @@
 import "./SideBar.scss";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {UserContext} from "../Providers/UserContext";
 import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -14,22 +14,13 @@ import {
     faVideo
 } from "@fortawesome/free-solid-svg-icons";
 import {Link, useHistory} from "react-router-dom";
-import avatar from "../Assets/img1.jpg";
+
 
 
 function SideBar() {
 
-    const {user, setUser} = React.useContext(UserContext);
-    const [tags, setTags] = useState([])
+    const {user, setUser,tags} = React.useContext(UserContext);
     const history = useHistory();
-
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/tags')
-            .then(response => {
-                setTags(response.data)
-            });
-    }, []);
 
     console.log(tags)
 
@@ -71,10 +62,10 @@ function SideBar() {
                 <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faFire}/></Link>
                 <p>Tendências</p>
             </div>
-            <div className={"Canais"}>
-                <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faClapperboard}/></Link>
+            {!user && <div className={"Canais"}>
+                <Link to={"/Channels"}><FontAwesomeIcon icon={faClapperboard}/></Link>
                 <p>Canais</p>
-            </div>
+            </div>}
         </div>
 
         {user && <div className={"container-user"}>

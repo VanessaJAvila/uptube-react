@@ -10,6 +10,7 @@ const UserProvider = ({children}) => {
     const [videos, setVideos] = useState([]);
     const [search,setSearch] =useState("");
     const [page, setPage] = useState(1);
+    const [tags, setTags] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:5000/user/sessao',{
@@ -25,6 +26,12 @@ const UserProvider = ({children}) => {
         });
     }, []);
 
+    useEffect(() => {
+        axios.get('http://localhost:5000/tags')
+            .then(response => {
+                setTags(response.data)
+            });
+    }, []);
 
 
     useEffect(() => {
@@ -38,7 +45,7 @@ const UserProvider = ({children}) => {
     }, [search])
 
 
-    return <UserContext.Provider value={{user, setUser, videos,setVideos,isLoading,page,setPage, search,setSearch}}>
+    return <UserContext.Provider value={{user, setUser, videos,setVideos,isLoading,page,setPage, search,setSearch, tags,setTags}}>
         {children}
     </UserContext.Provider>
 }

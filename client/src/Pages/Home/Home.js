@@ -4,7 +4,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Header from "../../Layout/Header";
-import {useHistory} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import {UserContext} from "../../Providers/UserContext";
 import SideBar from "../../Layout/SideBar";
 import "./Home.scss";
@@ -15,9 +15,20 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function Home() {
     const {user, setUser} = React.useContext(UserContext);
-    const history = useHistory();
     const [videos, setVideos] = useState([]);
     const [recommendations, setRecommendations] = useState([]);
+    const [topChannels, setTopChannels] = useState([]);
+    const [topChannel, setTopChannel] = useState([])
+    const [currentPage, setCurrentPage] = useState(1);
+    const channelsPerPage = 5;
+    const indexOfLastRecord = currentPage * channelsPerPage;
+    const indexOfFirstRecord = indexOfLastRecord - channelsPerPage;
+
+
+    // Records to be displayed on the current page
+    const currentChannels = topChannels.slice(indexOfFirstRecord, indexOfLastRecord);
+    const currentChannel = topChannel.slice(0,1);
+
     //const[public, setPublic] =useState("");
 
     useEffect(() => {
@@ -25,29 +36,22 @@ function Home() {
             .then(response => {
                 //console.log('rsp', response);
                 setRecommendations(response.data);
-            }).catch(e => console.log(e));
+            }).catch(e => console.log(e)) ;
     }, []);
 
+    useEffect(() => {
+        axios.get('http://localhost:5000/suggested/topchannels')
+            .then(response => {
+                //console.log('rsp', response);
+                setTopChannels(response.data);
+                setTopChannel(response.data);
+            }).catch(e => console.log(e)) ;
+    }, []);
 
-    let handleSubmit = async (e) => {
-        //history.push vai para pagina nova
-        //history.replace nao permite voltar para a pagina anterior
-        e.preventDefault();
-        axios.post('http://localhost:5000/user/Logout', true, {
-            withCredentials: true
-        })
-            .then((res) => {
-                setUser(null);
-                history.replace("/Login");
-            }).catch((error) => {
-            console.log(error)
-            history.replace("/Home");
-        });
-    }
+    if(!recommendations) return null;
+    if(!topChannels) return null;
+    if(!topChannel) return null;
 
-
-    console.log(recommendations)
-    //todo: <h2>{user?.name}</h2> crasha a página
     return <div className={"container-homepage"}>
         <Header/>
        <SideBar/>
@@ -61,22 +65,43 @@ function Home() {
                     <h3 >Canais Sugeridos</h3>
                     <FontAwesomeIcon className={'suggestions-icon'} icon={faEllipsis}/>
                 </div>
+                    {currentChannels.map ((c, idx) =>{
+                        return <div className={"list"}  key={ c + idx}>
+                            <div className={'photo-channel'}>
+                                <img className={"photo-chan"} src = {c.photo} alt="channel"/></div>
+                            <p className={"channel"}>{c.Channel}</p>
+                        </div>
+                    })}
+
             <div className={"see-more-btn"}>
-            <h3>Mostrar Mais</h3>
-            </div>
+                {currentPage &&
+                    <div className={"pagination"} onClick={() => setCurrentPage(currentPage + 1)}>
+                        {topChannels.length > 0 && <h3>Mostrar Mais</h3>}
+            </div> }
             </div>
             {user &&  <div className={"container-channels-2"}>
                 <div className={"title"}>
                     <h3 >Canais Sugeridos</h3>
                     <h3 className={"see-more"}>Ver todos</h3>
                 </div>
+
                 <div className={"add-channel"}>
-                    <FontAwesomeIcon className={'add-icon'} icon={faUserPlus}/>
-                    <h4>Seguir canal</h4>
+                    {currentChannel.map ((ch, idx) =>{
+                        return <div className={"list"}  key={ ch + idx}>
+                            <div className={'photo-channel-2'}>
+                                <img className={"photo-chan-2"} src = {ch.photo} alt="channel"/></div>
+                            <p className={"channel-id"}>{ch.Channel}</p>
+                            <p className={"channel-bio"}>{ch.bio.slice(0,15)}</p>
+                        </div>
+                    })}
                 </div>
-            </div>}
+                <div className={'chan-thumb'}>
+                <FontAwesomeIcon className={'add-icon'} icon={faUserPlus}/>
+                <p className={'follow-chan'}>Seguir canal</p>
+                </div>
+           </div>}
         </div>
-    </div>
-}
+        </div>
+    </div>}
 
 export default Home;
