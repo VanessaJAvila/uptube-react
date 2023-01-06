@@ -14,6 +14,7 @@ import Delete from "./Pages/Delete/Delete";
 import Playlist from "./Pages/Playlist/Playlist";
 import SearchResults from "./Pages/Search Results/SearchResults";
 import Channels from "./Pages/Channels/Channels";
+import {SearchProvider} from "./Providers/SearchContext";
 
 
 
@@ -27,18 +28,21 @@ function App() {
         <BrowserRouter>
             <div className="App">
                 <Switch>
-                    <Route path="/Home" component={Home}/>
+
                     <Route path="/Profile" component={Profile}/>
                     <Route path="/Register" component={Register}/>
                     <Route path="/Login" component={Login}/>
                     <Route path="/Suggested" component={Suggested}/>
                     <Route path="/Recoverpassword/:token" component={RecoverBytoken}/>
                     <Route path="/Recoverpassword" component={Recover}/>
+                    <SearchProvider>
+                    <Route path="/Home" component={Home}/>
                     <Route path="/Channel" component={Channel}/>
                     <Route path="/Channels" component={Channels}/>
                     <Route path="/Delete" component={Delete}/>
                     <Route path="/Playlist" component={Playlist}/>
                     <Route path="/SearchResults" component={SearchResults}/>
+                    </SearchProvider>
                 </Switch>
             </div>
 

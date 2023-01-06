@@ -1,5 +1,6 @@
 import "./Header.scss";
 import {UserContext} from "../Providers/UserContext";
+import {SearchContext} from "../Providers/SearchContext";
 import logo from "./logo.svg";
 import {Link, useHistory} from 'react-router-dom';
 import React, {useEffect, useState} from "react";
@@ -9,39 +10,38 @@ import {faCircleUser, faBell} from "@fortawesome/free-regular-svg-icons"
 import axios from "axios";
 
 
+
 function Header() {
 
     const {user} = React.useContext(UserContext);
-    const [search,setSearch] =useState("");
-    const [page, setPage] = useState(1);
-    const [videos, setVideos] = useState([]);
-    const history = useHistory();
-
-    let handleSearch = async (e) => {
-        setSearch(e.target.value)
-        if(search) {
-            history.push("/SearchResults")
-        }}
+    const [newNotification, setNewNotification] = useState(false);
+    const [viewed, setViewed] = useState();
+    const {handleSearch,videos,setVideos,search,setSearch} = React.useContext(SearchContext);
 
 
-    useEffect(() => {
-        axios
-            .get("http://localhost:5000/video/search", {
-                params: { page, search},
-                withCredentials: true,
-            })
-            .then((response) => {
-                setVideos(page === 1 ? response.data : [...videos, ...response.data]);
-            })
-            .catch((error) => {
-                console.log(error, "Error fetching search results");
-            });
-    }, [page, search]);
+
+        useEffect(() => {
+            axios.get(`http://localhost:5000/user/${user?.user_id}/notifications`)
+                .then(response => {
+                    setViewed(response.data);
+                })
+        }, []);
+
+
+
+        useEffect(() => {
+            axios.get(`http://localhost:5000/user/${user?.user_id}/notification`)
+                .then(response => {
+                    setNewNotification(true);
+                })
+        }, []);
 
 
     return <div className={"Header"}>
         <div className={"logo"}>
+            <Link to={"/Home"}>
             <img src={logo} alt="logo UpTube"/>
+            </Link>
         </div>
         <div className={"searching"}>
             <FontAwesomeIcon className={"s-icon"} icon={faMagnifyingGlass}/>

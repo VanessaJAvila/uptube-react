@@ -28,6 +28,35 @@
       margin-right: 3%;
       cursor: pointer;
 
+      .follow {
+        display:flex;
+        margin-top: 3%;
+
+
+        button {
+          display: flex;
+          background-color: #23232c;
+          color: lightgray;
+          text-align: center;
+          border: 1px solid dimgrey;
+          border-radius: 10px;
+          width: 4%;
+          height: 3%;
+          margin-top: calc(100% - 102%);
+          margin-left: 13%;
+          padding-top: 4px;
+          padding-right: 52px;
+          position: absolute;
+          font-size: 9px;
+        }
+
+          button:hover{
+            background-color: #7e0707;
+          }
+
+
+      }
+
 
       .channel-header {
         width: 100%;
@@ -38,7 +67,6 @@
           height: 71%;
           border-radius: 10px 10px 0 0;
         }
-
       }
 
       .channel-data {
@@ -53,7 +81,7 @@
         .channel-id {
           display: flex;
           margin-top: 3%;
-          margin-left: 27%;
+          margin-left: 26%;
           position: absolute;
         }
 
@@ -78,7 +106,7 @@
 
         .subscriptions {
           margin-top: 13%;
-          margin-left: 28%;
+          margin-left: 26%;
           font-size: 8pt;
           position: absolute;
 

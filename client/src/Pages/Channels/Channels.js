@@ -7,8 +7,11 @@ import {faBookmark, faEyeSlash, faTrashCan} from "@fortawesome/free-regular-svg-
 import {faPenToSquare, faPen, faGear, faX} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import {Link, useHistory} from "react-router-dom";
+import {UserContext} from "../../Providers/UserContext";
 
 export default function Channels() {
+
+    const {user} = React.useContext(UserContext);
 
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -49,8 +52,9 @@ export default function Channels() {
                                     <div className={'channel-img'}><img src={c.photo} alt={"avatar"}/></div>
                                     <div className={'channel-id'}>{c.username}</div>
                                     <div className={'subscriptions'}>{c.subscriptions}
-                                        <p className={'subscription-text'}>subscrições</p></div>
+                                        <p className={'subscription-text'}>subscritores</p></div>
                                 </div>
+                                {user && <div class={'follow'}><button>Subscrever</button></div>}
                             </Link>
                         </div>
                     );

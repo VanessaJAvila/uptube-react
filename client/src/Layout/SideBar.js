@@ -1,6 +1,7 @@
 import "./SideBar.scss";
 import React, {useEffect, useState} from "react";
 import {UserContext} from "../Providers/UserContext";
+import {SearchContext} from "../Providers/SearchContext";
 import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
@@ -15,36 +16,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {Link, useHistory} from "react-router-dom";
 
+
 function SideBar() {
 
     const {user, setUser} = React.useContext(UserContext);
-    const [tags, setTags] = useState([]);
-    const [page, setPage] = useState(1);
+    const {handleTags,tags} = React.useContext(SearchContext);
 
     const history = useHistory();
 
-    let handleTags = (tag) => {
-        console.log(tag)
-        if (tags) {
-            history.push("/SearchResults?tag="+tag.name);
-        }
-    }
-    console.log(tags)
 
-    useEffect(() => {
-        axios
-            .get("http://localhost:5000/tags")
-            .then((response) => {
-                setTags(response.data);
-            })
-            .catch((error) => {
-                console.log(error, "Error fetching tags");
-            });
-    }, []);
-
-    useEffect(() => {
-        setPage(1);
-    }, [tags])
 
 
     let handleSubmit = async (e) => {
@@ -91,6 +71,10 @@ function SideBar() {
         </div>
 
         {user && <div className={"container-user"}>
+            <div className={"Subscrições"}>
+                <Link to={"./Channels"}><FontAwesomeIcon icon={faClapperboard}/></Link>
+                <p>Subscrições</p>
+            </div>
             <div className={"Histórico"}>
                 <Link to={"./Home"}><FontAwesomeIcon icon={faClockRotateLeft}/></Link>
                 <p>Histórico</p>
