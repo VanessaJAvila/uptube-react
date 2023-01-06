@@ -14,7 +14,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 function Home() {
-    const {user, setUser} = React.useContext(UserContext);
+    const {user} = React.useContext(UserContext);
     const [videos, setVideos] = useState([]);
     const [recommendations, setRecommendations] = useState([]);
     const [topChannels, setTopChannels] = useState([]);
@@ -29,12 +29,12 @@ function Home() {
     const currentChannels = topChannels.slice(indexOfFirstRecord, indexOfLastRecord);
     const currentChannel = topChannel.slice(0,1);
 
-    //const[public, setPublic] =useState("");
+    console.log(currentChannels)
+
 
     useEffect(() => {
         axios.get('http://localhost:5000/suggested/50popular')
             .then(response => {
-                //console.log('rsp', response);
                 setRecommendations(response.data);
             }).catch(e => console.log(e)) ;
     }, []);
@@ -66,7 +66,7 @@ function Home() {
                     <FontAwesomeIcon className={'suggestions-icon'} icon={faEllipsis}/>
                 </div>
                     {currentChannels.map ((c, idx) =>{
-                        return <div className={"list"}  key={ c + idx}>
+                        return <div className={"list"}  key={ c + idx} >
                             <div className={'photo-channel'}>
                                 <img className={"photo-chan"} src = {c.photo} alt="channel"/></div>
                             <p className={"channel"}>{c.Channel}</p>
@@ -91,7 +91,7 @@ function Home() {
                             <div className={'photo-channel-2'}>
                                 <img className={"photo-chan-2"} src = {ch.photo} alt="channel"/></div>
                             <p className={"channel-id"}>{ch.Channel}</p>
-                            <p className={"channel-bio"}>{ch.bio.slice(0,15)}</p>
+                            <p className={"channel-bio"}>{ch.bio.slice(0,8)}</p>
                         </div>
                     })}
                 </div>

@@ -7,10 +7,6 @@ const UserContext = React.createContext({});
 const UserProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [isLoading,setIsLoading]= useState(true);
-    const [videos, setVideos] = useState([]);
-    const [search,setSearch] =useState("");
-    const [page, setPage] = useState(1);
-    const [tags, setTags] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:5000/user/sessao',{
@@ -26,26 +22,8 @@ const UserProvider = ({children}) => {
         });
     }, []);
 
-    useEffect(() => {
-        axios.get('http://localhost:5000/tags')
-            .then(response => {
-                setTags(response.data)
-            });
-    }, []);
 
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/video/search', {params: {page, search}, withCredentials: true})
-            .then(response => setVideos(page === 1 ? response.data : [...videos, ...response.data]))
-    }, [page,search]);
-
-
-    useEffect(() => {
-        setPage(1);
-    }, [search])
-
-
-    return <UserContext.Provider value={{user, setUser, videos,setVideos,isLoading,page,setPage, search,setSearch, tags,setTags}}>
+    return <UserContext.Provider value={{user, setUser,isLoading}}>
         {children}
     </UserContext.Provider>
 }

@@ -1,8 +1,9 @@
 .channels-container {
   display: flex;
-  width: 100%;
+  width: 93%;
   height: 90%;
-position: relative;
+  position: relative;
+
   .channels {
     display: flex;
     flex-wrap: wrap;
@@ -12,7 +13,7 @@ position: relative;
     width: 80%;
     height: 80%;
     margin-top: 6%;
-    margin-left: 19%;
+    margin-left: 28%;
 
     .channel-card {
       display: flex;
@@ -21,16 +22,32 @@ position: relative;
       align-items: flex-end;
       border: 1px solid grey;
       border-radius: 10px;
-      width: 23%;
-      height: 25%;
+      width: 27%;
+      height: 41%;
       margin-top: 4%;
-      margin-right: 2%;
+      margin-right: 3%;
+      cursor: pointer;
+
+
+      .channel-header {
+        width: 100%;
+        height: 100%;
+
+        .img-header {
+          width: 99%;
+          height: 71%;
+          border-radius: 10px 10px 0 0;
+        }
+
+      }
 
       .channel-data {
-        width: 280px;
+        width: 279px;
         height: 48px;
+        margin-top: -22%;
         border-top: 1px solid dimgrey;
         position: relative;
+        cursor: pointer;
 
 
         .channel-id {
@@ -47,19 +64,29 @@ position: relative;
           margin-left: 3%;
           margin-top: 3%;
           position: absolute;
+          border-radius: 10px 10px 0 0;
 
           img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             margin-top: 9%;
+            border: 3px solid lightgray;
+
           }
         }
-        .subscriptions{
+
+        .subscriptions {
           margin-top: 13%;
-          margin-left: 33%;
+          margin-left: 28%;
           font-size: 8pt;
           position: absolute;
+
+          .subscription-text {
+            margin-top: -20%;
+            margin-left: 12%;
+          }
+
         }
       }
     }
@@ -67,19 +94,54 @@ position: relative;
     a {
       color: lightgrey;
       text-decoration: none;
+      width: 310px;
+      height: 211px;
     }
   }
-  .results{
-    background-color: #1C1C24;
-    color:lightgray;
-    text-align: center;
-    border: 1px solid dimgrey;
-    border-radius: 10px;
-    width: 10%;
-    height: 6%;
-    margin-top: 40%;
-    margin-left: 20%;
-    position: absolute;
+
+  .results {
+    display: flex;
+
+    .pagination-next {
+      display: flex;
+      background-color: #1C1C24;
+      color: lightgray;
+      text-align: center;
+      border: 1px solid dimgrey;
+      border-radius: 10px;
+      width: 10%;
+      height: 6%;
+      margin-top: 45%;
+      margin-left: calc(100% - 105%);
+      position: absolute;
+
+      .next {
+        margin-top: 11px;
+        margin-left: 12px;
+      }
+    }
+
+    .pagination-goback {
+      display: flex;
+      background-color: #1C1C24;
+      color: lightgray;
+      text-align: center;
+      border: 1px solid dimgrey;
+      border-radius: 10px;
+      width: 10%;
+      height: 6%;
+      margin-top: 45%;
+      margin-left: calc(100% - 179%);
+      position: absolute;
+
+      .back {
+        margin-top: 8%;
+        margin-left: 4%;
+
+      }
+    }
+
+
   }
 }
 

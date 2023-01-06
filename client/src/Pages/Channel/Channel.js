@@ -12,9 +12,9 @@ import influencer from "../../Assets/influencer.svg";
 import socialite from "../../Assets/socialite.svg";
 import VideoCard from "../../Assets/Components/VideoCard/VideoCard"
 import {faBookmark, faEyeSlash, faTrashCan} from "@fortawesome/free-regular-svg-icons";
-import {faPenToSquare, faPen,faUser, faGear, faX} from "@fortawesome/free-solid-svg-icons";
+import {faPenToSquare, faPen, faUser, faGear, faX} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 
 export default function Channel() {
@@ -22,10 +22,10 @@ export default function Channel() {
     const [achis, setAchis] = useState([]);
     const [subs, setSubs] = useState([]);
     const [stats, setStats] = useState({});
-    const [selfChannel, setSelfChannel] = useState();
+    const [selfChannel, setSelfChannel] = useState(null);
+    const [channel, setChannel] = useState([null]);
     const [edit, setEdit] = useState(false);
-
-
+    const history = useHistory();
 
     const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
         "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
@@ -34,11 +34,12 @@ export default function Channel() {
         return date.getDay() + " de " + months[date.getMonth()] + " de " + date.getFullYear()
     }
 
-     useEffect(() => {
+    useEffect(() => {
         axios.get(`http://localhost:5000/user/${user?.user_id}`)
             .then(response => {
                 setSelfChannel(response.data);
-            }).catch(e => console.log(e)) ;
+                setChannel(response.data);
+            }).catch(e => console.log(e));
     }, [user]);
 
     console.log(selfChannel)
@@ -66,9 +67,9 @@ export default function Channel() {
             }).catch(e => console.log(e));
     }, [user]);
 
-console.log(achis)
+    console.log(achis)
 
-    if(!selfChannel) return null;
+    if (!selfChannel) return null;
     if (!achis) return null;
     if (!stats) return null;
     if (!subs) return null;
@@ -81,19 +82,22 @@ console.log(achis)
             <div className={"layer-bg"}>
                 <div className={"channel-bg"}
                      style={{backgroundImage: `url(${user?.header})`}}>
-                    {setEdit && <Link to={"/Profile"}><FontAwesomeIcon className={"edit-bg-icon"} icon={faPenToSquare}/></Link>}
+                    {setEdit &&
+                        <Link to={"/Profile"}><FontAwesomeIcon className={"edit-bg-icon"} icon={faPenToSquare}/></Link>}
                 </div>
             </div>
             <div className={'edit-user-details'}>
                 {setEdit && //todo verificar pq link para profile não funciona
                     <div className={"edit"}>
-                       <p className={"edit-text"}>Editar Canal</p>
+                        <p className={"edit-text"}>Editar Canal</p>
                         <Link to={"/Profile"}><FontAwesomeIcon className={"icon"} icon={faPenToSquare}/></Link>
                     </div>}
                 <div className={"user-data"}>
-                    {setEdit &&  <Link to={"/Profile"}><FontAwesomeIcon className={"edit-avatar-icon"} icon={faPenToSquare}/></Link>}
+                    {setEdit && <Link to={"/Profile"}><FontAwesomeIcon className={"edit-avatar-icon"}
+                                                                       icon={faPenToSquare}/></Link>}
                     <img className={"avatar"} src={user?.photo} alt={"user-photo"}/>
-                    {setEdit && <Link to={"/Profile"}><FontAwesomeIcon className={"edit-user-data-icon"} icon={faPen}/></Link>}
+                    {setEdit &&
+                        <Link to={"/Profile"}><FontAwesomeIcon className={"edit-user-data-icon"} icon={faPen}/></Link>}
                     <h4 className={"username"}>{user?.name}</h4>
                     <p className={"bio"}>{user?.bio}</p>
                     <div className={"stats-user"}>
@@ -108,11 +112,11 @@ console.log(achis)
                         <div className={"videos"}>
                             <p>Videos</p>
                             <p>{stats.videos}</p>
-                         </div>
-                     </div>
-                 </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-             </div>
+        </div>
 
              <h2>Achievements {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash}/>}</h2>
              <div className={"achievements"}>
@@ -157,16 +161,20 @@ console.log(achis)
              <div className={"container-playlists"}>
                  <VideoCard></VideoCard>
              </div>
-             <div className={"container-subs-stats"}>
-                 <h4 className={"subs-text"}>Subscrições</h4>
-                 <div className={"subs"}>
-                     {subs.map ((s, idx) =>{
-                         return <div className={"list"}  key={ s + idx}>
-                             <img className={"photo-chan"} src = {s.avatar} alt="channel"/>
-                             <p className={"channel"}>{s.username}</p>
-                         </div>
-                     })}
-                 </div>
+        <div className={"container-subs-stats"}>
+            <h4 className={"subs-text"}>Subscrições</h4>
+            <div className={"subs"}>
+                {subs.map((s, idx) => {
+                    return (
+                        <div className="list" key={s + idx} onClick={() => {
+                            history.push(`/user/${s.user.id}`)
+                        }}>
+                            <img className="photo-chan" src={s.avatar} alt="channel" />
+                            <p className="channel">{s.username}</p>
+                        </div>
+                    )
+                })}
+            </div>
                  <h4 className={"about-text"}>Acerca</h4>
                  <div className={"stats"}>
                      <p className={"date"}>Canal criado a {getDateString(new Date(user?.account_opening))}</p>

@@ -1,5 +1,5 @@
 import "./SideBar.scss";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {UserContext} from "../Providers/UserContext";
 import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -15,14 +15,36 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {Link, useHistory} from "react-router-dom";
 
-
-
 function SideBar() {
 
-    const {user, setUser,tags} = React.useContext(UserContext);
+    const {user, setUser} = React.useContext(UserContext);
+    const [tags, setTags] = useState([]);
+    const [page, setPage] = useState(1);
+
     const history = useHistory();
 
+    let handleTags = (tag) => {
+        console.log(tag)
+        if (tags) {
+            history.push("/SearchResults?tag="+tag.name);
+        }
+    }
     console.log(tags)
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:5000/tags")
+            .then((response) => {
+                setTags(response.data);
+            })
+            .catch((error) => {
+                console.log(error, "Error fetching tags");
+            });
+    }, []);
+
+    useEffect(() => {
+        setPage(1);
+    }, [tags])
 
 
     let handleSubmit = async (e) => {
@@ -59,7 +81,7 @@ function SideBar() {
                 <p>Início</p></Link>
             </div>
             <div className={"Tendências"}>
-                <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faFire}/></Link>
+                <Link to={"./Home"}><FontAwesomeIcon icon={faFire}/></Link>
                 <p>Tendências</p>
             </div>
             {!user && <div className={"Canais"}>
@@ -70,7 +92,7 @@ function SideBar() {
 
         {user && <div className={"container-user"}>
             <div className={"Histórico"}>
-                <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faClockRotateLeft}/></Link>
+                <Link to={"./Home"}><FontAwesomeIcon icon={faClockRotateLeft}/></Link>
                 <p>Histórico</p>
             </div>
             <div className={"Playlists"}>
@@ -81,11 +103,13 @@ function SideBar() {
         <div className={"Tags"}>
             <h4>Tags</h4>
             <div className={"tag"}>
-                {tags.map((tag,idx) => {
-                    return <Link to="/video" key={tag + "_" + idx}>
-                        <button>{tag.name}</button>
-                    </Link>
-                })}
+                {Object.values(tags).map((tag, idx) => (
+                    <div key={idx}>
+                        <button onClick={() => handleTags(tag)} value={tag.name}>
+                            {tag.name}
+                        </button>
+                    </div>
+                ))}
             </div>
         </div>
         {user && <div className={"container-home-2"}>

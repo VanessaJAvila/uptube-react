@@ -2,15 +2,19 @@ import "./Header.scss";
 import {UserContext} from "../Providers/UserContext";
 import logo from "./logo.svg";
 import {Link, useHistory} from 'react-router-dom';
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass, faSortDown} from "@fortawesome/free-solid-svg-icons";
 import {faCircleUser, faBell} from "@fortawesome/free-regular-svg-icons"
+import axios from "axios";
 
 
 function Header() {
 
-    const {user,setSearch,search, videos} = React.useContext(UserContext)
+    const {user} = React.useContext(UserContext);
+    const [search,setSearch] =useState("");
+    const [page, setPage] = useState(1);
+    const [videos, setVideos] = useState([]);
     const history = useHistory();
 
     let handleSearch = async (e) => {
@@ -18,6 +22,22 @@ function Header() {
         if(search) {
             history.push("/SearchResults")
         }}
+
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:5000/video/search", {
+                params: { page, search},
+                withCredentials: true,
+            })
+            .then((response) => {
+                setVideos(page === 1 ? response.data : [...videos, ...response.data]);
+            })
+            .catch((error) => {
+                console.log(error, "Error fetching search results");
+            });
+    }, [page, search]);
+
 
     return <div className={"Header"}>
         <div className={"logo"}>

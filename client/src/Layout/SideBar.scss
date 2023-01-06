@@ -1,11 +1,11 @@
 .SideBar {
   background-color: #1C1C24;
-  position:fixed;
+  position: fixed;
   width: 16%;
   height: 100vh;
   padding-top: 2%;
   padding-left: 10px;
-  margin-top:3%;
+  margin-top: 3%;
   display: block;
   flex-direction: column;
   color: rgba(248, 247, 247, 0.66);
@@ -94,9 +94,9 @@
   .Tags {
     display: flex;
     flex-direction: column;
-    cursor: pointer;
 
-    .tag{
+
+    .tag {
 
       display: flex;
       flex-wrap: wrap;
@@ -111,6 +111,7 @@
       padding: 4px;
       margin-bottom: 5px;
       margin-right: 5px;
+      cursor: pointer;
     }
   }
 
