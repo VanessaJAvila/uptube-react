@@ -22,33 +22,36 @@ import playlist from "./Pages/Playlist/Playlist";
 
 
 import SearchResults from "./Pages/Search Results/SearchResults";
+import AuthHandler from "./Assets/Components/AuthHandler";
 
 
 function App() {
 
-    const {user, setUser} = React.useContext(UserContext);
+    //const {user, setUser} = React.useContext(UserContext);
     //  <RequireAuth></RequireAuth><NotRequireAuth> </NotRequireAuth>
     return <UserProvider>
         <BrowserRouter>
                 <div className="App">
                     <Switch>
-
-                        <Route path="/Home" component={Home}/>
-                        <Route path="/Profile" component={Profile}/>
-                        <Route path="/Register" component={Register}/>
-                        <Route path="/Login" component={Login}/>
-                        <Route path="/Suggested" component={Suggested}/>
-                        <Route path="/Recoverpassword/:token" component={RecoverBytoken}/>
-                        <Route path="/Recoverpassword" component={Recover}/>
-                        <Route path ="/Header" component ={Header}/>
-                        <Route path ="/SideBar" component ={SideBar}/>
-                        <Route path ="/Channel" component ={Channel}/>
-                        <Route path ="/Delete" component ={Delete}/>
-                        <Route path ="/Playlists" component ={Playlists}/>
-                        <Route path="/Playlist/:playlist_id" component={playlist}/>
-                        <Route path="/SearchResults" component={SearchResults}/>
-
-
+                        <AuthHandler
+                            requireAuth={<>
+                                <Route path="/Profile" component={Profile}/>
+                            </>}
+                            requireAnonymous={<>
+                                <Route path="/Register" component={Register}/>
+                                <Route path="/Login" component={Login}/>
+                                <Route path="/Recoverpassword/:token" component={RecoverBytoken}/>
+                                <Route path="/Recoverpassword" component={Recover}/>
+                            </>}
+                        >
+                            <Route path="/Home" component={Home}/>
+                            <Route path="/Suggested" component={Suggested}/>
+                            <Route path ="/Channel" component ={Channel}/>
+                            <Route path ="/Delete" component ={Delete}/>
+                            <Route path ="/Playlists" component ={Playlists}/>
+                            <Route path="/Playlist/:playlist_id" component={playlist}/>
+                            <Route path="/SearchResults" component={SearchResults}/>
+                        </AuthHandler>
 
                     </Switch>
                 </div>

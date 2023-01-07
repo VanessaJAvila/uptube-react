@@ -23,9 +23,7 @@ function Profile() {
 
     const history = useHistory();
     console.log(user, "user Profile");
-    if(!user){
-        return <h2>Awaiting user....</h2>
-    }
+
 
     if (!user) {
         return <h2>Awaiting user....</h2>
@@ -34,8 +32,6 @@ function Profile() {
 
     let handleSubmit = async (e) => {
 
-        //history.push vai para pagina nova
-        //history.replace nao permite voltar para a pagina anterior
         e.preventDefault();
 
 
@@ -61,12 +57,12 @@ function Profile() {
         formData.append("photo", updateUserPhoto);
         formData.append("photoName", photoName);
 
-
+        console.log(formData, "formdata");
         axios.post('http://localhost:5000/user/'+user.user_id+'/edit/upload/avatar',formData, {
             withCredentials: true
         })
             .then((res) => {
-                //console.log(res, "upload res");
+                console.log(res, "upload res");
             }).catch((error) => {
             //console.log(error.response.data, "nao editaste a photo");
             alert("error: "+ error.response.data)

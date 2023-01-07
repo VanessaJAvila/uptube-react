@@ -1,6 +1,3 @@
-//export default defaultBackendURL = ´localhost:4000´
-//export default videosURL = defaultBackendURL + ´video´
-// fazer um file se possivel com todos os endpoints vindos da base de dados e chamar depois nos files necessarios
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Header from "../../Layout/Header";
@@ -19,41 +16,19 @@ function Playlists() {
     const {user} = React.useContext(UserContext);
     const history = useHistory();
     const [playlists, setplaylists] = useState([]);
-   // const [eachVideoDuration, setEachVideoDuration] = useState([]);
-    const [playlistDuration, setPlaylistDuration] = useState(0);
-  //  const [videoDuration, setVideoDuration]= useState(0);
     const[visibility, setVisibility] =useState("public");
     const [criarPlaylist, setCriarPlaylist] = useState(false);
     const [title, setTitle]= useState("");
-    //console.log(user, "user Playlists");
-    //console.log(user?.user_id);
-
 
 
     useEffect(() => {
         if(!user) return;
         axios.get('http://localhost:5000/playlist/user/'+user.user_id,{withCredentials: true})
             .then(response => {
-                console.log('rsp', response.data);
+                console.log('setplaylist', response.data);
                 setplaylists(response.data);
             }).catch(e => console.log(e, "erro playlist")) ;
     }, [user]);
-
-    //todo adicionar o a duração da playlist, de momento não consigo fazer
-    useEffect(() => {
-        if(!user) return;
-        axios.get('http://localhost:5000/playlist/user/'+user.user_id+`/duration/`,{withCredentials: true})
-            .then(response => {
-                console.log('rsp each video duration', response.data);
-
-                response.data.map(d =>{
-
-
-                    return d.duration
-                });
-            }).catch(e => console.log(e, "erro playlist")) ;
-    }, [user]);
-
 
 
     if(!user){
@@ -63,10 +38,8 @@ function Playlists() {
 
     let handleSubmit = async (e) => {
 
-        //history.push vai para pagina nova
-        //history.replace nao permite voltar para a pagina anterior
         e.preventDefault();
-        //alterei na bd thumbnail aceita null
+
         let newPlaylist = {
             title: title,
             creator_id: user.user_id,
@@ -86,21 +59,6 @@ function Playlists() {
         });
     }
 
-/*
-playlist title, playlist owner, count videos in playlist, duração da , dias desde a criação
-
-    function toSeconds(s) {
-        let p = s.split(':');
-        return parseInt(p[0], 10) * 3600 + parseInt(p[1], 10) * 60 + parseInt(p[2], 10);
-    }
-
-    eachVideoDuration.map((d)=>  {
-
-        setVideoDuration(videoDuration + toSeconds(d.duration))
-
-    } )
-
- */
 
 
 
@@ -115,11 +73,12 @@ playlist title, playlist owner, count videos in playlist, duração da , dias de
                 {playlists.map(p => {
                     return <PlaylistCard  key={p.playlist_id}
                                               id = {p.playlist_id}
+                                              creator_id = {p.creator_id}
                                               thumbnail = {p.thumbnail}
                                               photo = {user.photo}
                                               name = {user.name}
                                               title ={p.title}
-                                              duration = {playlistDuration}
+                                              duration = {p.duration}
                                               timestamp = {p.timestamp}
                     />}
                 )}

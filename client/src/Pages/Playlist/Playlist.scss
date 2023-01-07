@@ -1,0 +1,40 @@
+.container-playlist
+{
+  color:white;
+  .box-playlist {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    .nextContainer{
+      margin-left: 25px;
+      border-radius: 25px;
+      border-style: groove;
+      padding: 4px;
+
+      .musicToBeAdded{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .musicAdded{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .movieDiv{
+        cursor: pointer;
+        padding: 7px;
+        .addMusic{
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+      }
+    }
+  }
+}

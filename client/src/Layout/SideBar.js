@@ -31,7 +31,7 @@ function SideBar() {
             });
     }, []);
 
-    console.log(tags)
+   // console.log(tags)
 
 
     let handleSubmit = async (e) => {
