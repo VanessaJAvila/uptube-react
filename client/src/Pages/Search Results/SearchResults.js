@@ -3,6 +3,7 @@ import Header from "../../Layout/Header";
 import SideBar from "../../Layout/SideBar";
 import {SearchContext} from "../../Providers/SearchContext";
 import VideoCard from "../../Assets/Components/VideoCard/VideoCard";
+import React, {useContext, useState} from "react";
 
 export default function SearchResults() {
 

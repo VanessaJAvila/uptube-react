@@ -46,16 +46,16 @@ function Playlist() {
     useEffect(() => {
         axios.get(`${API}/playlist/${playlist_id}`,{withCredentials: true})
             .then(response => {
-                console.log('rsp playlist', response.data);
+                console.log('rsp playlist', response.data,`${API}${response.data[0].videoUrl}`);
                 setplaylist(response.data);
-                setMovie(response.data[0].videoUrl)
+                setMovie( `${API}${response.data[0].videoUrl}`)
             }).catch(e => console.log(e, "erro playlist")) ;
     }, []);
 
 
     useEffect(() => {
         if(!user) return;
-        axios.get('http://localhost:5000/playlist/user/'+user.user_id,{withCredentials: true})
+        axios.get(`${API}/playlist/user/`+user.user_id,{withCredentials: true})
             .then(response => {
                 console.log('setplaylists', response.data);
                 setplaylists(response.data);
@@ -87,7 +87,7 @@ function Playlist() {
                         {playlist.map((p,idx) => {
                             return <div key={idx} className={"movieDiv"} >
                                     <div>
-                                        <img onClick={()=>setMovie(p.videoUrl)} src={p.thumbnail} alt="no photo"/>
+                                        <img onClick={()=>setMovie(`${API}${p.videoUrl}`)} src={p.thumbnail} alt="no photo"/>
                                         <p>{p.duration}</p>
                                     </div>
                                         <div  className={"videoInfo"}>
@@ -99,7 +99,7 @@ function Playlist() {
                                                     async (e) => {
                                                         e.preventDefault();
                                                         setAddMusicDropdown(true);
-                                                     await axios.get('http://localhost:5000/playlist/moviesinplaylist/'+ p.video_id +'/' + user.user_id)
+                                                     await axios.get(`${API}/playlist/moviesinplaylist/`+ p.video_id +'/' + user.user_id)
                                                             .then(response => {
                                                                 setPMovies(response.data);
                                                             }).catch(e => console.log(e, "erro playlist")) ;
@@ -119,7 +119,7 @@ function Playlist() {
                                                                             video_id: p.video_id
                                                                         }
 
-                                                                        axios.post('http://localhost:5000/playlist/addmusic',addMusicToPlaylist, {
+                                                                        axios.post(`${API}/playlist/addmusic`,addMusicToPlaylist, {
                                                                             withCredentials: true
                                                                         })
                                                                             .then((res) => {
@@ -137,7 +137,7 @@ function Playlist() {
                                                                             video_id: p.video_id
                                                                         }
 
-                                                                        axios.post('http://localhost:5000/playlist/remove',deletePlay, {
+                                                                        axios.post(`${API}/playlist/remove`,deletePlay, {
                                                                             withCredentials: true
                                                                         })
                                                                             .then((res) => {

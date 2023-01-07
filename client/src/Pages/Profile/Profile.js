@@ -2,11 +2,12 @@ import React, {useContext, useState} from "react";
 import axios from "axios";
 import {Link, Redirect, useHistory} from 'react-router-dom';
 import {UserContext} from "../../Providers/UserContext";
+import SideBar from "../../Layout/SideBar";
 import "./Profile.scss";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faGear, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
 import Header from "../../Layout/Header";
-import SideBar from "../../Layout/SideBar";
+
 
 //localhost port for api
 const API = process.env.REACT_APP_API;
@@ -100,8 +101,9 @@ function Profile() {
 
     return <div className="Profile">
         <Header/>
-        <div className="container-profile" >
         <SideBar/>
+        <div className="container-profile" >
+
         <div className="container">
             <h1> Editar a Conta </h1>
             <form onSubmit={handleSubmit}>

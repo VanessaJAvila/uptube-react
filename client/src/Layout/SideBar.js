@@ -19,7 +19,6 @@ function SideBar() {
 
     const history = useHistory();
 
-
     let handleSubmit = async (e) => {
         //history.push vai para pagina nova
         //history.replace nao permite voltar para a pagina anterior
@@ -65,22 +64,26 @@ function SideBar() {
 
         {user && <div className={"container-user"}>
             <div className={"Subscrições"}>
-                <Link to={"./Channels"}><FontAwesomeIcon icon={faClapperboard}/></Link>
+                <Link to={"./Channels"}><FontAwesomeIcon icon={faClapperboard}/>
                 <p>Subscrições</p>
+                </Link>
             </div>
             <div className={"Histórico"}>
-                <Link to={"./Home"}><FontAwesomeIcon icon={faClockRotateLeft}/></Link>
+                <Link to={"./Home"}><FontAwesomeIcon icon={faClockRotateLeft}/>
                 <p>Histórico</p>
+                </Link>
             </div>
             <div className={"Playlists"}>
-                <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faPlay}/></Link>
-                <p>Playlists</p>
+                <Link to={"/Playlists"}><FontAwesomeIcon icon={faPlay}/>
+                    <p>Playlists</p>
+                </Link>
+
             </div>
         </div>}
         <div className={"Tags"}>
             <h4>Tags</h4>
             <div className={"tag"}>
-                {Object.values(tags).map((tag, idx) => (<div key={idx}>
+                {tags && Object.values(tags).map((tag, idx) => (<div key={idx}>
                         <button onClick={() => handleTags(tag)} value={tag.name}>
                             {tag.name}
                         </button>
