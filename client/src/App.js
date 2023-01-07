@@ -1,6 +1,5 @@
 import './App.css';
 
-
 import Suggested from "./Pages/Suggested";
 import Home from "./Pages/Home/Home.js";
 import Login from "./Pages/Login/Login.js";
@@ -10,18 +9,22 @@ import React from "react";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import Recover from "./Pages/Recover Password/Recover";
 import RecoverBytoken from "./Pages/Recover Password/RecoverBytoken";
-import Header from "./Layout/Header";
+
 import Channel from "./Pages/Channel/Channel";
-import SideBar from "./Layout/SideBar";
+
 import Profile from "./Pages/Profile/Profile";
 import Delete from "./Pages/Delete/Delete";
 import Playlists from "./Pages/Playlists/Playlists";
 import {RequireAuth} from "./Assets/Components/RequireAuth";
 import {NotRequireAuth} from "./Assets/Components/NotRequireAuth";
 import playlist from "./Pages/Playlist/Playlist";
-
-
 import SearchResults from "./Pages/Search Results/SearchResults";
+import Channels from "./Pages/Channels/Channels";
+import {SearchProvider} from "./Providers/SearchContext";
+import VideoStreamingPage from "./Pages/VideoStreamingPage/VideoStreamingPage";
+import {VideoUploader} from "./Components/VideoUploader/VideoUploader";
+import WatchHistory from "./Pages/WatchHistory/WatchHistory";
+
 import AuthHandler from "./Assets/Components/AuthHandler";
 
 
@@ -44,13 +47,20 @@ function App() {
                                 <Route path="/Recoverpassword" component={Recover}/>
                             </>}
                         >
-                            <Route path="/Home" component={Home}/>
                             <Route path="/Suggested" component={Suggested}/>
-                            <Route path ="/Channel" component ={Channel}/>
-                            <Route path ="/Delete" component ={Delete}/>
-                            <Route path ="/Playlists" component ={Playlists}/>
-                            <Route path="/Playlist/:playlist_id" component={playlist}/>
-                            <Route path="/SearchResults" component={SearchResults}/>
+
+                            <SearchProvider>
+                                <Route path="/Home" component={Home}/>
+                                <Route path="/Channel" component={Channel}/>
+                                <Route path="/Channels" component={Channels}/>
+                                <Route path="/Delete" component={Delete}/>
+                                <Route path ="/player/:id" component ={VideoStreamingPage}/>
+                                <Route path ="/studio" component ={VideoUploader}/>
+                                <Route path ="/history" component ={WatchHistory}/>
+                                <Route path ="/Playlists" component ={Playlists}/>
+                                <Route path="/Playlist/:playlist_id" component={playlist}/>
+                                <Route path="/SearchResults" component={SearchResults}/>
+                            </SearchProvider>
                         </AuthHandler>
 
                     </Switch>

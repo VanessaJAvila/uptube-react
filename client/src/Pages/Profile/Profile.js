@@ -8,6 +8,8 @@ import {faEnvelope, faGear, faKey, faUser} from "@fortawesome/free-solid-svg-ico
 import Header from "../../Layout/Header";
 import SideBar from "../../Layout/SideBar";
 
+//localhost port for api
+const API = process.env.REACT_APP_API;
 
 function Profile() {
     const {user,setUser} = React.useContext(UserContext);
@@ -42,7 +44,7 @@ function Profile() {
             birthday: updateUserBirthday,
         }
 
-        axios.post('http://localhost:5000/user/'+user.user_id+'/edit', newUser, {
+        axios.post(`${API}/user/${user.user_id}/edit`, newUser, {
             withCredentials: true
         })
         .then((res) => {
@@ -58,7 +60,7 @@ function Profile() {
         formData.append("photoName", photoName);
 
         console.log(formData, "formdata");
-        axios.post('http://localhost:5000/user/'+user.user_id+'/edit/upload/avatar',formData, {
+        axios.post(`${API}/user/${user.user_id}/edit/upload/avatar`,formData, {
             withCredentials: true
         })
             .then((res) => {
@@ -69,12 +71,11 @@ function Profile() {
             //  history.replace("/Register")
         });
 
-
         const formDataHead = new FormData();
         formDataHead.append("photo", updateUserHeader);
         formDataHead.append("photoName", headerName);
 
-        axios.post('http://localhost:5000/user/'+user.user_id+'/edit/upload/header',formDataHead, {
+        axios.post(`${API}/user/${user.user_id}/edit/upload/header`,formDataHead, {
             withCredentials: true
         })
             .then((res) => {

@@ -1,44 +1,30 @@
 import "./SideBar.scss";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {UserContext} from "../Providers/UserContext";
+import {SearchContext} from "../Providers/SearchContext";
 import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
-    faClapperboard,
-    faClockRotateLeft,
-    faFire,
-    faGear,
-    faHouse,
-    faPlay,
-    faRightFromBracket,
-    faVideo
+    faClapperboard, faClockRotateLeft, faFire, faGear, faHouse, faPlay, faRightFromBracket, faVideo
 } from "@fortawesome/free-solid-svg-icons";
 import {Link, useHistory} from "react-router-dom";
-import avatar from "../Assets/img1.jpg";
 
+//localhost port for api
+const API = process.env.REACT_APP_API;
 
 function SideBar() {
 
     const {user, setUser} = React.useContext(UserContext);
-    const [tags, setTags] = useState([])
+    const {handleTags, tags} = React.useContext(SearchContext);
+
     const history = useHistory();
-
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/tags')
-            .then(response => {
-                setTags(response.data)
-            });
-    }, []);
-
-   // console.log(tags)
 
 
     let handleSubmit = async (e) => {
         //history.push vai para pagina nova
         //history.replace nao permite voltar para a pagina anterior
         e.preventDefault();
-        axios.post('http://localhost:5000/user/Logout', true, {
+        axios.post(`${API}/user/Logout`, true, {
             withCredentials: true
         })
             .then((res) => {
@@ -51,8 +37,8 @@ function SideBar() {
     }
 
     return <div className={"SideBar"}>
-                {user && <div className={"User"}><Link to={"/Profile/"}>
-                    <img className={"avatar"} src = {user?.photo} alt={"user-photo"}/>
+        {user && <div className={"User"}><Link to={"/Profile/"}>
+            <img className={"avatar"} src={user?.photo} alt={"user-photo"}/>
             <div className={"Name"}>
                 {user?.name}
                 <div className={"username"}>
@@ -64,22 +50,26 @@ function SideBar() {
 
         <div className={"container-public-home"}>
             <div className={"Início"}>
-            <Link to={"/Home"}><FontAwesomeIcon icon={faHouse}/>
-                <p>Início</p></Link>
+                <Link to={"/Home"}><FontAwesomeIcon icon={faHouse}/>
+                    <p>Início</p></Link>
             </div>
             <div className={"Tendências"}>
-                <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faFire}/></Link>
+                <Link to={"./Home"}><FontAwesomeIcon icon={faFire}/></Link>
                 <p>Tendências</p>
             </div>
-            <div className={"Canais"}>
-                <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faClapperboard}/></Link>
+            {!user && <div className={"Canais"}>
+                <Link to={"/Channels"}><FontAwesomeIcon icon={faClapperboard}/></Link>
                 <p>Canais</p>
-            </div>
+            </div>}
         </div>
 
         {user && <div className={"container-user"}>
+            <div className={"Subscrições"}>
+                <Link to={"./Channels"}><FontAwesomeIcon icon={faClapperboard}/></Link>
+                <p>Subscrições</p>
+            </div>
             <div className={"Histórico"}>
-                <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faClockRotateLeft}/></Link>
+                <Link to={"./Home"}><FontAwesomeIcon icon={faClockRotateLeft}/></Link>
                 <p>Histórico</p>
             </div>
             <div className={"Playlists"}>
@@ -90,11 +80,11 @@ function SideBar() {
         <div className={"Tags"}>
             <h4>Tags</h4>
             <div className={"tag"}>
-                {tags.map((tag,idx) => {
-                    return <Link to="/video" key={tag + "_" + idx}>
-                        <button>{tag.name}</button>
-                    </Link>
-                })}
+                {Object.values(tags).map((tag, idx) => (<div key={idx}>
+                        <button onClick={() => handleTags(tag)} value={tag.name}>
+                            {tag.name}
+                        </button>
+                    </div>))}
             </div>
         </div>
         {user && <div className={"container-home-2"}>

@@ -1,28 +1,57 @@
 import "./Header.scss";
 import {UserContext} from "../Providers/UserContext";
+import {SearchContext} from "../Providers/SearchContext";
 import logo from "./logo.svg";
+import {Link, useHistory} from 'react-router-dom';
 import React, {useEffect, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass, faSortDown} from "@fortawesome/free-solid-svg-icons";
 import {faCircleUser, faBell} from "@fortawesome/free-regular-svg-icons"
-import avatar from "../Assets/img1.jpg"
-import {Link, Redirect} from "react-router-dom";
-import VideoCard from "../Assets/Components/VideoCard/VideoCard";
+import axios from "axios";
+
+//localhost port for api
+const  API  = process.env.REACT_APP_API;
+
 
 function Header() {
 
-    const {user,setSearch,videos} = React.useContext(UserContext);
+    const {user} = React.useContext(UserContext);
+    const [newNotification, setNewNotification] = useState(false);
+    const [viewed, setViewed] = useState();
+    const {handleSearch,videos,setVideos,search,setSearch} = React.useContext(SearchContext);
+
+
+
+        useEffect(() => {
+            axios.get(`${API}/video/user/${user?.user_id}/notifications`)
+                .then(response => {
+                    setViewed(response.data);
+                })
+        }, []);
+
+
+
+        useEffect(() => {
+            axios.get(`${API}/video/user/${user?.user_id}/notification`)
+                .then(response => {
+                    setNewNotification(true);
+                })
+        }, []);
+
 
     return <div className={"Header"}>
         <div className={"logo"}>
+            <Link to={"/Home"}>
             <img src={logo} alt="logo UpTube"/>
+            </Link>
         </div>
         <div className={"searching"}>
             <FontAwesomeIcon className={"s-icon"} icon={faMagnifyingGlass}/>
             <input className={"search"}
                    type="text"
                    placeholder={"Pesquisar"}
-                   onChange={e => setSearch(e.target.value) && <Redirect to="/SearchResults"/>}/>
+                   onChange={handleSearch}/>
+
              </div>
 
         {!user ? (<div className={"login"}>

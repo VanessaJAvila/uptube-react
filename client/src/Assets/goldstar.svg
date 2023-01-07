@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28.674mm" height="28.668mm" version="1.1" viewBox="0 0 101.6 101.58" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<title>Gold Five-Pointed Star</title>
+<metadata>
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:title>Gold Five-Pointed Star</dc:title>
+<cc:license rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/"/>
+<dc:date>2015-03-01</dc:date>
+<dc:creator>
+<cc:Agent>
+<dc:title>mazeo</dc:title>
+</cc:Agent>
+</dc:creator>
+<dc:publisher>
+<cc:Agent>
+<dc:title>openclipart.org</dc:title>
+</cc:Agent>
+</dc:publisher>
+<dc:language>en</dc:language>
+<dc:subject>
+<rdf:Bag>
+<rdf:li>star</rdf:li>
+<rdf:li>gold</rdf:li>
+<rdf:li>five-pointed</rdf:li>
+<rdf:li>5-pointed</rdf:li>
+<rdf:li>five</rdf:li>
+<rdf:li>pointed</rdf:li>
+<rdf:li>gold star</rdf:li>
+<rdf:li>five-pointed star</rdf:li>
+<rdf:li>5-pointed star</rdf:li>
+<rdf:li>3D</rdf:li>
+<rdf:li>3-D</rdf:li>
+<rdf:li>three-dimensional</rdf:li>
+<rdf:li>three dimensional</rdf:li>
+</rdf:Bag>
+</dc:subject>
+<dc:description>A 3D gold-colored 5-pointed star</dc:description>
+<dc:contributor>
+<cc:Agent>
+<dc:title>mazeo</dc:title>
+</cc:Agent>
+</dc:contributor>
+</cc:Work>
+<cc:License rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+<cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+<cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+<cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+</cc:License>
+</rdf:RDF>
+</metadata>
+<g transform="translate(-4.5872e-6 4.6662e-6)">
+<path d="m49.432 79.002 1.1197-23.124-32.05 44.71zm31.863 22.579-30.744-45.703-1.1197 23.124zm0 0-10.067-37.443-20.677-8.2597zm-62.794-0.9927 32.05-44.71-21.369 6.0316zm32.05-44.71-50.552-18.07 29.183 24.102zm0 0 20.677 8.2597 30.374-24.724zm0 0-12.087-19.396-38.465 1.3257zm0 0 51.05-16.464-37.152-1.555zm0 0 13.899-18.019-13.092-37.859zm0 0 0.8072-55.878-12.894 36.482z" fill="#ff0"/>
+<g transform="translate(50.552 55.878)" stroke-width="0">
+<path d="m0 0 0.8072-55.878-12.894 36.482z" fill="#8d8d1c"/>
+<path d="m0 0 13.899-18.019-13.092-37.859z" fill="#a5a521"/>
+<path d="m0 0 51.05-16.464-37.152-1.555z" fill="#91911d"/>
+<path d="m0 0-12.087-19.396-38.465 1.3257z" fill="#91911d"/>
+<path d="m0 0 20.677 8.2597 30.374-24.724z" fill="#b4b424"/>
+<path d="m0 0-50.552-18.07 29.183 24.102z" fill="#9e9e1f"/>
+<path d="m-32.05 44.71 32.05-44.71-21.369 6.0316z" fill="#8e8e1c"/>
+<path d="M 30.7437,45.7026 L 20.6769,8.2597 L 0,0 Z" fill="#a6a621"/>
+<path d="m30.744 45.703-30.744-45.703-1.1197 23.124z" fill="#9f9f1f"/>
+<path d="m-1.1197 23.124 1.1197-23.124-32.05 44.71z" fill="#b4b424"/>
+</g>
+</g>
+</svg>

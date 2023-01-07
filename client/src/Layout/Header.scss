@@ -8,15 +8,17 @@
   z-index: 3000;
 
   .logo {
-    width: 180px;
+    width: 200px;
 
     img {
       width: 85px;
       margin-top: 15px;
       margin-left: 25px;
+      object-fit: cover;
 
     }
   }
+
     .searching{
       padding-left: 6%;
       padding-bottom: 10px;
@@ -25,7 +27,6 @@
 
       .s-icon{
         position: absolute;
-        display: flex;
         margin-top: 17px;
         margin-left: 89%;
         font-size: 20px;
@@ -44,9 +45,7 @@
         background-color: #30303a;
         border:none;
         color:rgba(248, 247, 247, 0.47);
-
       }
-
     }
 
   .login {
@@ -59,9 +58,10 @@
       border: none;
       padding: 8px;
       margin-top: 10px;
-      margin-left:85%;
+      margin-left:98%;
       text-align: left;
-      width: 162px;
+      max-width: 16em;
+      min-width: 10em;
       color: white;
       font-family: 'Josefin Sans', sans-serif;
     }
@@ -70,7 +70,7 @@
       display:flex;
       position: absolute;
       color: white;
-      margin-left:266px;
+      margin-left:235px;
       margin-top:-24px;
       font-size: 20px;
     }

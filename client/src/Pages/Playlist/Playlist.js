@@ -9,8 +9,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGear} from "@fortawesome/free-solid-svg-icons";
 
 
-
-
+//localhost port for api
+const  API  = process.env.REACT_APP_API;
 
 function Playlist() {
     const {user} = React.useContext(UserContext);
@@ -44,7 +44,7 @@ function Playlist() {
     const {playlist_id} = useParams();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/playlist/'+playlist_id,{withCredentials: true})
+        axios.get(`${API}/playlist/${playlist_id}`,{withCredentials: true})
             .then(response => {
                 console.log('rsp playlist', response.data);
                 setplaylist(response.data);

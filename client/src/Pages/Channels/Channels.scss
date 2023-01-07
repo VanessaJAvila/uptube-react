@@ -1,0 +1,178 @@
+.channels-container {
+  display: flex;
+  width: 93%;
+  height: 90%;
+  position: relative;
+
+  .channels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: space-around;
+    flex-direction: column;
+    width: 80%;
+    height: 80%;
+    margin-top: 6%;
+    margin-left: 28%;
+
+    .channel-card {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      border: 1px solid grey;
+      border-radius: 10px;
+      width: 27%;
+      height: 41%;
+      margin-top: 4%;
+      margin-right: 3%;
+      cursor: pointer;
+
+      .follow {
+        display:flex;
+        margin-top: 3%;
+
+
+        button {
+          display: flex;
+          background-color: #23232c;
+          color: lightgray;
+          text-align: center;
+          border: 1px solid dimgrey;
+          border-radius: 10px;
+          width: 4%;
+          height: 3%;
+          margin-top: calc(100% - 102%);
+          margin-left: 13%;
+          padding-top: 4px;
+          padding-right: 52px;
+          position: absolute;
+          font-size: 9px;
+        }
+
+          button:hover{
+            background-color: #7e0707;
+          }
+
+
+      }
+
+
+      .channel-header {
+        width: 100%;
+        height: 100%;
+
+        .img-header {
+          width: 99%;
+          height: 71%;
+          border-radius: 10px 10px 0 0;
+        }
+      }
+
+      .channel-data {
+        width: 279px;
+        height: 48px;
+        margin-top: -22%;
+        border-top: 1px solid dimgrey;
+        position: relative;
+        cursor: pointer;
+
+
+        .channel-id {
+          display: flex;
+          margin-top: 3%;
+          margin-left: 26%;
+          position: absolute;
+        }
+
+        .channel-img {
+          display: flex;
+          width: 20%;
+          height: 26px;
+          margin-left: 3%;
+          margin-top: 3%;
+          position: absolute;
+          border-radius: 10px 10px 0 0;
+
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            margin-top: 9%;
+            border: 3px solid lightgray;
+
+          }
+        }
+
+        .subscriptions {
+          margin-top: 13%;
+          margin-left: 26%;
+          font-size: 8pt;
+          position: absolute;
+
+          .subscription-text {
+            margin-top: -20%;
+            margin-left: 12%;
+          }
+
+        }
+      }
+    }
+
+    a {
+      color: lightgrey;
+      text-decoration: none;
+      width: 310px;
+      height: 211px;
+    }
+  }
+
+  .results {
+    display: flex;
+
+    .pagination-next {
+      display: flex;
+      background-color: #1C1C24;
+      color: lightgray;
+      text-align: center;
+      border: 1px solid dimgrey;
+      border-radius: 10px;
+      width: 10%;
+      height: 6%;
+      margin-top: 45%;
+      margin-left: calc(100% - 105%);
+      position: absolute;
+
+      .next {
+        margin-top: 11px;
+        margin-left: 12px;
+      }
+    }
+
+    .pagination-goback {
+      display: flex;
+      background-color: #1C1C24;
+      color: lightgray;
+      text-align: center;
+      border: 1px solid dimgrey;
+      border-radius: 10px;
+      width: 10%;
+      height: 6%;
+      margin-top: 45%;
+      margin-left: calc(100% - 179%);
+      position: absolute;
+
+      .back {
+        margin-top: 8%;
+        margin-left: 4%;
+
+      }
+    }
+
+
+  }
+}
+
+
+
+

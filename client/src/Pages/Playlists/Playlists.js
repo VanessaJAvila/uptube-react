@@ -1,3 +1,6 @@
+//export default defaultBackendURL = ´localhost:4000´
+//export default videosURL = defaultBackendURL + ´video´
+// fazer um file se possivel com todos os endpoints vindos da base de dados e chamar depois nos files necessarios
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Header from "../../Layout/Header";
@@ -9,8 +12,8 @@ import {faEllipsis, faEnvelope, faUserPlus} from "@fortawesome/free-solid-svg-ic
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import PlaylistCard from "../../Assets/Components/PlaylistCard/PlaylistCard.js"
 
-
-
+//localhost port for api
+const API = process.env.REACT_APP_API;
 
 function Playlists() {
     const {user} = React.useContext(UserContext);
@@ -19,16 +22,32 @@ function Playlists() {
     const[visibility, setVisibility] =useState("public");
     const [criarPlaylist, setCriarPlaylist] = useState(false);
     const [title, setTitle]= useState("");
+    //console.log(user, "user Playlists");
+    //console.log(user?.user_id);
+
 
 
     useEffect(() => {
         if(!user) return;
-        axios.get('http://localhost:5000/playlist/user/'+user.user_id,{withCredentials: true})
+        axios.get(`${API}/playlist/user/${user.user_id}`,{withCredentials: true})
             .then(response => {
                 console.log('setplaylist', response.data);
                 setplaylists(response.data);
             }).catch(e => console.log(e, "erro playlist")) ;
     }, [user]);
+
+    //todo adicionar o a duração da playlist, de momento não consigo fazer
+    useEffect(() => {
+        if(!user) return;
+        axios.get(`${API}/playlist/user/${user.user_id}/duration/`,{withCredentials: true})
+            .then(response => {
+                console.log('rsp each video duration', response.data);
+                response.data.map(d =>{
+                    return d.duration
+                });
+            }).catch(e => console.log(e, "erro playlist")) ;
+    }, [user]);
+
 
 
     if(!user){
@@ -44,10 +63,10 @@ function Playlists() {
             title: title,
             creator_id: user.user_id,
             visibility:visibility,
-            thumbnail: "http://localhost:5000/playlistFiller/noVideoFound.jpg"
+            thumbnail: `${API}/playlistFiller/noVideoFound.jpg`
         }
 
-        axios.post('http://localhost:5000/playlist/create', newPlaylist, {
+        axios.post(`${API}/playlist/create`, newPlaylist, {
             withCredentials: true
         })
             .then((res) => {
