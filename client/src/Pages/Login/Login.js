@@ -1,5 +1,3 @@
-
-
 import React, {useState} from "react";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
@@ -9,6 +7,9 @@ import "./Login.scss";
 import logo from "../../Layout/logo.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faKey} from "@fortawesome/free-solid-svg-icons";
+
+//localhost port for api
+const  API  = process.env.REACT_APP_API;
 
 function Login() {
 
@@ -31,7 +32,7 @@ function Login() {
             password: newUserPassword
         }
 
-        axios.post('http://localhost:5000/user/Login', newUser, {
+        axios.post(`${API}/user/Login`, newUser, {
             withCredentials: true
         })
             .then((res) => {

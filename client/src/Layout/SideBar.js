@@ -1,37 +1,30 @@
 import "./SideBar.scss";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {UserContext} from "../Providers/UserContext";
 import {SearchContext} from "../Providers/SearchContext";
 import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
-    faClapperboard,
-    faClockRotateLeft,
-    faFire,
-    faGear,
-    faHouse,
-    faPlay,
-    faRightFromBracket,
-    faVideo
+    faClapperboard, faClockRotateLeft, faFire, faGear, faHouse, faPlay, faRightFromBracket, faVideo
 } from "@fortawesome/free-solid-svg-icons";
 import {Link, useHistory} from "react-router-dom";
 
+//localhost port for api
+const API = process.env.REACT_APP_API;
 
 function SideBar() {
 
     const {user, setUser} = React.useContext(UserContext);
-    const {handleTags,tags} = React.useContext(SearchContext);
+    const {handleTags, tags} = React.useContext(SearchContext);
 
     const history = useHistory();
-
-
 
 
     let handleSubmit = async (e) => {
         //history.push vai para pagina nova
         //history.replace nao permite voltar para a pagina anterior
         e.preventDefault();
-        axios.post('http://localhost:5000/user/Logout', true, {
+        axios.post(`${API}/user/Logout`, true, {
             withCredentials: true
         })
             .then((res) => {
@@ -44,8 +37,8 @@ function SideBar() {
     }
 
     return <div className={"SideBar"}>
-                {user && <div className={"User"}><Link to={"/Profile/"}>
-                    <img className={"avatar"} src = {user?.photo} alt={"user-photo"}/>
+        {user && <div className={"User"}><Link to={"/Profile/"}>
+            <img className={"avatar"} src={user?.photo} alt={"user-photo"}/>
             <div className={"Name"}>
                 {user?.name}
                 <div className={"username"}>
@@ -57,8 +50,8 @@ function SideBar() {
 
         <div className={"container-public-home"}>
             <div className={"Início"}>
-            <Link to={"/Home"}><FontAwesomeIcon icon={faHouse}/>
-                <p>Início</p></Link>
+                <Link to={"/Home"}><FontAwesomeIcon icon={faHouse}/>
+                    <p>Início</p></Link>
             </div>
             <div className={"Tendências"}>
                 <Link to={"./Home"}><FontAwesomeIcon icon={faFire}/></Link>
@@ -87,13 +80,11 @@ function SideBar() {
         <div className={"Tags"}>
             <h4>Tags</h4>
             <div className={"tag"}>
-                {Object.values(tags).map((tag, idx) => (
-                    <div key={idx}>
+                {Object.values(tags).map((tag, idx) => (<div key={idx}>
                         <button onClick={() => handleTags(tag)} value={tag.name}>
                             {tag.name}
                         </button>
-                    </div>
-                ))}
+                    </div>))}
             </div>
         </div>
         {user && <div className={"container-home-2"}>

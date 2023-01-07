@@ -1,15 +1,15 @@
-
-
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Redirect, Route, useHistory, useParams} from "react-router-dom";
 import {UserContext} from "../../Providers/UserContext";
 import Register from "../Register/Register";
 
-
 import logo from "../../Layout/logo.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faKey} from "@fortawesome/free-solid-svg-icons";
+
+//localhost port for api
+const  API  = process.env.REACT_APP_API;
 
 function RecoverBytoken() {
 
@@ -33,7 +33,7 @@ function RecoverBytoken() {
             rep_password: userRepPassword
         }
 
-        axios.post('http://localhost:5000/user/passwordrecovery/'+token, newUser, {
+        axios.post(`${API}/user/passwordrecovery/${token}`, newUser, {
             withCredentials: true
         })
             .then((res) => {

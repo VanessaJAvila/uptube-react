@@ -12,8 +12,8 @@ import {faEllipsis, faEnvelope, faUserPlus} from "@fortawesome/free-solid-svg-ic
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import PlaylistCard from "../../Assets/Components/PlaylistCard/PlaylistCard.js"
 
-
-
+//localhost port for api
+const API = process.env.REACT_APP_API;
 
 function Playlists() {
     const {user} = React.useContext(UserContext);
@@ -28,11 +28,9 @@ function Playlists() {
     //console.log(user, "user Playlists");
     //console.log(user?.user_id);
 
-
-
     useEffect(() => {
         if(!user) return;
-        axios.get('http://localhost:5000/playlist/user/'+user.user_id,{withCredentials: true})
+        axios.get(`${API}/playlist/user/${user.user_id}`,{withCredentials: true})
             .then(response => {
                 console.log('rsp', response.data);
                 setplaylists(response.data);
@@ -42,13 +40,10 @@ function Playlists() {
     //todo adicionar o a duração da playlist, de momento não consigo fazer
     useEffect(() => {
         if(!user) return;
-        axios.get('http://localhost:5000/playlist/user/'+user.user_id+`/duration/`,{withCredentials: true})
+        axios.get(`${API}/playlist/user/${user.user_id}/duration/`,{withCredentials: true})
             .then(response => {
                 console.log('rsp each video duration', response.data);
-
                 response.data.map(d =>{
-
-
                     return d.duration
                 });
             }).catch(e => console.log(e, "erro playlist")) ;
@@ -71,10 +66,10 @@ function Playlists() {
             title: title,
             creator_id: user.user_id,
             visibility:visibility,
-            thumbnail: "http://localhost:5000/playlistFiller/noVideoFound.jpg"
+            thumbnail: `${API}/playlistFiller/noVideoFound.jpg`
         }
 
-        axios.post('http://localhost:5000/playlist/create', newPlaylist, {
+        axios.post(`${API}/playlist/create`, newPlaylist, {
             withCredentials: true
         })
             .then((res) => {

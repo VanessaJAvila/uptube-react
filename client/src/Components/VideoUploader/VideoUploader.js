@@ -4,6 +4,9 @@ import ProgressBar from '../ProgressBar/ProgressBar';
 import { useState } from 'react';
 import axios from 'axios';
 
+//localhost port for api
+const  API  = process.env.REACT_APP_API;
+
 // This component is a form that allows the user to select a file and upload it to a server.
 // It uses state variables to keep track of the form's state.
 export const VideoUploader = ({}) => {
@@ -44,7 +47,7 @@ export const VideoUploader = ({}) => {
 
         // Send an HTTP POST request to the server with the file as the payload
         axios
-            .post('http://localhost:5000/studio/upload', data, {
+            .post(`${API}/studio/upload`, data, {
                 // Add a progress event handler to update the progress state variable
                 onUploadProgress: (progressEvent) => {
                     // Calculate the progress percentage

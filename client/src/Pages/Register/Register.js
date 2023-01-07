@@ -10,6 +10,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
 //import Popup from "reactjs-popup";
 
+//localhost port for api
+const API = process.env.REACT_APP_API;
+
 function Register() {
     const [newUserName, setNewUserName] = useState("");
     const [newUserEmail, setNewUserEmail] = useState("");
@@ -39,7 +42,7 @@ function Register() {
             rep_password: newUserRepPassword
         }
 
-        axios.post('http://localhost:5000/user/register', newUser, {
+        axios.post(`${API}/user/register`, newUser, {
             withCredentials: true
         })
             .then((res) => {

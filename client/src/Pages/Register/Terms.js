@@ -1,7 +1,5 @@
 import "./Terms.scss";
 
-
-
 export default function Terms({closeTerms}) {
 
     return (<div className={"popup"}>
