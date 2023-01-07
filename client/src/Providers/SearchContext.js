@@ -20,7 +20,7 @@ const SearchProvider = ({children}) => {
     let tag = new URLSearchParams(location.search).get('tag')
 
     let handleTags = (tag) => {
-        console.log(tag)
+        //console.log(tag)
         if (tags) {
             history.push("/SearchResults?tag="+tag.name);
         }
@@ -72,7 +72,7 @@ const SearchProvider = ({children}) => {
     }, [tag]);
 
 
-    console.log("tags="+videos);
+    //console.log("tags="+videos);
 
     let handleSearch = (e) => {
         setSearch(e.target.value)
