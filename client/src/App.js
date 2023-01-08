@@ -1,5 +1,5 @@
 import './App.css';
-
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Suggested from "./Pages/Suggested";
 import Home from "./Pages/Home/Home.js";
 import Login from "./Pages/Login/Login.js";
@@ -9,9 +9,7 @@ import React from "react";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import Recover from "./Pages/Recover Password/Recover";
 import RecoverBytoken from "./Pages/Recover Password/RecoverBytoken";
-
 import Channel from "./Pages/Channel/Channel";
-
 import Profile from "./Pages/Profile/Profile";
 import Delete from "./Pages/Delete/Delete";
 import Playlists from "./Pages/Playlists/Playlists";
@@ -24,6 +22,8 @@ import {SearchProvider} from "./Providers/SearchContext";
 import VideoStreamingPage from "./Pages/VideoStreamingPage/VideoStreamingPage";
 import {VideoUploader} from "./Components/VideoUploader/VideoUploader";
 import WatchHistory from "./Pages/WatchHistory/WatchHistory";
+import Header from "./Layout/Header";
+import Studio from "./Pages/Studio/Studio";
 
 import AuthHandler from "./Assets/Components/AuthHandler";
 
@@ -31,10 +31,13 @@ import AuthHandler from "./Assets/Components/AuthHandler";
 function App() {
 
     //const {user, setUser} = React.useContext(UserContext);
+
     //  <RequireAuth></RequireAuth><NotRequireAuth> </NotRequireAuth>
+
     return <UserProvider>
         <BrowserRouter>
                 <div className="App">
+                    <Header/>
                     <Switch>
                         <AuthHandler
                             requireAuth={<>
