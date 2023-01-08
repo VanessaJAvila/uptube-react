@@ -2,12 +2,15 @@ import React, {useContext, useState} from "react";
 import axios from "axios";
 import {Link, Redirect, useHistory} from 'react-router-dom';
 import {UserContext} from "../../Providers/UserContext";
+import SideBar from "../../Layout/SideBar";
 import "./Profile.scss";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faGear, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
 import Header from "../../Layout/Header";
-import SideBar from "../../Layout/SideBar";
 
+
+//localhost port for api
+const API = process.env.REACT_APP_API;
 
 function Profile() {
     const {user,setUser} = React.useContext(UserContext);
@@ -23,9 +26,7 @@ function Profile() {
 
     const history = useHistory();
     console.log(user, "user Profile");
-    if(!user){
-        return <h2>Awaiting user....</h2>
-    }
+
 
     if (!user) {
         return <h2>Awaiting user....</h2>
@@ -34,8 +35,6 @@ function Profile() {
 
     let handleSubmit = async (e) => {
 
-        //history.push vai para pagina nova
-        //history.replace nao permite voltar para a pagina anterior
         e.preventDefault();
 
 
@@ -46,7 +45,7 @@ function Profile() {
             birthday: updateUserBirthday,
         }
 
-        axios.post('http://localhost:5000/user/'+user.user_id+'/edit', newUser, {
+        axios.post(`${API}/user/${user.user_id}/edit`, newUser, {
             withCredentials: true
         })
         .then((res) => {
@@ -61,24 +60,23 @@ function Profile() {
         formData.append("photo", updateUserPhoto);
         formData.append("photoName", photoName);
 
-
-        axios.post('http://localhost:5000/user/'+user.user_id+'/edit/upload/avatar',formData, {
+        console.log(formData, "formdata");
+        axios.post(`${API}/user/${user.user_id}/edit/upload/avatar`,formData, {
             withCredentials: true
         })
             .then((res) => {
-                //console.log(res, "upload res");
+                console.log(res, "upload res");
             }).catch((error) => {
             //console.log(error.response.data, "nao editaste a photo");
             alert("error: "+ error.response.data)
             //  history.replace("/Register")
         });
 
-
         const formDataHead = new FormData();
         formDataHead.append("photo", updateUserHeader);
         formDataHead.append("photoName", headerName);
 
-        axios.post('http://localhost:5000/user/'+user.user_id+'/edit/upload/header',formDataHead, {
+        axios.post(`${API}/user/${user.user_id}/edit/upload/header`,formDataHead, {
             withCredentials: true
         })
             .then((res) => {
@@ -101,8 +99,9 @@ function Profile() {
 
     return <div className="Profile">
         <Header/>
-        <div className="container-profile" >
         <SideBar/>
+        <div className="container-profile" >
+
         <div className="container">
             <h1> Editar a Conta </h1>
             <form onSubmit={handleSubmit}>

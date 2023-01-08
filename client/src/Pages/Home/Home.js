@@ -11,6 +11,9 @@ import VideoCard from "../../Assets/Components/VideoCard/VideoCard";
 import {faEllipsis, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
+//localhost port for api
+const  API  = process.env.REACT_APP_API;
+
 
 function Home() {
     const {user} = React.useContext(UserContext);
@@ -36,14 +39,14 @@ function Home() {
 
 
     useEffect(() => {
-        axios.get('http://localhost:5000/suggested/50popular')
+        axios.get(`${API}/suggested/50popular`)
             .then(response => {
                 setRecommendations(response.data);
             }).catch(e => console.log(e));
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/suggested/topchannels')
+        axios.get(`${API}/suggested/topchannels`)
             .then(response => {
                 //console.log('rsp', response);
                 setTopChannels(response.data);
@@ -51,9 +54,7 @@ function Home() {
             }).catch(e => console.log(e));
     }, []);
 
-    if (!recommendations) return null;
-    if (!topChannels) return null;
-    if (!topChannel) return null;
+    if (!recommendations || !topChannels || !topChannel) return null;
 
     return <div className={"container-homepage"}>
         <Header/>

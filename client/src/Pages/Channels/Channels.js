@@ -9,6 +9,9 @@ import axios from "axios";
 import {Link, useHistory} from "react-router-dom";
 import {UserContext} from "../../Providers/UserContext";
 
+//localhost port for api
+const  API  = process.env.REACT_APP_API;
+
 export default function Channels() {
 
     const {user} = React.useContext(UserContext);
@@ -24,7 +27,7 @@ export default function Channels() {
     const history = useHistory();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/user`)
+        axios.get(`${API}/user`)
             .then(response => {
                 setData(response.data);
             }).catch(e => console.log(e));

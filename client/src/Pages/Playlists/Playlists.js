@@ -12,16 +12,13 @@ import {faEllipsis, faEnvelope, faUserPlus} from "@fortawesome/free-solid-svg-ic
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import PlaylistCard from "../../Assets/Components/PlaylistCard/PlaylistCard.js"
 
-
-
+//localhost port for api
+const API = process.env.REACT_APP_API;
 
 function Playlists() {
     const {user} = React.useContext(UserContext);
     const history = useHistory();
     const [playlists, setplaylists] = useState([]);
-   // const [eachVideoDuration, setEachVideoDuration] = useState([]);
-    const [playlistDuration, setPlaylistDuration] = useState(0);
-  //  const [videoDuration, setVideoDuration]= useState(0);
     const[visibility, setVisibility] =useState("public");
     const [criarPlaylist, setCriarPlaylist] = useState(false);
     const [title, setTitle]= useState("");
@@ -32,9 +29,9 @@ function Playlists() {
 
     useEffect(() => {
         if(!user) return;
-        axios.get('http://localhost:5000/playlist/user/'+user.user_id,{withCredentials: true})
+        axios.get(`${API}/playlist/user/${user.user_id}`,{withCredentials: true})
             .then(response => {
-                console.log('rsp', response.data);
+                console.log('setplaylist', response.data);
                 setplaylists(response.data);
             }).catch(e => console.log(e, "erro playlist")) ;
     }, [user]);
@@ -42,13 +39,10 @@ function Playlists() {
     //todo adicionar o a duração da playlist, de momento não consigo fazer
     useEffect(() => {
         if(!user) return;
-        axios.get('http://localhost:5000/playlist/user/'+user.user_id+`/duration/`,{withCredentials: true})
+        axios.get(`${API}/playlist/user/${user.user_id}/duration/`,{withCredentials: true})
             .then(response => {
                 console.log('rsp each video duration', response.data);
-
                 response.data.map(d =>{
-
-
                     return d.duration
                 });
             }).catch(e => console.log(e, "erro playlist")) ;
@@ -63,18 +57,16 @@ function Playlists() {
 
     let handleSubmit = async (e) => {
 
-        //history.push vai para pagina nova
-        //history.replace nao permite voltar para a pagina anterior
         e.preventDefault();
-        //alterei na bd thumbnail aceita null
+
         let newPlaylist = {
             title: title,
             creator_id: user.user_id,
             visibility:visibility,
-            thumbnail: "http://localhost:5000/playlistFiller/noVideoFound.jpg"
+            thumbnail: `${API}/playlistFiller/noVideoFound.jpg`
         }
 
-        axios.post('http://localhost:5000/playlist/create', newPlaylist, {
+        axios.post(`${API}/playlist/create`, newPlaylist, {
             withCredentials: true
         })
             .then((res) => {
@@ -86,21 +78,6 @@ function Playlists() {
         });
     }
 
-/*
-playlist title, playlist owner, count videos in playlist, duração da , dias desde a criação
-
-    function toSeconds(s) {
-        let p = s.split(':');
-        return parseInt(p[0], 10) * 3600 + parseInt(p[1], 10) * 60 + parseInt(p[2], 10);
-    }
-
-    eachVideoDuration.map((d)=>  {
-
-        setVideoDuration(videoDuration + toSeconds(d.duration))
-
-    } )
-
- */
 
 
 
@@ -115,11 +92,12 @@ playlist title, playlist owner, count videos in playlist, duração da , dias de
                 {playlists.map(p => {
                     return <PlaylistCard  key={p.playlist_id}
                                               id = {p.playlist_id}
+                                              creator_id = {p.creator_id}
                                               thumbnail = {p.thumbnail}
                                               photo = {user.photo}
                                               name = {user.name}
                                               title ={p.title}
-                                              duration = {playlistDuration}
+                                              duration = {p.duration}
                                               timestamp = {p.timestamp}
                     />}
                 )}

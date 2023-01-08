@@ -16,6 +16,8 @@ import {faPenToSquare, faPen, faUser, faGear, faX} from "@fortawesome/free-solid
 import axios from "axios";
 import {Link, useHistory} from "react-router-dom";
 
+//localhost port for api
+const  API  = process.env.REACT_APP_API;
 
 export default function Channel() {
     const {user, setUser} = React.useContext(UserContext);
@@ -63,7 +65,7 @@ export default function Channel() {
     formData.append("photo", updateUserPhoto);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/user/${user?.user_id}`)
+        axios.get(`${API}/user/${user?.user_id}`)
             .then(response => {
                 setChannel(response.data);
             }).catch(e => console.log(e));
@@ -106,7 +108,7 @@ export default function Channel() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/user/stats/${user?.user_id}`)
+        axios.get(`${API}/user/stats/${user?.user_id}`)
             .then(response => {
                 setStats(response.data.user_report[0]);
             }).catch(e => console.log(e));
@@ -114,14 +116,14 @@ export default function Channel() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/subscriptions/${user?.user_id}`)
+        axios.get(`${API}/subscriptions/${user?.user_id}`)
             .then(response => {
                 setSubs(response.data);
             }).catch(e => console.log(e));
     }, [user]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/achievements/${user?.user_id}`)
+        axios.get(`${API}/achievements/${user?.user_id}`)
             .then(response => {
                 setAchis(response.data);
             }).catch(e => console.log(e));

@@ -9,6 +9,8 @@ import {faMagnifyingGlass, faSortDown} from "@fortawesome/free-solid-svg-icons";
 import {faCircleUser, faBell} from "@fortawesome/free-regular-svg-icons"
 import axios from "axios";
 
+//localhost port for api
+const  API  = process.env.REACT_APP_API;
 
 
 function Header() {
@@ -21,7 +23,7 @@ function Header() {
 
 
         useEffect(() => {
-            axios.get(`http://localhost:5000/user/${user?.user_id}/notifications`)
+            axios.get(`${API}/video/user/${user?.user_id}/notifications`)
                 .then(response => {
                     setViewed(response.data);
                 })
@@ -30,7 +32,7 @@ function Header() {
 
 
         useEffect(() => {
-            axios.get(`http://localhost:5000/user/${user?.user_id}/notification`)
+            axios.get(`${API}/video/user/${user?.user_id}/notification`)
                 .then(response => {
                     setNewNotification(true);
                 })

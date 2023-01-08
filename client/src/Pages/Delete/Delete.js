@@ -5,10 +5,8 @@ import {UserContext} from "../../Providers/UserContext";
 import Register from "../Register/Register";
 import "./Delete.scss";
 
-
-
-
-
+//localhost port for api
+const  API  = process.env.REACT_APP_API;
 
 function Delete() {
     const {user} = React.useContext(UserContext);
@@ -28,7 +26,7 @@ function Delete() {
         e.preventDefault();
 
 
-        axios.post('http://localhost:5000/user/'+user.user_id+'/delete', true, {
+        axios.post(`${API}/user/'+user.user_id+'/delete`, true, {
             withCredentials: true
         })
             .then((res) => {

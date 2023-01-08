@@ -4,6 +4,8 @@ import {useHistory, useLocation} from "react-router-dom";
 
 const SearchContext = React.createContext({});
 
+//localhost port for api
+const API = process.env.REACT_APP_API;
 
 const SearchProvider = ({children}) => {
 
@@ -18,7 +20,7 @@ const SearchProvider = ({children}) => {
     let tag = new URLSearchParams(location.search).get('tag')
 
     let handleTags = (tag) => {
-        console.log(tag)
+        //console.log(tag)
         if (tags) {
             history.push("/SearchResults?tag="+tag.name);
         }
@@ -26,7 +28,7 @@ const SearchProvider = ({children}) => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:5000/tags")
+            .get(`${API}/tags`)
             .then((response) => {
                 setTags(response.data);
             })
@@ -43,7 +45,7 @@ const SearchProvider = ({children}) => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/video/search?search=${search}&page=${page}`, {
+            .get(`${API}/video/search?search=${search}&page=${page}`, {
                 withCredentials: true,
             })
             .then((response) => {
@@ -58,7 +60,7 @@ const SearchProvider = ({children}) => {
 
     useEffect( () => {
         axios
-            .get(`http://localhost:5000/video/search/tag?search=${tag}`, {
+            .get(`${API}/video/search/tag?search=${tag}`, {
                 withCredentials: true,
             })
             .then((response) => {
@@ -70,7 +72,7 @@ const SearchProvider = ({children}) => {
     }, [tag]);
 
 
-    console.log("tags="+videos);
+    //console.log("tags="+videos);
 
     let handleSearch = (e) => {
         setSearch(e.target.value)

@@ -6,6 +6,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import logo from "../../Layout/logo.svg";
 
+//localhost port for api
+const API = process.env.REACT_APP_API;
+
 function Recover() {
 
     const [newUserEmail, setNewUserEmail] = useState("");
@@ -23,7 +26,7 @@ function Recover() {
             email: newUserEmail,
         }
 
-        axios.post('http://localhost:5000/user/passwordrecovery', newUser, {
+        axios.post(`${API}/user/passwordrecovery`, newUser, {
             withCredentials: true
         })
             .then((res) => {

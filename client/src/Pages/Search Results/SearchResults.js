@@ -1,17 +1,13 @@
 import "./SearchResults.scss";
 import Header from "../../Layout/Header";
 import SideBar from "../../Layout/SideBar";
-import React, {useEffect, useState} from "react";
-import {UserContext} from "../../Providers/UserContext";
 import {SearchContext} from "../../Providers/SearchContext";
 import VideoCard from "../../Assets/Components/VideoCard/VideoCard";
-import axios from "axios";
-import {useHistory, useLocation} from "react-router-dom";
+import React, {useContext, useState} from "react";
 
 export default function SearchResults() {
 
-    const {user} = React.useContext(UserContext);
-    const {videos,setVideos,search,setSearch} = React.useContext(SearchContext);
+    const {videos} = React.useContext(SearchContext);
 
     return <div className={"container-search-results"}>
         <Header/>
