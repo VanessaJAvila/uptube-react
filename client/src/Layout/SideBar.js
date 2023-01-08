@@ -87,7 +87,7 @@ function SideBar() {
         <div className={"Tags"}>
             <h4>Tags</h4>
             <div className={"tag"}>
-                {Object.values(tags).map((tag, idx) => (
+                {tags && Object.values(tags).map((tag, idx) => (
                     <div key={idx}>
                         <button onClick={() => handleTags(tag)} value={tag.name}>
                             {tag.name}

@@ -17,8 +17,6 @@
 
     .channel-card {
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
       align-items: flex-end;
       border: 1px solid grey;
       border-radius: 10px;
@@ -29,7 +27,7 @@
       cursor: pointer;
 
       .follow {
-        display:flex;
+        display: flex;
         margin-top: 3%;
 
 
@@ -50,9 +48,9 @@
           font-size: 9px;
         }
 
-          button:hover{
-            background-color: #7e0707;
-          }
+        button:hover {
+          background-color: #7e0707;
+        }
 
 
       }
