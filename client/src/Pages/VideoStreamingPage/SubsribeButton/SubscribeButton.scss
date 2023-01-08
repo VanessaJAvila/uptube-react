@@ -1,0 +1,14 @@
+.subscribe-button{
+  border-style: solid;
+  border-radius: 5px;
+  border-color: rgb(30,30,37);
+  color: rgb(249,249,249);
+  padding: 0.7em 0.5em 0.5em 0.5em;
+  cursor: pointer;
+
+
+  &:hover {
+    background-color: var(--bg-button-white-hover);
+    color: var(--text-color-secundary);
+  }
+}

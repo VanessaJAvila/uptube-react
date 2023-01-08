@@ -1,0 +1,16 @@
+.container-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  height: 100%;
+
+  .upload-title {
+    font-size: 18px;
+    text-align: center;
+    text-align: center;
+    color: rgb(255,255,255)
+
+  }
+}

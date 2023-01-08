@@ -1,5 +1,4 @@
 .streaming {
-  background-color: rgb(16, 15, 20);
   height: max-content;
   display: flex;
   flex-direction: row;
@@ -98,20 +97,6 @@
                 margin-right: 15px;
               }
 
-              .subscribe-button {
-                border: 1px solid var(--text-color-tertiary);
-                border-radius: 5px;
-                padding: 0 10px 2px 10px;
-                cursor: pointer;
-                width: 50%;
-
-
-                &:hover {
-                  background-color: var(--bg-button-white-hover);
-                  color: var(--text-color-secundary);
-                }
-
-              }
             }
 
             .video-info-container-row-2 {
@@ -162,21 +147,6 @@
           }
         }
       }
-    }
-  }
-
-
-  .description-container {
-    background-color: rgb(21,21,27);
-    border-radius: 10px;
-    min-height: 150px;
-    max-height: 200px;
-    font-size: 15px;
-    margin: 10px 0 10px 0;
-    padding-left: 1em;
-
-    .description-text {
-      padding: 7.5px
     }
   }
 

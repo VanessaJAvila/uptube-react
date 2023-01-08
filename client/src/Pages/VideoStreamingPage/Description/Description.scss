@@ -1,0 +1,19 @@
+.description-container {
+  background-color: rgb(21,21,27);
+  border-radius: 10px;
+  min-height: 150px;
+  max-height: 200px;
+  font-size: 15px;
+  color: white;
+  padding: 10px;
+  margin: 10px;
+  overflow: hidden;
+
+  .description-text {
+    white-space: pre-wrap;
+  }
+
+  a {
+    color: var(--text-color-tertiary);
+  }
+}
