@@ -166,7 +166,6 @@ const VideoStreamingPage = () => {
     // Render the component
     return (
         <div className="streaming">
-            <Header/>
             <SideBar/>
             <div className="streaming-container-1">
                 <div className={"streaming-video-details"}>

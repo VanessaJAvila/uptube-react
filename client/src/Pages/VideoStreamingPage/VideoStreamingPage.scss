@@ -1,10 +1,13 @@
 .streaming {
+  width: 100%;
+
   height: max-content;
   display: flex;
   flex-direction: row;
 
   .streaming-container-1 {
     height: 100%;
+    width: 60%;
     padding: 90px 0 0 200px;
     margin-left: 1.5em;
     background-color: var(--bg-color);
