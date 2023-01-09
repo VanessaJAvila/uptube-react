@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import Header from "../../Layout/Header";
 import {Redirect, useHistory, useParams} from "react-router-dom";
@@ -6,7 +6,10 @@ import {UserContext} from "../../Providers/UserContext";
 import SideBar from "../../Layout/SideBar";
 import "./Playlist.scss";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faGear} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faGear} from "@fortawesome/free-solid-svg-icons";
+import { createPopper } from '@popperjs/core';
+
+
 
 
 //localhost port for api
@@ -21,23 +24,88 @@ function Playlist() {
     const [dropdownState, setDropdownState] = useState(null);
     const [addMusicDropdown, setAddMusicDropdown] = useState(false);
     const [pmovies,setPMovies] = useState(null);
-    const closeDrop = useRef(null)
+    const [createDrop, setCreateDrop] = useState(false);
+    const [selected,setSelected] = useState(true);
+    const [moviePath, setMoviePath] = useState(null);
+    const[visibility, setVisibility] =useState("public");
+    const [title, setTitle]= useState("");
+    const [thumb,setThumb]= useState("");
+    const [idplay,setidplay]= useState("");
+    const [videoadd,setvideoadd]= useState("");
 
 
+    //todo  como dar background color no video selected
+    // criar caixa para criar playlist e add video
+    // linha 257
 
-    const closeOpenMenus = (e)=>{
-        if(closeDrop.current && dropdownState && !closeDrop.current.contains(e.target)){
-            console.log(e.target);
-            setDropdownState(null);
-            setAddMusicDropdown(false);
-            setPMovies(null);
+
+    let handleSubmit = async (e) => {
+
+        e.preventDefault();
+
+        let newPlaylist = {
+            title: title,
+            creator_id: user.user_id,
+            visibility:visibility,
+            thumbnail: `${API}`+thumb
         }
+
+        axios.post(`${API}/playlist/create`, newPlaylist, {
+            withCredentials: true
+        })
+            .then((res) => {
+                alert('Playlist created successfully');
+                setidplay(res.data.playlist_id)
+                console.log(res.data,playlist_id,"playlist id");
+            }).catch((error) => {
+            console.log(error, "messagem erro login frontend");
+            alert("error: Wrong Credentials!");
+        });
+
+        console.log(addMusic,"add music obj");
+
+        let addMusic = {
+            playlist_id: idplay,
+            video_id: videoadd
+        }
+
+        axios.post(`${API}/playlist/addmusic`,addMusic, {
+            withCredentials: true
+        })
+            .then((res) => {
+                alert("video added to playlist successfully");
+                console.log(res.data);
+            }).catch((error) => {
+            console.log(error, "messagem erro");
+        });
+
+
     }
 
 
 
-    document.addEventListener('mousedown',closeOpenMenus)
 
+
+//pooper
+    const popcorn = document.querySelector('#popcorn');
+    const tooltip = document.querySelector('#tooltip');
+
+    createPopper(popcorn, tooltip, {
+        placement: 'bottom',
+        modifiers: [
+            {
+                name: 'offset',
+                options: {
+                    offset: [0, 8],
+                },
+                preventOverflow:
+                    {
+                        enabled: true,
+                        escapeWithReference: true ,
+                        boundariesElement: 'viewport'},
+            },
+        ],
+    });
 
 
 
@@ -49,6 +117,7 @@ function Playlist() {
                 console.log('rsp playlist', response.data,`${API}${response.data[0].videoUrl}`);
                 setplaylist(response.data);
                 setMovie( `${API}${response.data[0].videoUrl}`)
+                setMoviePath(`${API}${response.data[0].videoUrl}`)
             }).catch(e => console.log(e, "erro playlist")) ;
     }, []);
 
@@ -68,10 +137,11 @@ function Playlist() {
     if(!user){
         return <h2>Awaiting user....</h2>
     }
+
+
     if(!playlist){
         return <h2>Awaiting playlist....</h2>
     }
-
 
 
     return <div className={"Playlist"}>
@@ -81,20 +151,24 @@ function Playlist() {
             <h1>As musicas da playlist</h1>
             <div className={"box-playlist"}>
                 <video src={movie} width="650" height="500" controls></video>
-                <div className={"nextContainer"} ref={closeDrop}>
+                <div className={"nextContainer"}>
                    <h1>{playlist[0].playlistTitle}</h1>
                     <div>
                         {playlist.map((p,idx) => {
-                            return <div key={idx} className={"movieDiv"} >
-                                    <div>
-                                        <img onClick={()=>setMovie(`${API}${p.videoUrl}`)} src={p.thumbnail} alt="no photo"/>
+                            return <div style={selected?{backgroundColor: "light-grey"}:{backgroundColor: "blue"}} key={idx} className={"movieDiv"} >
+                                    <div className={"imgContainer"}>
+                                        <img onClick={()=>{
+                                            setMovie(`${API}${p.videoUrl}`);
+                                        }} src={`${API}${p.thumbnail}`} alt="no photo"/>
                                         <p>{p.duration}</p>
                                     </div>
-                                        <div  className={"videoInfo"}>
-                                            <h2 >{p.videoTitle}</h2>
-                                            <h3>{p.username}</h3>
+                                        <div className={"videoInfo"}>
+                                            <div className={"videoText"}>
+                                                <h2 >{p.videoTitle}</h2>
+                                                <h3>{p.videoCreator}</h3>
+                                            </div>
                                             <FontAwesomeIcon onClick={()=>setDropdownState(idx)} className="dropbtn" icon={faGear}></FontAwesomeIcon>
-                                            {dropdownState===idx&&<div className="dropdown-content">
+                                            {dropdownState===idx&&<div id="tooltip" role="tooltip" className="dropdown-content">
                                                 <p onClick={
                                                     async (e) => {
                                                         e.preventDefault();
@@ -147,9 +221,11 @@ function Playlist() {
                                                                             console.log(error, "messagem erro");
                                                                         });
 
+                                                                        if(p.video_id===playlist[0].video_id) {
+                                                                            //todo update imagem to 1st of line
+                                                                        }
+
                                                                     }
-
-
                                                                 }
                                                                 let lists = [];
                                                                if(pmovies.includes(play.playlist_id)){
@@ -164,9 +240,49 @@ function Playlist() {
                                                                     </div>
                                                             })
                                                         }
-                                                        <div>Criar Nova playlist e add music</div>
+                                                        <div onClick={()=> {
+                                                            setCreateDrop(true);
+                                                            setThumb(p.thumbnail);
+                                                            setvideoadd(p.video_id);
+                                                        }}>Criar Nova playlist e add music</div>
+
+
+                                                        { createDrop && <div>
+                                                            <div id="tooltip" role="tooltip">
+                                                                <form onSubmit={handleSubmit}>
+                                                                    <div className="inputContainer">
+                                                                        <input type="text" onChange={e => setTitle(e.target.value)} value={title} id="title"
+                                                                               name="title" placeholder="title" required/>
+                                                                        <FontAwesomeIcon className="icons" icon={faEnvelope}/>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <select id="visibility" onChange={e => setVisibility(e.target.value)} name ="visibility">
+                                                                            <option value="Public">Public</option>
+                                                                            <option value="Private">Private</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <button type="submit">Gravar Alterações</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>}
+
                                                     </div>
                                                 }
+                                                <p onClick={async (e)=>{
+
+                                                    console.log(e.target);
+                                                    setDropdownState(null);
+                                                    setAddMusicDropdown(false);
+                                                    e.preventDefault();
+                                                    await axios.get(`${API}/playlist/moviesinplaylist/`+ p.video_id +'/' + user.user_id)
+                                                        .then(response => {
+                                                            setPMovies(response.data);
+                                                        }).catch(e => console.log(e, "erro playlist")) ;
+
+
+                                                }
+                                                }> close </p>
                                             </div>
                                             }
                                         </div>
