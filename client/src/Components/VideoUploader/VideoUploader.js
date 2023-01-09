@@ -1,104 +1,151 @@
-import './VideoUploader.css';
+import './VideoUploader.scss';
 import LoadingSpinner from '../Spinner/Spinner';
 import ProgressBar from '../ProgressBar/ProgressBar';
-import { useState } from 'react';
+import {useRef, useState} from 'react';
 import axios from 'axios';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUpload} from "@fortawesome/free-solid-svg-icons";
+import {CircularProgressbar, buildStyles} from 'react-circular-progressbar';
+
+import SideBar from "../../Layout/SideBar";
 
 //localhost port for api
-const  API  = process.env.REACT_APP_API;
+const API = process.env.REACT_APP_API;
 
 // This component is a form that allows the user to select a file and upload it to a server.
 // It uses state variables to keep track of the form's state.
-export const VideoUploader = ({}) => {
+export const VideoUploader = ({onSubmit}) => {
     // The file that the user has selected for upload
     const [file, setFile] = useState(null);
-
-    // Whether the file is currently being uploaded
     const [isLoading, setIsLoading] = useState(false);
+    const [uploadPercentage, setUploadPercentage] = useState(0);
 
-    // Whether the file has finished uploading
-    const [isLoaded, setIsLoaded] = useState(false);
 
-    // An error message to display if there is an issue with the file upload
-    const [errorMessage, setErrorMessage] = useState('');
+    const [dragActive, setDragActive] = useState(false);
+    const inputRef = useRef(null);
+    const [fileName, setFileName] = useState('')
 
-    // The progress of the file upload, as a percentage
-    const [progress, setProgress] = useState(0);
-
-    // This function is called when the user selects a file
-    const onInputChange = (e) => {
-        // Update the file state variable with the selected file
-        setFile(e.target.files[0]);
-    };
-
-    // This function is called when the user submits the form
-    const onSubmit = (e) => {
-        // Prevent the default form submission behavior
-        e.preventDefault();
-        // Create a new FormData object to store the file
-        const data = new FormData();
-        data.append('file', file);
-
-        // Set the isLoading state variable to true to show the loading spinner
+    const uploadFile = async (file) => {
         setIsLoading(true);
-
-        // Set the isLoaded state variable to false
-        setIsLoaded(false);
-
-        // Send an HTTP POST request to the server with the file as the payload
-        axios
-            .post(`${API}/studio/upload`, data, {
-                // Add a progress event handler to update the progress state variable
-                onUploadProgress: (progressEvent) => {
-                    // Calculate the progress percentage
-                    const percentCompleted = Math.round(
-                        (progressEvent.loaded * 100) / progressEvent.total
-                    );
-
-                    // Update the progress state variable
-                    setProgress(percentCompleted);
-                },
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+            await axios.post(`${API}/studio/upload`, formData, {
+                headers: {'Content-Type': 'multipart/form-data'}, withCredentials: true,
+                onUploadProgress: ({progress}) => {
+                    setUploadPercentage(Math.floor(progress * 100));
+                }
+            }).then((res) => {
+                console.log(res.data)
+                onSubmit(res.data)
             })
-            // If the file upload is successful, update the isLoading and isLoaded state variables
-            .then(() => {
-                setIsLoading(false);
-                setIsLoaded(true);
-            })
-            // If there is an error with the file upload, update the errorMessage state variable
-            .catch((e) => {
-                setErrorMessage('Unable to upload');
-                setIsLoading(false);
-            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const handleDrag = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.type === "dragenter" || e.type === "dragover") setDragActive(true)
+        if (e.type === "dragleave") setDragActive(false);
     };
+
+    const onButtonClick = () => {
+        inputRef.current.click();
+    };
+
+    const handleClick = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.target.files && e.target.files[0]) {
+            await uploadFile(e.target.files[0]);
+            setIsLoading(true);
+        }
+    };
+
+    const handleDrop = async (e) => { // triggered by drop
+        e.preventDefault();
+        e.stopPropagation();
+        setDragActive(false);
+        if (e.dataTransfer.files[0] > 1) throw "please drag only one file at a time.";
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            await uploadFile(e.dataTransfer.files[0])
+            setIsLoading(true);
+        }
+    };
+
+    const loadingContainer = () => {
+        return (
+            <div className="progress-container">
+                <CircularProgressbar className={'progress-circular-bar'}
+                                     value={uploadPercentage}
+                                     styles={buildStyles({
+                                         rotation: 0.15,
+                                         strokeLinecap: 'round',
+                                         textSize: '12px',
+                                         trailColor: 'rgba(19, 19, 26)',
+                                         backgroundColor: 'rgba(19, 19, 26)',
+
+                                     })}
+                />
+                <div className={'progress-container-progress-bar'}>
+                    <div className={'progress-bar-text'}><p>{uploadPercentage}%</p></div>
+                    <div className="progress-container-bar">
+                                            <span className="progress-bar-fill"
+                                                  style={{width: uploadPercentage + "%"}}></span>
+                    </div>
+                </div>
+
+                <div className="loading-video-text">
+                    <p>A carregar o seu vídeo,</p>
+                    <p>por favor aguarde...</p>
+                </div>
+            </div>
+        )
+    }
+
+    const formContainer = () => {
+        if (isLoading) {
+            return loadingContainer()
+        }
+
+        return (
+            <>
+                <div className={"drag-container-info"}>
+                    <div className={'drag-container-info-icon'}>
+                        <FontAwesomeIcon icon={faUpload}/>
+                    </div>
+                    <div className={"drag-container-info-text-container"}>
+                        <p className={"drag-container-info-text"}>Arraste para aqui o vídeo ou
+                            clique</p>
+                        <p className={"drag-container-info-text"}>para escolher o ficheiro</p>
+                    </div>
+                    <button className={"drag-container-info-upload-button"}
+                            onClick={onButtonClick}></button>
+                </div>
+                {dragActive &&
+                    <div id="drag-area" onDragEnter={handleDrag} onDragLeave={handleDrag}
+                         onDragOver={handleDrag} onDrop={handleDrop}></div>
+                }
+            </>
+        )
+    }
 
     // Render the form
     return (
         <div className='upload'>
-            <form
-                method='post'
-                action='#'
-                id='#'
-                encType='multipart/form-data'
-                onSubmit={onSubmit}
-            >
-                <div className='form-group files'>
-                    <label htmlFor='file-input'>Select a file</label>
-                    <input
-                        type='file'
-                        name='image'
-                        id='file-input'
-                        onChange={onInputChange}
-                        className='form-control'
-                        multiple=''
-                    />
-                </div>
-                {isLoading ? <LoadingSpinner /> : onSubmit}
-                {errorMessage && <div className='error'>{errorMessage}</div>}
-                <button disabled={isLoading} style={{ display: isLoaded ? 'none' : 'block' }}>
-                    Submit
-                </button>
-                <ProgressBar value={progress} />
-            </form>
+            <div className='upload-container'>
+                    <form className={"upload-drag-video"} onDragEnter={handleDrag} onSubmit={(e) => e.preventDefault()}>
+                        <input ref={inputRef} type={"file"} id={"input-video-upload"} multiple={false}
+                                         onChange={handleClick}/>
+                        <label id={"label-file-upload"} htmlFor={"input-file-upload"}
+                               className={dragActive ? "active" : ""}>
+                            <div className={"drag-container"}>
+                                {formContainer()}
+                            </div>
+                        </label>
+                    </form>
+            </div>
         </div>
     );
 };
