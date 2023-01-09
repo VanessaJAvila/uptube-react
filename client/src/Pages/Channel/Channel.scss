@@ -5,8 +5,7 @@
   flex-direction: column;
   position: relative;
 
-  .user-details {
-    position: relative;
+  .channel-details {
     background-color: #13131A;
     width: 81%;
     height: 30%;
@@ -15,159 +14,97 @@
     border-bottom: 1px solid dimgrey;
     color: white;
 
-    .layer-bg{
-      width: 100%;
+    .channel-layer-bg {
+      width: 80%;
       height: 69%;
-      position: absolute;
-      background:linear-gradient(rgb(255, 255, 255), #16161e);
       border-radius: 10px 10px 0 0;
-      opacity: 1;
+    }
 
-      .channel-bg{
-       width: 100%;
-      height: 97%;
-      position: absolute;
-      border-radius: 10px 10px 0 0;
-
-        .edit-bg-icon{
-          position: absolute;
-          margin-top: 6%;
-          margin-left: 50%;
-        }
-        a{
-          color:lightgray;
-        }
-    }}
-
-    .edit-user-details {
-      .edit {
+      .channel-header {
+        width: 80%;
+        height: 17%;
         position: absolute;
-        width: 10%;
-        height: 12%;
-        border: 1px solid dimgrey;
-        border-radius: 18px;
-        margin-top: 16%;
-        margin-left: 1%;
-        font-size: 9px;
-        color: lightgrey;
-        padding-bottom: 2px;
-        background-color: #1C1C24;
-
-        .edit-text {
-          margin-top: 8%;
-          margin-left: 10%;
-          position: absolute;
-        }
-
-        .icon {
-          margin-left: 80%;
-          margin-top: 4%;
-          font-size: 16px;
-          color: lightgray;
-        }
+        border-radius: 10px 10px 0 0;
       }
 
-      .user-data {
-        width: 95%;
-        position: relative;
-        margin-top: -7%;
+    .channel-data {
+      width: 95%;
+      position: relative;
+      margin-top: calc( 100% - 110%);
 
-        a{
-          color:lightgray;
-        }
+      .channel-avatar {
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        margin-top: calc(100% - 101%);
+        margin-left: 85%;
+        border: 3px solid whitesmoke;
+      }
 
-        .edit-avatar-icon{
-          position: absolute;
-          margin-top: 17%;
-          margin-left: 92%;
-        }
+      .channel-name {
+        margin-left: 1%;
+        font-size: 22px;
+        position: absolute;
+        margin-top: calc(100% - 105%);
+      }
 
-        .edit-user-data-icon{
-          position: absolute;
-          font-size: 12px;
-          margin-top: -5%;
-          margin-left: 14%;
-        }
-
-
-
-        .avatar {
-          width: 180px;
-          height: 180px;
-          border-radius: 50%;
-          margin-top: 10%;
-          margin-left: 85%;
-          border: 3px solid whitesmoke;
-
-        }
-
-        .username {
-          margin-left: 1%;
-          font-size: 22px;
-          position: absolute;
-          margin-top: -5%;
-        }
-
-        .bio {
-          margin-top: -2%;
-          margin-left: 1%;
-          font-size: 10pt;
-
-        }
-        .stats-user {
-          display: flex;
-          position: absolute;
-          flex-direction: row;
-          margin-top: -7%;
-          margin-left: 60%;
-          text-align: center;
-
-          .followers, .views {
-            margin-right: 10px;
-          }
-        }
+      .channel-bio {
+        margin-top:calc(100% - 103%);
+        width: 50%;
+        margin-left: 1%;
+        font-size: 10pt;
       }
     }
-  }
+
+    .stats-channel {
+      display: flex;
+      position: absolute;
+      flex-direction: row;
+      margin-top: -7%;
+      margin-left: 60%;
+      text-align: center;
+
+      .followers, .views {
+        margin-right: 10px;
+      }
+    }
+    }
 
   h2 {
     color: lightgray;
     position: absolute;
-    margin-left: 18%;
+    margin-left: 19%;
     margin-top: 20%;
     font-size: 15px;
-  }
-
-  .hide-icon{
-    font-size: 12px;
   }
 
   .achievements {
     display: flex;
     background-color: #1C1C24;
     position: absolute;
-    width: 80%;
+    width: 79%;
     height: 16%;
     margin-top: 22%;
-    margin-left: 18%;
+    margin-left: 19%;
     border-radius: 10px;
     flex-wrap: nowrap;
 
-    .goldStalker{
+    .goldStalker {
       background-color: #13131A;
       width: 7%;
       height: 87%;
-      margin-top: 1%;
-      margin-left: 25%;
+      margin-top: 7px;
+      margin-left: 24%;
       position: absolute;
       border-radius: 10px;
 
-      img.Stalker.ouro{
+      img.Stalker.ouro {
         width: 76%;
         margin-top: 9%;
         margin-left: 11%;
       }
-      p{
+
+      p {
         color: lightgray;
         font-size: 10pt;
         margin-top: 7%;
@@ -175,7 +112,7 @@
       }
     }
 
-    .bronzeInflu{
+    .bronzeInflu {
       background-color: #13131A;
       width: 7%;
       height: 87%;
@@ -184,14 +121,14 @@
       position: absolute;
       border-radius: 10px;
 
-      img.Influencer.bronze{
+      img.Influencer.bronze {
         width: 76%;
         margin-top: 9%;
         margin-left: 12%;
-        color:lightgray;
+        color: lightgray;
       }
 
-      p{
+      p {
         color: lightgray;
         font-size: 10pt;
         margin-top: 7%;
@@ -204,8 +141,8 @@
       background-color: #13131A;
       width: 7%;
       height: 87%;
-      margin-top: 1%;
-      margin-left: 9%;
+      margin-top: 7px;
+      margin-left: 7px;
       position: absolute;
       border-radius: 10px;
 
@@ -216,12 +153,10 @@
         margin-left: 6%;
       }
 
-
-
       .começar {
         width: 65%;
         position: absolute;
-        margin-top: 14%;
+        margin-top: 7px;
         margin-left: 15%;
       }
     }
@@ -230,12 +165,12 @@
       background-color: #13131A;
       width: 7%;
       height: 87%;
-      margin-top: 1%;
-      margin-left: 1%;
+      margin-top: 7px;
+      margin-left: 8%;
       position: absolute;
       border-radius: 10px;
 
-      p{
+      p {
         color: lightgray;
         font-size: 10pt;
         margin-top: 98%;
@@ -245,22 +180,18 @@
       img.adoram-me.ouro {
         width: 75%;
         position: absolute;
-        margin-top: 8%;
+        margin-top:7px;
         margin-left: 12%;
         border-radius: 50%;
         background: rgb(232, 206, 107);
-
       }
     }
-
-
-
     .goldRising {
       background-color: #13131A;
       width: 7%;
       height: 87%;
-      margin-top: 1%;
-      margin-left: 17%;
+      margin-top: 7px;
+      margin-left: 16%;
       position: absolute;
       border-radius: 10px;
 
@@ -279,16 +210,14 @@
     }
   }
 
-
   .upload {
     margin-top: 32%;
-
   }
 
   .container-uploads {
     background-color: #1C1C24;
     position: absolute;
-    width: 80%;
+    width: 79%;
     height: 16%;
     margin-top: 34%;
     margin-left: 19%;
@@ -303,93 +232,52 @@
   .container-playlists {
     background-color: #1C1C24;
     position: absolute;
-    width: 80%;
+    width: 79%;
     height: 16%;
     margin-top: 45%;
     margin-left: 19%;
     border-radius: 10px;
   }
 
-  .container-subs-stats {
 
+  .about-text {
+    color: lightgray;
     position: absolute;
-    width: 81%;
-    height: 21%;
-    margin-top: 53%;
-    margin-left: 17%;
+    margin-left: 19%;
+    margin-top: 36%;
 
+  }
 
-    .subs-text {
+  .stats {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 25%;
+    height: 20%;
+    margin-top: 38%;
+    margin-left: 19%;
+    border-radius: 12px;
+    background-color: #1C1C24;
+
+    .date {
       color: lightgray;
-      position: absolute;
-      margin-top: 1%;
-      margin-left: 3%;
+      margin-left: 5%;
     }
 
-    .subs {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      width: 39%;
-      height: 100%;
-      margin-top: 1%;
-      margin-left: 12%;
-
-      .list {
-        display: flex;
-        flex-direction: row;
-        margin-top: 2%;
-        color: lightgray;
-
-        .channel{
-          margin-top: 10px;
-          margin-left: 4%;
-        }
-
-        .photo-chan{
-          border-radius: 50%;
-          width: 30px;
-          height: 30px;
-        }
-      }
-    }
-
-    .about-text {
+    .stats-st-data {
+      margin-left: 5%;
+      margin-bottom: 0;
       color: lightgray;
-      position: absolute;
-      margin-left: 50%;
-
     }
 
-    .stats {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      width: 28%;
-      height: 93%;
-      margin-top: 1%;
-      margin-left: 56%;
-      border-radius:12px;
-      background-color: #1C1C24;
-
-      .date{
-        color: lightgray;
-        margin-left: 5%;
-      }
-
-      .stats-st-data{
-        margin-left:5%;
-        margin-bottom: 0;
-        color: lightgray;
-      }
-      .stats-data{
-        margin-top:0;
-        margin-left:5%;
-        margin-bottom: 0;
-        color: lightgray;
-      }
-
+    .stats-data {
+      margin-top: 0;
+      margin-left: 5%;
+      margin-bottom: 0;
+      color: lightgray;
     }
   }
 
+
 }
+

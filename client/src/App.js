@@ -8,6 +8,7 @@ import {UserContext, UserProvider} from "./Providers/UserContext";
 import React from "react";
 import Recover from "./Pages/Recover Password/Recover";
 import RecoverBytoken from "./Pages/Recover Password/RecoverBytoken";
+import UserChannel from "./Pages/Channel/UserChannel";
 import Channel from "./Pages/Channel/Channel";
 import Profile from "./Pages/Profile/Profile";
 import Delete from "./Pages/Delete/Delete";
@@ -54,7 +55,7 @@ function App() {
 
                             <SearchProvider>
                                 <Route path="/Home" component={Home}/>
-                                <Route path="/Channel" component={Channel}/>
+                                <Route path="/UserChannel" component={UserChannel}/>
                                 <Route path="/Channel/:user_id" component={Channel}/>
                                 <Route path="/Channels" component={Channels}/>
                                 <Route path="/Delete" component={Delete}/>

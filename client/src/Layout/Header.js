@@ -26,7 +26,7 @@ function Header() {
         console.log(popup)
     }
 
-    useEffect(() => {
+    {/*}  useEffect(() => {
         axios.get(`${API}/video/user/${user?.user_id}/notifications`)
             .then(response => {
                 setViewed(response.data);
@@ -39,7 +39,7 @@ function Header() {
             .then(response => {
                 setNewNotification(true);
             })
-    }, []);
+    }, []);*/}
 
 
     return <div className={"Header"}>
@@ -63,11 +63,11 @@ function Header() {
                 <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/></Link>
         </div>) : (<div className={"user-logged"}>
             <FontAwesomeIcon className={"b-icon"} icon={faBell}/>
-            <Link to={"/Channel"}> <img className={"avatar"} src={user?.photo} alt={"user-photo"}/></Link>
+            <Link to={"/UserChannel"}> <img className={"avatar"} src={user?.photo} alt={"user-photo"}/></Link>
             <div className={"dropdown"}>
                 <Link onClick={togglePopUp}><FontAwesomeIcon className={"sort-icon"} icon={faSortDown}/></Link>
                 {popup && <div className={"dropdown-content"}>
-                    <div className={"menu-item"}><Link to="/Channel">Canal</Link></div>
+                    <div className={"menu-item"}><Link to="/UserChannel">Canal</Link></div>
                     <div className={"menu-item"}><Link to="/studio">Estúdio</Link></div>
                     <div className={"menu-item"}><button>Dark/Light Mode</button></div>
                     <div className={"menu-last-item"} ><Link to="">Enviar Feedback</Link></div>

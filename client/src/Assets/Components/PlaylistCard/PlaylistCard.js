@@ -73,7 +73,7 @@ function PlaylistCard(props){
                         <img src={props.photo}/>
                     </div>
                     <div className="card_info">
-                        <Link to={"/Channel"} >
+                        <Link to={"/UserChannel"} >
                             <h2>{props.name}</h2>
                         </Link>
                         <h1>{props.title}</h1>
