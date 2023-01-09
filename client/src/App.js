@@ -37,7 +37,6 @@ function App() {
     return <UserProvider>
         <BrowserRouter>
                 <div className="App">
-
                     <Switch>
                         <AuthHandler
                             requireAuth={<>
@@ -59,7 +58,7 @@ function App() {
                                 <Route path="/Channels" component={Channels}/>
                                 <Route path="/Delete" component={Delete}/>
                                 <Route path ="/player/:id" component ={VideoStreamingPage}/>
-                                <Route path ="/studio" component ={VideoUploader}/>
+                                <Route path ="/studio" component ={Studio}/>
                                 <Route path ="/history" component ={WatchHistory}/>
                                 <Route path ="/Playlists" component ={Playlists}/>
                                 <Route path="/Playlist/:playlist_id" component={playlist}/>
