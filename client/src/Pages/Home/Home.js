@@ -14,6 +14,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 //localhost port for api
 const  API  = process.env.REACT_APP_API;
 
+console.log(API)
 
 function Home() {
     const {user} = React.useContext(UserContext);
@@ -36,6 +37,7 @@ function Home() {
     const currentRecomendations = recommendations.slice(indexOfFirstRecordRec, indexOfLastRecordRec)
 
     console.log(currentChannels)
+
 
 
     useEffect(() => {

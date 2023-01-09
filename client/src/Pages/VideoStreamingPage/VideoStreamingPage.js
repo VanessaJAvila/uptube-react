@@ -1,7 +1,6 @@
 import {Link, useHistory, useParams} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import moment from "moment/moment";
 import 'moment/locale/pt'
 import "./VideoStreamingPage.scss"
 import {UserContext} from "../../Providers/UserContext";

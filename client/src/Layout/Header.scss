@@ -1,9 +1,9 @@
-.Header{
+.Header {
   width: 100%;
-  height:55px;
+  height: 55px;
   background-color: #1C1C24;
   border-bottom: 1px solid dimgrey;
-  display:flex;
+  display: flex;
 
   .logo {
     width: 200px;
@@ -16,38 +16,38 @@
     }
   }
 
-    .searching{
-      padding-left: 6%;
-      padding-bottom: 10px;
-      position: relative;
-      width: 60%;
+  .searching {
+    padding-left: 6%;
+    padding-bottom: 10px;
+    position: relative;
+    width: 60%;
 
-      .s-icon{
-        position: absolute;
-        margin-top: 17px;
-        margin-left: 89%;
-        font-size: 20px;
-        color: rgba(248, 247, 247, 0.47);
+    .s-icon {
+      position: absolute;
+      margin-top: 17px;
+      margin-left: 89%;
+      font-size: 20px;
+      color: rgba(248, 247, 247, 0.47);
 
-        &.active, &:hover{
-          color: antiquewhite;
-        }
-      }
-
-      .search{
-        width: 100%;
-        border-radius: 8px;
-        margin-top: 10px;
-        padding: 8px;
-        background-color: #30303a;
-        border:none;
-        color:rgba(248, 247, 247, 0.47);
+      &.active, &:hover {
+        color: antiquewhite;
       }
     }
 
+    .search {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 10px;
+      padding: 8px;
+      background-color: #30303a;
+      border: none;
+      color: rgba(248, 247, 247, 0.47);
+    }
+  }
+
   .login {
     position: relative;
-    padding:0;
+    padding: 0;
 
     .button {
       background-color: #1E75FF;
@@ -55,7 +55,7 @@
       border: none;
       padding: 8px;
       margin-top: 10px;
-      margin-left:98%;
+      margin-left: 98%;
       text-align: left;
       max-width: 16em;
       min-width: 10em;
@@ -64,56 +64,105 @@
     }
 
     .l-icon {
-      display:flex;
+      display: flex;
       position: absolute;
       color: white;
-      margin-left:235px;
-      margin-top:-24px;
+      margin-left: 235px;
+      margin-top: -24px;
       font-size: 20px;
     }
   }
 
+  .user-logged {
 
-    .user-logged {
+    width: 150px;
+    margin-left: 16%;
 
-      width: 150px;
-      margin-left:16%;
+    .b-icon {
+      position: absolute;
+      display: flex;
+      margin-top: 17px;
+      margin-left: 10px;
+      font-size: 20px;
+      color: rgba(248, 247, 247, 0.47);
 
-      .b-icon{
-        position: absolute;
-        display: flex;
-        margin-top: 17px;
-        margin-left: 10px;
-        font-size: 20px;
-        color: rgba(248, 247, 247, 0.47);
-
-        &.active, &:hover{
-          color: antiquewhite;
-        }
-      }
-
-      .avatar {
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        margin-top: 13px;
-        margin-left: 40px;
-
-      }
-
-      .sort-icon {
-        position: absolute;
-        display: flex;
-        margin-top: -30px;
-        margin-left: 80px;
-        font-size: 20px;
-        color: rgba(248, 247, 247, 0.47);
-
-        &.active, &:hover{
-          color: antiquewhite;
-        }
+      &.active, &:hover {
+        color: antiquewhite;
       }
     }
+
+    .avatar {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      margin-top: 13px;
+      margin-left: 40px;
+    }
+
+    .sort-icon {
+      position: absolute;
+      display: flex;
+      margin-top: -30px;
+      margin-left: 80px;
+      font-size: 20px;
+      color: rgba(248, 247, 247, 0.47);
+
+      &.active, &:hover {
+        color: antiquewhite;
+      }
+    }
+
+    .dropdown {
+      .dropdown-content {
+        position: absolute;
+        width: 7%;
+        height: 21%;
+        background-color: #1C1C24;
+        border: 1px solid dimgrey;
+        border-radius: 10px;
+        font-size: 12pt;
+        z-index: 1;
+
+        .menu-item {
+          border-bottom: 1px solid #696969;
+          padding: 5px;
+
+          a {
+            text-decoration: none;
+            color: #dddddd;
+            padding-bottom: 5px;
+          }
+        }
+
+        .menu-last-item {
+          padding: 5px;
+
+          a {
+            text-decoration: none;
+            color: #dddddd;
+            padding-bottom: 5px;
+          }
+
+        }
+
+        a {
+          text-decoration: none;
+          color: #dddddd;
+          padding-bottom: 5px;
+        }
+
+        button {
+          padding: 0;
+          font-size: 11pt;
+          font-family: 'Josefin Sans', sans-serif;
+          color: #dddddd;
+          background-color: #1C1C24;
+        }
+
+      }
+    }
+
+  }
 
   .search-results{
     display: flex;
@@ -126,5 +175,4 @@
     background-color: #1C1C24;
 
   }
-
 }

@@ -56,8 +56,6 @@ function Register() {
         });
 
     }
-
-
 /*
     if (user) {
         history.replace("/home");

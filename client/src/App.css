@@ -3,10 +3,11 @@
 .App {
     font-family: 'Josefin Sans', sans-serif;
     background-color: #13131A;
-    height: 100vh;
-    padding: 0;
+    width:100vw;
+    max-height: 100%;
     margin: 0;
-    overflow: hidden;
+    overflow: auto;
+    padding-bottom: 20%;
 }
 
 #root{

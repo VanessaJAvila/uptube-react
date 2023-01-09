@@ -14,7 +14,7 @@ import VideoCard from "../../Assets/Components/VideoCard/VideoCard"
 import {faBookmark, faEyeSlash, faTrashCan} from "@fortawesome/free-regular-svg-icons";
 import {faPenToSquare, faPen, faUser, faGear, faX} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import {Link, useHistory} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 
 //localhost port for api
 const  API  = process.env.REACT_APP_API;
@@ -25,7 +25,7 @@ export default function Channel() {
     const [subs, setSubs] = useState([]);
     const [videos, setVideos] = useState([]);
     const [stats, setStats] = useState({});
-    const [channel, setChannel] = useState([null]);
+    const [channel, setChannel] = useState([]);
     const [edit, setEdit] = useState(false);
     const [showElement, setShowElement] = useState(false)
     const [updateUserUsername, setUpdateUserUsername] = useState(user?.username);
@@ -45,7 +45,19 @@ export default function Channel() {
         return date.getDay() + " de " + months[date.getMonth()] + " de " + date.getFullYear()
     }
 
-    let updateUserInfo = {
+
+    const {user_id} = useParams();
+
+    useEffect(() => {
+        axios.get(`${API}/user/${user_id}`)
+            .then(response => {
+                setChannel(response.data);
+            }).catch(e => console.log(e));
+    }, []);
+
+    console.log("channel" + channel)
+
+    {/*  let updateUserInfo = {
         username: updateUserUsername,
         bio: updateUserBio,
     }
@@ -62,16 +74,10 @@ export default function Channel() {
     });
 
     const formData = new FormData();
-    formData.append("photo", updateUserPhoto);
+    formData.append("photo", updateUserPhoto);*/}
 
-    useEffect(() => {
-        axios.get(`${API}/user/${user?.user_id}`)
-            .then(response => {
-                setChannel(response.data);
-            }).catch(e => console.log(e));
-    }, [user]);
 
-    axios.post('http://localhost:5000/user/' + user.user_id + '/edit/upload/avatar', formData, {
+    {/*Axios.post('http://localhost:5000/user/' + user.user_id + '/edit/upload/avatar', formData, {
         withCredentials: true
     })
         .then((res) => {
@@ -99,7 +105,7 @@ export default function Channel() {
 }*/}
 
     useEffect(() => {
-        axios.get(` http://localhost:5000/video/user/${user?.user_id}`)
+        axios.get(` ${API}/video/user/${user?.user_id}`)
             .then(response => {
                 setVideos(response.data);
             }).catch(e => console.log(e));
@@ -129,10 +135,8 @@ export default function Channel() {
             }).catch(e => console.log(e));
     }, [user]);
 
-    if (!videos) return null;
-    if (!achis) return null;
-    if (!stats) return null;
-    if (!subs) return null;
+
+    if (!videos || !achis || !stats || !subs || !channel) return null;
 
     return <div className={'channel-container'}>
         <Header/>
@@ -217,7 +221,7 @@ export default function Channel() {
                  {!videos && <p>A carregar...</p>}
                  {videos && <>
                      {videos.length === 0 && <p className={"no results"}>Partilha o teu 1º video?</p>}
-                     {videos.map((v, idx) => (<VideoCard type="geral" key={idx} {...v}/>))}
+                     {videos.map((v, idx) => (<VideoCard type="geral"  {...v}/>))}
                  </>}
              </div>*/}
              <h2 className={"playlist"}>Playlists  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash}/>}</h2>
@@ -229,9 +233,10 @@ export default function Channel() {
             <div className={"subs"}>
                 {subs.map((s, idx) => {
                     return (
-                        <div className="list" key={s + idx} onClick={() => {
-                            history.push(`/user/${s.user.id}`)
-                        }}>
+                        <div className="list"  key={s + idx} onClick={() => {
+                            channel.map((c, idx) => {
+                                history.push(`/user/${c.user_id}`)
+                            })}}>
                             <img className="photo-chan" src={s.avatar} alt="channel" />
                             <p className="channel">{s.username}</p>
                         </div>
@@ -248,5 +253,5 @@ export default function Channel() {
 
                  </div>
 
-             </div>}
+             </div>
          </div>}

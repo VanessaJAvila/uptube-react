@@ -18,7 +18,7 @@ export default function Channels() {
 
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const channelsPerPage = 8;
+    const channelsPerPage = 6;
     const indexOfLastRecord = currentPage * channelsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - channelsPerPage;
 

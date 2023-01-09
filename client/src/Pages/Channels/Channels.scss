@@ -1,19 +1,18 @@
 .channels-container {
   display: flex;
-  width: 93%;
+  width: 97%;
   height: 90%;
-  position: relative;
 
   .channels {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-content: space-around;
-    flex-direction: column;
-    width: 80%;
+    flex-direction: row;
+    width: 70%;
     height: 80%;
-    margin-top: 6%;
-    margin-left: 28%;
+    margin-top: 5%;
+    margin-left: calc(100% - 173%);
 
     .channel-card {
       display: flex;
@@ -137,8 +136,8 @@
       border-radius: 10px;
       width: 10%;
       height: 6%;
-      margin-top: 45%;
-      margin-left: calc(100% - 105%);
+      margin-top: 42%;
+      margin-left: calc(100% - 114%);
       position: absolute;
 
       .next {
@@ -156,8 +155,8 @@
       border-radius: 10px;
       width: 10%;
       height: 6%;
-      margin-top: 45%;
-      margin-left: calc(100% - 179%);
+      margin-top: 42%;
+      margin-left: calc(100% - 167%);
       position: absolute;
 
       .back {

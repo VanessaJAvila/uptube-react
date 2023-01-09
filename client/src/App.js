@@ -6,7 +6,6 @@ import Login from "./Pages/Login/Login.js";
 import Register from "./Pages/Register/Register.js";
 import {UserContext, UserProvider} from "./Providers/UserContext";
 import React from "react";
-import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import Recover from "./Pages/Recover Password/Recover";
 import RecoverBytoken from "./Pages/Recover Password/RecoverBytoken";
 import Channel from "./Pages/Channel/Channel";
@@ -26,6 +25,7 @@ import Header from "./Layout/Header";
 import Studio from "./Pages/Studio/Studio";
 
 import AuthHandler from "./Assets/Components/AuthHandler";
+import SideBar from "./Layout/SideBar";
 
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
     return <UserProvider>
         <BrowserRouter>
                 <div className="App">
-                    <Header/>
+
                     <Switch>
                         <AuthHandler
                             requireAuth={<>
@@ -55,6 +55,7 @@ function App() {
                             <SearchProvider>
                                 <Route path="/Home" component={Home}/>
                                 <Route path="/Channel" component={Channel}/>
+                                <Route path="/Channel/:user_id" component={Channel}/>
                                 <Route path="/Channels" component={Channels}/>
                                 <Route path="/Delete" component={Delete}/>
                                 <Route path ="/player/:id" component ={VideoStreamingPage}/>
