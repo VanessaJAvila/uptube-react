@@ -53,7 +53,7 @@ function PlaylistCard(props){
             playlist_id: props.id
         }
 
-        axios.post('http://localhost:5000/playlist/delete/',deletePlay, {
+        axios.post('http://localhost:3001/playlist/delete/',deletePlay, {
             withCredentials: true
         })
             .then((res) => {

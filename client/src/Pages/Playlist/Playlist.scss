@@ -12,22 +12,43 @@
       border-radius: 25px;
       border-style: groove;
       padding: 4px;
+      img{
+        max-width: 200px;
+      }
 
       .musicToBeAdded{
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        border-bottom: black;
+        border-bottom-style: solid;
       }
       .musicAdded{
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        border-bottom: black;
+        border-bottom-style: solid;
       }
       .movieDiv{
+        display: flex;
         cursor: pointer;
         padding: 7px;
+        border-bottom: black;
+        border-bottom-style: solid;
+        .videoInfo{
+          display: flex;
+        }
+        .imgContainer{
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          p{
+            margin-top: -9%;
+          }
+        }
         .addMusic{
           display: flex;
           flex-direction: column;
@@ -37,4 +58,54 @@
       }
     }
   }
+
+
+
+  #popcorn {
+    display: inline-block;
+  }
+
+  #tooltip {
+    display: inline-block;
+    background: #ffffff;
+    color: #643045;
+    font-weight: bold;
+    font-size: 13px;
+    border-radius: 4px;
+  }
+
+  #arrow,
+  #arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: inherit;
+  }
+
+  #arrow {
+    visibility: hidden;
+  }
+
+  #arrow::before {
+    visibility: visible;
+    content: '';
+    transform: rotate(45deg);
+  }
+
+  #tooltip[data-popper-placement^='top'] > #arrow {
+    bottom: -4px;
+  }
+
+  #tooltip[data-popper-placement^='bottom'] > #arrow {
+    top: -4px;
+  }
+
+  #tooltip[data-popper-placement^='left'] > #arrow {
+    right: -4px;
+  }
+
+  #tooltip[data-popper-placement^='right'] > #arrow {
+    left: -4px;
+  }
+
 }
