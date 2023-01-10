@@ -32,8 +32,7 @@ export default function VideoInfo( {videoData}){
             axios.post(`${API}/:video_key/update`, {
                 title: videoTitle,
                 thumbnail: activeThumb,
-                description: videoDescription,
-                tag: videoTags
+                description: videoDescription
             }, {
                 withCredentials: true
             }).then(r =>{
@@ -44,7 +43,7 @@ export default function VideoInfo( {videoData}){
         }
     }
 
-
+console.log("img1", img1)
     return(
         <div className={"video-details"}>
             <div className={'upload-video-details'}>
@@ -136,7 +135,6 @@ export default function VideoInfo( {videoData}){
                         </div>
 
                     </div>
-
                     <div className={'upload-video-details-data'}>
                         <div className={'upload-video-details-data-title'}>
                             <h4>Dados do vídeo</h4>
