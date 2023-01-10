@@ -27,6 +27,7 @@
     "react-scripts": "5.0.1",
     "sass": "^1.56.1",
     "save": "^2.9.0",
+    "semantic-ui-react": "^2.1.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

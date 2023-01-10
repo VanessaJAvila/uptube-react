@@ -13,15 +13,12 @@ import {Link, useHistory} from "react-router-dom";
 const API = process.env.REACT_APP_API;
 
 function SideBar() {
-
     const {user, setUser} = React.useContext(UserContext);
     const {handleTags, tags} = React.useContext(SearchContext);
 
     const history = useHistory();
 
     let handleSubmit = async (e) => {
-        //history.push vai para pagina nova
-        //history.replace nao permite voltar para a pagina anterior
         e.preventDefault();
         axios.post(`${API}/user/Logout`, true, {
             withCredentials: true
