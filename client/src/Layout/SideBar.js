@@ -64,12 +64,12 @@ function SideBar() {
 
         {user && <div className={"container-user"}>
             <div className={"Subscrições"}>
-                <Link to={"./Channels"}><FontAwesomeIcon icon={faClapperboard}/>
+                <Link to={"/Channels"}><FontAwesomeIcon icon={faClapperboard}/>
                     <p>Subscrições</p>
                 </Link>
             </div>
             <div className={"Histórico"}>
-                <Link to={"./Home"}><FontAwesomeIcon icon={faClockRotateLeft}/>
+                <Link to={"/Home"}><FontAwesomeIcon icon={faClockRotateLeft}/>
                     <p>Histórico</p>
                 </Link>
             </div>
@@ -83,13 +83,15 @@ function SideBar() {
         <div className={"Tags"}>
             <h4>Tags</h4>
             <div className={"tag"}>
-                {tags && Object.values(tags).map((tag, idx) => (<div key={idx}>
-                    <button onClick={() => handleTags(tag)} value={tag.name}>
-                        {tag.name}
-                    </button>
-                </div>))}
+                { tags && Object.values(tags).map((tag, idx) => (
+                    <div key={idx}>
+                        <button onClick={() => handleTags(tag)} value={tag.name}>
+                            {tag.name}
+                        </button>
+                    </div>))}
             </div>
         </div>
+
         {user && <div className={"container-home-2"}>
             <div className={"Estudio"}>
                 <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faVideo}></FontAwesomeIcon></Link>

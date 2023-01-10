@@ -44,10 +44,9 @@ export default function Channels() {
             <div className={'channels'}>
                 {currentChannels.map((c, idx) => {
                     return (
-                        <div className={"channel-card"}>
-                            <Link to="/user" key={c + "_" + idx} onClick={() => {
-                                history.push(`/user/${c.user_id}`)
-                            }}>
+                        <div className={"channel-card"} key={c + "_" + idx}  onClick={() => {
+                                      history.push(`/Channel/${c.user_id}`)
+                                  }}>
                                 <div className="channel-header">
                                     <img className={'img-header'} src={c.header}/>
                                 </div>
@@ -58,7 +57,6 @@ export default function Channels() {
                                         <p className={'subscription-text'}>subscritores</p></div>
                                 </div>
                                 {user && <div class={'follow'}><button>Subscrever</button></div>}
-                            </Link>
                         </div>
                     );
                 })}

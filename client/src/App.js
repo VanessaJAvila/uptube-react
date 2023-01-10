@@ -22,11 +22,9 @@ import {SearchProvider} from "./Providers/SearchContext";
 import VideoStreamingPage from "./Pages/VideoStreamingPage/VideoStreamingPage";
 import {VideoUploader} from "./Components/VideoUploader/VideoUploader";
 import WatchHistory from "./Pages/WatchHistory/WatchHistory";
-import Header from "./Layout/Header";
 import Studio from "./Pages/Studio/Studio";
-
 import AuthHandler from "./Assets/Components/AuthHandler";
-import SideBar from "./Layout/SideBar";
+
 
 
 function App() {

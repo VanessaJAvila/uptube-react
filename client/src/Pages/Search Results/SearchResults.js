@@ -9,6 +9,8 @@ export default function SearchResults() {
 
     const {videos} = React.useContext(SearchContext);
 
+    console.log(videos)
+
     return <div className={"container-search-results"}>
         <Header/>
         <SideBar/>

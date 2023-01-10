@@ -39,11 +39,11 @@ export default function UserChannel() {
 
 
     useEffect(() => {
-        axios.get(`${API}/user/${user_id}`)
+        axios.get(`${API}/user/channel/${user_id}`)
             .then(response => {
                 setChannel(response.data[0]);
             }).catch(e => console.log(e));
-    }, []);
+    }, [user_id]);
 
     console.log("channel", channel)
 

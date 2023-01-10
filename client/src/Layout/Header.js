@@ -9,37 +9,42 @@ import {faMagnifyingGlass, faSortDown} from "@fortawesome/free-solid-svg-icons";
 import {faCircleUser, faBell} from "@fortawesome/free-regular-svg-icons"
 import axios from "axios";
 
-
 //localhost port for api
 const API = process.env.REACT_APP_API;
 
 function Header() {
 
     const {user} = React.useContext(UserContext);
-    const [newNotification, setNewNotification] = useState(false);
-    const [viewed, setViewed] = useState();
+    const [alert, setAlert] = useState(false);
+    const [openPopUp, setOpenPopUp] = useState(false);
+    const [notification, setNotification] = useState();
+    const [unSeenNot, setUnSeenNot] = useState();
     const [popup, setPopUp] = useState(false);
-    const {handleSearch, videos, setVideos, search, setSearch} = React.useContext(SearchContext);
+    const {handleSearch} = React.useContext(SearchContext);
 
     const togglePopUp = () => {
         setPopUp(!popup)
         console.log(popup)
     }
 
-    {/*}  useEffect(() => {
-        axios.get(`${API}/video/user/${user?.user_id}/notifications`)
-            .then(response => {
-                setViewed(response.data);
-            })
-    }, []);
+    const toggleNot = () => {
+        setOpenPopUp(!openPopUp)
+        console.log(openPopUp)
+    }
 
-
-    useEffect(() => {
-        axios.get(`${API}/video/user/${user?.user_id}/notification`)
+     useEffect(() => {
+        axios.get(`${API}/user/${user?.user_id}/notifications`)
             .then(response => {
-                setNewNotification(true);
-            })
-    }, []);*/}
+                setNotification(response.data.notifications);
+                setUnSeenNot(response.data.unseenNot)
+                if (response.data.unseenNot[0] > 0) {
+                  setAlert(true)
+                }
+                })
+            }, []);
+
+    console.log("notification", notification)
+    console.log ("unseeNot", unSeenNot)
 
 
     return <div className={"Header"}>
@@ -62,7 +67,18 @@ function Header() {
                 <input className={"button"} type="button" value="Iniciar Sessão"/>
                 <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/></Link>
         </div>) : (<div className={"user-logged"}>
-            <FontAwesomeIcon className={"b-icon"} icon={faBell}/>
+            <FontAwesomeIcon className={"b-icon"} icon={faBell} onClick={toggleNot}/>
+            {alert && <div className="redDot"/>}
+            {notification && openPopUp &&
+                 <div className="menu-notification" >
+                    {notification.map((notification, idx) => (
+                            <div className={"menu-item"}  key={idx}>
+                                Tens um {notification.notification} de {notification.sender}
+                            </div>
+                        ))}
+                </div>}
+
+
             <Link to={"/UserChannel"}> <img className={"avatar"} src={user?.photo} alt={"user-photo"}/></Link>
             <div className={"dropdown"}>
                 <Link onClick={togglePopUp}><FontAwesomeIcon className={"sort-icon"} icon={faSortDown}/></Link>

@@ -168,7 +168,7 @@ export default function UserChannel() {
                      <img className={"adoram-me bronze"} src={beloved}/><p>Adoram-me</p></div>: null}
                  {achis.some(e => e.achievement === 'Adoram-me'&& e.ranking === '20 likes') ? <div className={'loved'}>
                      <img className={"adoram-me prata"} src={beloved}/><p>Adoram-me</p></div>: null}
-                 {achis.some(e => e.achievement === 'Adoram-me'&& e.ranking === '100 likes') ? <div className={'loved'}>
+                 {achis.some(e => e.achievement === 'Adoram-me'&& e.ranking === '100 likes') ? <div className={'goldLoved'}>
                      <img className={"adoram-me ouro"} src={beloved}/><p>Adoram-me</p></div>: null}
                  {achis.some(e => e.achievement === 'Influencer' && e.ranking === '50 views') ? <div className={'bronzeInflu'}>
                      <img className={"Influencer bronze"} src={influencer}/><p>Influencer</p></div>: null}
@@ -214,8 +214,8 @@ export default function UserChannel() {
                  <div className={"subs"}>
                      {subs.map ((s, idx) =>{
                          return <div className="list"  key={idx} onClick={() => {
-                             history.push(`/Channel/${s.channel}`)
-                             window.location.reload()
+                             history.push(`/${s.channel}`)
+                              window.location.reload()
                          }}>
                              <img className="photo-chan" src={s.avatar} alt="channel" />
                              <p className="channel">{s.username}</p>
