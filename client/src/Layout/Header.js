@@ -18,9 +18,27 @@ function Header() {
     const [alert, setAlert] = useState(false);
     const [openPopUp, setOpenPopUp] = useState(false);
     const [notification, setNotification] = useState();
-    const [unSeenNot, setUnSeenNot] = useState();
+    const [viewed, setViewed] = useState(false);
+    const [unSeenNot, setUnSeenNot] = useState([]);
     const [popup, setPopUp] = useState(false);
     const {handleSearch} = React.useContext(SearchContext);
+
+
+    useEffect(() => {
+        axios.get(`${API}/user/${user?.user_id}/notifications`)
+            .then(response => {
+                setNotification(response.data.notifications);
+                setUnSeenNot(response.data.unseenNot);
+                        if (response.data.unseenNot.length > 0) {
+                            setAlert(true)
+                        } if(!viewed) {  axios.post(`${API}/user/${unSeenNot[0].notification_id}/update`)
+                                    .then(response => {
+
+                                    })}
+                    if (response.data.notifications > 0) {
+                        return response.data.notifications
+                    }
+                })}, []);
 
     const togglePopUp = () => {
         setPopUp(!popup)
@@ -32,19 +50,11 @@ function Header() {
         console.log(openPopUp)
     }
 
-     useEffect(() => {
-        axios.get(`${API}/user/${user?.user_id}/notifications`)
-            .then(response => {
-                setNotification(response.data.notifications);
-                setUnSeenNot(response.data.unseenNot)
-                if (response.data.unseenNot[0] > 0) {
-                  setAlert(true)
-                }
-                })
-            }, []);
 
-    console.log("notification", notification)
     console.log ("unseeNot", unSeenNot)
+    console.log("alert", alert)
+    console.log("viewed", viewed)
+    console.log("open message", openPopUp)
 
 
     return <div className={"Header"}>
@@ -67,19 +77,24 @@ function Header() {
                 <input className={"button"} type="button" value="Iniciar Sessão"/>
                 <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/></Link>
         </div>) : (<div className={"user-logged"}>
-            <FontAwesomeIcon className={"b-icon"} icon={faBell} onClick={toggleNot}/>
             {alert && <div className="redDot"/>}
-            {notification && openPopUp &&
+            <FontAwesomeIcon className={"b-icon"} icon={faBell} onClick={() => {
+                setOpenPopUp(!openPopUp);
+                setViewed(!viewed);
+                setAlert(!popup)
+            }}/>
+
+            { unSeenNot && notification && openPopUp &&
                  <div className="menu-notification" >
-                    {notification.map((notification, idx) => (
-                            <div className={"menu-item"}  key={idx}>
-                                Tens um {notification.notification} de {notification.sender}
-                            </div>
+                    {notification.map((n, idx) => (
+                            <Link to = {`/player/${n.video_id}`}><div className={"menu-item"} key={idx}>
+                                Tens um {n.notification} de {n.sender}
+                            </div></Link>
                         ))}
                 </div>}
 
 
-            <Link to={"/UserChannel"}> <img className={"avatar"} src={user?.photo} alt={"user-photo"}/></Link>
+            <Link to={"/UserChannel"}><img className={"avatar"} src={user?.photo} alt={"user-photo"}/></Link>
             <div className={"dropdown"}>
                 <Link onClick={togglePopUp}><FontAwesomeIcon className={"sort-icon"} icon={faSortDown}/></Link>
                 {popup && <div className={"dropdown-content"}>

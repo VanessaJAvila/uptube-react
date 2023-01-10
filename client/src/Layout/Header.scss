@@ -78,6 +78,18 @@
     width: 150px;
     margin-left: 16%;
 
+    .redDot{
+      position: absolute;
+      z-index: 1;
+      width: 5px;
+      height: 5px;
+      margin-top: 15px;
+      margin-left: 20px;
+      border-radius:50%;
+      background-color: red;
+
+    }
+
     .b-icon {
       position: absolute;
       display: flex;
@@ -92,13 +104,7 @@
       }
     }
 
-    .redDot{
-      width: 20%;
-      height: 20%;
-      border-radius:50%;
-      background-color: red;
 
-    }
 
     .menu-notification{
       width:14%;
@@ -112,6 +118,10 @@
       padding-left: 5px;
       border-radius:10px;
       color:#1C1C24;
+
+      a{
+        color:#1C1C24;
+      }
     }
 
     .avatar {
