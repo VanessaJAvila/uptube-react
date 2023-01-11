@@ -1,8 +1,19 @@
-.geral {
+$bg-color-1: rgb(28, 28, 36);
+$bg-color-2: rgba(28, 28, 36, 0.83);
+$text-color-1: white;
+$text-color-2: #1e5cc3;
+$text-color-3: #74747d;
+$text-color-4: #92929D;
+$line-color: #343438;
+$border-radius-1: 20px;
+$border-radius-2: 3px;
+$table: 950px;
+
+.geral{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   color: lightgrey;
   margin-left: -10%;
 
@@ -13,6 +24,7 @@
     justify-content: space-evenly;
     margin-top: 5%;
     margin-left: 1%;
+  .suggestions-wrapper{
 
 
     .show-more{
@@ -63,36 +75,116 @@
     width: 34%;
     height: 83%;
     border-radius: 1em;
+    .video-card-suggestions {
+      width: 40%;
+      margin-bottom: 1em;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      border-radius: $border-radius-1;
+      min-width: 20em;
+      background-color: $bg-color-1;
 
-    .contents{
-      padding: 1%;
-    .title{
+      .thumbnail-container {
+        width: 20em;
+        height: 10em;
+        overflow: hidden;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-top-left-radius: $border-radius-1;
+        border-top-right-radius: $border-radius-1;
 
-    }
-    .days-posted{
+        .length {
+          font-size: .65em;
+          font-weight: bold;
+          background-color: $bg-color-2;
+          color: white;
+          margin-top: 135px;
+          margin-left: 1em;
+          top: auto;
+          text-align: center;
+          padding: .2em .4em;
+          border-radius: $border-radius-2;
+          display: inline-block;
+        }
+      }
 
-    }
-    .length{
+      .user-photo {
+        overflow: hidden;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 3em;
+        min-width: 3em;
+        border-radius: 50%;
+        border: solid white 2px;
+        margin: -1.5em 1em 0 auto;
+      }
 
+      .username {
+        margin: .15em 0 0;
+        color: $text-color-1;
+        font-size: .8em;
+      }
+
+      .video-title {
+        color: $text-color-1;
+        font-size: .8em;
+        margin: .15em 0 0;
+      }
+
+      .details-container {
+        display: flex;
+
+        p {
+          margin: .15em .5em 0 0;
+          color: $text-color-3;
+          font-size: .65em;
+          font-weight: bold;
+        }
+      }
+
+      .reactions-container {
+        color: $text-color-1;
+        margin-left: 1em;
+        margin-right: 1em;
+
+        .graph {
+          background-color: $line-color;
+          height: .5px;
+          width: 100%;
+        }
+
+        .reactions {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .comments {
+            display: flex;
+            font-size: 1.25em;
+            align-items: center;
+          }
+
+          .likes {
+            display: flex;
+            font-size: 1.25em;
+            align-items: center;
+          }
+
+          .icon {
+            color: $text-color-4;
+            height: 15px;
+            margin: 0 .5em;
+          }
+
+        }
+      }
     }
 
-    .likes{
-
-    }
-    .comments{
-
-    }
-    .views{
-
-    }
-    .username{
-
-    }
-    .user-photo{
-      background-color: red;
-      position: absolute;
-      border-radius: 50%;
-    }
-    }
   }
 }
+
+
+
