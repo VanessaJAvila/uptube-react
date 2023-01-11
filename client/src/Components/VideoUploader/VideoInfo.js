@@ -26,11 +26,10 @@ export default function VideoInfo( {videoData}){
     const [textLimit, setTextLimit] = useState(0)
     const [limitColor, setLimitColor] = useState('')
 
-    const videoId = videoData.video_id;
 
     const sendVideoData = () => {
         try{
-            axios.post(`${API}/video/${videoId}/update`, {
+            axios.post(`${API}/:video_key/update`, {
                 title: videoTitle,
                 thumbnail: activeThumb,
                 description: videoDescription

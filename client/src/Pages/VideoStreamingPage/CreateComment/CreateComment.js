@@ -16,7 +16,6 @@ function CreateComment(props) {
             if (res.data.success) {
                 // Clear the input field and do something with the new comment
                 setInputCommentValue("");
-                props.handleNewComment(res.data.new_comment);
                 // You can access the new comment with res.data.new_comment
             } else {
                 // There was an error creating the comment
