@@ -24,6 +24,7 @@ import WatchHistory from "./Pages/WatchHistory/WatchHistory";
 import Studio from "./Pages/Studio/Studio";
 import AuthHandler from "./Assets/Components/AuthHandler";
 import FeedbackForm from "./Pages/Feedback Form/FeedbackForm";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 
 

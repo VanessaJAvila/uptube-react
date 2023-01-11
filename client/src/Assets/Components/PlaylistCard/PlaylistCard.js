@@ -74,11 +74,13 @@ function PlaylistCard(props){
                         .then((res) => {
                             alert('G added to playlist successfully');
                         }).catch((error) => {
-                        alert("user was already invited to this playlist");
+                            console.log(error, "error ------------------------------------------------------------------1");
+                       // alert("user was already invited to this playlist 1");
                     });
 
                 }).catch(e => {
-                    alert("user was already invited to this playlist")
+                    console.log(e, "error++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 2");
+                  //  alert("user was already invited to this playlist 2")
                 }
             ) ;
 
@@ -132,7 +134,7 @@ function PlaylistCard(props){
                                     { user.user_id === props.creator_id && <p onClick={()=>{setConvState(!convState)}}>Convidados</p>}
                                     {
                                         convState && <div>
-                                                    <p onClick={()=>setAddGstate(!addGstate)}>Adicionar guest á playlist</p>
+                                                    <p onClick={()=>setAddGstate(!addGstate)}> -Adicionar guest á playlist</p>
                                             {
                                                 addGstate && <div>
                                                     <form>
@@ -147,14 +149,13 @@ function PlaylistCard(props){
                                                     </form>
                                                 </div>
                                             }
-                                                    <p onClick={()=>setRmvGstate(!rmvGstate)}>Remover guest da playlist</p>
+                                                    <p onClick={()=>setRmvGstate(!rmvGstate)}>-Remover guest da playlist</p>
                                             {
                                                 rmvGstate && <div>
                                                     {guest.map((g,idx)=>{
                                                         //todo carregar no nome e remover user
-                                                      return <p key={idx}>{g.name}</p>
+                                                      return <p className={"userRemove"} key={idx}>{idx+1}->{g.name}</p>
                                                     })}
-                                                     <p>listar Guests e escolher remover</p>
                                                 </div>
                                             }
                                         </div>
