@@ -13,6 +13,15 @@
     flex-wrap: wrap;
     flex-direction: row;
   }
+
+  .playlistsGuestContainer{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-bottom: 10%;
+
+  }
+
   .createPlaylist {
     margin-top: 50px;
     display: flex;

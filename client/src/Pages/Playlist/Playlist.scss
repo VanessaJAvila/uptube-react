@@ -15,6 +15,11 @@
       img{
         max-width: 200px;
       }
+      button{
+        color: black;
+        border-style: ridge;
+        border-radius: 25px;
+      }
 
       .musicToBeAdded{
         width: 100%;
@@ -32,6 +37,7 @@
         border-bottom: black;
         border-bottom-style: solid;
       }
+
       .movieDiv{
         display: flex;
         cursor: pointer;
@@ -40,6 +46,10 @@
         border-bottom-style: solid;
         .videoInfo{
           display: flex;
+          .musicGAdded{
+            display: flex;
+            justify-content: space-between;
+          }
         }
         .imgContainer{
           display: flex;

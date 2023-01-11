@@ -1,5 +1,4 @@
 import './App.css';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Suggested from "./Pages/Suggested";
 import Home from "./Pages/Home/Home.js";
 import Login from "./Pages/Login/Login.js";
