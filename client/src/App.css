@@ -58,11 +58,11 @@ label {
     color:#1C1C24;
 }
 #light .b-icon {
-    color: #B2191B;
+    color: #1C1C24;
 }
 
 #light .sort-icon {
-    color: #B2191B;
+    color: #1C1C24;
 }
 
 #light .avatar{
@@ -227,8 +227,3 @@ label {
     color:white;
 }
 
-
-
-#root{
-    /*background-color: #13131A;*/
-}
