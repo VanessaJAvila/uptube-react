@@ -3,6 +3,8 @@ import axios from "axios";
 import {VideoUploader} from "../../Components/VideoUploader/VideoUploader";
 import "./Studio.scss"
 import VideoInfo from "../../Components/VideoUploader/VideoInfo";
+import SideBar from "../../Layout/SideBar";
+import Header from "../../Layout/Header";
 
 //localhost port for api
 const API = process.env.REACT_APP_API;
@@ -18,7 +20,9 @@ export default function Studio() {
         setSubmitData(data)
     }
 
+    console.log("submitData", submitData)
     const mockData = {
+        video_id: 1,
         video_key: "Q-SzVbsb9",
         user_id: 61,
         thumbnail: "thumbnail",
@@ -32,11 +36,17 @@ export default function Studio() {
             <VideoInfo videoData={submitData}/>*/
 
     return (
-        <div className={"container-wrapper"}>
-            <div className={"upload-title"}>Upload de um novo vídeo</div>
+        <div className={"app-wrapper"}>
+            <Header/>
+            <SideBar/>
+            <div className={"container-wrapper"}>
 
-            { isFileSubmitted ? <VideoInfo videoData={submitData} /> : < VideoUploader onSubmit={onSubmit} /> }
+                <div className={"upload-title"}>Upload de um novo vídeo</div>
 
+                { isFileSubmitted ? <VideoInfo videoData={submitData} /> : < VideoUploader onSubmit={onSubmit} /> }
+
+            </div>
         </div>
+
     )
 }

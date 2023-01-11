@@ -44,7 +44,17 @@ const VideoStreamingPage = () => {
     const {id} = useParams();
 
     const {user} = React.useContext(UserContext);
+    let userId = 0;
+    if (user && user.user_id) {
+        userId = user.user_id;
+    }
     const {history} = useHistory();
+
+    const [newComment, setNewComment] = useState('');
+
+    const handleNewComment = (newComment) => {
+        setComments((prevComments) => [...prevComments, newComment]);
+    };
 
     useEffect(() => {
         if (!id) {
@@ -99,7 +109,7 @@ const VideoStreamingPage = () => {
                                 width={"100%"}
                                 playing
                                 controls
-                                url={``}
+                                url={`$`}
                             />
                         </div>
                         <div className={"video-tags"}>
@@ -109,18 +119,20 @@ const VideoStreamingPage = () => {
                         </div>
                         <div className={"video-info"}>
                             <div className={"video-info-1"}>
-                                <div className="video-title">{videos.title}</div>
+                                <div className="video-title">
+                                    {videos ? videos.title : 'Loading...'}
+                                    {videos.title}</div>
                                 <div className={"report"}>
-                                    <ReportVideo videoId={id} reporterId={user.user_id}/>                                </div>
+                                    <ReportVideo videoId={id} reporterId={userId}/>                                </div>
                             </div>
                             <div className={"channel-info-1"}>
                                 <div className="channel-info-1-a">
+                                    {videos ? videos.username : 'Loading...'}
                                     <Link to={"/canal"}>
                                         <div
                                             className={"avatar"}
                                             style={{backgroundImage: `url(${videos.photo})`}}></div>
                                     </Link>
-                                    <SubscribeButton userFollowedId={videos.user_id}/>
                                 </div>
                                 <div className="video-info-container">
                                     <div className="video-info-container-row-1">
@@ -149,7 +161,7 @@ const VideoStreamingPage = () => {
                                     className={"new-comment-user-photo"}
                                     style={{backgroundImage: `url(${user.photo})`}}>
                                 </div>
-                                <CreateComment videoId={id}/>
+                                <CreateComment videoId={id} handleNewComment={handleNewComment}/>
                             </div>
                         )}
                         {!user && "login para comentar"}
