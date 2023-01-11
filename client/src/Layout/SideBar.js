@@ -8,6 +8,7 @@ import {
     faClapperboard, faClockRotateLeft, faFire, faGear, faHouse, faPlay, faRightFromBracket, faVideo
 } from "@fortawesome/free-solid-svg-icons";
 import {Link, useHistory} from "react-router-dom";
+import ReactSwitch from "react-switch";
 
 //localhost port for api
 const API = process.env.REACT_APP_API;
