@@ -22,8 +22,10 @@ function Playlists() {
     const[visibility, setVisibility] =useState("public");
     const [criarPlaylist, setCriarPlaylist] = useState(false);
     const [title, setTitle]= useState("");
-    //console.log(user, "user Playlists");
-    //console.log(user?.user_id);
+    const [gPlaylists,setGPlaylists] = useState([]);
+    const[creator, setCreator] = useState(null);
+
+
 
 
 
@@ -31,34 +33,24 @@ function Playlists() {
         if(!user) return;
         axios.get(`${API}/playlist/user/${user.user_id}`,{withCredentials: true})
             .then(response => {
-                console.log('setplaylist', response.data);
                 setplaylists(response.data);
             }).catch(e => console.log(e, "erro playlist")) ;
     }, [user]);
 
-    //todo adicionar o a duração da playlist, de momento não consigo fazer
+
     useEffect(() => {
         if(!user) return;
-        axios.get(`${API}/playlist/user/${user.user_id}/duration/`,{withCredentials: true})
+        axios.get(`${API}/playlist/guest/${user.user_id}/playlists`,{withCredentials: true})
             .then(response => {
-                console.log('rsp each video duration', response.data);
-                response.data.map(d =>{
-                    return d.duration
-                });
+                setGPlaylists(response.data);
             }).catch(e => console.log(e, "erro playlist")) ;
     }, [user]);
 
 
 
-    if(!user){
-        return <h2>Awaiting user....</h2>
-    }
-
 
     let handleSubmit = async (e) => {
-
         e.preventDefault();
-
         let newPlaylist = {
             title: title,
             creator_id: user.user_id,
@@ -89,8 +81,8 @@ function Playlists() {
             <h1>As suas Playlists</h1>
             <div className={"box-playlist"}>
 
-                {playlists.map(p => {
-                    return <PlaylistCard  key={p.playlist_id}
+                {playlists.map((p) => {
+                    return <PlaylistCard  key={p.playlist_id+1500}
                                               id = {p.playlist_id}
                                               creator_id = {p.creator_id}
                                               thumbnail = {p.thumbnail}
@@ -127,8 +119,35 @@ function Playlists() {
                 <button type="submit">Gravar Alterações</button>
             </form>}
             </div>
+            <h1> Playlists participantes</h1>
+            <div className={"playlistsGuestContainer"}>
+
+                {gPlaylists.map((gp)=>{
+
+                        axios.get(`${API}/playlist/helper/${gp.creator_id}`,{withCredentials: true})
+                            .then(response => {
+                                setCreator(response.data[0]);
+                            }).catch(e => console.log(e, "erro playlist")) ;
+
+                    if(!creator){
+                        return <h1 key={gp.playlist_id}> No creator info</h1>
+                    }
+                    return <PlaylistCard  key={gp.playlist_id + 900}
+                                         id = {gp.playlist_id}
+                                         creator_id = {gp.creator_id}
+                                         thumbnail = {gp.thumbnail}
+                                         photo = {creator.photo}
+                                         name = {creator.name}
+                                         title ={gp.title}
+                                         duration = {gp.duration}
+                                         timestamp = {gp.timestamp}
+                   />
+                })}
+
+            </div>
 
         </div>
+
     </div>}
 
 export default Playlists;

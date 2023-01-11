@@ -1,5 +1,4 @@
 import './App.css';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Suggested from "./Pages/Suggested";
 import Home from "./Pages/Home/Home.js";
 import Login from "./Pages/Login/Login.js";
@@ -20,10 +19,11 @@ import SearchResults from "./Pages/Search Results/SearchResults";
 import Channels from "./Pages/Channels/Channels";
 import {SearchProvider} from "./Providers/SearchContext";
 import VideoStreamingPage from "./Pages/VideoStreamingPage/VideoStreamingPage";
-import {VideoUploader} from "./Components/VideoUploader/VideoUploader";
 import WatchHistory from "./Pages/WatchHistory/WatchHistory";
 import Studio from "./Pages/Studio/Studio";
 import AuthHandler from "./Assets/Components/AuthHandler";
+import FeedbackForm from "./Pages/Feedback Form/FeedbackForm";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 
 

@@ -60,6 +60,7 @@
               width: 90%;
               font-size: 25px;
               margin-top: 1px;
+              padding-bottom: 1em;
             }
             .report{
               color: var(--text-color-tertiary);
@@ -157,7 +158,10 @@
         }
       }
       .comments-container {
+
         .new-comment {
+          position: relative;
+
           display: flex;
           .new-comment-user-photo {
             width: 50px;
@@ -170,21 +174,26 @@
           form {
             width: 100%;
             .new-comment-input {
-              width: 100%;
+              width: 99%;
               background-color: var(--bg-color);
               border: none;
-              border-bottom: 1px solid var(--text-color-main);
+              border-bottom: 1px solid rgb(255,255,255);
+              padding-bottom: 0.8em;
               color: var(--text-color-main);
               outline: none;
               margin: 15px 0 25px 0;
-
               &:target {
                 border: none;
                 outline: none;
               }
 
             }
-
+          }
+          button{
+            position: absolute;
+            bottom: 0px;
+            right: 10px;
+            color: grey;
           }
 
         }

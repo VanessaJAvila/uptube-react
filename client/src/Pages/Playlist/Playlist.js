@@ -25,13 +25,14 @@ function Playlist() {
     const [addMusicDropdown, setAddMusicDropdown] = useState(false);
     const [pmovies,setPMovies] = useState(null);
     const [createDrop, setCreateDrop] = useState(false);
-    const [selected,setSelected] = useState(true);
     const [moviePath, setMoviePath] = useState(null);
     const[visibility, setVisibility] =useState("public");
     const [title, setTitle]= useState("");
     const [thumb,setThumb]= useState("");
-    const [idplay,setidplay]= useState("");
     const [videoadd,setvideoadd]= useState("");
+    const[guestPlaylistDrop, setGuestPlaylistDrop] = useState(false);
+    const[gPlaylist,setGPlaylist] = useState(null);
+    const[gpmovies, setGPMovies] = useState([]);
 
 
     //todo  como dar background color no video selected
@@ -50,34 +51,34 @@ function Playlist() {
             thumbnail: `${API}`+thumb
         }
 
+        console.log(newPlaylist,"newplaylist")
+
         axios.post(`${API}/playlist/create`, newPlaylist, {
             withCredentials: true
         })
             .then((res) => {
-                alert('Playlist created successfully');
-                setidplay(res.data.playlist_id)
                 console.log(res.data,playlist_id,"playlist id");
+                let addMusic = {
+                    playlist_id: res.data.playlist_id,
+                    video_id: videoadd
+                }
+                console.log(addMusic,"add music obj");
+
+                axios.post(`${API}/playlist/addmusic`,addMusic, {
+                    withCredentials: true
+                })
+                    .then((res) => {
+                        alert("playlist created and video added to playlist successfully");
+                        console.log(res.data);
+                    }).catch((error) => {
+                    console.log(error, "messagem erro");
+                    alert("video wasnt added to playlist successfully");
+                });
             }).catch((error) => {
-            console.log(error, "messagem erro login frontend");
+            console.log(error, "erro playlist create");
             alert("error: Wrong Credentials!");
         });
 
-        console.log(addMusic,"add music obj");
-
-        let addMusic = {
-            playlist_id: idplay,
-            video_id: videoadd
-        }
-
-        axios.post(`${API}/playlist/addmusic`,addMusic, {
-            withCredentials: true
-        })
-            .then((res) => {
-                alert("video added to playlist successfully");
-                console.log(res.data);
-            }).catch((error) => {
-            console.log(error, "messagem erro");
-        });
 
 
     }
@@ -132,6 +133,18 @@ function Playlist() {
     }, [user]);
 
 
+    useEffect(() => {
+        if(!user) return;
+        axios.get(`${API}/playlist/guest/`+ user.user_id,{withCredentials: true})
+            .then(response => {
+                setGPlaylist(response.data);
+                console.log(response.data, "setGplaylist")
+            }).catch(e => console.log(e, "erro playlist")) ;
+    }, [user]);
+
+
+
+
 
 
     if(!user){
@@ -140,7 +153,7 @@ function Playlist() {
 
 
     if(!playlist){
-        return <h2>Awaiting playlist....</h2>
+        return <h2>THERE IS NO VIDEOS IN PLAYLIST</h2>
     }
 
 
@@ -155,7 +168,7 @@ function Playlist() {
                    <h1>{playlist[0].playlistTitle}</h1>
                     <div>
                         {playlist.map((p,idx) => {
-                            return <div style={selected?{backgroundColor: "light-grey"}:{backgroundColor: "blue"}} key={idx} className={"movieDiv"} >
+                            return <div key={idx} className={"movieDiv"} >
                                     <div className={"imgContainer"}>
                                         <img onClick={()=>{
                                             setMovie(`${API}${p.videoUrl}`);
@@ -167,7 +180,9 @@ function Playlist() {
                                                 <h2 >{p.videoTitle}</h2>
                                                 <h3>{p.videoCreator}</h3>
                                             </div>
-                                            <FontAwesomeIcon onClick={()=>setDropdownState(idx)} className="dropbtn" icon={faGear}></FontAwesomeIcon>
+                                            <FontAwesomeIcon onClick={()=>{
+                                                setDropdownState(idx)
+                                            }} className="dropbtn" icon={faGear}></FontAwesomeIcon>
                                             {dropdownState===idx&&<div id="tooltip" role="tooltip" className="dropdown-content">
                                                 <p onClick={
                                                     async (e) => {
@@ -180,6 +195,7 @@ function Playlist() {
 
                                                     }
                                                 }>adicionar/remover da(s) playlist(s)</p>
+
 
                                                 {
                                                     addMusicDropdown && pmovies&& <div className={"addMusic"} >
@@ -228,6 +244,7 @@ function Playlist() {
                                                                     }
                                                                 }
                                                                 let lists = [];
+
                                                                if(pmovies.includes(play.playlist_id)){
                                                                    lists.push(<p  key={ix} onClick={handleChange}><strong>X</strong></p>)
                                                                } else {
@@ -266,14 +283,210 @@ function Playlist() {
                                                                 </form>
                                                             </div>
                                                         </div>}
-
                                                     </div>
                                                 }
+                                                {
+                                                    addMusicDropdown && !pmovies&& <div className={"addMusic"} >
+                                                        {
+                                                            playlists.map((play,ix) => {
+                                                                const handleChange = (e) => {
+                                                                    e.preventDefault();
+                                                                    if(e.target.innerHTML==="+"){
+                                                                        let addMusicToPlaylist = {
+                                                                            playlist_id: play.playlist_id,
+                                                                            video_id: p.video_id
+                                                                        }
+
+                                                                        axios.post(`${API}/playlist/addmusic`,addMusicToPlaylist, {
+                                                                            withCredentials: true
+                                                                        })
+                                                                            .then((res) => {
+                                                                                alert("video added to playlist successfully");
+                                                                                console.log(res.data);
+                                                                            }).catch((error) => {
+                                                                            console.log(error, "messagem erro");
+                                                                        });
+                                                                    }
+                                                                    if(e.target.innerHTML ==="X"){
+                                                                        let deletePlay = {
+                                                                            user_id: user.user_id,
+                                                                            creator_id: p.creator_id,
+                                                                            playlist_id: p.playlist_id,
+                                                                            video_id: p.video_id
+                                                                        }
+
+                                                                        axios.post(`${API}/playlist/remove`,deletePlay, {
+                                                                            withCredentials: true
+                                                                        })
+                                                                            .then((res) => {
+                                                                                alert("video removed successfully");
+                                                                                console.log(res.data);
+                                                                            }).catch((error) => {
+                                                                            console.log(error, "messagem erro");
+                                                                        });
+
+                                                                        if(p.video_id===playlist[0].video_id) {
+                                                                            //todo update imagem to 1st of line
+                                                                        }
+
+                                                                    }
+                                                                }
+                                                                let lists = [];
+                                                                if(gpmovies.length > 0){
+                                                                    if(pmovies.includes(play.playlist_id)){
+                                                                        lists.push(<p  key={ix} onClick={handleChange}><strong>X</strong></p>)
+                                                                    } else {
+                                                                        lists.push(<p  key={ix} onClick={handleChange}><strong>+</strong></p>)
+                                                                    }
+                                                                } else {
+                                                                    lists.push(<p  key={ix} onClick={handleChange}><strong>+</strong></p>)
+                                                                }
+
+
+                                                                return <div className={"musicAdded"}  key={play.playlist_id} id={play.playlist_id} >
+                                                                    <p>{play.title}</p>
+                                                                    {lists}
+                                                                </div>
+                                                            })
+                                                        }
+                                                    </div>
+                                                }
+
+
+                                                <div onClick={async(e)=> {
+                                                    e.preventDefault();
+                                                    setGuestPlaylistDrop(true);
+                                                    await axios.get(`${API}/playlist/gmoviesinplaylist/`+ p.video_id +'/' + user.user_id)
+                                                        .then(response => {
+                                                            setGPMovies(response.data);
+                                                            console.log(gpmovies, "gpmovies",response.data, "gmovi data")
+                                                        }).catch(e => console.log(e, "erro playlist")) ;
+                                                }}>Playlists Guest</div>
+
+                                                {
+                                                    guestPlaylistDrop && gpmovies && <div>
+                                                        {gPlaylist.map((gp,i)=>{
+                                                            const handleGChange = (e) => {
+                                                                e.preventDefault();
+                                                                if(e.target.innerHTML==="+"){
+                                                                    let addGMusicToPlaylist = {
+                                                                        playlist_id: gp.playlist_id,
+                                                                        video_id: p.video_id
+                                                                    }
+
+                                                                    axios.post(`${API}/playlist/guest/addmusic`,addGMusicToPlaylist, {
+                                                                        withCredentials: true
+                                                                    })
+                                                                        .then((res) => {
+                                                                            alert("video added to playlist successfully");
+                                                                            console.log(res.data);
+                                                                        }).catch((error) => {
+                                                                        console.log(error, "messagem erro");
+                                                                    });
+                                                                }
+                                                                if(e.target.innerHTML ==="X"){
+                                                                    let deleteGPlay = {
+                                                                        user_id: user.user_id,
+                                                                        creator_id: gp.creator_id,
+                                                                        playlist_id: gp.playlist_id,
+                                                                        video_id: p.video_id
+                                                                    }
+
+                                                                    axios.post(`${API}/playlist/guest/remove`,deleteGPlay, {
+                                                                        withCredentials: true
+                                                                    })
+                                                                        .then((res) => {
+                                                                            alert("video removed successfully");
+                                                                            console.log(res.data);
+                                                                        }).catch((error) => {
+                                                                        console.log(error, "messagem erro");
+                                                                    });
+                                                                }
+                                                            }
+                                                            let lists = [];
+                                                            console.log(gpmovies,"gpmovies");
+                                                            console.log(gp,"gp");
+                                                            if(gpmovies.length > 0){
+                                                                if(gpmovies.includes(gp.playlist_id)){
+                                                                    lists.push(<p  key={i} onClick={handleGChange}><strong>X</strong></p>)
+                                                                } else {
+
+                                                                    lists.push(<p  key={i} onClick={handleGChange}><strong>+</strong></p>)
+                                                                }
+                                                            } else {
+
+                                                                lists.push(<p  key={i} onClick={handleGChange}><strong>+</strong></p>)
+                                                            }
+
+
+                                                            return <div className={"musicGAdded"}  key={gp.playlist_id} id={gp.playlist_id} >
+                                                                <p>{gp.title}</p>
+                                                                {lists}
+                                                            </div>
+                                                        })
+                                                        }
+                                                    </div>
+                                                }
+
+                                                {
+                                                    guestPlaylistDrop && !gpmovies && <div>
+                                                        {
+                                                            gPlaylist.map(((g,i)=>{
+                                                                const handleGChange = (e) => {
+                                                                    e.preventDefault();
+                                                                    if(e.target.innerHTML==="+"){
+                                                                        let addGMusicToPlaylist = {
+                                                                            playlist_id: g.playlist_id,
+                                                                            video_id: p.video_id
+                                                                        }
+
+                                                                        axios.post(`${API}/playlist/guest/addmusic`,addGMusicToPlaylist, {
+                                                                            withCredentials: true
+                                                                        })
+                                                                            .then((res) => {
+                                                                                alert("video added to playlist successfully");
+                                                                                console.log(res.data);
+                                                                            }).catch((error) => {
+                                                                            console.log(error, "messagem erro");
+                                                                        });
+                                                                    }
+                                                                    if(e.target.innerHTML ==="X"){
+                                                                        let deleteGPlay = {
+                                                                            user_id: user.user_id,
+                                                                            creator_id: g.creator_id,
+                                                                            playlist_id: g.playlist_id,
+                                                                            video_id: p.video_id
+                                                                        }
+
+                                                                        axios.post(`${API}/playlist/guest/remove`,deleteGPlay, {
+                                                                            withCredentials: true
+                                                                        })
+                                                                            .then((res) => {
+                                                                                alert("video removed successfully");
+                                                                                console.log(res.data);
+                                                                            }).catch((error) => {
+                                                                            console.log(error, "messagem erro");
+                                                                        });
+                                                                    }
+                                                                }
+
+                                                                let lists = [];
+                                                                lists.push(<p  key={i} onClick={handleGChange}><strong>+</strong></p>)
+                                                                return <div className={"musicGAdded"}  key={g.playlist_id} id={g.playlist_id} >
+                                                                    <p>{g.title}</p>
+                                                                    {lists}
+                                                                </div>
+                                                            }))
+                                                        }
+                                                    </div>
+                                                }
+
                                                 <p onClick={async (e)=>{
 
                                                     console.log(e.target);
                                                     setDropdownState(null);
                                                     setAddMusicDropdown(false);
+                                                    setGuestPlaylistDrop(false);
                                                     e.preventDefault();
                                                     await axios.get(`${API}/playlist/moviesinplaylist/`+ p.video_id +'/' + user.user_id)
                                                         .then(response => {

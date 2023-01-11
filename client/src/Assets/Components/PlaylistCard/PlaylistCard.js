@@ -2,11 +2,13 @@ import React, {useEffect, useState} from "react";
 import "./PlaylistCard.scss";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faGear} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faGear} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import {UserContext} from "../../../Providers/UserContext";
 
 
+//localhost port for api
+const API = process.env.REACT_APP_API;
 
 let dateNow = new Date();
 
@@ -15,6 +17,7 @@ function getHoursDiff(startDate, endDate) {
 
     return Math.round(Math.abs(endDate - startDate) / msInHour);
 }
+
 
 
 
@@ -37,7 +40,50 @@ function PlaylistCard(props){
     const [dropdownState, setDropdownState] = useState(false);
     const [deleteState, setDeleteState] = useState(false);
     const {user} = React.useContext(UserContext);
+    const[convState,setConvState] = useState(false);
+    const[addGstate,setAddGstate] = useState(false);
+    const[rmvGstate,setRmvGstate] = useState(false);
+    const[email,setEmail] = useState("");
+    const[guest,setGuest] = useState([]);
 
+
+
+    useEffect(() => {
+        if(!user) return;
+        axios.get(`${API}/playlist/ginplaylist/`+props.id,{withCredentials: true})
+            .then(response => {
+                console.log(response.data[0].name,props.id,"ginplaylist" );
+                setGuest(response.data);
+            }).catch(e => console.log(e, "erro ginplaylist")) ;
+    }, [user]);
+
+    let handleSub = async (e) => {
+        e.preventDefault();
+            axios.get(`${API}/playlist/getInvitedEmail/`+email,{withCredentials: true})
+                .then(response => {
+                    let newGuest = {
+                        playlist_id: props.id,
+                        invited_id: response.data[0].user_id,
+                        email:email
+                    }
+
+
+                    axios.post(`${API}/playlist/addguestplaylist`, newGuest, {
+                        withCredentials: true
+                    })
+                        .then((res) => {
+                            alert('G added to playlist successfully');
+                        }).catch((error) => {
+                        alert("user was already invited to this playlist");
+                    });
+
+                }).catch(e => {
+                    alert("user was already invited to this playlist")
+                }
+            ) ;
+
+
+    }
 
 
 
@@ -82,14 +128,52 @@ function PlaylistCard(props){
                             <div className="dropdown">
                              <FontAwesomeIcon onClick={()=>setDropdownState(!dropdownState)} className="dropbtn" icon={faGear}></FontAwesomeIcon>
                                 {dropdownState&&<div id="myDropdown" className="dropdown-content">
-                                        <a href={"/Playlist/" + props.id}>Editar playlist</a>
-                                        <p onClick={()=>{setDeleteState(true)}}>Apagar playlist</p>
+                                    <a href={"/Playlist/" + props.id}>Editar playlist</a>
+                                    { user.user_id === props.creator_id && <p onClick={()=>{setConvState(!convState)}}>Convidados</p>}
+                                    {
+                                        convState && <div>
+                                                    <p onClick={()=>setAddGstate(!addGstate)}>Adicionar guest á playlist</p>
+                                            {
+                                                addGstate && <div>
+                                                    <form>
+
+                                                        <div className="inputContainer">
+                                                            <input type="email" onChange={e => setEmail(e.target.value)} value={email} id="email"
+                                                                   name="email" placeholder="email" required/>
+                                                            <FontAwesomeIcon className="icons" icon={faEnvelope}/>
+                                                        </div>
+
+                                                        <p onClick={handleSub}>Enviar email e adicionar</p>
+                                                    </form>
+                                                </div>
+                                            }
+                                                    <p onClick={()=>setRmvGstate(!rmvGstate)}>Remover guest da playlist</p>
+                                            {
+                                                rmvGstate && <div>
+                                                    {guest.map((g,idx)=>{
+                                                        //todo carregar no nome e remover user
+                                                      return <p key={idx}>{g.name}</p>
+                                                    })}
+                                                     <p>listar Guests e escolher remover</p>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+
+
+
+                                    { user.user_id === props.creator_id && <p onClick={()=>{setDeleteState(true)}}>Apagar playlist</p>}
                                     {
                                         deleteState && <div className={"deletePlaylist"} style={{color:"red"}} > <strong>Are you sure you want to delete this playlist?</strong>
                                             <p onClick={confirmDelete}>YES</p>
                                             <p onClick={()=>setDropdownState(false)}>NO</p>
                                         </div>
                                     }
+                                    <p onClick={()=>{
+                                        setDropdownState(false);
+                                       setConvState(false);
+                                    }}>Close</p>
+
                                     </div>
                                 }
 

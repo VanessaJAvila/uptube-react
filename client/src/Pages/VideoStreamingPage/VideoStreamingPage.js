@@ -7,15 +7,13 @@ import {UserContext} from "../../Providers/UserContext";
 import ReactPlayer from "react-player";
 import Header from "../../Layout/Header";
 import SideBar from "../../Layout/SideBar";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faFlag, faThumbsDown, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import Description from "./Description/Description"
-import SubscribeButton from "./SubsribeButton/SubscribeButton";
 import LikeButton from "./LikeButton/LikeButton";
 import CreateComment from "./CreateComment/CreateComment";
 import DislikeButton from "./DislikeButton/DislikeButton";
 import getDaySeen from "../../Utils/getDaySeen";
 import ReportVideo from "./Report/Report";
+import SubscribeButton from "./SubsribeButton/SubscribeButton";
 
 //localhost port for api
 const API = process.env.REACT_APP_API;
@@ -49,12 +47,18 @@ const VideoStreamingPage = () => {
     const {history} = useHistory();
 
     useEffect(() => {
+        if (!id) {
+            console.log("id (video id from params) variable is empty, cannot make API call");
+            return;
+        }
         axios
-            .get(`${API}/video/stream/${id}`)
+            .get(`${API}/video/videoinfocomment/${id}`)
             .then(async(response) => {
                 // Update thevideoInfo state variable with the video data, !important data[0] so that it retrieves the array
-                setVideos(response.data[0]);
-                setIsLoading(false);
+                setVideos(response.data.video_info[0]);
+                setComments(response.data.video_comments);
+                //setUserFollowedId(response.data[0].user_id)
+                //setIsLoading(false);
             })
             .catch((e) => {
                 // Update the errorMessage state variable with the error message
@@ -68,36 +72,19 @@ const VideoStreamingPage = () => {
                 setTags(response.data);
                 //console.log(tags)
                 setIsLoading(false);
+
             })
             .catch((e) => {
                 // Update the errorMessage state variable with the error message
                 setErrorMessage('Unable to retrieve video tags data');
                 setIsLoading(false);
             });
-        axios
-            .get(`${API}/video/${id}/comments`)
-            .then((response) => {
-                // Update the comments state variable with the video comments data
-                setComments(response.data);
-                //console.log("comments:", response.data)
-                setIsLoading(false);
-            })
-            .catch((e) => {
-                // Update the errorMessage state variable with the error message
-                setErrorMessage('Unable to retrieve video comments data');
-                setIsLoading(false);
-            });
-        axios
-            .get(`${API}/video/${id}/user`)
-            .then((response) => {
-                setUserFollowedId(response.data[0].user_id)
-            })
-            .catch((e) => console.log(e));
 
     }, [id, videos?.user_id]);
 
-    console.log("videos.photo", videos.photo)
 
+
+    console.log("comments", comments)
     // Render the component
     return (
         <div className={"streaming-wrapper"}>
@@ -133,6 +120,7 @@ const VideoStreamingPage = () => {
                                             className={"avatar"}
                                             style={{backgroundImage: `url(${videos.photo})`}}></div>
                                     </Link>
+                                    <SubscribeButton userFollowedId={videos.user_id}/>
                                 </div>
                                 <div className="video-info-container">
                                     <div className="video-info-container-row-1">
@@ -168,7 +156,7 @@ const VideoStreamingPage = () => {
                         {comments && !isLoading && <div className={"video-comments"}>
                             {comments.map((comment, idx) => {
                                 return  <div key={idx} className={'video-comment'}>
-                                    <div className={'user-comment-photo'} style={{backgroundImage: `url(http://localhost:3001/avatar/photo-4.jpg)`}}></div>
+                                    <div className={'user-comment-photo'} style={{backgroundImage: `url(${comment.photo})`}}></div>
                                     <div className={'user-comment-inner-container'}>
                                         <div className={'user-comment-content'}>
                                             <p className={'user-comment-username'}>{comment.name}</p>
