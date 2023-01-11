@@ -44,7 +44,9 @@ const VideoStreamingPage = () => {
     const {id} = useParams();
 
     const {user} = React.useContext(UserContext);
+
     let userId = 0;
+
     if (user && user.user_id) {
         userId = user.user_id;
     }
@@ -61,6 +63,7 @@ const VideoStreamingPage = () => {
             console.log("id (video id from params) variable is empty, cannot make API call");
             return;
         }
+        setIsLoading(true);
         axios
             .get(`${API}/video/videoinfocomment/${id}`)
             .then(async(response) => {
@@ -75,6 +78,7 @@ const VideoStreamingPage = () => {
                 setErrorMessage('Unable to retrieve video data');
                 setIsLoading(false);
             });
+        setIsLoading(true);
         axios
             .get(`${API}/video/${id}/tags`)
             .then((response) => {
@@ -93,99 +97,193 @@ const VideoStreamingPage = () => {
     }, [id, videos?.user_id]);
 
 
-
-    console.log("comments", comments)
-    // Render the component
-    return (
-        <div className={"streaming-wrapper"}>
-            <Header/>
-            <SideBar/>
-            <div className="streaming">
-                <div className="streaming-container-1">
-                    <div className={"streaming-video-details"}>
-                        <div className={"video-player"}>
-                            <ReactPlayer
-                                className={"video-player-r"}
-                                width={"100%"}
-                                playing
-                                controls
-                                url={`$`}
-                            />
-                        </div>
-                        <div className={"video-tags"}>
-                            {tags.map((tag, idx) => {
-                                return <p key={tag + "_" + idx} className={'tag'}>#{tag.name}</p>
-                            })}
-                        </div>
-                        <div className={"video-info"}>
-                            <div className={"video-info-1"}>
-                                <div className="video-title">
-                                    {videos ? videos.title : 'Loading...'}
-                                    {videos.title}</div>
-                                <div className={"report"}>
-                                    <ReportVideo videoId={id} reporterId={userId}/>                                </div>
+    if (isLoading === true) {
+        return <div className="App">Loading...</div>;
+    }
+    if (isLoading === false && userId){
+        return (
+            <div className={"streaming-wrapper"}>
+                <Header/>
+                <SideBar/>
+                <div className="streaming">
+                    <div className="streaming-container-1">
+                        <div className={"streaming-video-details"}>
+                            <div className={"video-player"}>
+                                <ReactPlayer
+                                    className={"video-player-r"}
+                                    width={"100%"}
+                                    playing
+                                    controls
+                                    url={`$`}
+                                />
                             </div>
-                            <div className={"channel-info-1"}>
-                                <div className="channel-info-1-a">
-                                    {videos ? videos.username : 'Loading...'}
-                                    <Link to={"/canal"}>
-                                        <div
-                                            className={"avatar"}
-                                            style={{backgroundImage: `url(${videos.photo})`}}></div>
-                                    </Link>
+                            <div className={"video-tags"}>
+                                {tags.map((tag, idx) => {
+                                    return <p key={tag + "_" + idx} className={'tag'}>#{tag.name}</p>
+                                })}
+                            </div>
+                            <div className={"video-info"}>
+                                <div className={"video-info-1"}>
+                                    <div className="video-title">
+                                        {videos ? videos.title : 'Loading...'}
+                                        {videos.title}</div>
+                                    <div className={"report"}>
+                                        <ReportVideo videoId={id} reporterId={userId}/>                                </div>
                                 </div>
-                                <div className="video-info-container">
-                                    <div className="video-info-container-row-1">
+                                <div className={"channel-info-1"}>
+                                    <div className="channel-info-1-a">
                                         <Link to={"/canal"}>
-                                            <p className={"video-channel-username"}>{videos.username}</p>
+                                            <div
+                                                className={"avatar"}
+                                                style={{backgroundImage: `url(${videos.photo})`}}></div>
                                         </Link>
                                     </div>
-                                    <div className="video-info-container-row-2">
-                                        <p className={"views-days-posted"}>
-                                            {videos.views} visualizações | {getDaySeen(videos.date)}
-                                        </p>
+                                    <div className="video-info-container">
+                                        <div className="video-info-container-row-1">
+                                            <Link to={"/canal"}>
+                                                <p className={"video-channel-username"}>{videos.username}</p>
+                                            </Link>
+
+                                        </div>
+                                        <div className="video-info-container-row-2">
+                                            <p className={"views-days-posted"}>
+                                                {videos.views} visualizações | {getDaySeen(videos.date)}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className={"reactions"}>
-                                    <LikeButton videoId={id} likeCount={videos.likes}/>
-                                    <DislikeButton videoId={id} dislikeCount={videos.dislikes}/>
+                                    <div className={"reactions"}>
+                                        <LikeButton videoId={id} likeCount={videos.likes}/>
+                                        <DislikeButton videoId={id} dislikeCount={videos.dislikes}/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <Description id={id} description={videos.description} />
-                    <div className={"comments-container"}>
-                        {user && (
-                            <div className={"new-comment"}>
-                                <div
-                                    className={"new-comment-user-photo"}
-                                    style={{backgroundImage: `url(${user.photo})`}}>
+                        <Description id={id} description={videos.description} />
+                        <div className={"comments-container"}>
+                            {userId && (
+                                <div className={"new-comment"}>
+                                    <div
+                                        className={"new-comment-user-photo"}
+                                        style={{backgroundImage: `url(${user.photo})`}}>
+                                    </div>
+                                    <CreateComment videoId={id} handleNewComment={handleNewComment}/>
                                 </div>
-                                <CreateComment videoId={id} handleNewComment={handleNewComment}/>
-                            </div>
-                        )}
-                        {!user && "login para comentar"}
-                        {comments && !isLoading && <div className={"video-comments"}>
-                            {comments.map((comment, idx) => {
-                                return  <div key={idx} className={'video-comment'}>
-                                    <div className={'user-comment-photo'} style={{backgroundImage: `url(${comment.photo})`}}></div>
-                                    <div className={'user-comment-inner-container'}>
-                                        <div className={'user-comment-content'}>
-                                            <p className={'user-comment-username'}>{comment.name}</p>
-                                            <p className={'comment-time-from-now'}>{getDaySeen(comment.timestamp)}</p>
-                                        </div>
-                                        <div className={'comment-text'}>
-                                            <p>{comment.comment}</p>
+                            )}
+                            {!userId && "login para comentar"}
+                            {comments && !isLoading && <div className={"video-comments"}>
+                                {comments.map((comment, idx) => {
+                                    return  <div key={idx} className={'video-comment'}>
+                                        <div className={'user-comment-photo'} style={{backgroundImage: `url(${comment.photo})`}}></div>
+                                        <div className={'user-comment-inner-container'}>
+                                            <div className={'user-comment-content'}>
+                                                <p className={'user-comment-username'}>{comment.name}</p>
+                                                <p className={'comment-time-from-now'}>{getDaySeen(comment.timestamp)}</p>
+                                            </div>
+                                            <div className={'comment-text'}>
+                                                <p>{comment.comment}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            })}
-                        </div>}
+                                })}
+                            </div>}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
+    if (isLoading === false && !userId){
+        return (
+            <div className={"streaming-wrapper"}>
+                <Header/>
+                <SideBar/>
+                <div className="streaming">
+                    <div className="streaming-container-1">
+                        <div className={"streaming-video-details"}>
+                            <div className={"video-player"}>
+                                <ReactPlayer
+                                    className={"video-player-r"}
+                                    width={"100%"}
+                                    playing
+                                    controls
+                                    url={`$`}
+                                />
+                            </div>
+                            <div className={"video-tags"}>
+                                {tags.map((tag, idx) => {
+                                    return <p key={tag + "_" + idx} className={'tag'}>#{tag.name}</p>
+                                })}
+                            </div>
+                            <div className={"video-info"}>
+                                <div className={"video-info-1"}>
+                                    <div className="video-title">
+                                        {videos ? videos.title : 'Loading...'}
+                                        {videos.title}</div>
+                                    <div className={"report"}>
+                                        <ReportVideo videoId={id} reporterId={userId}/>                                </div>
+                                </div>
+                                <div className={"channel-info-1"}>
+                                    <div className="channel-info-1-a">
+                                        <Link to={"/canal"}>
+                                            <div
+                                                className={"avatar"}
+                                                style={{backgroundImage: `url(${videos.photo})`}}></div>
+                                        </Link>
+                                    </div>
+                                    <div className="video-info-container">
+                                        <div className="video-info-container-row-1">
+                                            <Link to={"/canal"}>
+                                                <p className={"video-channel-username"}>{videos.username}</p>
+                                            </Link>
+                                        </div>
+                                        <div className="video-info-container-row-2">
+                                            <p className={"views-days-posted"}>
+                                                {videos.views} visualizações | {getDaySeen(videos.date)}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className={"reactions"}>
+                                        <LikeButton videoId={id} likeCount={videos.likes}/>
+                                        <DislikeButton videoId={id} dislikeCount={videos.dislikes}/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <Description id={id} description={videos.description} />
+                        <div className={"comments-container"}>
+                            {userId && (
+                                <div className={"new-comment"}>
+                                    <div
+                                        className={"new-comment-user-photo"}
+                                        style={{backgroundImage: `url(${user.photo})`}}>
+                                    </div>
+                                    <CreateComment videoId={id} handleNewComment={handleNewComment}/>
+                                </div>
+                            )}
+                            {!userId && "login para comentar"}
+                            {comments && !isLoading && <div className={"video-comments"}>
+                                {comments.map((comment, idx) => {
+                                    return  <div key={idx} className={'video-comment'}>
+                                        <div className={'user-comment-photo'} style={{backgroundImage: `url(${comment.photo})`}}></div>
+                                        <div className={'user-comment-inner-container'}>
+                                            <div className={'user-comment-content'}>
+                                                <p className={'user-comment-username'}>{comment.name}</p>
+                                                <p className={'comment-time-from-now'}>{getDaySeen(comment.timestamp)}</p>
+                                            </div>
+                                            <div className={'comment-text'}>
+                                                <p>{comment.comment}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                })}
+                            </div>}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
 }
 
 export default VideoStreamingPage;

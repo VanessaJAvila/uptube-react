@@ -40,8 +40,6 @@ function Home() {
 
     console.log(topChannels)
 
-
-
     useEffect(() => {
         axios.get(`${API}/suggested/50popular`)
             .then(response => {
@@ -60,13 +58,14 @@ function Home() {
 
     if (!recommendations || !topChannels || !topChannel) return null;
 
+    console.log("recommendations", recommendations)
     return <div className={"container-homepage"}>
         <Header/>
         <SideBar/>
         <div className={"container-home"}>
             <h1>Videos sugeridos</h1>
             <div className="geral">
-                {currentRecomendations.map((video, idx) => (<VideoCard type="geral" key={idx} {...video}/>))}
+                {currentRecomendations.map((video, idx) => (<VideoCard type={"geral"} key={idx} {...video}/>))}
                 {currentPageRec &&
                     <div className={"pages"}>
                         {currentPageRec >= 2 &&
