@@ -4,13 +4,15 @@
   min-height: 150px;
   max-height: 200px;
   font-size: 15px;
+  margin-top: 1em;
+  margin-bottom: 2em;
   color: white;
   padding: 10px;
-  margin: 10px;
   overflow: hidden;
 
   .description-text {
     white-space: pre-wrap;
+    padding-left: 0.5em;
   }
 
   a {

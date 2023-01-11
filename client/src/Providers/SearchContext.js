@@ -27,6 +27,10 @@ const SearchProvider = ({children}) => {
     }
 
     useEffect(() => {
+        if (!tags) {
+            console.log("tags variable is empty, cannot make API call");
+            return;
+        }
         axios
             .get(`${API}/tags`)
             .then((response) => {
@@ -42,8 +46,11 @@ const SearchProvider = ({children}) => {
         setPage(1);
     }, [tags])
 
-
     useEffect(() => {
+        if (!search) {
+            console.log("Search variable is empty, cannot make API call");
+            return;
+        }
         axios
             .get(`${API}/video/search?search=${search}&page=${page}`, {
                 withCredentials: true,
@@ -53,12 +60,17 @@ const SearchProvider = ({children}) => {
                 setHasTags(false);
             })
             .catch((error) => {
+                console.log("search results:", error)
                 console.log(error, "Error fetching search results");
             });
     }, [page, search]);
 
 
     useEffect( () => {
+        if (!tag) {
+            console.log("tag variable is empty, cannot make API call");
+            return;
+        }
         axios
             .get(`${API}/video/search/tag?search=${tag}`, {
                 withCredentials: true,
