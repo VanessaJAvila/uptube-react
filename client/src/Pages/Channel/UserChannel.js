@@ -27,14 +27,29 @@ export default function UserChannel() {
     const [stats, setStats] = useState({});
     const [userChannel, setUserChannel] = useState();
     const [edit, setEdit] = useState(false);
-    const [showElement, setShowElement] = useState(false)
+    const [showAchis, setShowAchis] = useState(true)
+    const [showUp, setShowUp] = useState(true)
+    const [showPlay, setShowPlay] = useState(true)
     const [updateUserUsername, setUpdateUserUsername] = useState(user?.username);
     const [updateUserPhoto, setUpdateUserPhoto] = useState();
     const [updateUserBio, setUpdateUserBio] = useState(user?.bio);
     const [updateUserHeader, setUpdateUserHeader] = useState(user?.header);
 
 
-    const showOrHide = () => setShowElement(true)
+    const HideOrShowAchis = () => {
+        setShowAchis(!showAchis)
+        console.log(showAchis)
+    }
+
+    const HideOrShowUploads = () => {
+        setShowUp(!showUp)
+        console.log(showUp)
+    }
+
+    const HideOrShowPlay = () => {
+        setShowPlay(!showPlay)
+        console.log(showPlay)
+    }
 
     const history = useHistory();
 
@@ -162,8 +177,8 @@ export default function UserChannel() {
             </div>
         </div>
 
-             <h2>Achievements {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash}/>}</h2>
-             <div className={"achievements"}>
+             <h2>Achievements {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowAchis}/>}</h2>
+        { showAchis && <div className={"achievements"}>
                   {achis.some(e => e.achievement === 'Adoram-me'&& e.ranking === '5 likes') ? <div className={'loved'}>
                      <img className={"adoram-me bronze"} src={beloved}/><p>Adoram-me</p></div>: null}
                  {achis.some(e => e.achievement === 'Adoram-me'&& e.ranking === '20 likes') ? <div className={'loved'}>
@@ -196,19 +211,19 @@ export default function UserChannel() {
                      <img className={"Stalker bronze"} src={stalkerorange}/></div>: null}
                  {achis.some(e => e.achievement === 'Só a começar') ? <div className={'starting'}><img className={"começar"} src={rocket}/><p>Just Starting</p></div>: null}
 
-             </div>
-             <h2 className={"upload"}>Uploads  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash}/>}</h2>
-        {/*  <div className={"geral"}>
+             </div>}
+             <h2 className={"upload"}>Uploads  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowUploads}/>}</h2>
+        {/*{showUp &&  <div className={"geral"}>
                  {!videos && <p>A carregar...</p>}
                  {videos && <>
                      {videos.length === 0 && <p className={"no results"}>Partilha o teu 1º video?</p>}
                      {videos.map((v, idx) => (<VideoCard type="geral"  {...v}/>))}
                  </>}
-             </div>*/}
-             <h2 className={"playlist"}>Playlists  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash}/>}</h2>
-             <div className={"container-playlists"}>
+             </div>}*/}
+             <h2 className={"playlist"}>Playlists  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowPlay}/>}</h2>
+        { showPlay && <div className={"container-playlists"}>
                  <VideoCard></VideoCard>
-             </div>
+             </div>}
              <div className={"container-subs-stats"}>
                  <h4 className={"subs-text"}>Subscrições</h4>
                  <div className={"subs"}>

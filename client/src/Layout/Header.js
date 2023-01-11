@@ -101,7 +101,7 @@ function Header() {
                     <div className={"menu-item"}><Link to="/UserChannel">Canal</Link></div>
                     <div className={"menu-item"}><Link to="/studio">Estúdio</Link></div>
                     <div className={"menu-item"}><button>Dark/Light Mode</button></div>
-                    <div className={"menu-last-item"} ><Link to="">Enviar Feedback</Link></div>
+                    <div className={"menu-last-item"} ><Link to="/FeedbackForm">Enviar Feedback</Link></div>
                 </div>}
             </div>
         </div>)}
