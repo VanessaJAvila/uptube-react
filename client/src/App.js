@@ -52,7 +52,6 @@ function App() {
 
                             <SearchProvider>
                                 <Route path="/Home" component={Home}/>
-                                <Route path="/FeedbackForm" component={FeedbackForm}/>
                                 <Route path="/UserChannel" component={UserChannel}/>
                                 <Route path="/Channel/:user_id" component={Channel}/>
                                 <Route path="/Channels" component={Channels}/>
