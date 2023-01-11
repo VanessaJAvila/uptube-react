@@ -72,31 +72,40 @@ function PlaylistCard(props){
         e.preventDefault();
             axios.get(`${API}/playlist/getInvitedEmail/`+email,{withCredentials: true})
                 .then(response => {
+                    let helper = null;
+                  console.log(response, "trial");
+                  if(response.data.length===0){
+                      helper = null
+                  } else {
+                      helper = response.data[0].user_id;
+                  }
+                console.log(helper,"helper")
                     let newGuest = {
                         playlist_id: props.id,
-                        invited_id: response.data[0].user_id,
+                        invited_id: helper,
                         email:email
                     }
-
-
                     axios.post(`${API}/playlist/addguestplaylist`, newGuest, {
                         withCredentials: true
                     })
                         .then((res) => {
-                            console.log("sucesso", res.data)
+                            console.log("sucesso", res)
                             //TODO modificar o guest
+                            /*
                             setGuest(g => {
                                 g.push(res.data[0]);
                             });
+                             */
+                            setErrorM(res.data.message);
+                            setErrorDiv(true);
                         }).catch((error) => {
                         console.log(error.response.data.message, "error ------------------------------------------------------------------1");
                         setErrorM(error.response.data.message);
                         setErrorDiv(true);
                     });
+
                 }).catch(e => {
                     console.log(e, "error++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 2");
-                setErrorM(e.response.data.message);
-                setErrorDiv(true);
                 }
             ) ;
     }

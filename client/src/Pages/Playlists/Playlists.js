@@ -37,7 +37,7 @@ function Playlists() {
             .then(response => {
                 console.log(response.data)
                 setGPlaylists(response.data);
-            }).catch(e => console.log(e, "erro playlist")) ;
+            }).catch(e => console.log(e, "No G playlists")) ;
     }, [user]);
 /*
     let creatorPlaylistIds = [];
