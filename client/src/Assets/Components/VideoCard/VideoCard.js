@@ -7,6 +7,7 @@ import {faBookmark} from "@fortawesome/free-regular-svg-icons";
 
 function VideoCard(props) {
     switch (props.type) {
+
         case "geral":
             return (
                 <div className={"suggestions-wrapper"}>
