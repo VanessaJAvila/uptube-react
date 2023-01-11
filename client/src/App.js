@@ -5,9 +5,9 @@ import Login from "./Pages/Login/Login.js";
 import Register from "./Pages/Register/Register.js";
 import {UserContext, UserProvider} from "./Providers/UserContext";
 import React from "react";
-import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import Recover from "./Pages/Recover Password/Recover";
 import RecoverBytoken from "./Pages/Recover Password/RecoverBytoken";
+import UserChannel from "./Pages/Channel/UserChannel";
 import Channel from "./Pages/Channel/Channel";
 import Profile from "./Pages/Profile/Profile";
 import Delete from "./Pages/Delete/Delete";
@@ -21,10 +21,10 @@ import {SearchProvider} from "./Providers/SearchContext";
 import VideoStreamingPage from "./Pages/VideoStreamingPage/VideoStreamingPage";
 import {VideoUploader} from "./Components/VideoUploader/VideoUploader";
 import WatchHistory from "./Pages/WatchHistory/WatchHistory";
-import Header from "./Layout/Header";
 import Studio from "./Pages/Studio/Studio";
-
 import AuthHandler from "./Assets/Components/AuthHandler";
+import FeedbackForm from "./Pages/Feedback Form/FeedbackForm";
+
 
 
 function App() {
@@ -36,7 +36,6 @@ function App() {
     return <UserProvider>
         <BrowserRouter>
                 <div className="App">
-                    <Header/>
                     <Switch>
                         <AuthHandler
                             requireAuth={<>
@@ -53,11 +52,13 @@ function App() {
 
                             <SearchProvider>
                                 <Route path="/Home" component={Home}/>
-                                <Route path="/Channel" component={Channel}/>
+                                <Route path="/FeedbackForm" component={FeedbackForm}/>
+                                <Route path="/UserChannel" component={UserChannel}/>
+                                <Route path="/Channel/:user_id" component={Channel}/>
                                 <Route path="/Channels" component={Channels}/>
                                 <Route path="/Delete" component={Delete}/>
                                 <Route path ="/player/:id" component ={VideoStreamingPage}/>
-                                <Route path ="/studio" component ={VideoUploader}/>
+                                <Route path ="/studio" component ={Studio}/>
                                 <Route path ="/history" component ={WatchHistory}/>
                                 <Route path ="/Playlists" component ={Playlists}/>
                                 <Route path="/Playlist/:playlist_id" component={playlist}/>

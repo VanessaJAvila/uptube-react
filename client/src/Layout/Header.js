@@ -10,39 +10,57 @@ import {faCircleUser, faBell} from "@fortawesome/free-regular-svg-icons"
 import axios from "axios";
 
 //localhost port for api
-const  API  = process.env.REACT_APP_API;
-
+const API = process.env.REACT_APP_API;
 
 function Header() {
 
     const {user} = React.useContext(UserContext);
-    const [newNotification, setNewNotification] = useState(false);
-    const [viewed, setViewed] = useState();
-    const {handleSearch,videos,setVideos,search,setSearch} = React.useContext(SearchContext);
+    const [alert, setAlert] = useState(false);
+    const [openPopUp, setOpenPopUp] = useState(false);
+    const [notification, setNotification] = useState();
+    const [viewed, setViewed] = useState(false);
+    const [unSeenNot, setUnSeenNot] = useState([]);
+    const [popup, setPopUp] = useState(false);
+    const {handleSearch} = React.useContext(SearchContext);
 
 
+    useEffect(() => {
+        axios.get(`${API}/user/${user?.user_id}/notifications`)
+            .then(response => {
+                setNotification(response.data.notifications);
+                setUnSeenNot(response.data.unseenNot);
+                        if (response.data.unseenNot.length > 0) {
+                            setAlert(true)
+                        } if(!viewed) {  axios.post(`${API}/user/${unSeenNot[0].notification_id}/update`)
+                                    .then(response => {
 
-        useEffect(() => {
-            axios.get(`${API}/video/user/${user?.user_id}/notifications`)
-                .then(response => {
-                    setViewed(response.data);
-                })
-        }, []);
+                                    })}
+                    if (response.data.notifications > 0) {
+                        return response.data.notifications
+                    }
+                })}, []);
+
+    const togglePopUp = () => {
+        setPopUp(!popup)
+        console.log(popup)
+    }
+
+    const toggleNot = () => {
+        setOpenPopUp(!openPopUp)
+        console.log(openPopUp)
+    }
 
 
-
-        useEffect(() => {
-            axios.get(`${API}/video/user/${user?.user_id}/notification`)
-                .then(response => {
-                    setNewNotification(true);
-                })
-        }, []);
+    console.log ("unseeNot", unSeenNot)
+    console.log("alert", alert)
+    console.log("viewed", viewed)
+    console.log("open message", openPopUp)
 
 
     return <div className={"Header"}>
         <div className={"logo"}>
             <Link to={"/Home"}>
-            <img src={logo} alt="logo UpTube"/>
+                <img src={logo} alt="logo UpTube"/>
             </Link>
         </div>
         <div className={"searching"}>
@@ -52,18 +70,43 @@ function Header() {
                    placeholder={"Pesquisar"}
                    onChange={handleSearch}/>
 
-             </div>
+        </div>
 
         {!user ? (<div className={"login"}>
-            <a href="/login">
+            <Link to="/login">
                 <input className={"button"} type="button" value="Iniciar Sessão"/>
-                <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/></a>
+                <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/></Link>
         </div>) : (<div className={"user-logged"}>
-            <FontAwesomeIcon className={"b-icon"} icon={faBell}/>
-            <Link to={"/Channel"}> <img className={"avatar"} src = {user?.photo} alt={"user-photo"}/></Link>
-               <Link to={"/Profile"}><FontAwesomeIcon className={"sort-icon"} icon={faSortDown}/></Link>
+            {alert && <div className="redDot"/>}
+            <FontAwesomeIcon className={"b-icon"} icon={faBell} onClick={() => {
+                setOpenPopUp(!openPopUp);
+                setViewed(!viewed);
+                setAlert(!popup)
+            }}/>
+
+            { unSeenNot && notification && openPopUp &&
+                 <div className="menu-notification" >
+                    {notification.map((n, idx) => (
+                            <Link to = {`/player/${n.video_id}`}><div className={"menu-item"} key={idx}>
+                                Tens um {n.notification} de {n.sender}
+                            </div></Link>
+                        ))}
+                </div>}
+
+
+            <Link to={"/UserChannel"}><img className={"avatar"} src={user?.photo} alt={"user-photo"}/></Link>
+            <div className={"dropdown"}>
+                <Link onClick={togglePopUp}><FontAwesomeIcon className={"sort-icon"} icon={faSortDown}/></Link>
+                {popup && <div className={"dropdown-content"}>
+                    <div className={"menu-item"}><Link to="/UserChannel">Canal</Link></div>
+                    <div className={"menu-item"}><Link to="/studio">Estúdio</Link></div>
+                    <div className={"menu-item"}><button>Dark/Light Mode</button></div>
+                    <div className={"menu-last-item"} ><Link to="/FeedbackForm">Enviar Feedback</Link></div>
+                </div>}
+            </div>
         </div>)}
     </div>
 }
+
 
 export default Header;

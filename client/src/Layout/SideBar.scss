@@ -1,22 +1,31 @@
 .SideBar {
+  @media only screen and (max-width: 769px) {
+    .SideBar {
+      display: none;
+    }
+  }
   background-color: #1C1C24;
   position: fixed;
   width: 16%;
-  height: 94vh;
-  padding-top: 2%;
+  height: 100%;
+  padding-top: 1%;
   padding-left: 10px;
   padding-bottom: 10%;
-  margin-top: 3%;
+  margin-top: 57px;
   display: block;
   flex-direction: column;
   color: rgba(248, 247, 247, 0.66);
   font-size: 12px;
 
+  &.Hidden {
+    display: none;
+  }
+
   .User {
     display: flex;
     background-color: #30303a;
     border-radius: 8px;
-    border: 1px solid dimgrey;
+    border: 1px solid red;
     width: 95%;
     height: 40px;
     margin-bottom: 13px;

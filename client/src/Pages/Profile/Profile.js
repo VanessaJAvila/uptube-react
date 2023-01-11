@@ -97,8 +97,6 @@ function Profile() {
     let bday = year+'-' + month + '-'+dt;
 
 
-
-
     return <div className="Profile">
         <Header/>
         <SideBar/>

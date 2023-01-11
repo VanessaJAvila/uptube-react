@@ -1,5 +1,5 @@
 import "./SideBar.scss";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {UserContext} from "../Providers/UserContext";
 import {SearchContext} from "../Providers/SearchContext";
 import axios from "axios";
@@ -13,15 +13,12 @@ import {Link, useHistory} from "react-router-dom";
 const API = process.env.REACT_APP_API;
 
 function SideBar() {
-
     const {user, setUser} = React.useContext(UserContext);
     const {handleTags, tags} = React.useContext(SearchContext);
 
     const history = useHistory();
 
     let handleSubmit = async (e) => {
-        //history.push vai para pagina nova
-        //history.replace nao permite voltar para a pagina anterior
         e.preventDefault();
         axios.post(`${API}/user/Logout`, true, {
             withCredentials: true
@@ -64,32 +61,34 @@ function SideBar() {
 
         {user && <div className={"container-user"}>
             <div className={"Subscrições"}>
-                <Link to={"./Channels"}><FontAwesomeIcon icon={faClapperboard}/>
-                <p>Subscrições</p>
+                <Link to={"/Channels"}><FontAwesomeIcon icon={faClapperboard}/>
+                    <p>Subscrições</p>
                 </Link>
             </div>
             <div className={"Histórico"}>
-                <Link to={"./Home"}><FontAwesomeIcon icon={faClockRotateLeft}/>
-                <p>Histórico</p>
+                <Link to={"/Home"}><FontAwesomeIcon icon={faClockRotateLeft}/>
+                    <p>Histórico</p>
                 </Link>
             </div>
             <div className={"Playlists"}>
                 <Link to={"/Playlists"}><FontAwesomeIcon icon={faPlay}/>
                     <p>Playlists</p>
                 </Link>
-
             </div>
         </div>}
+
         <div className={"Tags"}>
             <h4>Tags</h4>
             <div className={"tag"}>
-                {tags && Object.values(tags).map((tag, idx) => (<div key={idx}>
+                { tags && Object.values(tags).map((tag, idx) => (
+                    <div key={idx}>
                         <button onClick={() => handleTags(tag)} value={tag.name}>
                             {tag.name}
                         </button>
                     </div>))}
             </div>
         </div>
+
         {user && <div className={"container-home-2"}>
             <div className={"Estudio"}>
                 <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faVideo}></FontAwesomeIcon></Link>
@@ -105,7 +104,6 @@ function SideBar() {
             </div>
         </div>}
     </div>
-
 }
 
 export default SideBar;

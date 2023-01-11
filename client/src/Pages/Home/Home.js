@@ -4,21 +4,21 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Header from "../../Layout/Header";
-import {Redirect, useHistory} from "react-router-dom";
 import {UserContext} from "../../Providers/UserContext";
 import SideBar from "../../Layout/SideBar";
 import "./Home.scss";
 import VideoCard from "../../Assets/Components/VideoCard/VideoCard";
 import {faEllipsis, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useHistory} from "react-router-dom";
 
 //localhost port for api
 const  API  = process.env.REACT_APP_API;
 
+console.log(API)
 
 function Home() {
     const {user} = React.useContext(UserContext);
-    const [videos, setVideos] = useState([]);
     const [recommendations, setRecommendations] = useState([]);
     const [topChannels, setTopChannels] = useState([]);
     const [topChannel, setTopChannel] = useState([])
@@ -30,6 +30,7 @@ function Home() {
     const indexOfFirstRecord = indexOfLastRecord - resultsPerPage;
     const indexOfLastRecordRec = currentPageRec * resultsPerPageRec;
     const indexOfFirstRecordRec = indexOfLastRecordRec - resultsPerPageRec;
+    const history = useHistory();
 
 
     // Records to be displayed on the current page
@@ -37,7 +38,8 @@ function Home() {
     const currentChannel = topChannel.slice(0, 1);
     const currentRecomendations = recommendations.slice(indexOfFirstRecordRec, indexOfLastRecordRec)
 
-    console.log(currentChannels)
+    console.log(topChannels)
+
 
 
     useEffect(() => {
@@ -79,14 +81,20 @@ function Home() {
                 <div className={"title"}>
                     <h3>Canais Sugeridos</h3>
                     <FontAwesomeIcon className={'suggestions-icon'} icon={faEllipsis}/>
+                    {currentChannels.map((c, idx) => {
+                        return c.Channel ? (
+                            <div className={"list"} key={c + idx} onClick={() => {
+                                history.push(`/Channel/${c.user_id}`)
+                                window.location.reload()
+                                }}>
+                                <div className={'photo-channel'}>
+                                    <img className={"photo-chan"} src={c.photo} alt="channel" />
+                                </div>
+                                <p className={"channel"}>{c.Channel}</p>
+                            </div>
+                        ) : null;
+                    })}
                 </div>
-                {currentChannels.map((c, idx) => {
-                    return <div className={"list"} key={c + idx}>
-                        <div className={'photo-channel'}>
-                            <img className={"photo-chan"} src={c.photo} alt="channel"/></div>
-                        <p className={"channel"}>{c.Channel}</p>
-                    </div>
-                })}
 
                 <div className={"see-more-btn"}>
                     {currentPage &&
