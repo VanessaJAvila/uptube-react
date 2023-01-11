@@ -44,10 +44,17 @@ function PlaylistCard(props){
     const[addGstate,setAddGstate] = useState(false);
     const[rmvGstate,setRmvGstate] = useState(false);
     const[email,setEmail] = useState("");
-    const[guest,setGuest] = useState([]);
+    const[guest,setGuest] = useState("");
+    const[errorM,setErrorM] = useState("");
+    const[errorDiv,setErrorDiv] = useState(false);
+    const[deleteIdG,setDeleteIdG] = useState("");
 
 
 
+    //console.log(guest, "prrrrrrrrops");
+/*
+    //TODO nao usar useEffect aqui
+    //ir buscar guest a playlist
     useEffect(() => {
         if(!user) return;
         axios.get(`${API}/playlist/ginplaylist/`+props.id,{withCredentials: true})
@@ -56,6 +63,10 @@ function PlaylistCard(props){
                 setGuest(response.data);
             }).catch(e => console.log(e, "erro ginplaylist")) ;
     }, [user]);
+
+ */
+
+
 
     let handleSub = async (e) => {
         e.preventDefault();
@@ -72,19 +83,22 @@ function PlaylistCard(props){
                         withCredentials: true
                     })
                         .then((res) => {
-                            alert('G added to playlist successfully');
+                            console.log("sucesso", res.data)
+                            //TODO modificar o guest
+                            setGuest(g => {
+                                g.push(res.data[0]);
+                            });
                         }).catch((error) => {
-                            console.log(error, "error ------------------------------------------------------------------1");
-                       // alert("user was already invited to this playlist 1");
+                        console.log(error.response.data.message, "error ------------------------------------------------------------------1");
+                        setErrorM(error.response.data.message);
+                        setErrorDiv(true);
                     });
-
                 }).catch(e => {
                     console.log(e, "error++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 2");
-                  //  alert("user was already invited to this playlist 2")
+                setErrorM(e.response.data.message);
+                setErrorDiv(true);
                 }
             ) ;
-
-
     }
 
 
@@ -105,10 +119,10 @@ function PlaylistCard(props){
             withCredentials: true
         })
             .then((res) => {
-                alert("Playlist deleted successfully");
-             //   console.log(res.data);
+                // alert("Playlist deleted successfully");
+                console.log("Playlist deleted successfully");
             }).catch((error) => {
-            console.log(error, "messagem erro");
+            console.log(error, "messagem delete playlist erro");
         });
     }
 
@@ -146,16 +160,41 @@ function PlaylistCard(props){
                                                         </div>
 
                                                         <p onClick={handleSub}>Enviar email e adicionar</p>
+                                                        {errorDiv && <p>
+                                                            {errorM}
+                                                        </p>}
                                                     </form>
                                                 </div>
                                             }
-                                                    <p onClick={()=>setRmvGstate(!rmvGstate)}>-Remover guest da playlist</p>
+                                                    <p onClick={()=>{
+                                                        setRmvGstate(!rmvGstate);
+                                                        setGuest(props.guestPlaylists);
+                                                    }}>-Remover guest da playlist</p>
                                             {
                                                 rmvGstate && <div>
-                                                    {guest.map((g,idx)=>{
-                                                        //todo carregar no nome e remover user
-                                                      return <p className={"userRemove"} key={idx}>{idx+1}->{g.name}</p>
-                                                    })}
+                                                    {
+                                                       guest.map((g,i)=>{
+                                                            return <p onClick={async(e) =>{
+                                                                    let dGuest = {
+                                                                        playlist_id: props.id,
+                                                                        invited_id: g.user_id,
+                                                                    }
+
+                                                                    axios.post(`${API}/playlist/deletegfromp/`, dGuest, {
+                                                                        withCredentials: true
+                                                                    })
+                                                                        .then((res) => {
+                                                                            console.log("sucesso", res.data)
+                                                                        }).catch((error) => {
+                                                                        console.log(error.response.data.message, "error ------------------------------------------------------------------1");
+                                                                    });
+
+
+
+                                                            }}
+                                                             key={i}>{g.name}</p>
+                                                        })
+                                                    }
                                                 </div>
                                             }
                                         </div>
