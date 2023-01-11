@@ -72,9 +72,7 @@ const SearchProvider = ({children}) => {
             return;
         }
         axios
-            .get(`${API}/video/search/tag?search=${tag}`, {
-                withCredentials: true,
-            })
+            .get(`${API}/video/search/tag?search=${tag}`)
             .then((response) => {
                 setVideos(response.data);
             })
