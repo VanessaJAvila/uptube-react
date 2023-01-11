@@ -1,16 +1,24 @@
-
+import { faXmark} from "@fortawesome/free-solid-svg-icons";
 import "./FeedbackForm.scss";
 import Header from "../../Layout/Header";
 import SideBar from "../../Layout/SideBar";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
+import React, {useState} from "react";
 
 
 export default function FeedbackForm() {
 
+
+    const [close, setClose] = useState(true);
+
+
+
     return (
         <div className={"container-feedback"}>
-            <Header/>
-            <SideBar/>
-            <div className={"container-form"}>
+
+            {close &&  <div className={"container-form"}>
+                <FontAwesomeIcon className={"close-icon"} icon={faXmark} onClick={() => setClose(false)}/>
                 <h2>Envia-nos o teu feedback </h2>
                 <p>Descreve a tua questão ou sugestão</p>
                 <input name="Message" type="text"
@@ -19,10 +27,10 @@ export default function FeedbackForm() {
                     <input type="checkbox"/>
                         <span>Autorizas o envio de emails com informações sobre os nossos updates?</span>
                 </label>
-                <button type="submit" value="Submit">Enviar</button>
+                <button className={"send"} type="submit" value="Submit">Enviar</button>
 
 
-            </div>
+            </div>}
         </div>
     )
 }

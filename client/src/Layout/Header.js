@@ -8,6 +8,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass, faSortDown} from "@fortawesome/free-solid-svg-icons";
 import {faCircleUser, faBell} from "@fortawesome/free-regular-svg-icons"
 import axios from "axios";
+import FeedbackForm from "../Pages/Feedback Form/FeedbackForm";
 
 //localhost port for api
 const API = process.env.REACT_APP_API;
@@ -16,6 +17,7 @@ function Header() {
 
     const {user} = React.useContext(UserContext);
     const [alert, setAlert] = useState(false);
+    const [form, setForm] = useState(false);
     const [openPopUp, setOpenPopUp] = useState(false);
     const [notification, setNotification] = useState();
     const [viewed, setViewed] = useState(false);
@@ -103,7 +105,8 @@ function Header() {
                     <div className={"menu-item"}><Link to="/UserChannel">Canal</Link></div>
                     <div className={"menu-item"}><Link to="/studio">Estúdio</Link></div>
                     <div className={"menu-item"}><button>Dark/Light Mode</button></div>
-                    <div className={"menu-last-item"} ><Link to="/FeedbackForm">Enviar Feedback</Link></div>
+                    <div className={"menu-last-item"} onClick={() => setForm(true)}>Enviar Feedback</div>
+                        { form && <FeedbackForm/>}
                 </div>}
             </div>
         </div>)}
