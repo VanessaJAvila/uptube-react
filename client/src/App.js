@@ -1,4 +1,5 @@
 import './App.css';
+import axios from "axios";
 import Suggested from "./Pages/Suggested";
 import Home from "./Pages/Home/Home.js";
 import Login from "./Pages/Login/Login.js";
@@ -22,20 +23,34 @@ import VideoStreamingPage from "./Pages/VideoStreamingPage/VideoStreamingPage";
 import WatchHistory from "./Pages/WatchHistory/WatchHistory";
 import Studio from "./Pages/Studio/Studio";
 import AuthHandler from "./Assets/Components/AuthHandler";
-import FeedbackForm from "./Pages/Feedback Form/FeedbackForm";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
+import {createContext, useState} from "react";
+import ReactSwitch from "react-switch";
+
+export const ThemeContext = createContext(null);
 
 
+axios.defaults.withCredentials = true;
 
 function App() {
 
     //const {user, setUser} = React.useContext(UserContext);
-
     //  <RequireAuth></RequireAuth><NotRequireAuth> </NotRequireAuth>
 
-    return <UserProvider>
+    const [theme, setTheme]= useState("dark");
+
+    const toggleTheme = () => {
+        setTheme((curr) =>(curr === "dark" ? "light" : "dark"));
+    };
+
+    return  <ThemeContext.Provider value={{ theme,toggleTheme}}>
+    <UserProvider>
         <BrowserRouter>
-                <div className="App">
+                <div className="App" id={theme}>
+                    <div className={"switch"}>
+                        <label>{theme === "light" ? "Light Mode" : "Dark Mode" }</label>
+                        <ReactSwitch className={"button"} onChange={toggleTheme} checked={theme ==="dark"}/>
+                    </div>
                     <Switch>
                         <AuthHandler
                             requireAuth={<>
@@ -62,14 +77,14 @@ function App() {
                                 <Route path ="/Playlists" component ={Playlists}/>
                                 <Route path="/Playlist/:playlist_id" component={playlist}/>
                                 <Route path="/SearchResults" component={SearchResults}/>
+                                <Redirect to={"/Home"}/>
                             </SearchProvider>
                         </AuthHandler>
-
                     </Switch>
                 </div>
-
         </BrowserRouter>
     </UserProvider>
+    </ThemeContext.Provider>
 }
 
 export default App;

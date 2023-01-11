@@ -16,7 +16,6 @@ export default function FeedbackForm() {
 
     return (
         <div className={"container-feedback"}>
-
             {close &&  <div className={"container-form"}>
                 <FontAwesomeIcon className={"close-icon"} icon={faXmark} onClick={() => setClose(false)}/>
                 <h2>Envia-nos o teu feedback </h2>

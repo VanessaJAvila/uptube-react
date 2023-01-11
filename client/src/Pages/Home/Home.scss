@@ -26,14 +26,20 @@
       position: fixed;
       background-color: #1C1C24;
 
-      .chan-thumb{
+      .chan-thumb {
         display: flex;
         margin-top: 47%;
         margin-left: -94%;
         border: 1px solid dimgray;
         border-radius: 10px;
         height: 134px;
-        width: 89%;
+        width: 88%;
+
+        img{
+          width: 175px;
+          height: 100px;
+          border-radius: 10px 10px 0 0;
+        }
 
 
         .add-icon {
@@ -47,7 +53,7 @@
           font-size: 8pt;
           color: dimgray;
           margin-top: 65%;
-          margin-left: 44%;
+          margin-left: calc(100% - 155%);
         }
 
       }
@@ -66,12 +72,6 @@
           margin-left: 11px;
           font-size: 14px;
         }
-
-        .see-more {
-          margin-top: -13%;
-          margin-left: 67%;
-          font-size: 12px;
-        }
       }
 
       .add-channel {
@@ -88,17 +88,16 @@
           height: 30px;
           margin-top: 3%;
           margin-left: -6%;
-        position: absolute;
+          position: absolute;
 
 
           .photo-chan-2 {
             border-radius: 50%;
             width: 100%;
             height: 100%;
+            margin-top: calc(100% - 55px);
           }
         }
-
-
 
         h4 {
           margin-top: 133px;
@@ -146,6 +145,7 @@
         flex-direction: row;
         margin-top: 5%;
         margin-left: 10%;
+        padding-top: 9px;
         width: 77%;
         height: 23px;
 
@@ -154,87 +154,81 @@
           display: flex;
           width: 60%;
           height: 26px;
-          margin-top: 4%;
+          margin-top: calc(100% - 103%);
           position: absolute;
           margin-left: 23%;
           font-size: 9pt;
         }
-        p.channel-bio{
-          font-family: Arial,sans-serif;
+
+        p.channel-bio {
+          font-family: Arial, sans-serif;
           color: grey;
           font-size: 7pt;
-          margin-top: 17%;
+          margin-top: 6%;
           margin-left: 31%;
           width: 87px;
-    }
+        }
 
 
-    .channel {
-      margin-top: 7px;
-      margin-left: 23%;
-      font-size: 9pt;
-      color: lightgray;
-    }
+        .channel {
+          margin-top: 11px;
+          margin-left: 23%;
+          font-size: 9pt;
+          color: lightgray;
+        }
 
-    .photo-channel {
-      display: flex;
-      width: 20%;
-      height: 26px;
-      margin-top: 3%;
-      position: absolute;
+        .photo-channel {
+          display: flex;
+          width: 20%;
+          height: 26px;
+          margin-top: 3%;
+          position: absolute;
 
-
-
-      .photo-chan {
-        border-radius: 50%;
-        width: 70%;
-        height: 70%;
+          .photo-chan {
+            border-radius: 50%;
+            width: 70%;
+            height: 70%;
+          }
+        }
       }
-    }
-  }
 
-  .title {
-    position: relative;
-    margin-top: 15px;
-    text-align: left;
-    width: 100%;
-    height: 24px;
-    color: lightgrey;
-    border-bottom: 1px solid dimgrey;
-
-
-    h3 {
-      margin-top: 0;
-      margin-left: 11px;
-      font-size: 14px;
-    }
-  }
-
-  .see-more-btn {
-    width: 100%;
-    height: 37px;
-    background-color: #30303a;
-    margin-top: 115%;
-    border-radius: 0 0 10px 10px;
-    position: absolute;
-
-    .pagination {
-
-      h3 {
-        margin-top: 12px;
-        text-align: center;
-        font-size: 14px;
+      .title {
+        position: relative;
+        margin-top: 15px;
+        text-align: left;
+        width: 100%;
+        height: 24px;
         color: lightgrey;
+        border-bottom: 1px solid dimgrey;
+
+
+        h3 {
+          margin-top: 0;
+          margin-left: 11px;
+          font-size: 14px;
+        }
+      }
+
+      .see-more-btn {
+        width: 198px;
+        height: 37px;
+        background-color: #30303a;
+        margin-top: 225px;
+        padding-top: 12px;
+        border-radius: 0 0 10px 10px;
+        position: absolute;
+        margin-left: -1px;
+
+        .pagination {
+
+          h3 {
+            margin-top: 7px;
+            text-align: center;
+            font-size: 14px;
+            color: lightgrey;
+          }
+        }
       }
     }
   }
-
-  .suggestions-icon {
-    position: absolute;
-    margin-top: -14%;
-    margin-left: 85%;
-    color: lightgrey;
-  }
-}
-}
 }

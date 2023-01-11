@@ -3,6 +3,7 @@
 // fazer um file se possivel com todos os endpoints vindos da base de dados e chamar depois nos files necessarios
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import cat from "../../Assets/sample-thumbnails/ssh_1.png";
 import Header from "../../Layout/Header";
 import {UserContext} from "../../Providers/UserContext";
 import SideBar from "../../Layout/SideBar";
@@ -11,6 +12,7 @@ import VideoCard from "../../Assets/Components/VideoCard/VideoCard";
 import {faEllipsis, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useHistory} from "react-router-dom";
+import logo from "../../Layout/logo.svg";
 
 //localhost port for api
 const  API  = process.env.REACT_APP_API;
@@ -48,13 +50,15 @@ function Home() {
     }, []);
 
     useEffect(() => {
-        axios.get(`${API}/suggested/topchannels`)
+        axios.get(`${API}/user`)
             .then(response => {
                 //console.log('rsp', response);
                 setTopChannels(response.data);
                 setTopChannel(response.data);
             }).catch(e => console.log(e));
     }, []);
+
+    console.log ("canais", topChannels,"canal", topChannel)
 
     if (!recommendations || !topChannels || !topChannel) return null;
 
@@ -79,17 +83,15 @@ function Home() {
             <div className={"container-channels"}>
                 <div className={"title"}>
                     <h3>Canais Sugeridos</h3>
-                    <FontAwesomeIcon className={'suggestions-icon'} icon={faEllipsis}/>
                     {currentChannels.map((c, idx) => {
-                        return c.Channel ? (
+                        return c.username ? (
                             <div className={"list"} key={c + idx} onClick={() => {
                                 history.push(`/Channel/${c.user_id}`)
-                                window.location.reload()
                                 }}>
                                 <div className={'photo-channel'}>
                                     <img className={"photo-chan"} src={c.photo} alt="channel" />
                                 </div>
-                                <p className={"channel"}>{c.Channel}</p>
+                                <p className={"channel"}>{c.username}</p>
                             </div>
                         ) : null;
                     })}
@@ -103,8 +105,8 @@ function Home() {
                 </div>
                 {user && <div className={"container-channels-2"}>
                     <div className={"title"}>
-                        <h3>Canais Sugeridos</h3>
-                        <h3 className={"see-more"}>Ver todos</h3>
+                        <h3>Canal mais visto</h3>
+
                     </div>
 
                     <div className={"add-channel"}>
@@ -114,7 +116,7 @@ function Home() {
                                     <div className={"photo-channel-2"}>
                                         <img className={"photo-chan-2"} src={ch.photo} alt="channel"/>
                                     </div>
-                                    <p className={"channel-id"}>{ch.Channel}</p>
+                                    <p className={"channel-id"}>{ch.username}</p>
                                     {ch.bio && ch.bio.length > 15 ? (
                                         <p className={"channel-bio"}>{ch.bio.slice(0, 15)}</p>
                                     ) : (
@@ -125,6 +127,7 @@ function Home() {
                         })}
                     </div>
                     <div className={'chan-thumb'}>
+                        <img src={cat} alt="thumbnail-video"/>
                         <FontAwesomeIcon className={'add-icon'} icon={faUserPlus}/>
                         <p className={'follow-chan'}>Seguir canal</p>
                     </div>

@@ -27,38 +27,38 @@ function Header() {
 
 
     useEffect(() => {
-        axios.get(`${API}/user/${user?.user_id}/notifications`)
+        axios.get(`${API}/user/${user?.user_id}/notifications`, {withCredentials: true})
             .then(response => {
                 setNotification(response.data.notifications);
                 setUnSeenNot(response.data.unseenNot);
-                        if (response.data.unseenNot.length > 0) {
-                            setAlert(true)
-                        } if(!viewed) {  axios.post(`${API}/user/${unSeenNot[0].notification_id}/update`)
-                                    .then(response => {
+            })
+    }, []);
 
-                                    })}
-                    if (response.data.notifications > 0) {
-                        return response.data.notifications
-                    }
-                })}, []);
+    const handleOpenNotifications = async () => {
+        setOpenPopUp(!openPopUp);
+        try {
+            await axios.post(`${API}/user/readNotifications`, {withCredentials: true});
+            setUnSeenNot([]);
+        } catch (e) {
+            console.error("erro a ler notificacoes")
+        }
+    }
 
     const togglePopUp = () => {
         setPopUp(!popup)
-       // console.log(popup)
+        console.log(popup)
     }
 
     const toggleNot = () => {
         setOpenPopUp(!openPopUp)
-      //  console.log(openPopUp)
+        console.log(openPopUp)
     }
 
-/*
+
     console.log ("unseeNot", unSeenNot)
     console.log("alert", alert)
     console.log("viewed", viewed)
     console.log("open message", openPopUp)
-
- */
 
 
     return <div className={"Header"}>
@@ -81,21 +81,18 @@ function Header() {
                 <input className={"button"} type="button" value="Iniciar Sessão"/>
                 <FontAwesomeIcon className={"l-icon"} icon={faCircleUser}/></Link>
         </div>) : (<div className={"user-logged"}>
-            {alert && <div className="redDot"/>}
-            <FontAwesomeIcon className={"b-icon"} icon={faBell} onClick={() => {
-                setOpenPopUp(!openPopUp);
-                setViewed(!viewed);
-                setAlert(!popup)
-            }}/>
+            {unSeenNot.length > 0 && <div className="redDot"/>}
+            <FontAwesomeIcon className={"b-icon"} icon={faBell} onClick={handleOpenNotifications}/>
 
-            { unSeenNot && notification && openPopUp &&
+            { openPopUp &&
                  <div className="menu-notification" >
-                    {notification.map((n, idx) => (
-                            <Link to = {`/player/${n.video_id}`}><div className={"menu-item"} key={idx}>
-                                Tens um {n.notification} de {n.sender}
-                            </div></Link>
-                        ))}
-                </div>}
+                    {notification && notification.map((n, idx) => (
+                        <Link to = {`/player/${n.video_id}`}><div className={"menu-item"} key={idx}>
+                            Tens um {n.notification} de {n.sender}
+                        </div></Link>
+                    ))}
+                </div>
+            }
 
 
             <Link to={"/UserChannel"}><img className={"avatar"} src={user?.photo} alt={"user-photo"}/></Link>
@@ -104,7 +101,6 @@ function Header() {
                 {popup && <div className={"dropdown-content"}>
                     <div className={"menu-item"}><Link to="/UserChannel">Canal</Link></div>
                     <div className={"menu-item"}><Link to="/studio">Estúdio</Link></div>
-                    <div className={"menu-item"}><button>Dark/Light Mode</button></div>
                     <div className={"menu-last-item"} onClick={() => setForm(true)}>Enviar Feedback</div>
                         { form && <FeedbackForm/>}
                 </div>}
