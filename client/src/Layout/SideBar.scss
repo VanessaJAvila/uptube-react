@@ -127,7 +127,8 @@
     height: 15%;
     margin-top: 80%;
     cursor: pointer;
-
+    position: sticky;
+    margin-bottom: 2em;
     a {
       color: lightgrey;
       text-decoration: none;

@@ -44,10 +44,17 @@ function PlaylistCard(props){
     const[addGstate,setAddGstate] = useState(false);
     const[rmvGstate,setRmvGstate] = useState(false);
     const[email,setEmail] = useState("");
-    const[guest,setGuest] = useState([]);
+    const[guest,setGuest] = useState("");
+    const[errorM,setErrorM] = useState("");
+    const[errorDiv,setErrorDiv] = useState(false);
+    const[deleteIdG,setDeleteIdG] = useState("");
 
 
 
+    //console.log(guest, "prrrrrrrrops");
+/*
+    //TODO nao usar useEffect aqui
+    //ir buscar guest a playlist
     useEffect(() => {
         if(!user) return;
         axios.get(`${API}/playlist/ginplaylist/`+props.id,{withCredentials: true})
@@ -57,32 +64,50 @@ function PlaylistCard(props){
             }).catch(e => console.log(e, "erro ginplaylist")) ;
     }, [user]);
 
+ */
+
+
+
     let handleSub = async (e) => {
         e.preventDefault();
             axios.get(`${API}/playlist/getInvitedEmail/`+email,{withCredentials: true})
                 .then(response => {
+                    let helper = null;
+                  console.log(response, "trial");
+                  if(response.data.length===0){
+                      helper = null
+                  } else {
+                      helper = response.data[0].user_id;
+                  }
+                console.log(helper,"helper")
                     let newGuest = {
                         playlist_id: props.id,
-                        invited_id: response.data[0].user_id,
+                        invited_id: helper,
                         email:email
                     }
-
-
                     axios.post(`${API}/playlist/addguestplaylist`, newGuest, {
                         withCredentials: true
                     })
                         .then((res) => {
-                            alert('G added to playlist successfully');
+                            console.log("sucesso", res)
+                            //TODO modificar o guest
+                            /*
+                            setGuest(g => {
+                                g.push(res.data[0]);
+                            });
+                             */
+                            setErrorM(res.data.message);
+                            setErrorDiv(true);
                         }).catch((error) => {
-                        alert("user was already invited to this playlist");
+                        console.log(error.response.data.message, "error ------------------------------------------------------------------1");
+                        setErrorM(error.response.data.message);
+                        setErrorDiv(true);
                     });
 
                 }).catch(e => {
-                    alert("user was already invited to this playlist")
+                    console.log(e, "error++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 2");
                 }
             ) ;
-
-
     }
 
 
@@ -103,10 +128,10 @@ function PlaylistCard(props){
             withCredentials: true
         })
             .then((res) => {
-                alert("Playlist deleted successfully");
-             //   console.log(res.data);
+                // alert("Playlist deleted successfully");
+                console.log("Playlist deleted successfully");
             }).catch((error) => {
-            console.log(error, "messagem erro");
+            console.log(error, "messagem delete playlist erro");
         });
     }
 
@@ -132,7 +157,7 @@ function PlaylistCard(props){
                                     { user.user_id === props.creator_id && <p onClick={()=>{setConvState(!convState)}}>Convidados</p>}
                                     {
                                         convState && <div>
-                                                    <p onClick={()=>setAddGstate(!addGstate)}>Adicionar guest á playlist</p>
+                                                    <p onClick={()=>setAddGstate(!addGstate)}> -Adicionar guest á playlist</p>
                                             {
                                                 addGstate && <div>
                                                     <form>
@@ -144,17 +169,41 @@ function PlaylistCard(props){
                                                         </div>
 
                                                         <p onClick={handleSub}>Enviar email e adicionar</p>
+                                                        {errorDiv && <p>
+                                                            {errorM}
+                                                        </p>}
                                                     </form>
                                                 </div>
                                             }
-                                                    <p onClick={()=>setRmvGstate(!rmvGstate)}>Remover guest da playlist</p>
+                                                    <p onClick={()=>{
+                                                        setRmvGstate(!rmvGstate);
+                                                        setGuest(props.guestPlaylists);
+                                                    }}>-Remover guest da playlist</p>
                                             {
                                                 rmvGstate && <div>
-                                                    {guest.map((g,idx)=>{
-                                                        //todo carregar no nome e remover user
-                                                      return <p key={idx}>{g.name}</p>
-                                                    })}
-                                                     <p>listar Guests e escolher remover</p>
+                                                    {
+                                                       guest.map((g,i)=>{
+                                                            return <p onClick={async(e) =>{
+                                                                    let dGuest = {
+                                                                        playlist_id: props.id,
+                                                                        invited_id: g.user_id,
+                                                                    }
+
+                                                                    axios.post(`${API}/playlist/deletegfromp/`, dGuest, {
+                                                                        withCredentials: true
+                                                                    })
+                                                                        .then((res) => {
+                                                                            console.log("sucesso", res.data)
+                                                                        }).catch((error) => {
+                                                                        console.log(error.response.data.message, "error ------------------------------------------------------------------1");
+                                                                    });
+
+
+
+                                                            }}
+                                                             key={i}>{g.name}</p>
+                                                        })
+                                                    }
                                                 </div>
                                             }
                                         </div>

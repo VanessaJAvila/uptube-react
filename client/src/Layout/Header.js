@@ -49,6 +49,12 @@ function Header() {
         console.log(popup)
     }
 
+    const toggleNot = () => {
+        setOpenPopUp(!openPopUp)
+        console.log(openPopUp)
+    }
+
+
     console.log ("unseeNot", unSeenNot)
     console.log("alert", alert)
     console.log("viewed", viewed)

@@ -1,15 +1,18 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFingerprint, faPlus, faX} from "@fortawesome/free-solid-svg-icons";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import "./VideoInfo.scss"
 import img1 from "../../Assets/sample-thumbnails/ssh_1.png"
 import img2 from "../../Assets/sample-thumbnails/ssh_2.png"
 import img3 from "../../Assets/sample-thumbnails/ssh_3.png"
 import img4 from "../../Assets/sample-thumbnails/ssh_4.png"
+import * as PropTypes from "prop-types";
+import CreateNewTag from "./CreateNewTag/CreateNewTag";
 
 //localhost port for api
 const API = process.env.REACT_APP_API;
+
 
 export default function VideoInfo( {videoData}){
     const [thumbStyleOne, setThumbStyleOne] = useState('')
@@ -43,7 +46,23 @@ export default function VideoInfo( {videoData}){
         }
     }
 
-console.log("img1", img1)
+    useEffect( () => {
+        axios
+            .get(`${API}/tags/`)
+            .then((response) => {
+                //console.log("response.data", response.data)
+                setVideoTags(response.data)
+
+            })
+            .catch((e) => {
+                console.log(e)
+            });
+
+    });
+
+    const handleNewTag = (newTag) => {
+        setVideoTags((prevTags) => [...prevTags, newTag]);
+    };
     return(
         <div className={"video-details"}>
             <div className={'upload-video-details'}>
@@ -168,17 +187,13 @@ console.log("img1", img1)
                         <div className={'upload-video-details-tags-title'}>
                             <h4>Tags</h4>
                         </div>
-
                         <div className={'upload-video-details-tags-list'}>
-                            {videoTags.map((l, idx) => {
+                            {videoTags.map((tags, idx) => {
                                 return <div key={idx} className={'upload-video-details-tags-tag'}>
-                                    <p>{l}</p>
+                                    <p>{tags.name}</p>
                                 </div>
                             })}
-
-                            <div className={'upload-video-details-tags-list-plus'} onClick={() =>{setAddTags(true)}}>
-                                <FontAwesomeIcon icon={faPlus}/>
-                            </div>
+                            <CreateNewTag handleNewTag={handleNewTag}/>
                         </div>
                     </div>
                     <div className={'upload-video-details-button'}>
@@ -206,7 +221,6 @@ console.log("img1", img1)
                         <div className={'video-upload-add-tag-container-tag-add'}>
                             <input type={'text'} className={'video-upload-add-tag-container-tag-add-text'} placeholder={'Adicionar Tag'} value={tagText} onChange={(e) =>{
                                 setTagText(e.target.value)
-
                             }}/>
                             <div className={'video-upload-add-tag-container-tag-add-btn'}>
                                 <input type={'button'} value={'Adicionar Tag'} onClick={() =>{
