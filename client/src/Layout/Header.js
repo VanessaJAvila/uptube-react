@@ -44,19 +44,21 @@ function Header() {
 
     const togglePopUp = () => {
         setPopUp(!popup)
-        console.log(popup)
+       // console.log(popup)
     }
 
     const toggleNot = () => {
         setOpenPopUp(!openPopUp)
-        console.log(openPopUp)
+      //  console.log(openPopUp)
     }
 
-
+/*
     console.log ("unseeNot", unSeenNot)
     console.log("alert", alert)
     console.log("viewed", viewed)
     console.log("open message", openPopUp)
+
+ */
 
 
     return <div className={"Header"}>

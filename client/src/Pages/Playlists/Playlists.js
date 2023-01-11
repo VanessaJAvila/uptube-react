@@ -1,6 +1,3 @@
-//export default defaultBackendURL = ´localhost:4000´
-//export default videosURL = defaultBackendURL + ´video´
-// fazer um file se possivel com todos os endpoints vindos da base de dados e chamar depois nos files necessarios
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Header from "../../Layout/Header";
@@ -23,7 +20,7 @@ function Playlists() {
     const [criarPlaylist, setCriarPlaylist] = useState(false);
     const [title, setTitle]= useState("");
     const [gPlaylists,setGPlaylists] = useState([]);
-    const[creator, setCreator] = useState(null);
+    const[GuestPlaylists,  setGuestPlaylists] = useState([]);
 
 
 
@@ -34,19 +31,51 @@ function Playlists() {
         axios.get(`${API}/playlist/user/${user.user_id}`,{withCredentials: true})
             .then(response => {
                 setplaylists(response.data);
-            }).catch(e => console.log(e, "erro playlist")) ;
-    }, [user]);
-
-
-    useEffect(() => {
-        if(!user) return;
-        axios.get(`${API}/playlist/guest/${user.user_id}/playlists`,{withCredentials: true})
+            })
+            .catch(e => console.log(e, "erro playlistssssssssssss")) ;
+        axios.get(`${API}/playlist/guest/playlists`,{withCredentials: true})
             .then(response => {
+                console.log(response.data)
                 setGPlaylists(response.data);
             }).catch(e => console.log(e, "erro playlist")) ;
     }, [user]);
+/*
+    let creatorPlaylistIds = [];
+    gPlaylists.map((g)=> {
+        creatorPlaylistIds.push(g.playlist_id);
+    })
+        console.log(creatorPlaylistIds);
+ */
 
 
+
+
+
+
+        useEffect(() => {
+            axios.get(`${API}/playlist/ginplaylist/`,{withCredentials: true})
+                .then(response => {
+                    console.log(response.data,"ginplaylist" );
+                    setGuestPlaylists(response.data);
+                }).catch(e => console.log(e, "erro ginplaylist")) ;
+        }, [user]);
+
+
+        console.log(GuestPlaylists,"GuestPlaylists")
+
+
+
+    /*
+       useEffect(() => {
+     axios.get(`${API}/playlist/ginplaylist/`,{withCredentials: true})
+                    .then(response => {
+                        console.log(response.data[0].name,pid,"ginplaylist" );
+                        setGuestPlaylists(response.data);
+                    }).catch(e => console.log(e, "erro ginplaylist")) ;
+    }, [user]);
+
+
+*/
 
 
     let handleSubmit = async (e) => {
@@ -62,16 +91,16 @@ function Playlists() {
             withCredentials: true
         })
             .then((res) => {
-                alert('Playlist created successfully');
-                console.log(res.data.user, "messagem login frontend");
+                //alert('Playlist created successfully');
+                console.log(res.data.user, "playlist created");
             }).catch((error) => {
-            console.log(error, "messagem erro login frontend");
-            alert("error: Wrong Credentials!");
+            console.log(error, "erro create playlist");
+          //  alert("error: Wrong Credentials!");
         });
     }
 
 
-
+    let gpf = [];
 
 
     return <div className={"Playlists"}>
@@ -82,6 +111,11 @@ function Playlists() {
             <div className={"box-playlist"}>
 
                 {playlists.map((p) => {
+
+                    let filteredGuest=  GuestPlaylists.filter(guestP => guestP.playlist_id === p.playlist_id)
+                    gpf.push(filteredGuest);
+                 //   console.log(filteredGuest,gpf,"gpf")
+
                     return <PlaylistCard  key={p.playlist_id+1500}
                                               id = {p.playlist_id}
                                               creator_id = {p.creator_id}
@@ -91,6 +125,7 @@ function Playlists() {
                                               title ={p.title}
                                               duration = {p.duration}
                                               timestamp = {p.timestamp}
+                                          guestPlaylists={filteredGuest}
                     />}
                 )}
 
@@ -122,25 +157,19 @@ function Playlists() {
             <h1> Playlists participantes</h1>
             <div className={"playlistsGuestContainer"}>
 
+
                 {gPlaylists.map((gp)=>{
 
-                        axios.get(`${API}/playlist/helper/${gp.creator_id}`,{withCredentials: true})
-                            .then(response => {
-                                setCreator(response.data[0]);
-                            }).catch(e => console.log(e, "erro playlist")) ;
-
-                    if(!creator){
-                        return <h1 key={gp.playlist_id}> No creator info</h1>
-                    }
                     return <PlaylistCard  key={gp.playlist_id + 900}
                                          id = {gp.playlist_id}
                                          creator_id = {gp.creator_id}
                                          thumbnail = {gp.thumbnail}
-                                         photo = {creator.photo}
-                                         name = {creator.name}
+                                         photo = {gp.photo}
+                                         name = {gp.name}
                                          title ={gp.title}
                                          duration = {gp.duration}
                                          timestamp = {gp.timestamp}
+
                    />
                 })}
 
