@@ -1,9 +1,4 @@
 .SideBar {
-  @media only screen and (max-width: 769px) {
-    .SideBar {
-      display: none;
-    }
-  }
   background-color: #1C1C24;
   position: fixed;
   width: 16%;
@@ -25,7 +20,7 @@
     display: flex;
     background-color: #30303a;
     border-radius: 8px;
-    border: 1px solid red;
+    border: 1px solid darkgrey;
     width: 95%;
     height: 40px;
     margin-bottom: 13px;
@@ -39,7 +34,7 @@
       width: 25px;
       height: 25px;
       border-radius: 50%;
-      margin-top: 9px;
+      margin-top: 6px;
       margin-left: 10px;
 
     }
