@@ -10,7 +10,7 @@ const API = process.env.REACT_APP_API;
 // This component is a form that allows the user to select a file and upload it to a server.
 // It uses state variables to keep track of the form's state.
 export default function Studio() {
-    const [isFileSubmitted, setIsFileSubmitted] = useState(true);
+    const [isFileSubmitted, setIsFileSubmitted] = useState(false);
     const [submitData, setSubmitData] = useState(null)
 
     const onSubmit = (data) => {
@@ -35,7 +35,7 @@ export default function Studio() {
     return (
         <div className={"container-wrapper"}>
             <div className={"upload-title"}>Upload de um novo vídeo</div>
-            { isFileSubmitted ? <VideoInfo videoData={mockData} /> : < VideoUploader onSubmit={onSubmit} /> }
+            { isFileSubmitted ? <VideoInfo videoData={submitData} /> : < VideoUploader onSubmit={onSubmit} /> }
 
         </div>
     )
