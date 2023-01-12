@@ -3,288 +3,326 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  position: relative;
 
+  .container-public-channel-wrapper {
+    display: flex;
+    width: 78%;
+    margin-top: 85px;
+    margin-left: 280px;
+    flex-direction: column;
 
+    .channel-details {
+      background-color: #13131A;
+      border-bottom: 1px solid dimgrey;
+      color: white;
 
-  .channel-details {
-    background-color: #13131A;
-    width: 81%;
-    height: 30%;
-    margin-top: 6%;
-    margin-left: 18%;
-    border-bottom: 1px solid dimgrey;
-    color: white;
-
-    .channel-layer-bg {
-      width: 80%;
-      height: 69%;
-      border-radius: 10px 10px 0 0;
-    }
 
       .channel-header {
-        width: 80%;
-        height: 17%;
-        position: absolute;
         border-radius: 10px 10px 0 0;
+        background-size: cover;
+        overflow: hidden;
+        width: auto;
+        height: 150px;
       }
 
-    .channel-data {
-      width: 95%;
-      position: relative;
-      margin-top: calc( 100% - 110%);
+      .channel-data {
+        display: flex;
+        flex: 1;
+        position: relative;
 
-      .channel-avatar {
-        width: 170px;
-        height: 170px;
-        border-radius: 50%;
-        margin-top: calc(100% - 101%);
-        margin-left: 85%;
-        border: 3px solid whitesmoke;
-        object-fit: cover;
+
+        .channel-avatar {
+          width: 151px;
+          height: 151px;
+          border-radius: 50%;
+          margin-left: 980px;
+          border: 3px solid whitesmoke;
+          object-fit: cover;
+          position: absolute;
+          margin-top: -90px;
+          display: block;
+        }
+
+        .channel-name {
+          margin-left: 1%;
+          font-size: 22px;
+        }
+
+        .channel-bio {
+          width:550px;
+          margin-top: -2%;
+          margin-left: 1%;
+          font-size: 10pt;
+        }
       }
 
-      .channel-name {
-        margin-left: 1%;
-        font-size: 22px;
-        position: absolute;
-        margin-top: calc(100% - 105%);
-      }
+      .stats-channel {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        position: relative;
+        margin-left: 30px;
 
-      .channel-bio {
-        margin-top:calc(100% - 103%);
-        width: 50%;
-        margin-left: 1%;
-        font-size: 10pt;
+        .followers, .views {
+          margin-right: 10px;
+        }
       }
     }
 
-    .stats-channel {
+    .achi-title {
       display: flex;
-      position: absolute;
-      flex-direction: row;
-      margin-top: -7%;
-      margin-left: 60%;
-      text-align: center;
+      margin: 10px;
 
-      .followers, .views {
-        margin-right: 10px;
+      h2 {
+        color: lightgray;
+        font-size: 15px;
       }
     }
-    }
 
-  h2 {
-    color: lightgray;
-    position: absolute;
-    margin-left: 19%;
-    margin-top: 21%;
-    font-size: 15px;
+    .achievements {
+      display: flex;
+      background-color: #1C1C24;
+      width: 100%;
+      height: 7%;
+      border-radius: 10px;
+      flex-wrap: nowrap;
+      align-items: center;
+
+      .goldStalker:hover {
+        box-shadow: 4px 4px 4px 4px #857010;
+      }
+
+      .goldStalker {
+        position: relative;
+        display: flex;
+        background-color: #13131A;
+        width: 8%;
+        height: 87%;
+        margin: 7px;
+        border-radius: 10px;
+
+        img.Stalker.ouro {
+          width: 75px;
+          margin-top: -20px;
+          margin-left: 11px;
+          z-index: 0;
+
+        }
+
+        p {
+          color: lightgray;
+          font-size: 10pt;
+          margin-left: 27px;
+          position: absolute;
+          margin-top: 93px;
+        }
+      }
+
+
+      .starting:hover {
+        box-shadow: 4px 4px 4px 4px #78d511;
+      }
+
+      .starting {
+        position: relative;
+        display: flex;
+        background-color: #13131A;
+        width: 8%;
+        height: 87%;
+        margin: 7px;
+        border-radius: 10px;
+
+        p {
+          color: lightgray;
+          font-size: 10pt;
+          margin-top: 105px;
+          margin-left: -77px;
+        }
+
+        .começar {
+          width: 80px;
+          position: relative;
+          margin-top: -10px;
+          margin-left: 6px;
+        }
+      }
+
+      .goldLoved:hover {
+        box-shadow: 4px 4px 4px 4px #857010;
+      }
+
+      .goldLoved {
+        position: relative;
+        display: flex;
+        background-color: #13131A;
+        width: 8%;
+        height: 87%;
+        margin: 7px;
+        border-radius: 10px;
+
+        p {
+          color: lightgray;
+          font-size: 10pt;
+          margin-left: 12px;
+          position: absolute;
+          margin-top: 92px;
+        }
+
+        img.adoram-me.ouro {
+          width: 70px;
+          height: 70px;
+          margin-top: 15px;
+          margin-left: 12%;
+          border-radius: 50%;
+          color: rgb(232, 206, 107);
+
+        }
+      }
+
+
+
+      img.adoram-me.prata {
+        width: 70px;
+        height: 70px;
+        margin-top: 15px;
+        margin-left: 13px;
+        border-radius: 50%;
+        background: rgba(248, 247, 247, 0.73);
+
+      }
+
+  .loved:hover{
+    box-shadow: 4px 4px 4px 4px rgba(248, 247, 247, 0.73);
   }
 
-  .achievements {
-    display: flex;
-    background-color: #1C1C24;
-    position: absolute;
-    width: 79%;
-    height: 16%;
-    margin-top: 23%;
-    margin-left: 19%;
-    border-radius: 10px;
-    flex-wrap: nowrap;
+        .loved {
+          position: relative;
+          display: flex;
+          background-color: #13131A;
+          width: 8%;
+          height: 87%;
+          margin: 7px;
+          border-radius: 10px;
 
-    .goldStalker {
-      background-color: #13131A;
-      width: 7%;
-      height: 87%;
-      margin-top: 7px;
-      margin-left: 24%;
-      position: absolute;
-      border-radius: 10px;
+        p {
+          color: lightgray;
+          font-size: 10pt;
+          margin-top: 105px;
+          margin-left: -72px;
+        }
 
-      img.Stalker.ouro {
-        width: 76%;
-        margin-top: 9%;
-        margin-left: 11%;
+        img.adoram-me.ouro {
+          width: 75%;
+          position: absolute;
+          margin-top: 7px;
+          margin-left: 12%;
+          border-radius: 50%;
+          background: rgb(232, 206, 107);
+        }
       }
 
-      p {
-        color: lightgray;
-        font-size: 10pt;
-        margin-top: 7%;
-        margin-left: 24%;
-      }
-    }
-
-    .bronzeInflu {
-      background-color: #13131A;
-      width: 7%;
-      height: 87%;
-      margin-top: 1%;
-      margin-left: 33%;
-      position: absolute;
-      border-radius: 10px;
-
-      img.Influencer.bronze {
-        width: 76%;
-        margin-top: 9%;
-        margin-left: 12%;
-        color: lightgray;
-      }
-
-      p {
-        color: lightgray;
-        font-size: 10pt;
-        margin-top: 7%;
-        margin-left: 17%;
-      }
-    }
-
-    .starting:hover {
-      box-shadow: 4px 4px 4px 4px #78d511;
-    }
-
-    .starting {
-      display: flex;
-      background-color: #13131A;
-      width: 7%;
-      height: 87%;
-      margin-top: 7px;
-      margin-left: 7px;
-      position: absolute;
-      border-radius: 10px;
-
-      p {
-        color: lightgray;
-        font-size: 10pt;
-        margin-top: 97%;
-        margin-left: 6%;
-      }
-
-      .começar {
-        width: 65%;
-        position: absolute;
+      .goldRising {
+        background-color: #13131A;
+        width: 7%;
+        height: 87%;
         margin-top: 7px;
-        margin-left: 15%;
-      }
-    }
-
-    .loved {
-      background-color: #13131A;
-      width: 7%;
-      height: 87%;
-      margin-top: 7px;
-      margin-left: 8%;
-      position: absolute;
-      border-radius: 10px;
-
-      p {
-        color: lightgray;
-        font-size: 10pt;
-        margin-top: 98%;
-        margin-left: 8%
-      }
-
-      img.adoram-me.ouro {
-        width: 75%;
+        margin-left: 16%;
         position: absolute;
-        margin-top:7px;
-        margin-left: 12%;
-        border-radius: 50%;
-        background: rgb(232, 206, 107);
+        border-radius: 10px;
+
+        img.Rising.ouro {
+          width: 76%;
+          margin-top: 9%;
+          margin-left: 11%;
+        }
+
+        p {
+          color: lightgray;
+          font-size: 10pt;
+          margin-top: 11%;
+          margin-left: 13%;
+        }
       }
     }
-    .goldRising {
-      background-color: #13131A;
-      width: 7%;
-      height: 87%;
-      margin-top: 7px;
-      margin-left: 16%;
-      position: absolute;
-      border-radius: 10px;
 
-      img.Rising.ouro {
-        width: 76%;
-        margin-top: 9%;
-        margin-left: 11%;
-      }
+    .up-title {
+      display: flex;
+      margin-left: -193px;
+      margin-top: -50px;
+      height: 200px;
 
-      p {
+      h2 {
+        font-size: 15px;
         color: lightgray;
-        font-size: 10pt;
-        margin-top: 11%;
-        margin-left: 13%;
+      }
+    }
+
+    .uploads {
+      display: flex;
+      align-items: center;
+      background-color: #1C1C24;
+      width: 100%;
+      height: 12%;
+      border-radius: 10px;
+    }
+    .playlist {
+      display: flex;
+      margin-left: 10px;
+      margin-top: 30px;
+      h2 {
+        font-size: 15px;
+        color: lightgray;
+
+      }
+    }
+
+
+    .container-playlists {
+      display: flex;
+      flex-wrap: wrap;
+      background-color: #1C1C24;
+      width: 100%;
+      height: 16%;
+      margin-top: 10%;
+      margin-left: 15%;
+      border-radius: 10px;
+    }
+
+
+    .about-text {
+      color: lightgray;
+      margin-left: 9%;
+    }
+
+    .stats {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      height: 150px;
+      margin-top: 1%;
+      margin-left: 20px;
+      border-radius: 12px;
+      background-color: #1C1C24;
+
+
+      .date {
+        color: lightgray;
+        margin-left: 5%;
+      }
+
+      .stats-st-data {
+        margin-left: 20px;
+        margin-bottom: 0;
+        color: lightgray;
+      }
+
+      .stats-data {
+        margin-top: 0;
+        margin-left: 20px;
+        margin-bottom: 0;
+        color: lightgray;
       }
     }
   }
-
-  .upload {
-    margin-top: 32%;
-  }
-
-  .container-uploads {
-    background-color: #1C1C24;
-    position: absolute;
-    width: 79%;
-    height: 16%;
-    margin-top: 34%;
-    margin-left: 19%;
-    border-radius: 10px;
-  }
-
-  .playlist {
-    margin-top: 43%;
-    margin-left: 19%;
-  }
-
-  .container-playlists {
-    background-color: #1C1C24;
-    position: absolute;
-    width: 79%;
-    height: 16%;
-    margin-top: 45%;
-    margin-left: 19%;
-    border-radius: 10px;
-  }
-
-
-  .about-text {
-    color: lightgray;
-    position: absolute;
-    margin-left: 19%;
-    margin-top: 36%;
-
-  }
-
-  .stats {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    width: 25%;
-    height: 20%;
-    margin-top: 38%;
-    margin-left: 19%;
-    border-radius: 12px;
-    background-color: #1C1C24;
-
-    .date {
-      color: lightgray;
-      margin-left: 5%;
-    }
-
-    .stats-st-data {
-      margin-left: 5%;
-      margin-bottom: 0;
-      color: lightgray;
-    }
-
-    .stats-data {
-      margin-top: 0;
-      margin-left: 5%;
-      margin-bottom: 0;
-      color: lightgray;
-    }
-  }
-
-
 }
 

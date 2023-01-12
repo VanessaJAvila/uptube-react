@@ -27,7 +27,7 @@
     height: 53px;
     padding-top: 4px;
     z-index: 1;
-    margin-top: 35%;
+    margin-top: 33%;
     margin-left: 8px;
     position: fixed;
 }
@@ -45,7 +45,7 @@ label {
 }
 
 #light .Header{
-    background-color: rgba(105, 105, 105, 0.4);
+    background-color: #BDBDBD;
 }
 
 #light  .User{
@@ -67,6 +67,10 @@ label {
     color:#30303a;
 }
 
+#light .container .inputContainer .icons{
+    color:#30303a;
+}
+
 
 
 #light .goldStalker{
@@ -80,6 +84,11 @@ label {
 }
 
 #light .goldLoved{
+    background-color: rgba(105, 105, 105, 0.4);
+    border:1px solid #1C1C24;
+}
+
+#light .loved{
     background-color: rgba(105, 105, 105, 0.4);
     border:1px solid #1C1C24;
 }
@@ -110,6 +119,11 @@ label {
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
 }
 
+#light .container-playlists{
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
+}
+
 #light h1{
     color:#1C1C24;
 }
@@ -137,6 +151,12 @@ label {
 #light .upload-drag-video {
     color: #1C1C24;
     background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
+}
+
+#light .video-card {
+    color: #1C1C24;
+    background-color: #BDBDBD;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
 }
 
@@ -175,8 +195,43 @@ label {
     background-color: #1E75FF;
     color:white;
 }
+
+#light .Profile button {
+    background-color: #1E75FF;
+    color:white;
+}
+
+
+#light .results .pagination-next p{
+    color:white;
+}
+
+#light button{
+    background-color: white;
+    color: #1C1C24;
+}
+
+#light .container{
+    background-color: white;
+    color: #1C1C24;
+}
+
+#light .inputContainer input{
+    background-color: white;
+    color: #1C1C24;
+}
+
+#light .Profile .container .inputContainer .icons {
+    color: #1C1C24;
+}
+
+
 #light .results .pagination-goback{
     background-color: #1E75FF;
+    color:white;
+}
+
+#light .results .pagination-goback p{
     color:white;
 }
 
@@ -193,7 +248,16 @@ label {
 
 #light .channel-data{
     color:#1C1C24;
+    background-color: rgba(105, 105, 105, 0.4);
 }
+
+
+#light .channel-details{
+    color:#1C1C24;
+    background-color: rgba(105, 105, 105, 0.4);
+}
+
+
 
 
 #light .channel-card{
@@ -306,5 +370,17 @@ label {
 #light .container-subs-stats .stats{
     background-color: white;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
+}
+
+#light .container-uploads{
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
+}
+
+
+#light .stats{
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
+    color:#1C1C24;
 }
 

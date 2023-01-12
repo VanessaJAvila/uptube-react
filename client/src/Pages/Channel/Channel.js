@@ -8,11 +8,12 @@ import risingstar from "../../Assets/risingstar.svg";
 import beloved from "../../Assets/beloved.svg";
 import rocket from "../../Assets/rocket.svg";
 import influencer from "../../Assets/influencer.svg";
-import socialite from "../../Assets/socialite.svg";
+
 import VideoCard from "../../Assets/Components/VideoCard/VideoCard"
-import {faBookmark, faEyeSlash, faTrashCan} from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import {Link, useHistory, useParams} from "react-router-dom";
+import {faEyeSlash} from "@fortawesome/free-regular-svg-icons";
+import PlaylistCard from "../../Assets/Components/PlaylistCard/PlaylistCard";
 
 //localhost port for api
 const API = process.env.REACT_APP_API;
@@ -20,11 +21,15 @@ const API = process.env.REACT_APP_API;
 export default function UserChannel() {
 
     const [achis, setAchis] = useState([]);
-    const [subs, setSubs] = useState([]);
     const [videos, setVideos] = useState([]);
     const [stats, setStats] = useState({});
     const [channel, setChannel] = useState([]);
-
+    const [playlists, setplaylists] = useState([]);
+    const [criarPlaylist, setCriarPlaylist] = useState(false);
+    const [title, setTitle]= useState("");
+    const [gPlaylists,setGPlaylists] = useState([]);
+    const[GuestPlaylists,  setGuestPlaylists] = useState([]);
+    let gpf = [];
     const {user_id} = useParams();
 
     const history = useHistory();
@@ -70,23 +75,33 @@ export default function UserChannel() {
             }).catch(e => console.log(e));
     }, [user_id]);
 
-
-    if (!videos || !achis || !stats || !channel) return null;
+    useEffect(() => {
+        if(!channel) return;
+        axios.get(`${API}/playlist/user/${user_id}`,{withCredentials: true})
+            .then(response => {
+                setplaylists(response.data);
+            })
+            .catch(e => console.log(e, "erro playlistssssssssssss")) ;
+        axios.get(`${API}/playlist/guest/playlists`,{withCredentials: true})
+            .then(response => {
+                console.log(response.data)
+                setGPlaylists(response.data);
+            }).catch(e => console.log(e, "No G playlists")) ;
+    }, [user_id]);
 
 
     return <div className={'channel-container'}>
         <Header/>
         <SideBar/>
+        <div className={"container-public-channel-wrapper"}>
         <div className={"channel-details"}>
-            <div className={"channel-layer-bg"}>
                 <div className={"channel-header"}
                      style={{backgroundImage: `url(${channel.header})`}}>
                 </div>
-            </div>
             <div className={"channel-data"}>
                 <img className={"channel-avatar"} src={channel.photo} alt={"channel-photo"}/>
-                <h4 className={"channel-name"}>{channel.name}</h4>
-                <p className={"channel-bio"}>{channel.bio}</p>
+                <div className={"channel-bio"}><h4 className={"channel-name"}>{channel.name}</h4>
+                    <p>{channel.bio}</p></div>
                 <div className={"stats-channel"}>
                     <div className={"followers"}>
                         <p> Subscritores</p>
@@ -104,8 +119,10 @@ export default function UserChannel() {
             </div>
         </div>
 
-        <h2>Achievements</h2>
+            <div className={"achi-title"}><h2>Achievements</h2></div>
         <div className={"achievements"}>
+            {achis.some(e => e.achievement === 'Só a começar') ?
+                <div className={'starting'}><img className={"começar"} src={rocket}/><p>Just Starting</p></div> : null}
             {achis.some(e => e.achievement === 'Adoram-me' && e.ranking === '5 likes') ? <div className={'loved'}>
                 <img className={"adoram-me bronze"} src={beloved}/><p>Adoram-me</p></div> : null}
             {achis.some(e => e.achievement === 'Adoram-me' && e.ranking === '20 likes') ? <div className={'loved'}>
@@ -145,21 +162,37 @@ export default function UserChannel() {
             {achis.some(e => e.achievement === 'Stalker' && e.ranking === '5 subscriptions') ?
                 <div className={'bronzeStalker'}>
                     <img className={"Stalker bronze"} src={stalkerorange}/></div> : null}
-            {achis.some(e => e.achievement === 'Só a começar') ?
-                <div className={'starting'}><img className={"começar"} src={rocket}/><p>Just Starting</p></div> : null}
+
 
         </div>
-        <h2 className={"upload"}>Uploads </h2>
-        {/*  <div className={"geral"}>
-                 {!videos && <p>A carregar...</p>}
+            <div className={"up-title"}><h2 className={"upload"}>Uploads </h2></div>
+         <div className={"uploads"}>
+                 {!videos && <p>Este canal não têm videos</p>}
                  {videos && <>
                      {videos.length === 0 && <p className={"no results"}>Partilha o teu 1º video?</p>}
-                     {videos.map((v, idx) => (<VideoCard type="geral"  {...v}/>))}
+                     {videos.map((v, idx) => (<VideoCard type="channel"  {...v}/>))}
                  </>}
-             </div>*/}
-        <h2 className={"playlist"}>Playlists</h2>
-        <div className={"container-playlists"}>
-        </div>
+             </div>
+            <div className={"playlist"}><h2>Playlists</h2></div>
+          <div className={"container-playlists"}>
+                {playlists.map((p) => {
+
+                    let filteredGuest=  GuestPlaylists.filter(guestP => guestP.playlist_id === p.playlist_id)
+                    gpf.push(filteredGuest);
+
+                    return <PlaylistCard  key={p.playlist_id+1500}
+                                          id = {p.playlist_id}
+                                          creator_id = {p.creator_id}
+                                          thumbnail = {p.thumbnail}
+                                          photo = {channel.photo}
+                                          name = {channel.name}
+                                          title ={p.title}
+                                          duration = {p.duration}
+                                          timestamp = {p.timestamp}
+                                          guestPlaylists={filteredGuest}
+                    />}
+                )}
+            </div>
         <div className={"container-stats"}>
             <h4 className={"about-text"}>Acerca</h4>
             <div className={"stats"}>
@@ -170,7 +203,7 @@ export default function UserChannel() {
                 <p className={"stats-data"}>{stats.followers} subscritores</p>
 
             </div>
-
+        </div>
         </div>
     </div>
 }
