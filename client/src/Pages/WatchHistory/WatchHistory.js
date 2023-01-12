@@ -3,7 +3,7 @@ import axios from 'axios';
 import 'moment/locale/pt'
 import VideoCard from "../../Assets/Components/VideoCard/VideoCard";
 import getDaySeen from "../../Utils/getDaySeen";
-import "./WatchHistory.scss"
+//import "./WatchHistory.scss"
 import {UserContext} from "../../Providers/UserContext";
 
 //localhost port for api
