@@ -29,7 +29,6 @@ import ReactSwitch from "react-switch";
 
 export const ThemeContext = createContext(null);
 
-
 axios.defaults.withCredentials = true;
 
 function App() {
