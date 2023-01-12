@@ -39,9 +39,7 @@ function Home() {
     const currentChannels = topChannels.slice(indexOfFirstRecord, indexOfLastRecord);
     const currentChannel = topChannel.slice(0, 1);
     const currentRecomendations = recommendations.slice(indexOfFirstRecordRec, indexOfLastRecordRec)
-
     console.log(topChannels)
-
     useEffect(() => {
         axios.get(`${API}/suggested/50popular`)
             .then(response => {
@@ -62,7 +60,7 @@ function Home() {
 
     if (!recommendations || !topChannels || !topChannel) return null;
 
-    console.log("recommendations", recommendations)
+    console.log("curr", currentRecomendations)
     return <div className={"container-homepage"}>
         <Header/>
         <SideBar/>
