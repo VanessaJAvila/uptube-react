@@ -42,7 +42,7 @@ export default function UserChannel() {
         userId = user.user_id;
     }
 
-    const HideAchi = () => {
+    const HideAchiv = () => {
         setShowAchievement(!showAchievement)
         console.log(showAchievement)
     }
@@ -110,10 +110,10 @@ export default function UserChannel() {
     }, [user]);
 
 
-    return <div className={'channel-container'}>
+    return <div className={'user-channel-container'}>
         <Header/>
         <SideBar/>
-        <div className={"container-wrapper"}>
+        <div className={"container-channel-wrapper"}>
         <div className={"user-details"}>
                 <div className={"channel-bg"}
                      style={{backgroundImage: `url(${user?.header})`}}>
@@ -121,80 +121,123 @@ export default function UserChannel() {
             </div>
             <div className={'edit-user-details'}>
                     <div className={"edit"} onClick={toggleEdit}>
-                        <p className={"edit-text"}>Editar Canal</p>
+                        <p className={"edit-text"}>Editar canal</p>
                         <FontAwesomeIcon className={"icon"} icon={faPenToSquare}/>
+                    </div>
+                <div className={"user-bio"}><h4>{user?.name}</h4>
+                    <p className={"bio"}>{user?.bio}</p>
+                    {edit &&
+                        <Link to={"/Profile"}><FontAwesomeIcon className={"edit-user-data-icon"} icon={faPen}/></Link>}
+                </div>
+                <div className={"stats-user"}>
+                    <div className={"followers"}>
+                        <p> Subscritores</p>
+                        <p>{stats.followers}</p>
+                    </div>
+                    <div className={"views"}>
+                        <p>Visualizações</p>
+                        <p>{stats.views}</p>
+                    </div>
+                    <div className={"videos"}>
+                        <p>Videos</p>
+                        <p>{stats.videos}</p>
                     </div>
                 <div className={"user-data"}>
                     {edit && <Link to={"/Profile"}><FontAwesomeIcon className={"edit-avatar-icon"}
                                                                        icon={faPenToSquare}/></Link>}
                     <img className={"avatar"} src={user?.photo} alt={"user-photo"}/>
-                    {edit &&
-                        <Link to={"/Profile"}><FontAwesomeIcon className={"edit-user-data-icon"} icon={faPen}/></Link>}
-                    <h4 className={"username"}>{user?.name}</h4>
-                    <p className={"bio"}>{user?.bio}</p>
-                    <div className={"stats-user"}>
-                        <div className={"followers"}>
-                            <p> Subscritores</p>
-                            <p>{stats.followers}</p>
-                        </div>
-                        <div className={"views"}>
-                            <p>Visualizações</p>
-                            <p>{stats.views}</p>
-                        </div>
-                        <div className={"videos"}>
-                            <p>Videos</p>
-                            <p>{stats.videos}</p>
-                        </div>
+
+
                     </div>
                 </div>
             </div>
         </div>
 
-             <h2>Achievements {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowAchis}/>}</h2>
-        { showAchis && <div className={"achievements"}>
-            { achis.some(e => e.achievement === 'Adoram-me'&& e.ranking === '5 likes') && showAchievement ?
-                <div className={'loved'}><div>
-                            <div className={"hide-Achi"} onClick={HideAchi}>>
+            <div className={"achi-title"}><h2>Achievements {setEdit &&
+                <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowAchis}/>}</h2></div>
+            {showAchis && <div className={"achievements"}>
+                {achis.some(e => e.achievement === 'Só a começar') ? <div className={'starting'}>
+                    <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark}
+                                                                  onClick={HideAchiv}/></div>
+                    <img className={"começar"} src={rocket}/><p>Just Starting</p></div> : null}
+
+                {achis.some(e => e.achievement === 'Adoram-me' && e.ranking === '5 likes') && showAchievement ?
+                    <div className={'loved'}>
+                        <div>
+                            <div className={"hide-Achi"} onClick={HideAchiv}>>
                                 <FontAwesomeIcon className={"close-achi"} icon={faXmark}/>
                             </div>
                             <img className={"adoram-me bronze"} src={beloved}/>
                             <p>Adoram-me</p>
                         </div>
-                </div>
-                : null
-            }
-                 {achis.some(e => e.achievement === 'Adoram-me'&& e.ranking === '20 likes') ? <div className={'loved'}><div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark} onClick={HideAchi}/></div>
-                     <img className={"adoram-me prata"} src={beloved}/><p>Adoram-me</p></div>: null}
-                 {achis.some(e => e.achievement === 'Adoram-me'&& e.ranking === '100 likes') ? <div className={'goldLoved'}><div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark} onClick={HideAchi}/></div>
-                     <img className={"adoram-me ouro"} src={beloved}/><p>Adoram-me</p></div>: null}
-                 {achis.some(e => e.achievement === 'Influencer' && e.ranking === '50 views') ? <div className={'bronzeInflu'}><div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark} onClick={HideAchi}/></div>
-                     <img className={"Influencer bronze"} src={influencer}/><p>Influencer</p></div>: null}
-                 {achis.some(e => e.achievement === 'Influencer'&& e.ranking === '200 views') ? <div className={'silverInflu'}><div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark} onClick={HideAchi}/></div>
-                     <img className={"Influencer prata"} src={influencer}/><p>Influencer</p></div>: null}
-                 {achis.some(e => e.achievement === 'Influencer'&& e.ranking === '1000 views') ? <div className={'goldInflu'}><div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark} onClick={HideAchi}/></div>
-                     <img className={"Influencer ouro"} src={influencer}/><p>Influencer</p></div>: null}
-                 {achis.some(e => e.achievement === 'Rising star'&& e.ranking === '20 followers') ? <div className={'goldRising'}><div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark} onClick={HideAchi}/></div>
-                     <img className={"Rising ouro"} src={risingstar}/><p>Rising Star</p></div>: null}
-                 {achis.some(e => e.achievement === 'Rising star'&& e.ranking === '5 followers') ? <div className={'silverRising'}><div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark} onClick={HideAchi}/></div>
-                     <img className={"Rising prata"} src={risingstar}/><p>Rising Star</p></div>: null}
-                 {achis.some(e => e.achievement === 'Rising star'&& e.ranking === '1 followers') ? <div className={'bronzeRising'}><div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark} onClick={HideAchi}/></div>
-                     <img className={"Rising bronze"} src={risingstar}/><p>Rising Star</p></div>: null}
-                 {achis.some(e => e.achievement === 'Socielate'&& e.ranking === '200 comments') ? <div>
-                     <img className={"Socielate ouro"} src={beloved}/></div>: null}
-                 {achis.some(e => e.achievement === 'Socielate'&& e.ranking === '50 comments') ? <div>
-                     <img className={"Socielate prata"} src={beloved}/></div>: null}
-                 {achis.some(e => e.achievement === 'Socielate'&& e.ranking === '10 comments') ? <div><div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark} onClick={HideAchi}/></div>
-                     <img className={"Socielate bronze"} src={beloved}/></div>: null}
-                 {achis.some(e => e.achievement === 'Stalker'&& e.ranking === '20 subscriptions') ? <div className={'goldStalker'}><div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark} onClick={HideAchi}/></div>
-                     <img className={"Stalker ouro"} src={stalkerorange}/><p>Stalker</p></div>: null}
-                 {achis.some(e => e.achievement === 'Stalker'&& e.ranking === '10 subscriptions') ? <div className={'silverStalker'}><div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark} onClick={HideAchi}/></div>
-                     <img className={"Stalker prata"} src={stalkerorange}/></div>: null}
-                 {achis.some(e => e.achievement === 'Stalker'&& e.ranking === '5 subscriptions') ? <div className={'bronzeStalker'}><div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark} onClick={HideAchi}/></div>
-                     <img className={"Stalker bronze"} src={stalkerorange}/></div>: null}
-                 {achis.some(e => e.achievement === 'Só a começar') ? <div className={'starting'}> <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark} onClick={HideAchi}/></div><img className={"começar"} src={rocket}/><p>Just Starting</p></div>: null}
+                    </div>
+                    : null
+                }
+                {achis.some(e => e.achievement === 'Adoram-me' && e.ranking === '20 likes') ? <div className={'loved'}>
+                    <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark}
+                                                                  onClick={HideAchiv}/></div>
+                    <img className={"adoram-me prata"} src={beloved}/><p>Adoram-me</p></div> : null}
+                {achis.some(e => e.achievement === 'Adoram-me' && e.ranking === '100 likes') ?
+                    <div className={'goldLoved'}>
+                        <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark}
+                                                                      onClick={HideAchiv}/></div>
+                        <img className={"adoram-me ouro"} src={beloved}/><p>Adoram-me</p></div> : null}
+                {achis.some(e => e.achievement === 'Influencer' && e.ranking === '50 views') ?
+                    <div className={'bronzeInflu'}>
+                        <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark}
+                                                                      onClick={HideAchiv}/></div>
+                        <img className={"Influencer bronze"} src={influencer}/><p>Influencer</p></div> : null}
+                {achis.some(e => e.achievement === 'Influencer' && e.ranking === '200 views') ?
+                    <div className={'silverInflu'}>
+                        <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark}
+                                                                      onClick={HideAchiv}/></div>
+                        <img className={"Influencer prata"} src={influencer}/><p>Influencer</p></div> : null}
+                {achis.some(e => e.achievement === 'Influencer' && e.ranking === '1000 views') ?
+                    <div className={'goldInflu'}>
+                        <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark}
+                                                                      onClick={HideAchiv}/></div>
+                        <img className={"Influencer ouro"} src={influencer}/><p>Influencer</p></div> : null}
+                {achis.some(e => e.achievement === 'Rising star' && e.ranking === '20 followers') ?
+                    <div className={'goldRising'}>
+                        <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark}
+                                                                      onClick={HideAchiv}/></div>
+                        <img className={"Rising ouro"} src={risingstar}/><p>Rising Star</p></div> : null}
+                {achis.some(e => e.achievement === 'Rising star' && e.ranking === '5 followers') ?
+                    <div className={'silverRising'}>
+                        <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark}
+                                                                      onClick={HideAchiv}/></div>
+                        <img className={"Rising prata"} src={risingstar}/><p>Rising Star</p></div> : null}
+                {achis.some(e => e.achievement === 'Rising star' && e.ranking === '1 followers') ?
+                    <div className={'bronzeRising'}>
+                        <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark}
+                                                                      onClick={HideAchiv}/></div>
+                        <img className={"Rising bronze"} src={risingstar}/><p>Rising Star</p></div> : null}
+                {achis.some(e => e.achievement === 'Socielate' && e.ranking === '200 comments') ? <div>
+                    <img className={"Socielate ouro"} src={beloved}/></div> : null}
+                {achis.some(e => e.achievement === 'Socielate' && e.ranking === '50 comments') ? <div>
+                    <img className={"Socielate prata"} src={beloved}/></div> : null}
+                {achis.some(e => e.achievement === 'Socielate' && e.ranking === '10 comments') ? <div>
+                    <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark}
+                                                                  onClick={HideAchiv}/></div>
+                    <img className={"Socielate bronze"} src={beloved}/></div> : null}
+                {achis.some(e => e.achievement === 'Stalker' && e.ranking === '20 subscriptions') ?
+                    <div className={'goldStalker'}>
+                        <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark}
+                                                                      onClick={HideAchiv}/></div>
+                        <img className={"Stalker ouro"} src={stalkerorange}/><p>Stalker</p></div> : null}
+                {achis.some(e => e.achievement === 'Stalker' && e.ranking === '10 subscriptions') ?
+                    <div className={'silverStalker'}>
+                        <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark}
+                                                                      onClick={HideAchiv}/></div>
+                        <img className={"Stalker prata"} src={stalkerorange}/></div> : null}
+                {achis.some(e => e.achievement === 'Stalker' && e.ranking === '5 subscriptions') ?
+                    <div className={'bronzeStalker'}>
+                        <div className={"hide-Achi"}><FontAwesomeIcon className={"close-achi"} icon={faXmark}
+                                                                      onClick={HideAchiv}/></div>
+                        <img className={"Stalker bronze"} src={stalkerorange}/></div> : null}
+            </div>}
 
-             </div>}
-             <h2 className={"upload"}>Uploads  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowUploads}/>}</h2>
+            <div className={"upload-title"}><h2>Uploads  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowUploads}/>}</h2></div>
             {/*   {showUp &&  <div className={"container-uploads"}>
                  {!videos && <p>A carregar...</p>}
                  {videos && <>
@@ -202,20 +245,21 @@ export default function UserChannel() {
                      {videos.map((v, idx) => (<VideoCard type="channel" key={idx} {...v}/>))}
                  </>}
              </div>}*/}
-             <h2 className={"playlist"}>Playlists  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowPlay}/>}</h2>
+
+            <div className={"playlist"}><h2 >Playlists  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowPlay}/>}</h2></div>
         { showPlay && <div className={"container-playlists"}>
 
              </div>}
              <div className={"container-subs-stats"}>
                  <h4 className={"subs-text"}>Subscrições</h4>
                  <div className={"subs"}>
-                     { subs && subs.map ((s, idx) =>
-                     idx < 5 &&  (<div className="list"  key={idx} onClick={() => {
+                     {subs && subs.slice(0, 4).map((s, idx) => (
+                         <div className="list" key={idx} onClick={() => {
                              history.push(`/${s.channel}`)}}>
                              <img className={"photo-chan"} src={s.avatar} alt="channel"/>
                              <p className={"channel"}>{s.username}</p>
-                         </div>))}
-
+                         </div>
+                     ))}
                  </div>
                  <h4 className={"about-text"}>Acerca</h4>
                  <div className={"stats"}>
