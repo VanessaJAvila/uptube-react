@@ -35,18 +35,9 @@ function Playlists() {
             .catch(e => console.log(e, "erro playlistssssssssssss")) ;
         axios.get(`${API}/playlist/guest/playlists`,{withCredentials: true})
             .then(response => {
-                console.log(response.data)
                 setGPlaylists(response.data);
             }).catch(e => console.log(e, "No G playlists")) ;
     }, [user]);
-/*
-    let creatorPlaylistIds = [];
-    gPlaylists.map((g)=> {
-        creatorPlaylistIds.push(g.playlist_id);
-    })
-        console.log(creatorPlaylistIds);
- */
-
 
 
 
@@ -55,7 +46,6 @@ function Playlists() {
         useEffect(() => {
             axios.get(`${API}/playlist/ginplaylist/`,{withCredentials: true})
                 .then(response => {
-                    console.log(response.data,"ginplaylist" );
                     setGuestPlaylists(response.data);
                 }).catch(e => console.log(e, "erro ginplaylist")) ;
         }, [user]);

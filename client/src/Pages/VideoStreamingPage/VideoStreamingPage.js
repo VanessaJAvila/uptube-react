@@ -118,7 +118,7 @@ const VideoStreamingPage = () => {
                                 />
                             </div>
                             <div className={"video-tags"}>
-                                {tags.map((tag, idx) => {
+                                {tags && tags.map((tag, idx) => {
                                     return <p key={tag + "_" + idx} className={'tag'}>#{tag.name}</p>
                                 })}
                             </div>

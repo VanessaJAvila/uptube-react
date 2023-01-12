@@ -25,7 +25,6 @@ function Profile() {
     const [bdayState, setBdaystate] = useState(false);
 
     const history = useHistory();
-    console.log(user, "user Profile");
 
 
     if (!user) {
@@ -60,11 +59,11 @@ function Profile() {
         formData.append("photo", updateUserPhoto);
         formData.append("photoName", photoName);
 
-        console.log(formData, "formdata");
         axios.post(`${API}/user/${user.user_id}/edit/upload/avatar`,formData, {
             withCredentials: true
         })
             .then((res) => {
+
                 console.log(res, "upload res");
             }).catch((error) => {
             //console.log(error.response.data, "nao editaste a photo");
@@ -81,11 +80,13 @@ function Profile() {
         })
             .then((res) => {
                 //console.log(res, "upload res");
+
             }).catch((error) => {
             //console.log(error.response.data, "nao editaste a photo");
             alert("error: "+ error.response.data)
             //  history.replace("/Register")
         });
+        window.location.reload();
 
     }
 
@@ -109,34 +110,35 @@ function Profile() {
                     <label>Name</label>
                     <input type="text" onChange={e => setUpdateUserName(e.target.value)} value={updateUserName} id="name"
                            name="name" placeholder={user.name}/>
-                    <FontAwesomeIcon className="icons" icon={faUser}/>
                 </div>
                 <div className="inputContainer">
                     <label>Username</label>
                     <input type="text" onChange={e => setUpdateUserUsername(e.target.value)} value={updateUserUsername} id="username"
                            name="username" placeholder={user.username || user.name}/>
-                    <FontAwesomeIcon className="icons" icon={faUser}/>
                 </div>
 
                 <div className="inputContainer">
                     <label>Bio</label>
                     <input type="text" onChange={e => setUpdateUserBio(e.target.value)} value={updateUserBio}
                            id="bio" name="bio" placeholder={user.bio || "No Bio Available"}/>
-                    <FontAwesomeIcon className="icons" icon={faKey}/>
                 </div>
 
                 <div className="inputContainer" id="avatar">
                     <img alt="profile photo" src={user.photo} />
-                    <label>Choose a profile picture:</label>
-                    <input type="file" id="photo" name="photo" accept="image/png, image/jpeg" onChange={e =>  setUpdateUserPhoto(e.target.files[0]) && setPhotoName(user.email)}/>
-                </div>
+                    <div className={"avatarInfo"}>
+                        <label>Choose a profile picture:</label>
+                        <input type="file" id="photo" name="photo" accept="image/png, image/jpeg" onChange={e =>  setUpdateUserPhoto(e.target.files[0]) && setPhotoName(user.email)}/>
+                    </div>
+                  </div>
 
 
                 <div className="inputContainer" id="uheader" >
                     <img alt="header" src={user.header} />
-                    <label>Choose a header picture:</label>
-                    <input type="file" id="header" name="header" accept="image/png, image/jpeg" onChange={e =>  setUpdateUserHeader(e.target.files[0]) && setHeaderName(user.email)}/>
-                </div>
+                    <div className={"headerInfo"}>
+                        <label>Choose a header picture:</label>
+                        <input type="file" id="header" name="header" accept="image/png, image/jpeg" onChange={e =>  setUpdateUserHeader(e.target.files[0]) && setHeaderName(user.email)}/>
+                    </div>
+                 </div>
 
                 <div className="inputContainer" id="birthdate">
                     <label>Birthday</label>

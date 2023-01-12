@@ -1,19 +1,30 @@
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import Header from "../../Layout/Header";
-import {Redirect, useHistory, useParams} from "react-router-dom";
+import {Link, Redirect, useHistory, useParams} from "react-router-dom";
 import {UserContext} from "../../Providers/UserContext";
 import SideBar from "../../Layout/SideBar";
 import "./Playlist.scss";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faGear} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faGear,faCheck} from "@fortawesome/free-solid-svg-icons";
 import { createPopper } from '@popperjs/core';
+import VideoStreamingPage from "../VideoStreamingPage/VideoStreamingPage";
+import ReportVideo from "../VideoStreamingPage/Report/Report";
+import getDaySeen from "../../Utils/getDaySeen";
+import LikeButton from "../VideoStreamingPage/LikeButton/LikeButton";
+import DislikeButton from "../VideoStreamingPage/DislikeButton/DislikeButton";
+import Description from "../VideoStreamingPage/Description/Description";
+import CreateComment from "../VideoStreamingPage/CreateComment/CreateComment";
 
 
 
 
 //localhost port for api
 const  API  = process.env.REACT_APP_API;
+
+
+
+
 
 function Playlist() {
     const {user} = React.useContext(UserContext);
@@ -25,7 +36,6 @@ function Playlist() {
     const [addMusicDropdown, setAddMusicDropdown] = useState(false);
     const [pmovies,setPMovies] = useState(null);
     const [createDrop, setCreateDrop] = useState(false);
-    const [moviePath, setMoviePath] = useState(null);
     const[visibility, setVisibility] =useState("public");
     const [title, setTitle]= useState("");
     const [thumb,setThumb]= useState("");
@@ -33,60 +43,13 @@ function Playlist() {
     const[guestPlaylistDrop, setGuestPlaylistDrop] = useState(false);
     const[gPlaylist,setGPlaylist] = useState(null);
     const[gpmovies, setGPMovies] = useState([]);
+    const [tags, setTags] = useState([]);
+    const [videoId, setVideoId] = useState(null);
+    const [comments, setComments] = useState([])
+    const [videos, setVideos] = useState([]);
+    const [mensagem,setMensagem] = useState("");
 
-
-    //todo  como dar background color no video selected
-    // criar caixa para criar playlist e add video
-    // linha 257
-
-
-    let handleSubmit = async (e) => {
-
-        e.preventDefault();
-
-        let newPlaylist = {
-            title: title,
-            creator_id: user.user_id,
-            visibility:visibility,
-            thumbnail: `${API}`+thumb
-        }
-
-        console.log(newPlaylist,"newplaylist")
-
-        axios.post(`${API}/playlist/create`, newPlaylist, {
-            withCredentials: true
-        })
-            .then((res) => {
-                console.log(res.data,playlist_id,"playlist id");
-                let addMusic = {
-                    playlist_id: res.data.playlist_id,
-                    video_id: videoadd
-                }
-                console.log(addMusic,"add music obj");
-
-                axios.post(`${API}/playlist/addmusic`,addMusic, {
-                    withCredentials: true
-                })
-                    .then((res) => {
-                        alert("playlist created and video added to playlist successfully");
-                        console.log(res.data);
-                    }).catch((error) => {
-                    console.log(error, "messagem erro");
-                    alert("video wasnt added to playlist successfully");
-                });
-            }).catch((error) => {
-            console.log(error, "erro playlist create");
-            alert("error: Wrong Credentials!");
-        });
-
-
-
-    }
-
-
-
-
-
+/*
 //pooper
     const popcorn = document.querySelector('#popcorn');
     const tooltip = document.querySelector('#tooltip');
@@ -109,18 +72,74 @@ function Playlist() {
     });
 
 
+ */
+
+
+    let handleSubmit = async (e) => {
+        e.preventDefault();
+        let newPlaylist = {
+            title: title,
+            creator_id: user.user_id,
+            visibility:visibility,
+            thumbnail: `${API}`+thumb
+        }
+        axios.post(`${API}/playlist/create`, newPlaylist, {
+            withCredentials: true
+        })
+            .then((res) => {
+                let addMusic = {
+                    playlist_id: res.data.playlist_id,
+                    video_id: videoadd
+                }
+                axios.post(`${API}/playlist/addmusic`,addMusic, {
+                    withCredentials: true
+                })
+                    .then((res) => {
+                        setMensagem("Playlist Created and music added")
+                        setTitle("");
+                    }).catch((error) => {
+                    console.log(error, "messagem erro");
+                    setMensagem("video não foi adicionado");
+                });
+            }).catch((error) => {
+           setMensagem("ERRO");
+        });
+    }
+
+
 
     const {playlist_id} = useParams();
 
     useEffect(() => {
         axios.get(`${API}/playlist/${playlist_id}`,{withCredentials: true})
             .then(response => {
-                console.log('rsp playlist', response.data,`${API}${response.data[0].videoUrl}`);
                 setplaylist(response.data);
                 setMovie( `${API}${response.data[0].videoUrl}`)
-                setMoviePath(`${API}${response.data[0].videoUrl}`)
+                setVideoId(response.data[0].video_id);
+                axios.get(`${API}/video/${videoId}/tags`)
+                    .then((response) => {
+                        // Update the tags state variable with the video tags data
+                        setTags(response.data);
+                        //console.log(tags,videoId)
+                    })
+                axios
+                    .get(`${API}/video/videoinfocomment/${videoId}`)
+                    .then(async(response) => {
+                        // Update thevideoInfo state variable with the video data, !important data[0] so that it retrieves the array
+                        setVideos(response.data.video_info[0]);
+                        setComments(response.data.video_comments);
+                        //setUserFollowedId(response.data[0].user_id)
+                        console.log(videos,response.data.video_info[0])
+                    })
             }).catch(e => console.log(e, "erro playlist")) ;
-    }, []);
+    }, [dropdownState,videoId,user]);
+
+
+
+    const handleNewComment = (newComment) => {
+        setComments((prevComments) => [...prevComments, newComment]);
+    };
+
 
 
     useEffect(() => {
@@ -130,7 +149,10 @@ function Playlist() {
                 console.log('setplaylists', response.data);
                 setplaylists(response.data);
             }).catch(e => console.log(e, "erro playlist")) ;
-    }, [user]);
+    }, [user,dropdownState]);
+
+
+
 
 
     useEffect(() => {
@@ -140,14 +162,16 @@ function Playlist() {
                 setGPlaylist(response.data);
                 console.log(response.data, "setGplaylist")
             }).catch(e => console.log(e, "erro playlist")) ;
-    }, [user]);
+
+
+    }, [user,dropdownState]);
 
 
 
 
 
 
-    if(!user){
+    if(!user || !videoId){
         return <h2>Awaiting user....</h2>
     }
 
@@ -157,13 +181,89 @@ function Playlist() {
     }
 
 
+
     return <div className={"Playlist"}>
         <Header/>
         <SideBar/>
+
         <div className={"container-playlist"}>
             <h1>As musicas da playlist</h1>
             <div className={"box-playlist"}>
-                <video src={movie} width="650" height="500" controls></video>
+                <div className={"movieAndInfoContainer"}>
+                    <video src={movie} width="650" height="500" controls></video>
+                    <div className={"video-tags"}>
+                        {tags && tags.map((tag, idx) => {
+                            return <p key={tag + "_" + idx} className={'tag'}>#{tag.name}</p>
+                        })}
+                    </div>
+                    <div className={"video-info"}>
+                        <div className={"video-info-1"}>
+                            <div className="video-title">
+                                {videos ? videos.title : 'Loading...'}
+                            </div>
+                            <div className={"report"}>
+                                <ReportVideo videoId={videoId} reporterId={user.user_id}/>                                </div>
+                        </div>
+                        <div className={"channel-info-1"}>
+
+                            <div className="channel-info-1-a">
+                                <Link to={"/canal"}>
+                                    <div className={"avatar"}>
+                                        <img src={API+videos.photo} alt=""/>
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="video-info-container">
+
+                                    <div className="video-info-container-row-1">
+                                        <Link to={"/canal"}>
+                                            <p className={"video-channel-username"}>{videos.username}</p>
+                                        </Link>
+
+                                    </div>
+                                    <div className="video-info-container-row-2">
+                                        <p className={"views-days-posted"}>
+                                            {videos.views} visualizações | {getDaySeen(videos.date)}
+                                        </p>
+                                    </div>
+
+                            </div>
+                            <div className={"reactions"}>
+                                <LikeButton videoId={videoId} likeCount={videos.likes}/>
+                                <DislikeButton videoId={videoId} dislikeCount={videos.dislikes}/>
+                            </div>
+                        </div>
+                    </div>
+                    <Description id={videoId} description={videos.description} />
+                    <div className={"comments-container"}>
+                        {user && (
+                            <div className={"new-comment"}>
+                                <div
+                                    className={"new-comment-user-photo"}
+                                    style={{backgroundImage: `url(${user.photo})`}}>
+                                </div>
+                                <CreateComment videoId={videoId} handleNewComment={handleNewComment}/>
+                            </div>
+                        )}
+                        {!user && "login para comentar"}
+                        {comments && <div className={"video-comments"}>
+                            {comments.map((comment, idx) => {
+                                return  <div key={idx} className={'video-comment'}>
+                                    <div className={'user-comment-photo'} style={{backgroundImage: `url(${comment.photo})`}}></div>
+                                    <div className={'user-comment-inner-container'}>
+                                        <div className={'user-comment-content'}>
+                                            <p className={'user-comment-username'}>{comment.name}</p>
+                                            <p className={'comment-time-from-now'}>{getDaySeen(comment.timestamp)}</p>
+                                        </div>
+                                        <div className={'comment-text'}>
+                                            <p>{comment.comment}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            })}
+                        </div>}
+                    </div>
+                </div>
                 <div className={"nextContainer"}>
                    <h1>{playlist[0].playlistTitle}</h1>
                     <div>
@@ -172,22 +272,30 @@ function Playlist() {
                                     <div className={"imgContainer"}>
                                         <img onClick={()=>{
                                             setMovie(`${API}${p.videoUrl}`);
+                                            setVideoId(p.video_id);
                                         }} src={`${API}${p.thumbnail}`} alt="no photo"/>
                                         <p>{p.duration}</p>
                                     </div>
-                                        <div className={"videoInfo"}>
+
                                             <div className={"videoText"}>
-                                                <h2 >{p.videoTitle}</h2>
-                                                <h3>{p.videoCreator}</h3>
+                                                <p >{p.videoTitle}</p>
+                                                <h5>{p.videoCreator}</h5>
                                             </div>
                                             <FontAwesomeIcon onClick={()=>{
                                                 setDropdownState(idx)
                                             }} className="dropbtn" icon={faGear}></FontAwesomeIcon>
                                             {dropdownState===idx&&<div id="tooltip" role="tooltip" className="dropdown-content">
+                                                {mensagem && <div id={"comms"} onClick={()=>{
+                                                    setDropdownState(null);
+                                                    setAddMusicDropdown(!addMusicDropdown);
+                                                    setMensagem("");
+                                                }}> <p>{mensagem} </p>
+                                                    <p className={"okaydiv"}>OK</p>
+                                                </div>}
                                                 <p onClick={
                                                     async (e) => {
                                                         e.preventDefault();
-                                                        setAddMusicDropdown(true);
+                                                        setAddMusicDropdown(!addMusicDropdown);
                                                      await axios.get(`${API}/playlist/moviesinplaylist/`+ p.video_id +'/' + user.user_id)
                                                             .then(response => {
                                                                 setPMovies(response.data);
@@ -196,12 +304,12 @@ function Playlist() {
                                                     }
                                                 }>adicionar/remover da(s) playlist(s)</p>
 
-
                                                 {
                                                     addMusicDropdown && pmovies&& <div className={"addMusic"} >
                                                         {
                                                             playlists.map((play,ix) => {
                                                                 const handleChange = (e) => {
+
                                                                     e.preventDefault();
                                                                     if(e.target.innerHTML==="+"){
                                                                         let addMusicToPlaylist = {
@@ -213,8 +321,7 @@ function Playlist() {
                                                                             withCredentials: true
                                                                         })
                                                                             .then((res) => {
-                                                                                alert("video added to playlist successfully");
-                                                                                console.log(res.data);
+                                                                                setMensagem("video added to playlist successfully");
                                                                             }).catch((error) => {
                                                                             console.log(error, "messagem erro");
                                                                         });
@@ -231,7 +338,7 @@ function Playlist() {
                                                                             withCredentials: true
                                                                         })
                                                                             .then((res) => {
-                                                                                alert("video removed successfully");
+                                                                                setMensagem("video removed successfully");
                                                                                 console.log(res.data);
                                                                             }).catch((error) => {
                                                                             console.log(error, "messagem erro");
@@ -261,16 +368,16 @@ function Playlist() {
                                                             setCreateDrop(true);
                                                             setThumb(p.thumbnail);
                                                             setvideoadd(p.video_id);
-                                                        }}>Criar Nova playlist e add music</div>
+                                                        }} className={"criarNovaplaylist"}>Criar Nova playlist e add music</div>
 
 
-                                                        { createDrop && <div>
-                                                            <div id="tooltip" role="tooltip">
+
+                                                        { createDrop && <div className={"inputCreatePlaylist"}>
+
                                                                 <form onSubmit={handleSubmit}>
                                                                     <div className="inputContainer">
                                                                         <input type="text" onChange={e => setTitle(e.target.value)} value={title} id="title"
                                                                                name="title" placeholder="title" required/>
-                                                                        <FontAwesomeIcon className="icons" icon={faEnvelope}/>
                                                                     </div>
 
                                                                     <div>
@@ -281,8 +388,8 @@ function Playlist() {
                                                                     </div>
                                                                     <button type="submit">Gravar Alterações</button>
                                                                 </form>
-                                                            </div>
                                                         </div>}
+
                                                     </div>
                                                 }
                                                 {
@@ -301,10 +408,9 @@ function Playlist() {
                                                                             withCredentials: true
                                                                         })
                                                                             .then((res) => {
-                                                                                alert("video added to playlist successfully");
-                                                                                console.log(res.data);
+                                                                                setMensagem("video adicionado com sucesso!");
                                                                             }).catch((error) => {
-                                                                            console.log(error, "messagem erro");
+                                                                            setMensagem("video falhou a adicionar á playlist")
                                                                         });
                                                                     }
                                                                     if(e.target.innerHTML ==="X"){
@@ -319,7 +425,7 @@ function Playlist() {
                                                                             withCredentials: true
                                                                         })
                                                                             .then((res) => {
-                                                                                alert("video removed successfully");
+                                                                                setMensagem("video removed successfully");
                                                                                 console.log(res.data);
                                                                             }).catch((error) => {
                                                                             console.log(error, "messagem erro");
@@ -350,19 +456,18 @@ function Playlist() {
                                                             })
                                                         }
                                                     </div>
+
                                                 }
 
 
-                                                <div onClick={async(e)=> {
+                                                <div className={"playlistGuest"} onClick={async(e)=> {
                                                     e.preventDefault();
-                                                    setGuestPlaylistDrop(true);
+                                                    setGuestPlaylistDrop(!guestPlaylistDrop);
                                                     await axios.get(`${API}/playlist/gmoviesinplaylist/`+ p.video_id +'/' + user.user_id)
                                                         .then(response => {
                                                             setGPMovies(response.data);
-                                                            console.log(gpmovies, "gpmovies",response.data, "gmovi data")
                                                         }).catch(e => console.log(e, "erro playlist")) ;
                                                 }}>Playlists Guest</div>
-
                                                 {
                                                     guestPlaylistDrop && gpmovies && <div>
                                                         {gPlaylist.map((gp,i)=>{
@@ -378,10 +483,9 @@ function Playlist() {
                                                                         withCredentials: true
                                                                     })
                                                                         .then((res) => {
-                                                                            alert("video added to playlist successfully");
-                                                                            console.log(res.data);
+                                                                            setMensagem("video adicionado com sucesso á playlist!");
                                                                         }).catch((error) => {
-                                                                        console.log(error, "messagem erro");
+                                                                      setMensagem("Video não foi adicionado");
                                                                     });
                                                                 }
                                                                 if(e.target.innerHTML ==="X"){
@@ -396,16 +500,13 @@ function Playlist() {
                                                                         withCredentials: true
                                                                     })
                                                                         .then((res) => {
-                                                                            alert("video removed successfully");
-                                                                            console.log(res.data);
+                                                                           setMensagem("video removed successfully");
                                                                         }).catch((error) => {
                                                                         console.log(error, "messagem erro");
                                                                     });
                                                                 }
                                                             }
                                                             let lists = [];
-                                                            console.log(gpmovies,"gpmovies");
-                                                            console.log(gp,"gp");
                                                             if(gpmovies.length > 0){
                                                                 if(gpmovies.includes(gp.playlist_id)){
                                                                     lists.push(<p  key={i} onClick={handleGChange}><strong>X</strong></p>)
@@ -444,10 +545,10 @@ function Playlist() {
                                                                             withCredentials: true
                                                                         })
                                                                             .then((res) => {
-                                                                                alert("video added to playlist successfully");
+                                                                                setMensagem("video added to playlist successfully");
                                                                                 console.log(res.data);
                                                                             }).catch((error) => {
-                                                                            console.log(error, "messagem erro");
+                                                                            setMensagem(error, "messagem erro");
                                                                         });
                                                                     }
                                                                     if(e.target.innerHTML ==="X"){
@@ -462,7 +563,7 @@ function Playlist() {
                                                                             withCredentials: true
                                                                         })
                                                                             .then((res) => {
-                                                                                alert("video removed successfully");
+                                                                                setMensagem("video removed successfully");
                                                                                 console.log(res.data);
                                                                             }).catch((error) => {
                                                                             console.log(error, "messagem erro");
@@ -471,7 +572,7 @@ function Playlist() {
                                                                 }
 
                                                                 let lists = [];
-                                                                lists.push(<p  key={i} onClick={handleGChange}><strong>+</strong></p>)
+                                                                lists.push(<p  key={i} onClick={handleGChange}><strong>X</strong></p>)
                                                                 return <div className={"musicGAdded"}  key={g.playlist_id} id={g.playlist_id} >
                                                                     <p>{g.title}</p>
                                                                     {lists}
@@ -483,7 +584,7 @@ function Playlist() {
 
                                                 <p onClick={async (e)=>{
 
-                                                    console.log(e.target);
+
                                                     setDropdownState(null);
                                                     setAddMusicDropdown(false);
                                                     setGuestPlaylistDrop(false);
@@ -495,10 +596,10 @@ function Playlist() {
 
 
                                                 }
-                                                }> close </p>
+                                                } className={"close"} > close </p>
                                             </div>
                                             }
-                                        </div>
+
 
                             </div>}
                         )}
@@ -507,6 +608,7 @@ function Playlist() {
             </div>
 
         </div>
+
     </div>}
 
 export default Playlist;

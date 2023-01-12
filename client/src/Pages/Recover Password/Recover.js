@@ -5,6 +5,7 @@ import {Redirect, Route, useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import logo from "../../Layout/logo.svg";
+import "./Recover.scss"
 
 //localhost port for api
 const API = process.env.REACT_APP_API;
@@ -17,9 +18,6 @@ function Recover() {
 
 
     let handleSubmit = async (e) => {
-
-        //history.push vai para pagina nova
-        //history.replace nao permite voltar para a pagina anterior
         e.preventDefault();
 
         let newUser = {
@@ -57,7 +55,6 @@ function Recover() {
                 <div className="inputContainer">
                     <input type="email" onChange={e => setNewUserEmail(e.target.value)} value={newUserEmail} id="email"
                            name="email" placeholder="email" required/>
-                    <FontAwesomeIcon className="icons" icon={faEnvelope}/>
                 </div>
                 {user? <button type="submit">Enviar email de Alteração de password</button>:<button type="submit">Enviar email de Recuperação</button> }
 

@@ -2,6 +2,10 @@
   height:100%;
 }
 
+.Header{
+  z-index: 1;
+}
+
 .container-playlist{
   margin-left: 18%;
   padding-top: 4%;
@@ -12,6 +16,14 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    .playlist{
+      width: 22%;
+    }
+    .nextContainer{
+      .movieDiv{
+        height: 121px;
+      }
+    }
   }
 
   .playlistsGuestContainer{
@@ -19,6 +31,9 @@
     flex-wrap: wrap;
     flex-direction: row;
     margin-bottom: 10%;
+    .playlist{
+      width: 22%;
+    }
 
   }
 

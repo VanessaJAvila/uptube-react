@@ -7,13 +7,139 @@
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
+    .comments-container {
+
+      .new-comment {
+        position: relative;
+
+        display: flex;
+        .new-comment-user-photo {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-position: center;
+          background-size: cover;
+          margin-right: 10px;
+        }
+        form {
+          width: 100%;
+          .new-comment-input {
+            width: 99%;
+            background-color: var(--bg-color);
+            border: none;
+            border-bottom: 1px solid rgb(255,255,255);
+            padding-bottom: 0.8em;
+            color: var(--text-color-main);
+            outline: none;
+            margin: 15px 0 25px 0;
+            &:target {
+              border: none;
+              outline: none;
+            }
+
+          }
+        }
+        button{
+          position: absolute;
+          bottom: 0px;
+          right: 10px;
+          color: grey;
+        }
+
+      }
+      .video-comments {
+        margin: 10px 0 10px 0;
+
+
+        .video-comment {
+          margin-bottom: 10px;
+          display: flex;
+          .user-comment-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-position: center;
+            background-size: cover;
+            margin-right: 10px;
+          }
+
+          .user-comment-inner-container {
+            width: 100%;
+            font-size: 14px;
+
+            .user-comment-content {
+              display: flex;
+
+              .user-comment-username {
+                margin-right: 10px;
+              }
+              .comment-time-from-now {
+                color: var(--text-color-tertiary);
+              }
+
+            }
+
+            .comment-text {
+
+            }
+          }
+
+        }
+      }
+    }
+    .movieAndInfoContainer{
+
+      .video-tags{
+        display: flex;
+        .tag{
+          margin-right:5px
+        }
+      }
+
+      .video-info{
+        .channel-info-1{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .channel-info-1-a{
+            .avatar{
+              img{
+                height:50px;
+                width:50px;
+                border-radius:50%;
+              }
+            }
+          }
+          .video-info-container{
+            margin-left: -48%;
+          }
+        }
+
+        .video-info-1{
+          display: flex;
+          justify-content: space-between;
+        }
+        .reactions{
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          .likes{
+            margin: 10px;
+          }.dislikes{
+            margin: 10px;
+          }
+        }
+      }
+    }
+
     .nextContainer{
       margin-left: 25px;
       border-radius: 25px;
       border-style: groove;
       padding: 4px;
       img{
-        max-width: 200px;
+        width: 150px;
+        height: 100px;
       }
       button{
         color: black;
@@ -38,23 +164,35 @@
         border-bottom-style: solid;
       }
 
+
       .movieDiv{
         display: flex;
-        cursor: pointer;
         padding: 7px;
         border-bottom: black;
         border-bottom-style: solid;
-        .videoInfo{
-          display: flex;
+        justify-content: space-between;
+
+
+        .video-text{
+            width: 180px;
+        }
+        svg{
+          cursor: pointer;
+        }
+
+
+
           .musicGAdded{
             display: flex;
             justify-content: space-between;
+            position: relative;
           }
-        }
+
         .imgContainer{
           display: flex;
           flex-direction: column;
           align-items: flex-end;
+          cursor: pointer;
           p{
             margin-top: -9%;
           }
@@ -63,6 +201,45 @@
           display: flex;
           flex-direction: column;
           align-items: flex-start;
+          position: relative;
+          .criarNovaplaylist{
+            padding:10px
+          }
+          .inputCreatePlaylist{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+
+            #title{
+              width: 100%;
+              border: none;
+              /* margin-left: 10px; */
+              background-color: #13131A;
+              color: white;
+              border-radius: 20px;
+              height: 30px;
+            }
+          }
+        }
+
+        .close{
+          background-color: lightgrey;
+          text-align: center;
+          margin-top: 0;
+          padding: 10px;
+          position: relative;
+          z-index: 2;
+          border-bottom-right-radius: 10px;
+          border-bottom-left-radius: 10px;
+        }
+
+        .playlistGuest{
+          background-color: lightgrey;
+          text-align: center;
+          padding:10px;
+          position: relative;
+          z-index: 2;
         }
 
       }
@@ -77,11 +254,21 @@
 
   #tooltip {
     display: inline-block;
-    background: #ffffff;
+    background: lightgrey;
     color: #643045;
     font-weight: bold;
-    font-size: 13px;
-    border-radius: 4px;
+    font-size: 1.2vw;
+    border-radius: 10px;
+    p{
+      cursor: pointer;
+      background-color: lightgrey;
+    }
+    div{
+      cursor: pointer;
+      background-color: lightgrey;
+      z-index:2;
+      text-align: center;
+    }
   }
 
   #arrow,
@@ -116,6 +303,25 @@
 
   #tooltip[data-popper-placement^='right'] > #arrow {
     left: -4px;
+  }
+
+  #comms{
+    position: absolute;
+    right: 61%;
+    width: 17%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 30;
+    border-radius:25px;
+    .okaydiv{
+      border-color: white;
+      border-style: ridge;
+      border-radius: 50%;
+      padding: 5px;
+      width: 47px;
+    }
   }
 
 }

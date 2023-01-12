@@ -44,11 +44,11 @@ function App() {
                             requireAnonymous={<>
                                 <Route path="/Register" component={Register}/>
                                 <Route path="/Login" component={Login}/>
-                                <Route path="/Recoverpassword/:token" component={RecoverBytoken}/>
-                                <Route path="/Recoverpassword" component={Recover}/>
                             </>}
                         >
                             <Route path="/Suggested" component={Suggested}/>
+                            <Route path="/Recoverpassword" exact={true} component={Recover}/>
+                            <Route path="/Recoverpassword/:token" component={RecoverBytoken}/>
 
                             <SearchProvider>
                                 <Route path="/Home" component={Home}/>

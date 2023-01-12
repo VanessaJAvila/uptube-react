@@ -2,7 +2,14 @@
   .container-profile{
     display: flex;
   }
+  a{
+    all:unset
+  }
+  a:hover{
+    cursor: pointer;
+  }
   .container{
+    margin:5%;
     padding: 1%;
     display: flex;
     flex-direction: column;
@@ -25,6 +32,17 @@
       height: 30px;
       border: none;
       outline: none;
+      .avatarInfo{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .headerInfo{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
       img{
         width: 220px;
         height: 180px;
@@ -52,16 +70,18 @@
 
   #avatar{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     height: 100%;
+    justify-content: space-around;
   }
 
   #uheader{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     height: 100%;
+    justify-content: space-around;
   }
   button{
     margin-top: 10px;
@@ -74,6 +94,9 @@
   }
   #birthdate {
     color-scheme: dark;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     input{
       font-size:17px;
       color: grey;

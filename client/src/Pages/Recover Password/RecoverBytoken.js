@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Redirect, Route, useHistory, useParams} from "react-router-dom";
 import {UserContext} from "../../Providers/UserContext";
-import Register from "../Register/Register";
+import "./RecoverBytoken.scss"
 
 import logo from "../../Layout/logo.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -57,20 +57,22 @@ function RecoverBytoken() {
             {user? <h1> Alteração de Password</h1>:<h1>Recuperação de password</h1>}
             <form onSubmit={handleSubmit}>
                 <div className="inputContainer">
+                    <h3>Email</h3>
                     <input type="email" onChange={e => setUserEmail(e.target.value)} value={userEmail} id="email"
                            name="email" placeholder="email" required/>
-                    <FontAwesomeIcon className="icons" icon={faEnvelope}/>
+
                 </div>
                 <div className="inputContainer" id="pwContainer">
+                    <h3>Password</h3>
                     <input type="password" onChange={e => setUserPassword(e.target.value)} value={userPassword}
                            id="password" name="password" placeholder="Password" required/>
-                    <FontAwesomeIcon className="icons" icon={faKey}/>
                 </div>
 
                 <div className="inputContainer">
+                    <h3>Repetir Password</h3>
                     <input type="password" onChange={e => setUserRepPassword(e.target.value)} value={userRepPassword}
                            id="rep_password" name="rep_password" placeholder="Repetir Password" required/>
-                    <FontAwesomeIcon className="icons" icon={faKey}/>
+
                 </div>
 
                 <button type="submit">Alterar Password</button>

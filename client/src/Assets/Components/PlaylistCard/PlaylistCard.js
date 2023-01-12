@@ -79,7 +79,7 @@ function PlaylistCard(props){
                   } else {
                       helper = response.data[0].user_id;
                   }
-                console.log(helper,"helper")
+
                     let newGuest = {
                         playlist_id: props.id,
                         invited_id: helper,
@@ -124,7 +124,7 @@ function PlaylistCard(props){
             playlist_id: props.id
         }
 
-        axios.post('http://localhost:3001/playlist/delete/',deletePlay, {
+        axios.post(`${API}/playlist/delete/`,deletePlay, {
             withCredentials: true
         })
             .then((res) => {

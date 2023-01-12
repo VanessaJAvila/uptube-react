@@ -36,6 +36,7 @@ export default function UserChannel() {
     const [updateUserHeader, setUpdateUserHeader] = useState(user?.header);
 
 
+
     const HideOrShowAchis = () => {
         setShowAchis(!showAchis)
         console.log(showAchis)
@@ -133,7 +134,7 @@ export default function UserChannel() {
     }, [user]);
 
 
-    if (!videos || !achis || !stats || !subs || !userChannel) return null;
+    if (!user) return <h1>No user, please log in</h1>;
 
 
     return <div className={'channel-container'}>
@@ -176,8 +177,8 @@ export default function UserChannel() {
                 </div>
             </div>
         </div>
-
-             <h2>Achievements {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowAchis}/>}</h2>
+        {!achis && <h2>This user has no achievements</h2>}
+        {achis &&  <h2>Achievements {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowAchis}/>}</h2>}
         { showAchis && <div className={"achievements"}>
                   {achis.some(e => e.achievement === 'Adoram-me'&& e.ranking === '5 likes') ? <div className={'loved'}>
                      <img className={"adoram-me bronze"} src={beloved}/><p>Adoram-me</p></div>: null}
