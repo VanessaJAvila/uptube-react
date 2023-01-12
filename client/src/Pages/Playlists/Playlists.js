@@ -24,8 +24,6 @@ function Playlists() {
 
 
 
-
-
     useEffect(() => {
         if(!user) return;
         axios.get(`${API}/playlist/user/${user.user_id}`,{withCredentials: true})

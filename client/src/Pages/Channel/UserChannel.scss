@@ -202,34 +202,6 @@
       }
     }
 
-    .bronzeInflu:hover {
-      box-shadow: 4px 4px 4px 4px #624d0b;
-    }
-
-
-    .bronzeInflu {
-      position: relative;
-      display: flex;
-      background-color: #13131A;
-      width: 8%;
-      height: 87%;
-      margin: 7px;
-      border-radius: 10px;
-
-      img.Influencer.bronze {
-        width: 76%;
-        margin-top: 9%;
-        margin-left: 12%;
-        color: lightgray;
-      }
-
-      p {
-        color: lightgray;
-        font-size: 10pt;
-        margin-top: 7%;
-        margin-left: 17%;
-      }
-    }
 
     .starting:hover {
       box-shadow: 4px 4px 4px 4px #78d511;
@@ -349,8 +321,6 @@
         color: black;
         margin-left: 82%;
 
-
-
         .close-achi{
           width: 50%;
           margin-left: 4px;
@@ -386,17 +356,17 @@
   }
 
   .container-uploads {
+    display: flex;
+    align-items: center;
     background-color: #1C1C24;
-    width: 80%;
-    height: 16%;
-    margin-top: 58%;
-    margin-left: 17%;
+    width: 100%;
+    height: 12%;
     border-radius: 10px;
   }
     .playlist {
       display: flex;
-      margin-top: 300px;
       margin-left: 10px;
+      margin-top: 30px;
       h2 {
         font-size: 15px;
         color: lightgray;
@@ -409,7 +379,7 @@
     display: flex;
     flex-wrap: wrap;
     background-color: #1C1C24;
-    width: 78%;
+    width: 100%;
     height: 16%;
     margin-top: 80%;
     margin-left: 15%;

@@ -2,7 +2,8 @@
   display: flex;
   width: 97%;
   height: 90%;
-  z-index: 1;
+  margin-bottom: 335px;
+
 
   .channels {
     display: flex;
@@ -68,13 +69,14 @@
       }
 
       .channel-data {
-        width: 326px;
+        width: 323px;
         height: 48px;
         margin-top: -22%;
         border-top: 1px solid dimgrey;
         position: absolute;
         cursor: pointer;
         color: whitesmoke;
+        border-radius: 0 0 10px 10px;
 
 
         .channel-id {

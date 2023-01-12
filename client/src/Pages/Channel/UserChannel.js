@@ -15,6 +15,7 @@ import {faBookmark, faEyeSlash, faTrashCan} from "@fortawesome/free-regular-svg-
 import {faPenToSquare, faPen, faUser, faGear, faX, faXmark} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import {Link, useHistory, useParams} from "react-router-dom";
+import PlaylistCard from "../../Assets/Components/PlaylistCard/PlaylistCard";
 
 //localhost port for api
 const  API  = process.env.REACT_APP_API;
@@ -31,11 +32,14 @@ export default function UserChannel() {
     const [showUp, setShowUp] = useState(true)
     const [showPlay, setShowPlay] = useState(true)
     const [showAchievement,setShowAchievement] = useState(true)
+    const [playlists, setplaylists] = useState([]);
+    const [criarPlaylist, setCriarPlaylist] = useState(false);
+    const [title, setTitle]= useState("");
+    const [gPlaylists,setGPlaylists] = useState([]);
+    const[GuestPlaylists,  setGuestPlaylists] = useState([]);
 
-    const [updateUserUsername, setUpdateUserUsername] = useState(user?.username);
-    const [updateUserPhoto, setUpdateUserPhoto] = useState();
-    const [updateUserBio, setUpdateUserBio] = useState(user?.bio);
-    const [updateUserHeader, setUpdateUserHeader] = useState(user?.header);
+    let gpf = [];
+
 
     let userId = 0;
     if (user && user.user_id) {
@@ -81,6 +85,20 @@ export default function UserChannel() {
     }, [user]);
 
     useEffect(() => {
+        if(!user) return;
+        axios.get(`${API}/playlist/user/${user.user_id}`,{withCredentials: true})
+            .then(response => {
+                setplaylists(response.data);
+            })
+            .catch(e => console.log(e, "erro playlistssssssssssss")) ;
+        axios.get(`${API}/playlist/guest/playlists`,{withCredentials: true})
+            .then(response => {
+                console.log(response.data)
+                setGPlaylists(response.data);
+            }).catch(e => console.log(e, "No G playlists")) ;
+    }, [user]);
+
+    useEffect(() => {
         axios.get(` ${API}/video/user/${user?.user_id}`)
             .then(response => {
                 setVideos(response.data);
@@ -108,6 +126,8 @@ export default function UserChannel() {
                 setAchis(response.data);
             }).catch(e => console.log(e));
     }, [user]);
+
+    if(!user) return null
 
 
     return <div className={'user-channel-container'}>
@@ -238,18 +258,38 @@ export default function UserChannel() {
             </div>}
 
             <div className={"upload-title"}><h2>Uploads  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowUploads}/>}</h2></div>
-            {/*   {showUp &&  <div className={"container-uploads"}>
+               {showUp &&  <div className={"container-uploads"}>
                  {!videos && <p>A carregar...</p>}
                  {videos && <>
                      {videos.length === 0 && <p className={"no results"}>Partilha o teu 1º video?</p>}
                      {videos.map((v, idx) => (<VideoCard type="channel" key={idx} {...v}/>))}
                  </>}
-             </div>}*/}
+             </div>}
 
             <div className={"playlist"}><h2 >Playlists  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowPlay}/>}</h2></div>
         { showPlay && <div className={"container-playlists"}>
+            {playlists.map((p) => {
 
-             </div>}
+                let filteredGuest=  GuestPlaylists.filter(guestP => guestP.playlist_id === p.playlist_id)
+                gpf.push(filteredGuest);
+                //   console.log(filteredGuest,gpf,"gpf")
+
+                return <PlaylistCard  key={p.playlist_id+1500}
+                                      id = {p.playlist_id}
+                                      creator_id = {p.creator_id}
+                                      thumbnail = {p.thumbnail}
+                                      photo = {user.photo}
+                                      name = {user.name}
+                                      title ={p.title}
+                                      duration = {p.duration}
+                                      timestamp = {p.timestamp}
+                                      guestPlaylists={filteredGuest}
+                />}
+            )}
+
+
+
+        </div>}
              <div className={"container-subs-stats"}>
                  <h4 className={"subs-text"}>Subscrições</h4>
                  <div className={"subs"}>
