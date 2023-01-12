@@ -255,7 +255,7 @@ export default function UserChannel() {
                  <div className={"subs"}>
                      {subs && subs.slice(0, 4).map((s, idx) => (
                          <div className="list" key={idx} onClick={() => {
-                             history.push(`/${s.channel}`)}}>
+                             history.push(`/Channel/${s.channel}`)}}>
                              <img className={"photo-chan"} src={s.avatar} alt="channel"/>
                              <p className={"channel"}>{s.username}</p>
                          </div>

@@ -47,10 +47,7 @@ const SearchProvider = ({children}) => {
     }, [tags])
 
     useEffect(() => {
-        if (!search) {
-            console.log("Search variable is empty, cannot make API call");
-            return;
-        }
+     
         axios
             .get(`${API}/video/search?search=${search}&page=${page}`, {
                 withCredentials: true,

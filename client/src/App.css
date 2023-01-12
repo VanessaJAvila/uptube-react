@@ -53,15 +53,51 @@ label {
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
 }
 
+#light .starting{
+    background-color: rgba(105, 105, 105, 0.4);
+    border:1px solid #1C1C24;
+}
+
+#light .edit{
+    background-color: whitesmoke;
+    border:1px solid #1C1C24;
+}
+
+#light .icon{
+    color:#30303a;
+}
+
+
+
+#light .goldStalker{
+    background-color: rgba(105, 105, 105, 0.4);
+    border:1px solid #1C1C24;
+}
+
+#light .goldRising{
+    background-color: rgba(105, 105, 105, 0.4);
+    border:1px solid #1C1C24;
+}
+
+#light .goldLoved{
+    background-color: rgba(105, 105, 105, 0.4);
+    border:1px solid #1C1C24;
+}
+
 #light  .Name{
     color:#1C1C24;
 }
 #light .b-icon {
+    color: #30303a;
+}
+
+#light p {
     color: #1C1C24;
+
 }
 
 #light .sort-icon {
-    color: #1C1C24;
+    color: #30303a;
 }
 
 #light .avatar{
@@ -88,6 +124,31 @@ label {
 #light .stats-data {
     color: #1C1C24;
 }
+
+
+
+#light .menu-item {
+    color: #1C1C24;
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
+
+}
+
+#light .upload-drag-video {
+    color: #1C1C24;
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
+}
+
+#light .menu-last-item {
+    color: #1C1C24;
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
+}
+
+#light .pages p {
+    color: white;
+}
 #light .inputContainer{
     background-color: whitesmoke;
     color:#1C1C24;
@@ -95,10 +156,12 @@ label {
 
 #light .video-card-suggestions{
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
+    background-color: rgba(105, 105, 105, 0.4);
 }
 
 #light input.search{
     background-color: white;
+    color:#1C1C24;
 
 }
 
