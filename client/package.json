@@ -30,7 +30,11 @@
     "sass": "^1.56.1",
     "save": "^2.9.0",
     "semantic-ui-react": "^2.1.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+      "date-fns": "^2.29.3",
+      "devextreme-react": "^22.1.6",
+      "reactjs-popup": "^2.0.5"
+
   },
   "scripts": {
     "start": "react-scripts start",

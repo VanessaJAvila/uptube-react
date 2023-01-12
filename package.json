@@ -5,8 +5,7 @@
   "dependencies": {
     "date-fns": "^2.29.3",
     "devextreme-react": "^22.1.6",
-    "reactjs-popup": "^2.0.5"
-  "dependencies": {
+    "reactjs-popup": "^2.0.5",
     "@popperjs/core": "^2.11.6",
     "moment": "^2.29.4",
     "react-player": "^2.11.0"

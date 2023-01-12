@@ -143,10 +143,8 @@ function Playlist() {
 
 
     useEffect(() => {
-        if(!user) return;
         axios.get(`${API}/playlist/user/`+user.user_id,{withCredentials: true})
             .then(response => {
-                console.log('setplaylists', response.data);
                 setplaylists(response.data);
             }).catch(e => console.log(e, "erro playlist")) ;
     }, [user,dropdownState]);
@@ -156,11 +154,9 @@ function Playlist() {
 
 
     useEffect(() => {
-        if(!user) return;
         axios.get(`${API}/playlist/guest/`+ user.user_id,{withCredentials: true})
             .then(response => {
                 setGPlaylist(response.data);
-                console.log(response.data, "setGplaylist")
             }).catch(e => console.log(e, "erro playlist")) ;
 
 
@@ -171,13 +167,15 @@ function Playlist() {
 
 
 
-    if(!user || !videoId){
+    if(!user){
         return <h2>Awaiting user....</h2>
     }
 
 
-    if(!playlist){
-        return <h2>THERE IS NO VIDEOS IN PLAYLIST</h2>
+    if(!playlist||!videoId){
+        return     <Link to={"/playlists"}>
+            <h1>Esta playlist está vazia carrega aqui para voltar ás playlists</h1>
+        </Link>
     }
 
 
