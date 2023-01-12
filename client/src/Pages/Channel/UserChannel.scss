@@ -1,36 +1,31 @@
-.channel-container {
+
+.user-channel-container {
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  position: relative;
 
-  .user-details {
-    position: relative;
-    background-color: #13131A;
+  .container-channel-wrapper {
+    display: flex;
     width: 78%;
-    height: 30%;
-    margin-top: 1%;
-    margin-left: 19%;
-    border-bottom: 1px solid dimgrey;
-    color: white;
+    margin-top: 85px;
+    margin-left: 280px;
+    flex-direction: column;
 
-    .layer-bg {
-      width: 100%;
-      height: 69%;
-      position: absolute;
-      background: linear-gradient(rgb(255, 255, 255), #16161e);
-      border-radius: 10px 10px 0 0;
-      opacity: 1;
+    .user-details {
+      background-color: #13131A;
+      border-bottom: 1px solid dimgrey;
+      color: white;
 
       .channel-bg {
-        width: 100%;
-        height: 97%;
-        position: absolute;
         border-radius: 10px 10px 0 0;
+        background-size: cover;
+        overflow: hidden;
+        width: auto;
+        height: 150px;
+
 
         .edit-bg-icon {
-          position: absolute;
           margin-top: 6%;
           margin-left: 50%;
         }
@@ -42,21 +37,28 @@
     }
 
     .edit-user-details {
+      display: flex;
+      flex: 1;
+      position: relative;
+
+
       .edit {
         position: absolute;
         width: 10%;
-        height: 12%;
+        height: 30px;
+        margin-top: -30px;
         border: 1px solid dimgrey;
         border-radius: 18px;
-        margin-top: 16%;
-        margin-left: 1%;
+        margin-left: 5px;
         font-size: 9px;
         color: lightgrey;
         padding-bottom: 2px;
         background-color: #1C1C24;
 
+
         .edit-text {
           margin-top: 8%;
+          padding-top:2px;
           margin-left: 10%;
           position: absolute;
         }
@@ -66,125 +68,152 @@
           margin-top: 4%;
           font-size: 16px;
           color: lightgray;
+          position: absolute;
         }
       }
 
-      .user-data {
-        width: 95%;
+      .stats-user {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
         position: relative;
-        margin-top: -7%;
+        margin-left: 30px;
+
+        .followers, .views {
+          margin-right: 10px;
+
+        }
 
         a {
           color: lightgray;
+
+          .edit-user-data-icon {
+            position: absolute;
+            font-size: 12px;
+            margin-left: -150px;
+            color: white;
+          }
         }
 
         .edit-avatar-icon {
           position: absolute;
-          margin-top: 17%;
-          margin-left: 92%;
+          margin-top: -15px;
+          margin-left: 115px;
+          z-index: 1;
         }
 
-        .edit-user-data-icon {
-          position: absolute;
-          font-size: 12px;
-          margin-top: -5%;
-          margin-left: 14%;
-        }
+        .user-data {
+          .avatar {
+            width: 151px;
+            height: 151px;
+            border-radius: 50%;
+            margin-left: 50px;
+            border: 3px solid whitesmoke;
+            object-fit: cover;
+            position: absolute;
+            margin-top: -90px;
+            display: block;
 
-
-        .avatar {
-          width: 180px;
-          height: 180px;
-          border-radius: 50%;
-          margin-top: 10%;
-          margin-left: 85%;
-          border: 3px solid whitesmoke;
-
+          }
         }
 
         .username {
           margin-left: 1%;
           font-size: 22px;
-          position: absolute;
-          margin-top: -5%;
         }
 
         .bio {
           margin-top: -2%;
           margin-left: 1%;
           font-size: 10pt;
-
-        }
-
-        .stats-user {
-          display: flex;
-          position: absolute;
-          flex-direction: row;
-          margin-top: -7%;
-          margin-left: 60%;
-          text-align: center;
-
-          .followers, .views {
-            margin-right: 10px;
-          }
         }
       }
     }
   }
 
-  h2 {
-    color: lightgray;
-    position: absolute;
-    margin-left: 18%;
-    margin-top: 20%;
-    font-size: 15px;
-  }
+  .achi-title {
+    display: flex;
+    margin: 10px;
 
-  .hide-icon {
-    font-size: 12px;
+    h2 {
+      color: lightgray;
+      font-size: 15px;
+
+    }
+
+    .hide-icon {
+      font-size: 12px;
+    }
   }
 
   .achievements {
     display: flex;
     background-color: #1C1C24;
-    position: absolute;
-    width: 78%;
-    height: 16%;
-    margin-top: 22%;
-    margin-left: 18%;
+    width: 100%;
+    height: 7%;
     border-radius: 10px;
     flex-wrap: nowrap;
+    align-items: center;
+
+    .goldStalker:hover {
+      box-shadow: 4px 4px 4px 4px #857010;
+    }
 
     .goldStalker {
+      position: relative;
+      display: flex;
       background-color: #13131A;
-      width: 7%;
+      width: 8%;
       height: 87%;
-      margin-top: 1%;
-      margin-left: 25%;
-      position: absolute;
+      margin: 7px;
       border-radius: 10px;
 
+
+      .hide-Achi {
+        position: absolute;
+        background-color: red;
+        border-radius: 50%;
+        width: 16%;
+        height: 12%;
+        color: black;
+        margin-left: 82%;
+
+
+        .close-achi {
+          width: 50%;
+          margin-left: 4px;
+          margin-top: -1px;
+        }
+      }
       img.Stalker.ouro {
-        width: 76%;
-        margin-top: 9%;
-        margin-left: 11%;
+        width: 75px;
+        margin-top: -20px;
+        margin-left: 11px;
+        z-index: 0;
+
       }
 
       p {
         color: lightgray;
         font-size: 10pt;
-        margin-top: 7%;
-        margin-left: 24%;
+        margin-left: 27px;
+        position: absolute;
+        margin-top: 93px;
       }
     }
 
+    .bronzeInflu:hover {
+      box-shadow: 4px 4px 4px 4px #624d0b;
+    }
+
+
     .bronzeInflu {
+      position: relative;
+      display: flex;
       background-color: #13131A;
-      width: 7%;
+      width: 8%;
       height: 87%;
-      margin-top: 1%;
-      margin-left: 33%;
-      position: absolute;
+      margin: 7px;
       border-radius: 10px;
 
       img.Influencer.bronze {
@@ -202,53 +231,95 @@
       }
     }
 
+    .starting:hover {
+      box-shadow: 4px 4px 4px 4px #78d511;
+    }
+
     .starting {
+      position: relative;
       display: flex;
       background-color: #13131A;
-      width: 7%;
+      width: 8%;
       height: 87%;
-      margin-top: 1%;
-      margin-left: 9%;
-      position: absolute;
+      margin: 7px;
       border-radius: 10px;
+
+      .hide-Achi {
+        position: absolute;
+        background-color: red;
+        border-radius: 50%;
+        width: 16%;
+        height: 12%;
+        color: black;
+        margin-left: 82%;
+
+
+        .close-achi{
+          width: 50%;
+          margin-left: 4px;
+          margin-top: -1px;
+        }
+      }
 
       p {
         color: lightgray;
         font-size: 10pt;
-        margin-top: 97%;
-        margin-left: 6%;
+        margin-top: 93px;
+        margin-left: -77px;
       }
 
-
       .começar {
-        width: 65%;
-        position: absolute;
-        margin-top: 14%;
-        margin-left: 15%;
+        width: 80px;
+        position: relative;
+        margin-top: -10px;
+        margin-left: 6px;
       }
     }
 
-    .goldLoved {
-      background-color: #13131A;
-      width: 7%;
-      height: 87%;
-      margin-top: 7px;
-      margin-left: 8%;
-      position: absolute;
-      border-radius: 10px;
+    .goldLoved:hover {
+      box-shadow: 4px 4px 4px 4px #857010;
+    }
 
+      .goldLoved {
+        position: relative;
+        display: flex;
+        background-color: #13131A;
+        width: 8%;
+        height: 87%;
+        margin: 7px;
+        border-radius: 10px;
+
+
+        .hide-Achi {
+          position: absolute;
+          background-color: red;
+          border-radius: 50%;
+          width: 16%;
+          height: 12%;
+          color: black;
+          margin-left: 82%;
+
+
+
+          .close-achi{
+            width: 50%;
+            margin-left: 4px;
+            margin-top: -1px;
+          }
+        }
 
       p {
         color: lightgray;
         font-size: 10pt;
-        margin-top: 98%;
-        margin-left: 8%
+        margin-left: 12px;
+        position: absolute;
+        margin-top: 92px;
       }
 
       img.adoram-me.ouro {
-        width: 75%;
-        position: absolute;
-        margin-top: 7px;
+        width: 70px;
+        height: 70px;
+        margin-top: 15px;
         margin-left: 12%;
         border-radius: 50%;
         background: rgb(232, 206, 107);
@@ -256,88 +327,116 @@
       }
     }
 
+    .goldRising:hover {
+      box-shadow: 4px 4px 4px 4px #857010;
+    }
 
     .goldRising {
+      position: relative;
+      display: flex;
       background-color: #13131A;
-      width: 7%;
+      width: 8%;
       height: 87%;
-      margin-top: 1%;
-      margin-left: 17%;
-      position: absolute;
+      margin: 7px;
       border-radius: 10px;
 
+      .hide-Achi {
+        position: absolute;
+        background-color: red;
+        border-radius: 50%;
+        width: 16%;
+        height: 12%;
+        color: black;
+        margin-left: 82%;
+
+
+
+        .close-achi{
+          width: 50%;
+          margin-left: 4px;
+          margin-top: -1px;
+        }
+      }
+
       img.Rising.ouro {
-        width: 76%;
-        margin-top: 9%;
+        width: 75px;
+        margin-top: -27px;
         margin-left: 11%;
       }
 
       p {
         color: lightgray;
         font-size: 10pt;
-        margin-top: 11%;
-        margin-left: 13%;
+        margin-left: 14px;
+        position: absolute;
+        margin-top: 92px;
       }
     }
   }
 
+  .upload-title {
+    display: flex;
+   margin-top: 35px;
+    margin-left: 10px;
+    h2 {
+      font-size: 15px;
+      color: lightgray;
 
-  .upload {
-    margin-top: 32%;
-
+    }
   }
 
   .container-uploads {
     background-color: #1C1C24;
-    position: absolute;
     width: 80%;
     height: 16%;
-    margin-top: 34%;
-    margin-left: 19%;
+    margin-top: 58%;
+    margin-left: 17%;
     border-radius: 10px;
   }
+    .playlist {
+      display: flex;
+      margin-top: 300px;
+      margin-left: 10px;
+      h2 {
+        font-size: 15px;
+        color: lightgray;
 
-  .playlist {
-    margin-top: 43%;
-    margin-left: 19%;
-  }
+      }
+    }
+
 
   .container-playlists {
+    display: flex;
+    flex-wrap: wrap;
     background-color: #1C1C24;
-    position: absolute;
-    width: 80%;
+    width: 78%;
     height: 16%;
-    margin-top: 45%;
-    margin-left: 19%;
+    margin-top: 80%;
+    margin-left: 15%;
     border-radius: 10px;
   }
 
   .container-subs-stats {
-
-    position: absolute;
-    width: 81%;
-    height: 21%;
-    margin-top: 53%;
-    margin-left: 17%;
-
+    display: flex;
+    flex-direction: row;
+    width: 88%;
+    margin-bottom: 50px;
 
     .subs-text {
       color: lightgray;
-      position: absolute;
       margin-top: 1%;
       margin-left: 3%;
     }
 
-    .subs {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      width: 39%;
-      height: 100%;
-      margin-top: 1%;
-      margin-left: 12%;
+      .subs {
+        display: flex;
+        flex-direction: column;
+        width: 34%;
+        margin-top: 1%;
+        margin-left: 2%;
 
-      .list {
+
+        .list {
         display: flex;
         flex-direction: row;
         margin-top: 2%;
@@ -353,47 +452,45 @@
           border-radius: 50%;
           width: 30px;
           height: 30px;
+          object-fit: cover;
         }
       }
     }
 
-    .about-text {
-      color: lightgray;
-      position: absolute;
-      margin-left: 50%;
-
+      .about-text {
+        color: lightgray;
+        margin-left: 9%;
     }
 
-    .stats {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      width: 28%;
-      height: 93%;
-      margin-top: 1%;
-      margin-left: 56%;
-      border-radius: 12px;
-      background-color: #1C1C24;
+      .stats {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        height: 150px;
+        margin-top: 1%;
+        margin-left: 20px;
+        border-radius: 12px;
+        background-color: #1C1C24;
 
-      .date {
+
+        .date {
         color: lightgray;
         margin-left: 5%;
       }
 
       .stats-st-data {
-        margin-left: 5%;
+        margin-left: 20px;
         margin-bottom: 0;
         color: lightgray;
       }
 
       .stats-data {
         margin-top: 0;
-        margin-left: 5%;
+        margin-left: 20px;
         margin-bottom: 0;
         color: lightgray;
       }
-
     }
   }
-
 }
+

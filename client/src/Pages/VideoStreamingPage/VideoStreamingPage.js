@@ -31,6 +31,7 @@ const VideoStreamingPage = () => {
     // Whether the component is currently loading the video
     const [isLoading, setIsLoading] = useState(true);
 
+    const [url, setUrl] = useState("");
     // An error message to display if there is an issue with loading the video
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -70,6 +71,7 @@ const VideoStreamingPage = () => {
                 // Update thevideoInfo state variable with the video data, !important data[0] so that it retrieves the array
                 setVideos(response.data.video_info[0]);
                 setComments(response.data.video_comments);
+                setUrl(response.data.video_info[0].url_video);
                 //setUserFollowedId(response.data[0].user_id)
                 //setIsLoading(false);
             })
@@ -100,6 +102,10 @@ const VideoStreamingPage = () => {
     if (isLoading === true) {
         return <div className="App">Loading...</div>;
     }
+
+    console.log("url: ", url)
+
+    const newUrl = `${API}/videos/${videos.video_key}/${videos.video_key}.mp4`
     if (isLoading === false && userId){
         return (
             <div className={"streaming-wrapper"}>
@@ -109,13 +115,10 @@ const VideoStreamingPage = () => {
                     <div className="streaming-container-1">
                         <div className={"streaming-video-details"}>
                             <div className={"video-player"}>
-                                <ReactPlayer
-                                    className={"video-player-r"}
-                                    width={"100%"}
-                                    playing
-                                    controls
-                                    url={`$`}
-                                />
+                                <video width="100%" controls>
+                                    <source src={`${API}${url}`} type="video/mp4"/>
+                                        Your browser does not support the video tag.
+                                </video>
                             </div>
                             <div className={"video-tags"}>
                                 {tags && tags.map((tag, idx) => {
@@ -188,6 +191,9 @@ const VideoStreamingPage = () => {
                             </div>}
                         </div>
                     </div>
+                    <div className={"streaming-container-2"}>
+                        Videos sugeridos
+                    </div>
                 </div>
             </div>
         );
@@ -201,16 +207,13 @@ const VideoStreamingPage = () => {
                     <div className="streaming-container-1">
                         <div className={"streaming-video-details"}>
                             <div className={"video-player"}>
-                                <ReactPlayer
-                                    className={"video-player-r"}
-                                    width={"100%"}
-                                    playing
-                                    controls
-                                    url={`$`}
-                                />
+                                <video width="100%" controls>
+                                    <source src={`${newUrl}`} type="video/mp4"/>
+                                    Your browser does not support the video tag.
+                                </video>
                             </div>
                             <div className={"video-tags"}>
-                                {tags.map((tag, idx) => {
+                                {tags && tags.map((tag, idx) => {
                                     return <p key={tag + "_" + idx} className={'tag'}>#{tag.name}</p>
                                 })}
                             </div>
@@ -235,6 +238,7 @@ const VideoStreamingPage = () => {
                                             <Link to={"/canal"}>
                                                 <p className={"video-channel-username"}>{videos.username}</p>
                                             </Link>
+
                                         </div>
                                         <div className="video-info-container-row-2">
                                             <p className={"views-days-posted"}>
@@ -278,6 +282,9 @@ const VideoStreamingPage = () => {
                                 })}
                             </div>}
                         </div>
+                    </div>
+                    <div className={"streaming-container-2"}>
+                        Videos sugeridos
                     </div>
                 </div>
             </div>

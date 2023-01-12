@@ -3,6 +3,8 @@ import axios from "axios";
 import {VideoUploader} from "../../Components/VideoUploader/VideoUploader";
 import "./Studio.scss"
 import VideoInfo from "../../Components/VideoUploader/VideoInfo";
+import Header from "../../Layout/Header";
+import SideBar from "../../Layout/SideBar";
 
 //localhost port for api
 const API = process.env.REACT_APP_API;
@@ -11,32 +13,52 @@ const API = process.env.REACT_APP_API;
 // It uses state variables to keep track of the form's state.
 export default function Studio() {
     const [isFileSubmitted, setIsFileSubmitted] = useState(false);
-    const [submitData, setSubmitData] = useState(null)
+    const [submitData, setSubmitData] = useState(null);
 
     const onSubmit = (data) => {
         setIsFileSubmitted(true)
         setSubmitData(data)
     }
 
-    const mockData = {
-        video_key: "tj0R6nKvQ",
-        user_id: 61,
-        thumbnail: "thumbnail",
-        title: "Y2Mate.is - 2 Second Video-TK4N5W22Gts-480p-1655596635602.mp4",
-        description: "description",
-        duration: "00:02",
-        url_video: "videos/Q-SzVbsb9/Q-SzVbsb9.mp4",
-        video_id: 26
+    /*
+        useEffect(() => {
+        handleThumbnailsLoading();
+    }, []); // this empty array ensures that the effect only runs once on mount
+
+    const handleThumbnailsLoading = async (data) => {
+        try {
+            const response = await axios.get(`${API}/video/${data.video_key}/tn_1.png`, {
+                withCredentials: true
+            });
+            if(response.data.success){
+                setLoading(false);
+            }
+        } catch (e) {
+            console.error("erro a ler thumbnails")
+        }
     }
 
-    /*{ !isFileSubmitted && <VideoUploader onSubmit={onSubmit} /> }
-            <VideoInfo videoData={submitData}/>*/
 
+    const onSubmit = (data) => {
+        if (!loading) {
+            handleThumbnailsLoading(data);
+            setIsFileSubmitted(true)
+            setSubmitData(data)
+        }
+    }
+    */
+console.log("submitData: Studio  ", submitData)
     return (
-        <div className={"container-wrapper"}>
-            <div className={"upload-title"}>Upload de um novo vídeo</div>
-            { isFileSubmitted ? <VideoInfo videoData={submitData} /> : < VideoUploader onSubmit={onSubmit} /> }
-
+        <div>
+            <div>
+                <Header/>
+                <SideBar/>
+            </div>
+            <div className={"container-wrapper"}>
+                { isFileSubmitted ? <div className={"upload-title"}>Edite os daodos do vídeo</div> : <div className={"upload-title"}>Upload de um novo vídeo</div> }
+                { isFileSubmitted ? <VideoInfo videoData={submitData} /> : < VideoUploader onSubmit={onSubmit} /> }
+            </div>
         </div>
+
     )
 }

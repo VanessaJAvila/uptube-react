@@ -8,6 +8,7 @@ import {
     faClapperboard, faClockRotateLeft, faFire, faGear, faHouse, faPlay, faRightFromBracket, faVideo
 } from "@fortawesome/free-solid-svg-icons";
 import {Link, useHistory} from "react-router-dom";
+import ReactSwitch from "react-switch";
 
 //localhost port for api
 const API = process.env.REACT_APP_API;
@@ -66,7 +67,7 @@ function SideBar() {
                 </Link>
             </div>
             <div className={"Histórico"}>
-                <Link to={"/Home"}><FontAwesomeIcon icon={faClockRotateLeft}/>
+                <Link to={"/history"}><FontAwesomeIcon icon={faClockRotateLeft}/>
                     <p>Histórico</p>
                 </Link>
             </div>
@@ -80,8 +81,7 @@ function SideBar() {
         <div className={"Tags"}>
             <h4>Tags</h4>
             <div className={"tag"}>
-                { tags && Object.values(tags).map(
-                    (tag, idx) =>
+                { tags && Object.values(tags).map( (tag, idx) =>
                         idx < 12 && (
                     <div key={idx}>
                         <button onClick={() => handleTags(tag)} value={tag.name}>

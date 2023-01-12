@@ -159,7 +159,6 @@ export default function UserChannel() {
              </div>*/}
         <h2 className={"playlist"}>Playlists</h2>
         <div className={"container-playlists"}>
-            <VideoCard></VideoCard>
         </div>
         <div className={"container-stats"}>
             <h4 className={"about-text"}>Acerca</h4>

@@ -1,28 +1,164 @@
 import {getNumberOfDays} from "../../../Utils/getDateXDaysAgo";
 import React from "react";
 import "./VideoCard.scss"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMessage, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
+import {faBookmark} from "@fortawesome/free-regular-svg-icons";
+import thumbnail from "../../../Assets/sample-thumbnails/ssh_1.png"
+import img1 from "../../sample-thumbnails/ssh_1.png";
+import img2 from "../../sample-thumbnails/ssh_2.png";
+import getDaySeen from "../../../Utils/getDaySeen";
+import {Link} from "react-router-dom";
 
-function VideoCard({title, date, duration, thumbnail, likes, comments, views, username, photo, type, extraActions}){
+//localhost port for api
+const API = process.env.REACT_APP_API;
 
+function VideoCard(props) {
+    switch (props.type) {
 
-   // "SELECT playlist.*, invited_id is not null as guest FROM `playlist` join playlist_has_videos on playlist.playlist_id = playlist_has_videos.playlist_id left JOIN playlist_has_invitees on playlist_has_invitees.playlist_id = playlist.playlist_id where (creator_id = 28 or invited_id = 28) and playlist_has_videos.video_id = 24;"
-
-
-    switch (type) {
         case "geral":
-            return (<div className="video-card">
-            <div className="title">{title}</div>
-            <div className="days-posted">há {getNumberOfDays(date, Date.now())} dias</div>
-            <div className="length">{duration}</div>
-            <div className="thumbnail">
-                {/*<img src={`https://github.com/upskill-frontend-react-2022/uptube-grupo-5-react/${thumbnail}`}/>*/}
-            </div>
-            <div className="likes">{likes} likes</div>
-            <div className="comments">{comments} comments</div>
-            <div className="views">{views} visualizações</div>
-            <div className="username">{username}</div>
-            <div className="user-photo">{photo}</div>
-        </div>)
+            return (
+                <div className={"suggestions-wrapper"}>
+                    <div className="video-card-suggestions">
+                        <Link to={`/player/${props.video_id}`}>
+                            <div className={"thumbnail-container"}
+                                 style={{backgroundImage: `url(${API}${props.thumbnail}`}}>
+
+                                <p className={"length"}>{props.duration}</p>
+                            </div>
+                        </Link>
+                        <div className={"video-details-wrapper"}>
+                            <div>
+                                <Link to={`/channel/${props.user_id}`}>
+                                <p className={"username"}>{props.username}</p>
+                                </Link>
+                                <Link to={`/player/${props.video_id}`}>
+                                <h3 className={"video-title"}>{props.title.length > 40 ? props.title.slice(0, 37) + "..." : props.title}</h3>
+
+                                    <div className={"details-container"}>
+                                    <p>{props.views} visualizações | {getDaySeen(props.date)}</p>
+                                </div>
+                                </Link>
+                            </div>
+                            <Link to={`/channel/${props.user_id}`}>
+                            <div className={"user-photo"}
+                                 style={{backgroundImage: `url(${props.photo}`}}>
+                            </div>
+                            </Link>
+                        </div>
+                        <div className={"reactions-container"}>
+                            <div className={"graph"}/>
+                            <div className={"reactions"}>
+                                <div className={"comments"}>
+                                    <FontAwesomeIcon icon={faMessage} className={"icon"}/>
+                                    {props.comments === 1 ?
+                                        <p> {props.comments} comentário</p> :
+                                        <p> {props.comments} comentários</p>
+                                    }
+                                </div>
+                                <div className={"likes"}>
+                                    <FontAwesomeIcon icon={faThumbsUp} className={"icon"}/>
+                                    {props.likes === 1 ?
+                                        <p> {props.likes} like</p> :
+                                        <p> {props.likes} likes</p>
+                                    }
+                                </div>
+                                <div>
+                                    <FontAwesomeIcon icon={faBookmark} className={"save"}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        case "history":
+            return (
+                <div className={"suggestions-wrapper"}>
+                    <div className="video-card-suggestions">
+                        <div className={"thumbnail-container"}
+                             style={{backgroundImage: `url(${img1}`}}>
+                            <p className={"length"}>{props.duration}</p>
+                        </div>
+                        <div className={"user-photo"}
+                             style={{backgroundImage: `url('${img2}')`}}>
+                        </div>
+
+                        <Link to={`/channel/${props.user_id}`}>
+                            <p className={"username"}>{props.user}</p>
+                        </Link>
+
+
+                        <h3 className={"video-title"}>{props.title}</h3>
+                        <div className={"details-container"}>
+                            <p>{props.views} visualizações | {getNumberOfDays(props.date)}</p>
+                            <p>{props.views} visualizações | {getNumberOfDays(props.date)}</p>
+                        </div>
+                        <div className={"reactions-container"}>
+                            <div className={"graph"}/>
+                            <div className={"reactions"}>
+                                <div className={"comments"}>
+                                    <FontAwesomeIcon icon={faMessage} className={"icon"}/>
+                                    {props.comments === 1 ?
+                                        <p> {props.comments} comentário</p> :
+                                        <p> {props.comments} comentários</p>
+                                    }
+                                </div>
+                                <div className={"likes"}>
+                                    <FontAwesomeIcon icon={faThumbsUp} className={"icon"}/>
+                                    {props.likes === 1 ?
+                                        <p> {props.likes} like</p> :
+                                        <p> {props.likes} likes</p>
+                                    }
+                                </div>
+                                <div>
+                                    <FontAwesomeIcon icon={faBookmark} className={""}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        case "channel":
+            return (
+                <div className={"video-card " + props.type}>
+                    <div className={"thumbnail-container"}
+                         style={{backgroundImage: `url(${img1}`}}>
+                        <p className={"length"}>{props.duration}</p>
+                    </div>
+                    <div className={"user-photo"}
+                         style={{backgroundImage: `url('${img2}')`}}>
+                    </div>
+                    <p className={"username"}>{props.user}</p>
+                    <h3 className={"video-title"}>{props.title}</h3>
+                    <div className={"details-container"}>
+                        <p>{props.views} visualizações | {getNumberOfDays(props.date)}</p>
+                        <p>{props.views} visualizações | {getNumberOfDays(props.date)}</p>
+                    </div>
+                    <div className={"reactions-container"}>
+                        <div className={"graph"}/>
+                        <div className={"reactions"}>
+                            <div className={"comments"}>
+                                <FontAwesomeIcon icon={faMessage} className={"icon"}/>
+                                {props.comments === 1 ?
+                                    <p> {props.comments} comentário</p> :
+                                    <p> {props.comments} comentários</p>
+                                }
+                            </div>
+                            <div className={"likes"}>
+                                <FontAwesomeIcon icon={faThumbsUp} className={"icon"}/>
+                                {props.likes === 1 ?
+                                    <p> {props.likes} like</p> :
+                                    <p> {props.likes} likes</p>
+                                }
+                            </div>
+                            <div>
+                                <FontAwesomeIcon icon={faBookmark} className={""}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+
     }
 }
 
