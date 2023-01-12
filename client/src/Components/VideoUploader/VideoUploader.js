@@ -7,7 +7,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUpload} from "@fortawesome/free-solid-svg-icons";
 import {CircularProgressbar, buildStyles} from 'react-circular-progressbar';
 
+
 import SideBar from "../../Layout/SideBar";
+import {Redirect} from "react-router-dom";
 
 //localhost port for api
 const API = process.env.REACT_APP_API;
@@ -25,6 +27,7 @@ export const VideoUploader = ({onSubmit}) => {
     const inputRef = useRef(null);
     const [fileName, setFileName] = useState('')
 
+
     const uploadFile = async (file) => {
         setIsLoading(true);
         try {
@@ -36,8 +39,8 @@ export const VideoUploader = ({onSubmit}) => {
                     setUploadPercentage(Math.floor(progress * 100));
                 }
             }).then((res) => {
-                console.log(res.data)
-                onSubmit(res.data)
+                console.log("response from vid  upload:",res.data.data)
+                onSubmit(res.data.data)
             })
         } catch (error) {
             console.log(error);
@@ -87,7 +90,6 @@ export const VideoUploader = ({onSubmit}) => {
                                          textSize: '12px',
                                          trailColor: 'rgba(19, 19, 26)',
                                          backgroundColor: 'rgba(19, 19, 26)',
-
                                      })}
                 />
                 <div className={'progress-container-progress-bar'}>

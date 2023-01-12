@@ -64,7 +64,6 @@ function App() {
                             </>}
                         >
                             <Route path="/Suggested" component={Suggested}/>
-
                             <SearchProvider>
                                 <Route path="/Home" component={Home}/>
                                 <Route path="/UserChannel" component={UserChannel}/>
@@ -77,7 +76,6 @@ function App() {
                                 <Route path ="/Playlists" component ={Playlists}/>
                                 <Route path="/Playlist/:playlist_id" component={playlist}/>
                                 <Route path="/SearchResults" component={SearchResults}/>
-                                <Redirect to={"/Home"}/>
                             </SearchProvider>
                         </AuthHandler>
                     </Switch>

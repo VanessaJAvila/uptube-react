@@ -7,6 +7,7 @@
     flex-direction: row;
 
     .streaming-container-1 {
+      width: 70%;
       margin-top: 10%;
       height: 100%;
       margin-left: 2em;
@@ -231,6 +232,14 @@
           }
         }
       }
+    }
+    .streaming-container-2 {
+      width: 30%;
+      background-color: #7e0707;
+      margin-right: 2em ;
+      margin-top: 10%;
+
+
     }
   }
 }
