@@ -67,7 +67,7 @@ function SideBar() {
                 </Link>
             </div>
             <div className={"Histórico"}>
-                <Link to={"/Home"}><FontAwesomeIcon icon={faClockRotateLeft}/>
+                <Link to={"/history"}><FontAwesomeIcon icon={faClockRotateLeft}/>
                     <p>Histórico</p>
                 </Link>
             </div>

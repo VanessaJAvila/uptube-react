@@ -41,6 +41,7 @@
         margin-top: calc(100% - 101%);
         margin-left: 85%;
         border: 3px solid whitesmoke;
+        object-fit: cover;
       }
 
       .channel-name {
@@ -136,6 +137,10 @@
         margin-top: 7%;
         margin-left: 17%;
       }
+    }
+
+    .starting:hover {
+      box-shadow: 4px 4px 4px 4px #78d511;
     }
 
     .starting {

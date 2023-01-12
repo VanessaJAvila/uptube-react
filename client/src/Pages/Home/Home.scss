@@ -5,222 +5,121 @@
   .container-home {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    width: 50%;
     height: 60%;
     margin-top: 5%;
-    margin-left: 19%;
+    margin-left: 18%;
     color: white;
 
-    h1 {
-      margin-top: 0;
-      margin-bottom: 0;
+    .container-geral {
+      display: flex;
+      flex-direction: column;
+
+      h1 {
+        margin-top: 10px;
+        margin-bottom: 0;
+      }
+
+      .container-videos {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        height: 20%;
+        color: black;
+        background-color: dimgrey;
+        position: absolute;
+        margin-left: 200px;
+      }
+
+      .recomendations {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        background-color: dimgrey;
+        margin-left: 190px;
+      }
+
+
     }
 
-    .container-channels-2 {
+
+    .channels-containers-wrapper {
       display: flex;
-      width: 13%;
-      height: 34%;
-      margin-top: 19%;
-      border-radius: 15px;
-      position: fixed;
-      background-color: #1C1C24;
+      flex-direction: column;
+      width: 197px;
+      height: 589px;
+      margin: 4%;
+      justify-content: space-between;
 
-      .chan-thumb {
+
+      .container-channels {
         display: flex;
-        margin-top: 47%;
-        margin-left: -94%;
-        border: 1px solid dimgray;
-        border-radius: 10px;
-        height: 134px;
-        width: 88%;
-
-        img{
-          width: 175px;
-          height: 100px;
-          border-radius: 10px 10px 0 0;
-        }
+        flex-direction: column;
+        border-radius: 15px;
+        background-color: #1C1C24;
+        flex-wrap: wrap;
 
 
-        .add-icon {
-          position: absolute;
-          margin-top: 110px;
-          margin-left: 50px;
-          color: dimgray;
-        }
-
-        .follow-chan {
-          font-size: 8pt;
-          color: dimgray;
-          margin-top: 65%;
-          margin-left: calc(100% - 155%);
-        }
-
-      }
-
-      .title {
-        position: relative;
-        text-align: left;
-        width: 100%;
-        height: 24px;
-        margin-top: 5%;
-        color: lightgrey;
-        border-bottom: 1px solid dimgrey;
-
-        h3 {
-          margin-top: 0;
-          margin-left: 11px;
-          font-size: 14px;
-        }
-      }
-
-      .add-channel {
-        display: flex;
-        position: absolute;
-        width: 91%;
-        height: 40px;
-        margin-top: 21%;
-        margin-left: 8px;
-
-        .photo-channel-2 {
+        .list {
           display: flex;
-          width: 23%;
-          height: 30px;
-          margin-top: 3%;
-          margin-left: -6%;
-          position: absolute;
+          flex-direction: row;
 
+          p.channel-id {
+            display: flex;
+            width: 60%;
+            height: 26px;
+            margin-top: calc(100% - 103%);
+            position: absolute;
+            margin-left: 23%;
+            font-size: 9pt;
+          }
 
-          .photo-chan-2 {
-            border-radius: 50%;
-            width: 100%;
-            height: 100%;
-            margin-top: calc(100% - 55px);
+          p.channel-bio {
+            font-family: Arial, sans-serif;
+            color: grey;
+            font-size: 7pt;
+            margin-top: 6%;
+            margin-left: 31%;
+            width: 87px;
+          }
+
+          .channel {
+            font-size: 9pt;
+            color: lightgray;
+          }
+
+          .photo-channel {
+            display: flex;
+            width: 20%;
+            height: 26px;
+
+            .photo-chan {
+              border-radius: 50%;
+              width: 70%;
+              height: 70%;
+            }
           }
         }
 
-        h4 {
-          margin-top: 133px;
-          margin-left: 78px;
+        .title {
+          margin-top: 15px;
+          text-align: left;
+          width: 100%;
           color: lightgrey;
-          font-size: 10px;
-        }
-      }
-    }
+          border-bottom: 1px solid dimgrey;
 
-    .container-videos {
-      display: flex;
-      flex-direction: column;
-      width: 30%;
-      height: 20%;
-      color: black;
-      background-color: dimgrey;
-      position: absolute;
-      margin-left: 200px;
-    }
-
-    .recomendations {
-      display: flex;
-      flex-direction: column;
-      width: 30%;
-      background-color: dimgrey;
-      margin-left: 190px;
-
-    }
-
-    .container-channels {
-      display: flex;
-      flex-direction: column;
-      width: 13%;
-      height: 38%;
-      margin-top: 2%;
-      margin-left: 65%;
-      border-radius: 15px;
-      position: fixed;
-      background-color: #1C1C24;
-
-
-      .list {
-        display: flex;
-        flex-direction: row;
-        margin-top: 5%;
-        margin-left: 10%;
-        padding-top: 9px;
-        width: 77%;
-        height: 23px;
-
-
-        p.channel-id {
-          display: flex;
-          width: 60%;
-          height: 26px;
-          margin-top: calc(100% - 103%);
-          position: absolute;
-          margin-left: 23%;
-          font-size: 9pt;
-        }
-
-        p.channel-bio {
-          font-family: Arial, sans-serif;
-          color: grey;
-          font-size: 7pt;
-          margin-top: 6%;
-          margin-left: 31%;
-          width: 87px;
-        }
-
-
-        .channel {
-          margin-top: 11px;
-          margin-left: 23%;
-          font-size: 9pt;
-          color: lightgray;
-        }
-
-        .photo-channel {
-          display: flex;
-          width: 20%;
-          height: 26px;
-          margin-top: 3%;
-          position: absolute;
-
-          .photo-chan {
-            border-radius: 50%;
-            width: 70%;
-            height: 70%;
+          h3 {
+            margin-top: 0;
+            margin-left: 11px;
+            font-size: 14px;
           }
         }
-      }
 
-      .title {
-        position: relative;
-        margin-top: 15px;
-        text-align: left;
-        width: 100%;
-        height: 24px;
-        color: lightgrey;
-        border-bottom: 1px solid dimgrey;
-
-
-        h3 {
-          margin-top: 0;
-          margin-left: 11px;
-          font-size: 14px;
+        .see-more-btn {
+          background-color: #30303a;
+          border-radius: 0 0 10px 10px;
         }
-      }
-
-      .see-more-btn {
-        width: 198px;
-        height: 37px;
-        background-color: #30303a;
-        margin-top: 225px;
-        padding-top: 12px;
-        border-radius: 0 0 10px 10px;
-        position: absolute;
-        margin-left: -1px;
 
         .pagination {
-
           h3 {
             margin-top: 7px;
             text-align: center;
@@ -229,6 +128,76 @@
           }
         }
       }
+
+      .container-channels-2 {
+        border-radius: 15px;
+        background-color: #1C1C24;
+
+        .chan-thumb {
+          display: flex;
+          border: 1px solid dimgray;
+
+          img {
+            width: 175px;
+            height: 100px;
+            border-radius: 10px 10px 0 0;
+          }
+
+          .add-icon {
+            position: absolute;
+            margin-top: 110px;
+            margin-left: 50px;
+            color: dimgray;
+          }
+
+          .follow-chan {
+            font-size: 8pt;
+            color: dimgray;
+            margin-top: 65%;
+            margin-left: calc(100% - 155%);
+          }
+        }
+
+        .title {
+          position: relative;
+          text-align: left;
+          width: 100%;
+          height: 24px;
+          margin-top: 5%;
+          color: lightgrey;
+          border-bottom: 1px solid dimgrey;
+
+          h3 {
+            margin-top: 0;
+            margin-left: 11px;
+            font-size: 14px;
+          }
+        }
+
+        .add-channel {
+          display: flex;
+
+          .photo-channel-2 {
+            display: flex;
+            height: 30px;
+
+            .photo-chan-2 {
+              border-radius: 50%;
+              width: 100%;
+              height: 100%;
+              margin-top: calc(100% - 55px);
+            }
+          }
+
+          h4 {
+            margin-top: 133px;
+            margin-left: 78px;
+            color: lightgrey;
+            font-size: 10px;
+          }
+        }
+      }
+
     }
   }
 }

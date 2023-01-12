@@ -12,7 +12,7 @@ import VideoCard from "../../Assets/Components/VideoCard/VideoCard";
 import {faEllipsis, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useHistory} from "react-router-dom";
-import logo from "../../Layout/logo.svg";
+
 
 //localhost port for api
 const  API  = process.env.REACT_APP_API;
@@ -67,6 +67,7 @@ function Home() {
         <Header/>
         <SideBar/>
         <div className={"container-home"}>
+            <div className={"container-geral"}>
             <h1>Videos sugeridos</h1>
             <div className="geral">
                 {currentRecomendations.map((video, idx) => (<VideoCard type={"geral"} key={idx} {...video}/>))}
@@ -80,6 +81,8 @@ function Home() {
                                 <p>Mostrar Mais</p></div>}
                     </div>}
             </div>
+            </div>
+            <div className={"channels-containers-wrapper"}>
             <div className={"container-channels"}>
                 <div className={"title"}>
                     <h3>Canais Sugeridos</h3>
@@ -103,6 +106,7 @@ function Home() {
                             {topChannels.length > 0 && <h3>Mostrar Mais</h3>}
                         </div>}
                 </div>
+            </div>
                 {user && <div className={"container-channels-2"}>
                     <div className={"title"}>
                         <h3>Canal mais visto</h3>
@@ -133,7 +137,7 @@ function Home() {
                     </div>
                 </div>}
             </div>
-        </div>
+            </div>
     </div>
 }
 

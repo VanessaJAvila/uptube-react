@@ -109,6 +109,7 @@
           margin-top: 10%;
           margin-left: 85%;
           border: 3px solid whitesmoke;
+          object-fit: cover;
 
         }
 
@@ -165,12 +166,16 @@
     border-radius: 10px;
     flex-wrap: nowrap;
 
+    .goldStalker:hover {
+      box-shadow: 4px 4px 4px 4px #857010;
+    }
+
     .goldStalker {
       background-color: #13131A;
       width: 7%;
       height: 87%;
       margin-top: 7px;
-      margin-left: 274px;
+      margin-left: 31%;
       position: absolute;
       border-radius: 10px;
 
@@ -191,6 +196,9 @@
     margin-left: 30%;
   }
 }
+
+
+
       img.Stalker.ouro {
         width: 76%;
         margin-top: 9%;
@@ -204,6 +212,11 @@
         margin-left: 24%;
       }
     }
+
+    .bronzeInflu:hover {
+      box-shadow: 4px 4px 4px 4px #624d0b;
+    }
+
 
     .bronzeInflu {
       background-color: #13131A;
@@ -227,6 +240,10 @@
         margin-top: 7%;
         margin-left: 17%;
       }
+    }
+
+    .starting:hover {
+      box-shadow: 4px 4px 4px 4px #78d511;
     }
 
     .starting {
@@ -264,7 +281,6 @@
         margin-left: 6%;
       }
 
-
       .começar {
         width: 65%;
         position: absolute;
@@ -273,32 +289,37 @@
       }
     }
 
-    .goldLoved {
+    .goldLoved:hover {
+      box-shadow: 4px 4px 4px 4px #857010;
+    }
+
+      .goldLoved {
       background-color: #13131A;
       width: 7%;
       height: 87%;
       margin-top: 7px;
-      margin-left: 8%;
+      margin-left: 11%;
       position: absolute;
       border-radius: 10px;
 
-      .hide-Achi {
-        position: absolute;
-        background-color: red;
-        border-radius: 50%;
-        width: 18%;
-        height: 12%;
-        color: black;
-        margin-left: 82%;
-        margin-top: -4px;
-        z-index: 1;
 
-          .close-achi{
+        .hide-Achi {
+          position: absolute;
+          background-color: red;
+          border-radius: 50%;
+          width: 18%;
+          height: 12%;
+          color: black;
+          margin-left: 82%;
+          margin-top: -4px;
+          z-index: 1;
+
+          .close-achi {
             width: 40%;
             margin-top: -25%;
             margin-left: 30%;
+          }
         }
-      }
 
       p {
         color: lightgray;
@@ -318,12 +339,16 @@
       }
     }
 
+    .goldRising:hover {
+      box-shadow: 4px 4px 4px 4px #857010;
+    }
+
     .goldRising {
       background-color: #13131A;
       width: 7%;
       height: 87%;
       margin-top: 7px;
-      margin-left: 185px;
+      margin-left: 21%;
       position: absolute;
       border-radius: 10px;
 
@@ -432,6 +457,7 @@
           border-radius: 50%;
           width: 30px;
           height: 30px;
+          object-fit: cover;
         }
       }
     }
