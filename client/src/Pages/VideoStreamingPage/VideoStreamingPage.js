@@ -103,19 +103,9 @@ const VideoStreamingPage = () => {
         return <div className="App">Loading...</div>;
     }
 
-    function handleVideoPlay() {
-        // increment the view count
-        setViewCount(viewCount + 1);
-
-        // make a call to your API to increment the view count on the server
-        fetch(`${API}/video/${props.videoId}/views`, { method: 'POST' })
-            .then(response => response.json())
-            .then(data => console.log('View count incremented:', data))
-            .catch(error => console.error('Error incrementing view count:', error));
-    }
-
     console.log("url: ", url)
 
+    const newUrl = `${API}/videos/${videos.video_key}/${videos.video_key}.mp4`
     if (isLoading === false && userId){
         return (
             <div className={"streaming-wrapper"}>
@@ -131,7 +121,7 @@ const VideoStreamingPage = () => {
                                 </video>
                             </div>
                             <div className={"video-tags"}>
-                                {tags.map((tag, idx) => {
+                                {tags && tags.map((tag, idx) => {
                                     return <p key={tag + "_" + idx} className={'tag'}>#{tag.name}</p>
                                 })}
                             </div>
@@ -218,12 +208,12 @@ const VideoStreamingPage = () => {
                         <div className={"streaming-video-details"}>
                             <div className={"video-player"}>
                                 <video width="100%" controls>
-                                    <source src={`${API}${url}`} type="video/mp4"/>
+                                    <source src={`${newUrl}`} type="video/mp4"/>
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
                             <div className={"video-tags"}>
-                                {tags.map((tag, idx) => {
+                                {tags && tags.map((tag, idx) => {
                                     return <p key={tag + "_" + idx} className={'tag'}>#{tag.name}</p>
                                 })}
                             </div>

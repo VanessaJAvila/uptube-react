@@ -8,6 +8,10 @@ import thumbnail from "../../../Assets/sample-thumbnails/ssh_1.png"
 import img1 from "../../sample-thumbnails/ssh_1.png";
 import img2 from "../../sample-thumbnails/ssh_2.png";
 import getDaySeen from "../../../Utils/getDaySeen";
+import {Link} from "react-router-dom";
+
+//localhost port for api
+const API = process.env.REACT_APP_API;
 
 function VideoCard(props) {
     switch (props.type) {
@@ -16,24 +20,31 @@ function VideoCard(props) {
             return (
                 <div className={"suggestions-wrapper"}>
                     <div className="video-card-suggestions">
-                        <div className={"thumbnail-container"}
-                             style={{backgroundImage: `url(${img1}`}}>
-                            <p className={"length"}>{props.duration}</p>
+                        <Link to={`/player/${props.video_id}`}>
+                            <div className={"thumbnail-container"}
+                                 style={{backgroundImage: `url(${API}${props.thumbnail}`}}>
 
-                        </div>
+                                <p className={"length"}>{props.duration}</p>
+                            </div>
+                        </Link>
                         <div className={"video-details-wrapper"}>
-
                             <div>
+                                <Link to={`/channel/${props.user_id}`}>
                                 <p className={"username"}>{props.username}</p>
+                                </Link>
+                                <Link to={`/player/${props.video_id}`}>
                                 <h3 className={"video-title"}>{props.title.length > 40 ? props.title.slice(0, 37) + "..." : props.title}</h3>
-                                <div className={"details-container"}>
+
+                                    <div className={"details-container"}>
                                     <p>{props.views} visualizações | {getDaySeen(props.date)}</p>
                                 </div>
+                                </Link>
                             </div>
+                            <Link to={`/channel/${props.user_id}`}>
                             <div className={"user-photo"}
-                                 style={{backgroundImage: `url('${img2}')`}}>
+                                 style={{backgroundImage: `url(${props.photo}`}}>
                             </div>
-
+                            </Link>
                         </div>
                         <div className={"reactions-container"}>
                             <div className={"graph"}/>
@@ -71,7 +82,12 @@ function VideoCard(props) {
                         <div className={"user-photo"}
                              style={{backgroundImage: `url('${img2}')`}}>
                         </div>
-                        {["suggestion", "geral"].includes(props.type) && <p className={"username"}>{props.user}</p>}
+
+                        <Link to={`/channel/${props.user_id}`}>
+                            <p className={"username"}>{props.user}</p>
+                        </Link>
+
+
                         <h3 className={"video-title"}>{props.title}</h3>
                         <div className={"details-container"}>
                             <p>{props.views} visualizações | {getNumberOfDays(props.date)}</p>

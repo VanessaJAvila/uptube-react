@@ -3,11 +3,6 @@ import {faFingerprint, faPlus, faX} from "@fortawesome/free-solid-svg-icons";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import "./VideoInfo.scss"
-import img1 from "../../Assets/sample-thumbnails/ssh_1.png"
-import img2 from "../../Assets/sample-thumbnails/ssh_2.png"
-import img3 from "../../Assets/sample-thumbnails/ssh_3.png"
-import img4 from "../../Assets/sample-thumbnails/ssh_4.png"
-import * as PropTypes from "prop-types";
 import CreateNewTag from "./CreateNewTag/CreateNewTag";
 import {Redirect} from "react-router-dom";
 import VideoStreamingPage from "../../Pages/VideoStreamingPage/VideoStreamingPage";
@@ -43,7 +38,6 @@ export default function VideoInfo( {videoData}){
             }, {
                 withCredentials: true
             }).then(r =>{
-                <Redirect to={`/player/${videoId}`}/>
                 console.log(r.request.statusText)
             });
         }catch(e){
@@ -103,7 +97,7 @@ export default function VideoInfo( {videoData}){
                             }} onMouseLeave={() => {
                                 setTooltip(0)
                             }}onClick={() => {
-                                setActiveThumb('ssh_1.png')
+                                setActiveThumb('tn_1.png')
                                 setThumbStyleOne('active')
                                 setThumbStyleTwo('')
                                 setThumbStyleThree('')
@@ -111,9 +105,9 @@ export default function VideoInfo( {videoData}){
                             }}>
                                 {tooltip === 1 &&
                                     <span className={'upload-video-details-thumbs-thumb-tooltip'}>Escolher como capa</span>}
-                                {videoData.title && <div className={'upload-video-details-thumbs-thumb'}>
-                                    <img src={`${API}/video/${videoData.video_key}/tn_1.png`} onLoad={() => setImageLoaded(true)} />
-                                </div>}
+                                <div className={'upload-video-details-thumbs-thumb'}
+                                     style={{backgroundImage: `url(${API}/videos/${
+                                             videoData.video_key}/tn_1.png)`}}></div>
                             </div>
 
                             <div className={`upload-video-details-thumbs-thumb-container upload-video-details-thumbs-border-${thumbStyleTwo}`} onMouseEnter={() => {
@@ -121,7 +115,7 @@ export default function VideoInfo( {videoData}){
                             }} onMouseLeave={() => {
                                 setTooltip(0)
                             }} onClick={() => {
-                                setActiveThumb('ssh_2.png')
+                                setActiveThumb('tn_2.png')
                                 setThumbStyleOne('')
                                 setThumbStyleTwo('active')
                                 setThumbStyleThree('')
@@ -130,14 +124,14 @@ export default function VideoInfo( {videoData}){
                                 {tooltip === 2 &&
                                     <span className={'upload-video-details-thumbs-thumb-tooltip'}>Escolher como capa</span>}
                                 <div className={'upload-video-details-thumbs-thumb'}
-                                     style={{backgroundImage: `url(${API}/video/${videoData.video_key}/tn_2.png)`}}></div>
+                                     style={{backgroundImage: `url(${API}/videos/${videoData.video_key}/tn_2.png)`}}></div>
                             </div>
                             <div className={`upload-video-details-thumbs-thumb-container upload-video-details-thumbs-border-${thumbStyleThree}`} onMouseEnter={() => {
                                 setTooltip(3)
                             }} onMouseLeave={() => {
                                 setTooltip(0)
                             }}onClick={() => {
-                                setActiveThumb('ssh_3.png')
+                                setActiveThumb('tn_3.png')
                                 setThumbStyleOne('')
                                 setThumbStyleTwo('')
                                 setThumbStyleThree('active')
@@ -146,7 +140,8 @@ export default function VideoInfo( {videoData}){
                                 {tooltip === 3 &&
                                     <span className={'upload-video-details-thumbs-thumb-tooltip'}>Escolher como capa</span>}
                                 <div className={'upload-video-details-thumbs-thumb'}
-                                     style={{backgroundImage: `url(${API}/video/${videoData.video_key}/tn_3.png)`}}></div>
+                                     style={{backgroundImage: `url(${API}/videos/${
+videoData.video_key}/tn_3.png)`}}></div>
                             </div>
 
                             <div className={`upload-video-details-thumbs-thumb-container upload-video-details-thumbs-border-${thumbStyleFour}`} onMouseEnter={() => {
@@ -154,7 +149,7 @@ export default function VideoInfo( {videoData}){
                             }} onMouseLeave={() => {
                                 setTooltip(0)
                             }}onClick={() => {
-                                setActiveThumb('ssh_4.png')
+                                setActiveThumb('tn_4.png')
                                 setThumbStyleOne('')
                                 setThumbStyleTwo('')
                                 setThumbStyleThree('')
@@ -163,7 +158,8 @@ export default function VideoInfo( {videoData}){
                                 {tooltip === 4 &&
                                     <span className={'upload-video-details-thumbs-thumb-tooltip'}>Escolher como capa</span>}
                                 <div className={'upload-video-details-thumbs-thumb'}
-                                     style={{backgroundImage: `url(${API}/video/${videoData.video_key}/tn_4.png)`}}></div>
+                                     style={{backgroundImage: `url(${API}/videos/${
+videoData.video_key}/tn_4.png)`}}></div>
                             </div>
 
                         </div>
@@ -215,8 +211,7 @@ export default function VideoInfo( {videoData}){
                             </div>
                         </div>
                     </div>
-                </div>}
-
+                </div>
                 {addTags && <div className={'video-upload-add-tag'}>
                     <div className={'video-upload-add-tag-container'}>
                         <div className={'video-upload-add-tag-container-two'}>
