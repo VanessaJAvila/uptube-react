@@ -79,6 +79,16 @@ label {
     color:#1C1C24;
 }
 
+#light .date {
+    color:#1C1C24;
+}
+#light .stats-st-data {
+    color: #1C1C24;
+}
+
+#light .stats-data {
+    color: #1C1C24;
+}
 #light .inputContainer{
     background-color: whitesmoke;
     color:#1C1C24;

@@ -110,19 +110,14 @@ export default function UserChannel() {
     }, [user]);
 
 
-    if (!videos || !achis || !stats || !subs || !userChannel) return null;
-
-
     return <div className={'channel-container'}>
         <Header/>
         <SideBar/>
         <div className={"container-wrapper"}>
         <div className={"user-details"}>
-            <div className={"layer-bg"}>
                 <div className={"channel-bg"}
                      style={{backgroundImage: `url(${user?.header})`}}>
                     {edit && <Link to={"/Profile"}><FontAwesomeIcon className={"edit-bg-icon"} icon={faPenToSquare}/></Link>}
-                </div>
             </div>
             <div className={'edit-user-details'}>
                     <div className={"edit"} onClick={toggleEdit}>
@@ -200,29 +195,26 @@ export default function UserChannel() {
 
              </div>}
              <h2 className={"upload"}>Uploads  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowUploads}/>}</h2>
-        {/*{showUp &&  <div className={"geral"}>
+            {/*   {showUp &&  <div className={"container-uploads"}>
                  {!videos && <p>A carregar...</p>}
                  {videos && <>
                      {videos.length === 0 && <p className={"no results"}>Partilha o teu 1º video?</p>}
-                     {videos.map((v, idx) => (<VideoCard type="geral"  {...v}/>))}
+                     {videos.map((v, idx) => (<VideoCard type="channel" key={idx} {...v}/>))}
                  </>}
              </div>}*/}
              <h2 className={"playlist"}>Playlists  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowPlay}/>}</h2>
         { showPlay && <div className={"container-playlists"}>
-                 <VideoCard></VideoCard>
+
              </div>}
              <div className={"container-subs-stats"}>
                  <h4 className={"subs-text"}>Subscrições</h4>
                  <div className={"subs"}>
-                     {subs.map ((s, idx) =>{
-                         return <div className="list"  key={idx} onClick={() => {
-                             history.push(`/${s.channel}`)
-                              window.location.reload()
-                         }}>
-                             <img className="photo-chan" src={s.avatar} alt="channel" />
-                             <p className="channel">{s.username}</p>
-                         </div>
-                     })}
+                     { subs && subs.map ((s, idx) =>
+                     idx < 5 &&  (<div className="list"  key={idx} onClick={() => {
+                             history.push(`/${s.channel}`)}}>
+                             <img className={"photo-chan"} src={s.avatar} alt="channel"/>
+                             <p className={"channel"}>{s.username}</p>
+                         </div>))}
 
                  </div>
                  <h4 className={"about-text"}>Acerca</h4>
