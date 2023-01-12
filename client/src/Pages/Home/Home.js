@@ -49,6 +49,8 @@ function Home() {
             }).catch(e => console.log(e));
     }, []);
 
+    //        axios.get(`${API}/suggested/topchannels`)
+
     useEffect(() => {
         axios.get(`${API}/user`)
             .then(response => {
@@ -57,8 +59,6 @@ function Home() {
                 setTopChannel(response.data);
             }).catch(e => console.log(e));
     }, []);
-
-    console.log ("canais", topChannels,"canal", topChannel)
 
     if (!recommendations || !topChannels || !topChannel) return null;
 
@@ -86,6 +86,7 @@ function Home() {
             <div className={"container-channels"}>
                 <div className={"title"}>
                     <h3>Canais Sugeridos</h3>
+                    <FontAwesomeIcon className={'suggestions-icon'} icon={faEllipsis}/>
                     {currentChannels.map((c, idx) => {
                         return c.username ? (
                             <div className={"list"} key={c + idx} onClick={() => {
