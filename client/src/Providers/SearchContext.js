@@ -32,7 +32,7 @@ const SearchProvider = ({children}) => {
             return;
         }
         axios
-            .get(`${API}/tags`)
+            .get(`${API}/tags/`)
             .then((response) => {
                 setTags(response.data);
             })

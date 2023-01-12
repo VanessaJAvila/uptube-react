@@ -43,6 +43,8 @@ export const VideoUploader = ({onSubmit}) => {
             console.log(error);
         }
     }
+
+    console.log("onSubmit", onSubmit)
     const handleDrag = (e) => {
         e.preventDefault();
         e.stopPropagation();

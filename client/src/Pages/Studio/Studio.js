@@ -11,7 +11,7 @@ const API = process.env.REACT_APP_API;
 // It uses state variables to keep track of the form's state.
 export default function Studio() {
     const [isFileSubmitted, setIsFileSubmitted] = useState(false);
-    const [submitData, setSubmitData] = useState(null)
+    const [submitData, setSubmitData] = useState(null);
 
     const onSubmit = (data) => {
         setIsFileSubmitted(true)
@@ -31,12 +31,11 @@ export default function Studio() {
 
     /*{ !isFileSubmitted && <VideoUploader onSubmit={onSubmit} /> }
             <VideoInfo videoData={submitData}/>*/
-
+console.log("submitData: ", submitData)
     return (
         <div className={"container-wrapper"}>
             <div className={"upload-title"}>Upload de um novo vídeo</div>
             { isFileSubmitted ? <VideoInfo videoData={submitData} /> : < VideoUploader onSubmit={onSubmit} /> }
-
         </div>
     )
 }

@@ -32,7 +32,7 @@ export default function VideoInfo( {videoData}){
 
     const sendVideoData = () => {
         try{
-            axios.post(`${API}/:video_key/update`, {
+            axios.post(`${API}/video/:video_id/update`, {
                 title: videoTitle,
                 thumbnail: activeThumb,
                 description: videoDescription
@@ -45,6 +45,11 @@ export default function VideoInfo( {videoData}){
             console.log('err', e.response)
         }
     }
+
+    //console.log("videoTitle: ", videoTitle)
+    //console.log("thumbnail: ", activeThumb)
+    //console.log("videoDescription: ", videoDescription)
+    console.log("videoData: ", videoData)
 
     useEffect( () => {
         axios
@@ -60,9 +65,12 @@ export default function VideoInfo( {videoData}){
 
     });
 
+    console.log("videoTags: ", videoTags)
+
     const handleNewTag = (newTag) => {
         setVideoTags((prevTags) => [...prevTags, newTag]);
     };
+
     return(
         <div className={"video-details"}>
             <div className={'upload-video-details'}>
@@ -207,7 +215,6 @@ export default function VideoInfo( {videoData}){
             {addTags && <div className={'video-upload-add-tag'}>
                 <div className={'video-upload-add-tag-container'}>
                     <div className={'video-upload-add-tag-container-two'}>
-
                         <div className={'video-upload-add-tag-container-two-header'}>
                             <div className={'video-upload-add-tag-container-title'}>
                                 <h4>Adiciona as tags</h4>

@@ -100,6 +100,9 @@ const VideoStreamingPage = () => {
     if (isLoading === true) {
         return <div className="App">Loading...</div>;
     }
+
+    console.log("videos: ",videos)
+
     if (isLoading === false && userId){
         return (
             <div className={"streaming-wrapper"}>
@@ -109,13 +112,10 @@ const VideoStreamingPage = () => {
                     <div className="streaming-container-1">
                         <div className={"streaming-video-details"}>
                             <div className={"video-player"}>
-                                <ReactPlayer
-                                    className={"video-player-r"}
-                                    width={"100%"}
-                                    playing
-                                    controls
-                                    url={`$`}
-                                />
+                                <video width="100%" controls>
+                                    <source src={`http://localhost:3001/videos/NRBS9JUND/NRBS9JUND.mp4`} type="video/mp4"/>
+                                        Your browser does not support the video tag.
+                                </video>
                             </div>
                             <div className={"video-tags"}>
                                 {tags.map((tag, idx) => {
