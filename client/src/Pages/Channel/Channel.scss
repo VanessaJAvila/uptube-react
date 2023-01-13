@@ -262,6 +262,11 @@
       height: 18%;
       border-radius: 10px;
 
+      p{
+
+        margin-left: 10px;
+      }
+
       .user-video{
         display: flex;
         flex-direction: column;
@@ -274,7 +279,9 @@
     .playlist {
       display: flex;
       margin: 10px;
-      height: 50px;
+      height: 163px;
+      width: 300px;
+
       h2 {
         font-size: 15px;
         color: lightgray;

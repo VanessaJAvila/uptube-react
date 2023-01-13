@@ -183,11 +183,10 @@ if(!channel){
                     let filteredGuest=  GuestPlaylists.filter(guestP => guestP.playlist_id === p.playlist_id)
                     gpf.push(filteredGuest);
 
-                    return <div className={"channel-video"}><PlaylistCard  key={p.playlist_id+1500}
+                    return <div className={"channel-play"}><PlaylistCard  key={p.playlist_id+1500}
                                           id = {p.playlist_id}
                                           creator_id = {p.creator_id}
                                           thumbnail = {p.thumbnail}
-                                          photo = {channel.photo}
                                           name = {channel.name}
                                           title ={p.title}
                                           duration = {p.duration}
