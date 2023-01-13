@@ -188,7 +188,7 @@ function Playlist() {
             <h1>As musicas da playlist</h1>
             <div className={"box-playlist"}>
                 <div className={"movieAndInfoContainer"}>
-                    <video src={movie} width="650" height="500" controls></video>
+                    {/* <video src={movie} width="650" height="500" controls></video>*/}
                     <div className={"video-tags"}>
                         {tags && tags.map((tag, idx) => {
                             return <p key={tag + "_" + idx} className={'tag'}>#{tag.name}</p>

@@ -262,7 +262,7 @@ export default function UserChannel() {
                  {!videos && <p>A carregar...</p>}
                  {videos && <>
                      {videos.length === 0 && <p className={"no results"}>Partilha o teu 1º video?</p>}
-                     {videos.map((v, idx) => (<VideoCard type="channel" key={idx} {...v}/>))}
+                     {videos.map((v, idx) => (<div className={"user-video"}><VideoCard type="channel" key={idx} {...v}/></div>))}
                  </>}
              </div>}
 
