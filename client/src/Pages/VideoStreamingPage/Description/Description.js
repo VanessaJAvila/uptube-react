@@ -9,17 +9,25 @@ export default function Description({ id, description = "" }) {
         <div className="description-container">
             <p className="description-text">
                 {expanded ? description : shortDescription}
+                {!expanded && description.length > 250 && (
+                    <a href="#" onClick={(event) => {
+                        event.preventDefault();
+                        setExpanded(true);
+                    }}>
+                        Ver mais
+                    </a>
+
+                )}
+                {expanded && (
+                    <a href="#" onClick={(event) => {
+                        event.preventDefault();
+                        setExpanded(false);
+                    }}>
+                        Ver menos
+                    </a>
+                )}
             </p>
-            {!expanded && description.length > 250 && (
-                <a href="#" onClick={() => setExpanded(true)}>
-                    Show more
-                </a>
-            )}
-            {expanded && (
-                <a href="#" onClick={() => setExpanded(false)}>
-                    Show less
-                </a>
-            )}
+
         </div>
     );
 }
