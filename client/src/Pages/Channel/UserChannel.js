@@ -248,7 +248,6 @@ console.log("videos", videos)
                                       id = {p.playlist_id}
                                       creator_id = {p.creator_id}
                                       thumbnail = {p.thumbnail}
-                                      photo = {user.photo}
                                       name = {user.name}
                                       title ={p.title}
                                       duration = {p.duration}

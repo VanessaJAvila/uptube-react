@@ -140,9 +140,10 @@ function PlaylistCard(props){
                     <Link to={"/Playlist/" + props.id} >
                         <img src={props.thumbnail}/>
                     </Link>
-                    <div className="card_img">
+                    {props.photo && <div className="card_img">
                         <img src={props.photo}/>
-                    </div>
+                    </div>}
+
                     <div className="card_info">
                         <Link to={"/UserChannel"} >
                             <h2>{props.name}</h2>
