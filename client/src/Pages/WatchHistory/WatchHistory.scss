@@ -1,0 +1,16 @@
+.history-container {
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  .history {
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .history-title {
+
+    }
+  }
+}
