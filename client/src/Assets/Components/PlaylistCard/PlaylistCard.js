@@ -129,6 +129,7 @@ function PlaylistCard(props){
             .then((res) => {
                 // alert("Playlist deleted successfully");
                 console.log("Playlist deleted successfully");
+                window.location.reload();
             }).catch((error) => {
             console.log(error, "messagem delete playlist erro");
         });
