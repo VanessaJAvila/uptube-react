@@ -1,0 +1,96 @@
+$bg-color-1: rgb(28, 28, 36);
+$bg-color-2: rgba(28, 28, 36, 0.83);
+$text-color-1: white;
+$text-color-2: #1e5cc3;
+$text-color-3: #74747d;
+$text-color-4: #92929D;
+$border-radius-2: 3px;
+$table: 950px;
+$video-card-suggestions-width: 100%;
+
+.wrapper-history{
+  display: flex;
+  flex-direction: column;
+
+  .history-container{
+    padding-bottom: 200px;
+    padding-left: 250px;
+    padding-right: 250px;
+    width: 60%;
+
+    .history{
+      padding-top: 3em;
+      display: flex;
+      flex-direction: column;
+      .history-cards{
+
+        .suggestions-wrapper {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          padding: 0.5em;
+          width: 100%;
+          .video-card-suggestions {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            margin-bottom: 1em;
+            text-align: left;
+            border-top-left-radius: 20px;
+          .container-1-hist{
+width: 50%;
+            .thumbnail-container {
+              height: 12em;
+              width: 20em;
+              overflow: hidden;
+              background-size: cover;
+              background-position: center;
+              border-bottom-left-radius:20px;
+              border-bottom-right-radius:20px;
+
+              .length {
+                font-size: .65em;
+                font-weight: bold;
+                background-color: rgba(28, 28, 36, 0.83);
+                color: white;
+                margin-top: 135px;
+                margin-left: 1em;
+                padding: .2em .4em;
+                display: inline-block;
+              }
+            }
+          }
+            .container-2-hist{
+              padding-left: 1em;
+              width: 300px;
+              .username {
+                text-decoration: none;
+                margin: .15em 0 0;
+                padding-top: 2em;
+                color: rgb(58, 115, 246);
+                font-size: 1em;
+                a{
+                  text-decoration: none;
+                }
+              }
+
+              .video-title {
+                color: $text-color-1;
+                padding-top: 0.3em;
+                font-size: 1.5em;
+                margin: .15em 0 0;
+              }
+
+              .details-container {
+                display: flex;
+
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -16,6 +16,7 @@
       background-color: #13131A;
       border-bottom: 1px solid dimgrey;
       color: white;
+      padding-left: 10px;
 
       .channel-bg {
         border-radius: 10px 10px 0 0;
@@ -150,7 +151,7 @@
     display: flex;
     background-color: #1C1C24;
     width: 100%;
-    height: 7%;
+    height: 11%;
     border-radius: 10px;
     flex-wrap: nowrap;
     align-items: center;
@@ -346,8 +347,7 @@
 
   .upload-title {
     display: flex;
-   margin-top: 35px;
-    margin-left: 10px;
+    margin:10px;
     h2 {
       font-size: 15px;
       color: lightgray;
@@ -358,15 +358,26 @@
   .container-uploads {
     display: flex;
     align-items: center;
+    align-content: space-evenly;
     background-color: #1C1C24;
     width: 100%;
-    height: 12%;
+    height: 18%;
     border-radius: 10px;
-  }
-    .playlist {
+
+    .user-video{
       display: flex;
-      margin-left: 10px;
-      margin-top: 30px;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      width: 300px;
+      margin:auto;
+
+    }
+
+  }
+    .play {
+      display: flex;
+      margin: 10px;
+      height: 50px;
       h2 {
         font-size: 15px;
         color: lightgray;
@@ -377,25 +388,33 @@
 
   .container-playlists {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    align-content: space-evenly;
     background-color: #1C1C24;
     width: 100%;
-    height: 16%;
-    margin-top: 80%;
-    margin-left: 15%;
+    height: 18%;
     border-radius: 10px;
+
+    .user-play{
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      width: 300px;
+      margin:auto;
+
+    }
   }
 
   .container-subs-stats {
     display: flex;
     flex-direction: row;
-    width: 88%;
+    width: 89%;
+    margin-top: 30px;
     margin-bottom: 50px;
 
     .subs-text {
       color: lightgray;
       margin-top: 1%;
-      margin-left: 3%;
     }
 
       .subs {

@@ -160,7 +160,7 @@ $video-card-suggestions-width: 100%;
 
     .show-more {
       margin-left: 7%;
-      width: 14%;
+      width: 130px;
       height: 37px;
       border: 1px solid dimgray;
       border-radius: 1em;
@@ -175,7 +175,7 @@ $video-card-suggestions-width: 100%;
     .show-less {
       margin-left: 9%;
       height: 37px;
-      width: 14%;
+      width: 130px;
       border: 1px solid dimgray;
       border-radius: 1em;
       background-color: #1C1C24;
@@ -372,10 +372,12 @@ $video-card-suggestions-width: 100%;
 
       margin-bottom: 1em;
       display: flex;
+      height: 50px;
       flex-direction: column;
       text-align: left;
       border-radius: 20px;
       background-color: $bg-color-1;
+      border: 1px solid dimgrey;
 
       .thumbnail-container {
         height: 10em;
@@ -516,6 +518,7 @@ $video-card-suggestions-width: 100%;
 
   margin-bottom: 1em;
   display: flex;
+  height: 50px;
   flex-direction: column;
   text-align: left;
   border-radius: 20px;

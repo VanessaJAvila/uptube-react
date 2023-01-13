@@ -50,10 +50,6 @@ function SideBar() {
                 <Link to={"/Home"}><FontAwesomeIcon icon={faHouse}/>
                     <p>Início</p></Link>
             </div>
-            <div className={"Tendências"}>
-                <Link to={"./Home"}><FontAwesomeIcon icon={faFire}/></Link>
-                <p>Tendências</p>
-            </div>
             {!user && <div className={"Canais"}>
                 <Link to={"/Channels"}><FontAwesomeIcon icon={faClapperboard}/></Link>
                 <p>Canais</p>
@@ -93,8 +89,10 @@ function SideBar() {
 
         {user && <div className={"container-home-2"}>
             <div className={"Estudio"}>
-                <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faVideo}></FontAwesomeIcon></Link>
-                <p>Estúdio</p>
+                <Link to={"/studio"}><FontAwesomeIcon icon={faVideo}></FontAwesomeIcon>
+                    <p>Estúdio</p>
+
+                </Link>
             </div>
             <div className={"Definições"}>
                 <Link to={"/Profile"}><FontAwesomeIcon icon={faGear}></FontAwesomeIcon>

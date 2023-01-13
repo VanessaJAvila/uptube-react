@@ -26,7 +26,7 @@ function Home() {
     const [topChannel, setTopChannel] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const [currentPageRec, setCurrentPageRec] = useState(1);
-    const resultsPerPage = 5;
+    const resultsPerPage = 4;
     const resultsPerPageRec = 6;
     const indexOfLastRecord = currentPage * resultsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - resultsPerPage;
@@ -83,17 +83,16 @@ function Home() {
             <div className={"channels-containers-wrapper"}>
             <div className={"container-channels"}>
                 <div className={"title"}>
-                    <h3>Canais Sugeridos</h3>
-                    <FontAwesomeIcon className={'suggestions-icon'} icon={faEllipsis}/>
+                    <div className={"title-chan"}><h3>Canais Sugeridos</h3>
+                        <FontAwesomeIcon className={'suggestions-icon'} icon={faEllipsis} onClick={() => setCurrentPage(currentPage - 1)}/></div>
                     {currentChannels.map((c, idx) => {
                         return c.username ? (
-                            <div className={"list"} key={c + idx} onClick={() => {
+                            <div className={"channel-list"} key={c + idx} onClick={() => {
                                 history.push(`/Channel/${c.user_id}`)
                                 }}>
                                 <div className={'photo-channel'}>
                                     <img className={"photo-chan"} src={c.photo} alt="channel" />
-                                </div>
-                                <p className={"channel"}>{c.username}</p>
+                                <p className={"channel"}>{c.username}</p></div>
                             </div>
                         ) : null;
                     })}
@@ -102,7 +101,7 @@ function Home() {
                 <div className={"see-more-btn"}>
                     {currentPage &&
                         <div className={"pagination"} onClick={() => setCurrentPage(currentPage + 1)}>
-                            {topChannels.length > 0 && <h3>Mostrar Mais</h3>}
+                            { topChannels && (topChannels.length > 0 ) && <h3>Mostrar Mais</h3>}
                         </div>}
                 </div>
             </div>
@@ -117,22 +116,23 @@ function Home() {
                             return (
                                 <div className={"list"} key={ch + idx}>
                                     <div className={"photo-channel-2"}>
-                                        <img className={"photo-chan-2"} src={ch.photo} alt="channel"/>
-                                    </div>
-                                    <p className={"channel-id"}>{ch.username}</p>
-                                    {ch.bio && ch.bio.length > 15 ? (
-                                        <p className={"channel-bio"}>{ch.bio.slice(0, 15)}</p>
+                                        <div className={"id"}><img className={"photo-chan-2"} src={ch.photo} alt="channel"/>
+                                        <p className={"channel-id"}>{ch.username}</p></div>
+                                    {ch.bio && ch.bio.length > 10 ? (
+                                        <div className={"channel-bio"}>{ch.bio.slice(0, 20)}</div>
                                     ) : (
-                                        <p className={"channel-bio"}>{ch.bio}</p>
+                                        <div className={"channel-bio"}>{ch.bio}</div>
                                     )}
+                                </div>
                                 </div>
                             );
                         })}
                     </div>
                     <div className={'chan-thumb'}>
-                        <img src={cat} alt="thumbnail-video"/>
-                        <FontAwesomeIcon className={'add-icon'} icon={faUserPlus}/>
-                        <p className={'follow-chan'}>Seguir canal</p>
+                        <video width="100%" controls>
+                            {/* <source src={${API}${/user}} type="video/mp4"/>*/}
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>}
             </div>
