@@ -133,7 +133,7 @@ function Playlist() {
                         //setUserFollowedId(response.data[0].user_id)
                         console.log(videos,response.data.video_info[0])
                     })
-            }).catch(e => setMensagem("erro playlist")) ;
+            }).catch(e => console.log(e)) ;
     }, [dropdownState,videoId,user]);
 
 
@@ -160,9 +160,7 @@ function Playlist() {
             .then(response => {
                 setGPlaylist(response.data);
             }).catch(e => console.log(e, "erro playlist")) ;
-
-
-    }, [user,dropdownState]);
+    }, [user]);
 
 
 
@@ -296,11 +294,14 @@ function Playlist() {
                                                 <p onClick={
                                                     async (e) => {
                                                         e.preventDefault();
-                                                        setAddMusicDropdown(!addMusicDropdown);
+                                                        setAddMusicDropdown(true);
                                                      await axios.get(`${API}/playlist/moviesinplaylist/`+ p.video_id)
                                                             .then(response => {
                                                                 setPMovies(response.data);
-                                                            }).catch(e => console.log(e, "erro playlist")) ;
+                                                            }).catch(e => {
+                                                                setPMovies(null);
+                                                             console.log(e, "erro playlist") ;
+                                                         })
 
                                                     }
                                                 }>adicionar/remover da(s) playlist(s)</p>
@@ -396,7 +397,7 @@ function Playlist() {
                                                 {
                                                     addMusicDropdown && !pmovies&& <div className={"addMusic"} >
                                                         {
-                                                            playlists.map((play,ix) => {
+                                                         playlists &&   playlists.map((play,ix) => {
                                                                 const handleChange = (e) => {
                                                                     e.preventDefault();
                                                                     if(e.target.innerHTML==="+"){
@@ -458,15 +459,38 @@ function Playlist() {
                                                                     {lists}
                                                                 </div>
                                                             })
-                                                        }
-                                                    </div>
 
+                                                        }
+                                                        <div onClick={()=> {
+                                                            setCreateDrop(true);
+                                                            setThumb(p.thumbnail);
+                                                            setvideoadd(p.video_id);
+                                                        }} className={"criarNovaplaylist"}>Criar Nova playlist e add music</div>
+                                                        { createDrop && <div className={"inputCreatePlaylist"}>
+
+                                                            <form onSubmit={handleSubmit}>
+                                                                <div className="inputContainer">
+                                                                    <input type="text" onChange={e => setTitle(e.target.value)} value={title} id="title"
+                                                                           name="title" placeholder="title" required/>
+                                                                </div>
+
+                                                                <div>
+                                                                    <select id="visibility" onChange={e => setVisibility(e.target.value)} name ="visibility">
+                                                                        <option value="Public">Public</option>
+                                                                        <option value="Private">Private</option>
+                                                                    </select>
+                                                                </div>
+                                                                <button type="submit">Gravar Alterações</button>
+                                                            </form>
+                                                        </div>}
+
+                                                    </div>
                                                 }
 
 
                                                 <div className={"playlistGuest"} onClick={async(e)=> {
                                                     e.preventDefault();
-                                                    setGuestPlaylistDrop(!guestPlaylistDrop);
+                                                    setGuestPlaylistDrop(true);
                                                     await axios.get(`${API}/playlist/gmoviesinplaylist/`+ p.video_id)
                                                         .then(response => {
                                                             setGPMovies(response.data);
@@ -474,7 +498,7 @@ function Playlist() {
                                                 }}>Playlists Guest</div>
                                                 {
                                                     guestPlaylistDrop && gpmovies && <div>
-                                                        {gPlaylist.map((gp,i)=>{
+                                                        {gPlaylist && gPlaylist.map((gp,i)=>{
                                                             const handleGChange = (e) => {
                                                                 e.preventDefault();
                                                                 if(e.target.innerHTML==="+"){
