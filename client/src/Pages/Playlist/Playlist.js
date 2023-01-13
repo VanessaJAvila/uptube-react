@@ -114,8 +114,10 @@ function Playlist() {
         axios.get(`${API}/playlist/${playlist_id}`,{withCredentials: true})
             .then(response => {
                 setplaylist(response.data);
+                console.log(response.data[0].video_id,"ajfbkjdsnfkjdsnfkjdsnfkjn")
                 setMovie( `${API}${response.data[0].videoUrl}`)
                 setVideoId(response.data[0].video_id);
+                if(!videoId)return setMensagem("Sem videos")
                 axios.get(`${API}/video/${videoId}/tags`)
                     .then((response) => {
                         // Update the tags state variable with the video tags data
@@ -143,7 +145,7 @@ function Playlist() {
 
 
     useEffect(() => {
-        axios.get(`${API}/playlist/user/`+user.user_id,{withCredentials: true})
+        axios.get(`${API}/playlist/user/`,{withCredentials: true})
             .then(response => {
                 setplaylists(response.data);
             }).catch(e => console.log(e, "erro playlist")) ;
@@ -154,7 +156,7 @@ function Playlist() {
 
 
     useEffect(() => {
-        axios.get(`${API}/playlist/guest/`+ user.user_id,{withCredentials: true})
+        axios.get(`${API}/playlist/guest/`,{withCredentials: true})
             .then(response => {
                 setGPlaylist(response.data);
             }).catch(e => console.log(e, "erro playlist")) ;
@@ -188,11 +190,14 @@ function Playlist() {
             <h1>As musicas da playlist</h1>
             <div className={"box-playlist"}>
                 <div className={"movieAndInfoContainer"}>
+
                     <video src={movie} width="650" height="500" controls></video>
+
                     <div className={"video-tags"}>
                         {tags && tags.map((tag, idx) => {
                             return <p key={tag + "_" + idx} className={'tag'}>#{tag.name}</p>
                         })}
+                        {!tags &&  <p>Sem tags</p>}
                     </div>
                     <div className={"video-info"}>
                         <div className={"video-info-1"}>
@@ -294,7 +299,7 @@ function Playlist() {
                                                     async (e) => {
                                                         e.preventDefault();
                                                         setAddMusicDropdown(!addMusicDropdown);
-                                                     await axios.get(`${API}/playlist/moviesinplaylist/`+ p.video_id +'/' + user.user_id)
+                                                     await axios.get(`${API}/playlist/moviesinplaylist/`+ p.video_id)
                                                             .then(response => {
                                                                 setPMovies(response.data);
                                                             }).catch(e => console.log(e, "erro playlist")) ;
@@ -461,7 +466,7 @@ function Playlist() {
                                                 <div className={"playlistGuest"} onClick={async(e)=> {
                                                     e.preventDefault();
                                                     setGuestPlaylistDrop(!guestPlaylistDrop);
-                                                    await axios.get(`${API}/playlist/gmoviesinplaylist/`+ p.video_id +'/' + user.user_id)
+                                                    await axios.get(`${API}/playlist/gmoviesinplaylist/`+ p.video_id)
                                                         .then(response => {
                                                             setGPMovies(response.data);
                                                         }).catch(e => console.log(e, "erro playlist")) ;
@@ -561,10 +566,9 @@ function Playlist() {
                                                                             withCredentials: true
                                                                         })
                                                                             .then((res) => {
-                                                                                setMensagem("video removed successfully");
-                                                                                console.log(res.data);
+                                                                                setMensagem("video removido com sucesso");
                                                                             }).catch((error) => {
-                                                                            console.log(error, "messagem erro");
+                                                                            setMensagem("Não foi possivel remover o video");
                                                                         });
                                                                     }
                                                                 }

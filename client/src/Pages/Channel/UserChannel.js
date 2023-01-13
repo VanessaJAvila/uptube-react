@@ -87,7 +87,7 @@ export default function UserChannel() {
 
     useEffect(() => {
         if(!user) return;
-        axios.get(`${API}/playlist/user/${user.user_id}`,{withCredentials: true})
+        axios.get(`${API}/playlist/user/`,{withCredentials: true})
             .then(response => {
                 setplaylists(response.data);
             })

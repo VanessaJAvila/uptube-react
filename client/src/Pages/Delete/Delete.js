@@ -26,7 +26,7 @@ function Delete() {
         e.preventDefault();
 
 
-        axios.post(`${API}/user/'+user.user_id+'/delete`, true, {
+        axios.post(`${API}/user/delete`, true, {
             withCredentials: true
         })
             .then((res) => {

@@ -44,7 +44,7 @@ function Profile() {
             birthday: updateUserBirthday,
         }
 
-        axios.post(`${API}/user/${user.user_id}/edit`, newUser, {
+        axios.post(`${API}/user/edit`, newUser, {
             withCredentials: true
         })
         .then((res) => {
@@ -59,7 +59,7 @@ function Profile() {
         formData.append("photo", updateUserPhoto);
         formData.append("photoName", photoName);
 
-        axios.post(`${API}/user/${user.user_id}/edit/upload/avatar`,formData, {
+        axios.post(`${API}/user/edit/upload/avatar`,formData, {
             withCredentials: true
         })
             .then((res) => {
@@ -75,11 +75,10 @@ function Profile() {
         formDataHead.append("photo", updateUserHeader);
         formDataHead.append("photoName", headerName);
 
-        axios.post(`${API}/user/${user.user_id}/edit/upload/header`,formDataHead, {
+        axios.post(`${API}/user/edit/upload/header`,formDataHead, {
             withCredentials: true
         })
             .then((res) => {
-                //console.log(res, "upload res");
 
             }).catch((error) => {
             //console.log(error.response.data, "nao editaste a photo");

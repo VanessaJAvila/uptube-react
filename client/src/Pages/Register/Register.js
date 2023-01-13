@@ -27,12 +27,10 @@ function Register() {
     }
 
     const history = useHistory();
-    //console.log(user, "user register1");
+
 
     let handleSubmit = async (e) => {
 
-        //history.push vai para pagina nova
-        //history.replace nao permite voltar para a pagina anterior
         e.preventDefault();
 
         let newUser = {
@@ -56,12 +54,7 @@ function Register() {
         });
 
     }
-/*
-    if (user) {
-        history.replace("/home");
-    }
 
- */
 
     return <div className="register">
         <div className="container">

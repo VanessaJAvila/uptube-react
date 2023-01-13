@@ -122,7 +122,7 @@ function VideoCard(props) {
             return (
                 <div className={"video-card " + props.type}>
                     <div className={"thumbnail-container"}
-                         style={{backgroundImage: `url(${img1}`}}>
+                         style={{backgroundImage: `url(${API}${props.thumbnail}`}}>
                         <p className={"length"}>{props.duration}</p>
                     </div>
                     <div className={"user-photo"}
