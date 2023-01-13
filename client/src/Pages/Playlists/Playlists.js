@@ -26,7 +26,7 @@ function Playlists() {
 
     useEffect(() => {
         if(!user) return;
-        axios.get(`${API}/playlist/user/${user.user_id}`,{withCredentials: true})
+        axios.get(`${API}/playlist/user/`,{withCredentials: true})
             .then(response => {
                 setplaylists(response.data);
             })
@@ -99,11 +99,8 @@ function Playlists() {
             <div className={"box-playlist"}>
 
                 {playlists.map((p) => {
-
                     let filteredGuest=  GuestPlaylists.filter(guestP => guestP.playlist_id === p.playlist_id)
                     gpf.push(filteredGuest);
-                 //   console.log(filteredGuest,gpf,"gpf")
-
                     return <PlaylistCard  key={p.playlist_id+1500}
                                               id = {p.playlist_id}
                                               creator_id = {p.creator_id}

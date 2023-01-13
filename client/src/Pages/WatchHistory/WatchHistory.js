@@ -16,7 +16,7 @@ const WatchHistory = () => {
 
     useEffect(() => {
         axios
-            .get(`${API}/user/watchhistory/${user?.user_id}`)
+            .get(`${API}/user/watchhistory/`)
             .then((response) => {
                 // Update the videos state variable with the watch history data
                 setHistory(response.data);

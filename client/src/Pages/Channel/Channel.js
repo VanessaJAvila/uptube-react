@@ -76,8 +76,7 @@ export default function UserChannel() {
     }, [user_id]);
 
     useEffect(() => {
-        if(!channel) return;
-        axios.get(`${API}/playlist/user/${user_id}`,{withCredentials: true})
+        axios.get(`${API}/playlist/user`,{withCredentials: true})
             .then(response => {
                 setplaylists(response.data);
             })
@@ -88,7 +87,11 @@ export default function UserChannel() {
                 setGPlaylists(response.data);
             }).catch(e => console.log(e, "No G playlists")) ;
     }, [user_id]);
-
+if(!channel){
+ return <Link to={"/Home/"}>
+      <h1>Este user nao tem canal</h1>
+  </Link>
+}
 
     return <div className={'channel-container'}>
         <Header/>

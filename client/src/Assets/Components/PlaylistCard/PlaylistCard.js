@@ -119,7 +119,6 @@ function PlaylistCard(props){
         e.preventDefault();
 
         let deletePlay = {
-            user_id: user.user_id,
             creator_id: props.creator_id,
             playlist_id: props.id
         }
