@@ -92,10 +92,6 @@ function Register() {
                 </div>
                 <button type="submit">Registar</button>
                 <a href="../Login">Fazer Login</a>
-                <div className="google">
-                    <button type="submit">Entrar com Google</button>
-
-                </div>
             </form>
 
         </div>
