@@ -208,7 +208,7 @@ function Playlist() {
                         <div className={"channel-info-1"}>
 
                             <div className="channel-info-1-a">
-                                <Link to={"/canal"}>
+                                <Link to={"/Channel"}>
                                     <div className={"avatar"}>
                                         <img src={API+videos.photo} alt=""/>
                                     </div>

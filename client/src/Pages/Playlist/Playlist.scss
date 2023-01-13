@@ -1,7 +1,6 @@
-.container-playlist
-{
+.container-playlist{
   color:white;
-  text-align: center;
+  margin-left: 100px;
 
   .box-playlist {
     display: flex;
@@ -10,23 +9,28 @@
     align-items: flex-start;
     flex-wrap: wrap;
     .comments-container {
+      color: white;
+
 
       .new-comment {
         position: relative;
 
         display: flex;
         .new-comment-user-photo {
-          width: 50px;
+          width: 42px;
           height: 50px;
           border-radius: 50%;
           background-position: center;
           background-size: cover;
-          margin-right: 10px;
+          margin-left: 100px;
         }
         form {
-          width: 100%;
+          width: 74%;
+          margin-left: 12px;
+
           .new-comment-input {
             width: 99%;
+            border-radius: 10px;
             background-color: var(--bg-color);
             border: none;
             border-bottom: 1px solid rgb(255,255,255);
@@ -90,9 +94,17 @@
       }
     }
     .movieAndInfoContainer{
+      display: flex;
+      flex-direction: column;
+       margin: auto;
 
+      video{
+        border-radius:10px;
+        margin-left: 100px;
+      }
       .video-tags{
         display: flex;
+        margin-left: 100px;
         .tag{
           margin-right:5px
         }
@@ -120,11 +132,11 @@
         .video-info-1{
           display: flex;
           justify-content: space-between;
+          margin-right: 363px;
         }
         .reactions{
-          display: flex;
-          flex-direction: row;
-          justify-content: flex-end;
+            display: flex;
+            margin-right: 350px;
           .likes{
             margin: 10px;
           }.dislikes{
@@ -135,10 +147,11 @@
     }
 
     .nextContainer{
-      margin-left: 25px;
+      margin-left: 248px;
       border-radius: 25px;
       border-style: groove;
       padding: 4px;
+
       img{
         width: 150px;
         height: 100px;
@@ -169,6 +182,7 @@
 
       .movieDiv{
         display: flex;
+        flex-direction: column;
         padding: 7px;
         border-bottom: black;
         border-bottom-style: solid;

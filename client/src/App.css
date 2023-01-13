@@ -59,6 +59,11 @@ label {
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
 }
 
+
+#light .movieAndInfoContainer video{
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
+}
 #light .starting{
     background-color: rgba(105, 105, 105, 0.4);
     border:1px solid #1C1C24;
@@ -67,6 +72,12 @@ label {
 #light .edit{
     background-color: whitesmoke;
     border:1px solid #1C1C24;
+}
+
+#light .new-comment-input{
+    background-color: whitesmoke;
+    border:1px solid #1C1C24;
+
 }
 
 #light .icon{
@@ -118,6 +129,14 @@ label {
 }
 
 #light .sort-icon {
+    color: #30303a;
+}
+
+#light .reactions {
+    color: #30303a;
+}
+
+#light .svg-inline--fa  {
     color: #30303a;
 }
 
