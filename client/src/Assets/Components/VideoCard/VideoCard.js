@@ -122,40 +122,15 @@ function VideoCard(props) {
             return (
                 <div className={"video-card " + props.type}>
                     <div className={"thumbnail-container"}
-                         style={{backgroundImage: `url(${API}${props.thumbnail}`}}>
+                         style={{backgroundImage: `url(${props.thumbnail})`}}>
                         <p className={"length"}>{props.duration}</p>
                     </div>
                     <div className={"user-photo"}
-                         style={{backgroundImage: `url('${img2}')`}}>
+                         style={{backgroundImage: `url(${props.photo})`}}>
                     </div>
-                    <p className={"username"}>{props.user}</p>
+                    <p className={"username"}>{props.username}</p>
                     <h3 className={"video-title"}>{props.title}</h3>
-                    <div className={"details-container"}>
-                        <p>{props.views} visualizações | {getNumberOfDays(props.date)}</p>
-                        <p>{props.views} visualizações | {getNumberOfDays(props.date)}</p>
-                    </div>
-                    <div className={"reactions-container"}>
-                        <div className={"graph"}/>
-                        <div className={"reactions"}>
-                            <div className={"comments"}>
-                                <FontAwesomeIcon icon={faMessage} className={"icon"}/>
-                                {props.comments === 1 ?
-                                    <p> {props.comments} comentário</p> :
-                                    <p> {props.comments} comentários</p>
-                                }
-                            </div>
-                            <div className={"likes"}>
-                                <FontAwesomeIcon icon={faThumbsUp} className={"icon"}/>
-                                {props.likes === 1 ?
-                                    <p> {props.likes} like</p> :
-                                    <p> {props.likes} likes</p>
-                                }
-                            </div>
-                            <div>
-                                <FontAwesomeIcon icon={faBookmark} className={""}/>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             )
 

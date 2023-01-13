@@ -372,10 +372,12 @@ $video-card-suggestions-width: 100%;
 
       margin-bottom: 1em;
       display: flex;
+      height: 50px;
       flex-direction: column;
       text-align: left;
       border-radius: 20px;
       background-color: $bg-color-1;
+      border: 1px solid dimgrey;
 
       .thumbnail-container {
         height: 10em;
@@ -516,6 +518,7 @@ $video-card-suggestions-width: 100%;
 
   margin-bottom: 1em;
   display: flex;
+  height: 50px;
   flex-direction: column;
   text-align: left;
   border-radius: 20px;

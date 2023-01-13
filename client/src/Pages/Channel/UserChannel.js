@@ -128,7 +128,7 @@ export default function UserChannel() {
     }, [user]);
 
     if(!user) return null
-
+console.log("videos", videos)
 
     return <div className={'user-channel-container'}>
         <Header/>
@@ -266,7 +266,7 @@ export default function UserChannel() {
                  </>}
              </div>}
 
-            <div className={"playlist"}><h2 >Playlists  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowPlay}/>}</h2></div>
+            <div className={"play"}><h2 >Playlists  {setEdit && <FontAwesomeIcon className={"hide-icon"} icon={faEyeSlash} onClick={HideOrShowPlay}/>}</h2></div>
         { showPlay && <div className={"container-playlists"}>
             {playlists.map((p) => {
 
@@ -274,7 +274,7 @@ export default function UserChannel() {
                 gpf.push(filteredGuest);
                 //   console.log(filteredGuest,gpf,"gpf")
 
-                return <PlaylistCard  key={p.playlist_id+1500}
+                return <div className={"user-play"}><PlaylistCard  key={p.playlist_id+1500}
                                       id = {p.playlist_id}
                                       creator_id = {p.creator_id}
                                       thumbnail = {p.thumbnail}
@@ -284,7 +284,7 @@ export default function UserChannel() {
                                       duration = {p.duration}
                                       timestamp = {p.timestamp}
                                       guestPlaylists={filteredGuest}
-                />}
+                /></div>}
             )}
 
 

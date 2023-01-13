@@ -13,6 +13,14 @@
     background-color: whitesmoke;
 }
 
+
+#light p.length{
+    background-color: whitesmoke;
+    color: #1C1C24;
+}
+
+
+
 #dark {
     background-color: #13131A;
     color: whitesmoke;
