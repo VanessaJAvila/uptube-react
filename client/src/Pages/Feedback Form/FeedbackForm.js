@@ -13,12 +13,15 @@ export default function FeedbackForm() {
     const [close, setClose] = useState(true);
     const [form, setForm] = useState(false);
 
+    const toggleForm = () => {
+        setForm(!form)
+    }
 
 
     return (
-        <div className={"container-feedback"}>
+        !form && <div className={"container-feedback"}>
             {close &&  <div className={"container-form"}>
-                <FontAwesomeIcon className={"close-icon"} icon={faXmark} onClick={() => setClose(false) && setForm(false)}/>
+                <FontAwesomeIcon className={"close-icon"} icon={faXmark} onClick={toggleForm}/>
                 <h2>Envia-nos o teu feedback </h2>
                 <p>Descreve a tua questão ou sugestão</p>
                 <input name="Message" type="text"
@@ -27,7 +30,7 @@ export default function FeedbackForm() {
                     <input className={"radio"} type="checkbox"/>
                         <span>Autorizas o envio de emails com informações sobre os nossos updates?</span>
                 </label>
-                <button className={"send"} type="submit" value="Submit">Enviar</button>
+                 <div className={"send"} onClick={toggleForm}>Enviar</div>
 
 
             </div>}

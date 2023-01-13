@@ -48,11 +48,6 @@ function Header() {
     const togglePopUp = () => {
         setPopUp(!popup)
     }
-
-    const toggleNot = () => {
-        setOpenPopUp(!openPopUp)
-    }
-
     const toggleForm = () => {
         setForm(!form)
     }
