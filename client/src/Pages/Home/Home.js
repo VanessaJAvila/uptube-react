@@ -12,7 +12,7 @@ import VideoCard from "../../Assets/Components/VideoCard/VideoCard";
 import {faEllipsis, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useHistory} from "react-router-dom";
-
+import teaser from "../../Assets/teaser.mp4"
 
 //localhost port for api
 const  API  = process.env.REACT_APP_API;
@@ -130,7 +130,7 @@ function Home() {
                     </div>
                     <div className={'chan-thumb'}>
                         <video width="100%" controls>
-                            {/* <source src={${API}${/user}} type="video/mp4"/>*/}
+                            <source src={teaser} type="video/mp4"/>
                             Your browser does not support the video tag.
                         </video>
                     </div>

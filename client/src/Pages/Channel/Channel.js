@@ -168,12 +168,12 @@ if(!channel){
 
 
         </div>
-            <div className={"up-title"}><h2 className={"upload"}>Uploads </h2></div>
+            <div className={"up-title"}>Uploads</div>
          <div className={"uploads"}>
                  {!videos && <p>Este canal não têm videos</p>}
                  {videos && <>
                      {videos.length === 0 && <p className={"no results"}>Partilha o teu 1º video?</p>}
-                     {videos.map((v, idx) => (<VideoCard type="channel"  {...v}/>))}
+                     {videos.slice(0, 4).map((v, idx) => (<VideoCard type="channel"  {...v}/>))}
                  </>}
              </div>
             <div className={"playlist"}><h2>Playlists</h2></div>

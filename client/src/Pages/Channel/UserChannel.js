@@ -232,7 +232,7 @@ console.log("videos", videos)
                  {!videos && <p>A carregar...</p>}
                  {videos && <>
                      {videos.length === 0 && <p className={"no results"}>Partilha o teu 1º video?</p>}
-                     {videos.map((v, idx) => (<div className={"user-video"}><VideoCard type="channel" key={idx} {...v}/></div>))}
+                     {videos.slice(0, 4).map((v, idx) => (<div className={"user-video"}><VideoCard type="channel" key={idx} {...v}/></div>))}
                  </>}
              </div>}
 
