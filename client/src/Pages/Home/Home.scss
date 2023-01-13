@@ -7,7 +7,7 @@
     flex-direction: row;
     height: 60%;
     margin-top: 5%;
-    margin-left: 18%;
+    margin-left: 23%;
     color: white;
 
     .container-geral {
@@ -46,7 +46,7 @@
       display: flex;
       flex-direction: column;
       width: 197px;
-      height: 589px;
+      height: 458px;
       margin: 6%;
       justify-content: space-between;
 
@@ -63,26 +63,16 @@
           display: flex;
           flex-direction: row;
 
-          p.channel-id {
-            display: flex;
-            width: 60%;
-            height: 26px;
-            margin-top: calc(100% - 103%);
-            position: absolute;
-            margin-left: 23%;
-            font-size: 9pt;
-          }
 
-          p.channel-bio {
-            font-family: Arial, sans-serif;
-            color: grey;
-            font-size: 7pt;
-            margin-top: 6%;
-            margin-left: 31%;
-            width: 87px;
-          }
-
-
+            p.channel-id {
+              display: flex;
+              width: 60%;
+              height: 26px;
+              margin-top: calc(100% - 103%);
+              position: absolute;
+              margin-left: 23%;
+              font-size: 9pt;
+            }
         }
 
         .title {
@@ -161,26 +151,27 @@
         .chan-thumb {
           display: flex;
           border: 1px solid dimgray;
+          border-radius: 10px;
+          width:150px;
+          margin: 15px 5px 15px 23px;
+
+          video{
+            border-radius: 10px;
+          }
+
 
           img {
             width: 175px;
             height: 100px;
             border-radius: 10px 10px 0 0;
           }
+        }
 
-          .add-icon {
-            position: absolute;
-            margin-top: 110px;
-            margin-left: 50px;
-            color: dimgray;
-          }
-
-          .follow-chan {
-            font-size: 8pt;
-            color: dimgray;
-            margin-top: 65%;
-            margin-left: calc(100% - 155%);
-          }
+        .channel-bio{
+          display: flex;
+          margin-left:50px;
+          font-size: 10px;
+          margin-top: 0;
         }
 
         .title {
@@ -194,24 +185,37 @@
 
           h3 {
             margin-top: 0;
-            margin-left: 11px;
+            text-align: center;
             font-size: 14px;
           }
         }
 
         .add-channel {
           display: flex;
+          .id {
+            display: flex;
+            margin-left:10px;
 
           .photo-channel-2 {
             display: flex;
             height: 30px;
+          }
+
+            .channel-id{
+              margin-left: 10px;
+              margin-top: 12px;
+              margin-bottom: 0;
+            }
 
             .photo-chan-2 {
+              border: 2px solid #1C1C24;
               border-radius: 50%;
-              width: 100%;
-              height: 100%;
-              margin-top: calc(100% - 55px);
+              margin-top: 5px;
+              width: 25px;
+              height: 25px;
+
             }
+
           }
 
           h4 {

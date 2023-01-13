@@ -116,22 +116,23 @@ function Home() {
                             return (
                                 <div className={"list"} key={ch + idx}>
                                     <div className={"photo-channel-2"}>
-                                        <img className={"photo-chan-2"} src={ch.photo} alt="channel"/>
-                                    </div>
-                                    <p className={"channel-id"}>{ch.username}</p>
-                                    {ch.bio && ch.bio.length > 15 ? (
-                                        <p className={"channel-bio"}>{ch.bio.slice(0, 15)}</p>
+                                        <div className={"id"}><img className={"photo-chan-2"} src={ch.photo} alt="channel"/>
+                                        <p className={"channel-id"}>{ch.username}</p></div>
+                                    {ch.bio && ch.bio.length > 10 ? (
+                                        <div className={"channel-bio"}>{ch.bio.slice(0, 20)}</div>
                                     ) : (
-                                        <p className={"channel-bio"}>{ch.bio}</p>
+                                        <div className={"channel-bio"}>{ch.bio}</div>
                                     )}
+                                </div>
                                 </div>
                             );
                         })}
                     </div>
                     <div className={'chan-thumb'}>
-                        <img src={cat} alt="thumbnail-video"/>
-                        <FontAwesomeIcon className={'add-icon'} icon={faUserPlus}/>
-                        <p className={'follow-chan'}>Seguir canal</p>
+                        <video width="100%" controls>
+                            {/* <source src={${API}${/user}} type="video/mp4"/>*/}
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>}
             </div>

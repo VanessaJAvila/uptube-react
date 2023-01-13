@@ -50,10 +50,6 @@ function SideBar() {
                 <Link to={"/Home"}><FontAwesomeIcon icon={faHouse}/>
                     <p>Início</p></Link>
             </div>
-            <div className={"Tendências"}>
-                <Link to={"./Home"}><FontAwesomeIcon icon={faFire}/></Link>
-                <p>Tendências</p>
-            </div>
             {!user && <div className={"Canais"}>
                 <Link to={"/Channels"}><FontAwesomeIcon icon={faClapperboard}/></Link>
                 <p>Canais</p>

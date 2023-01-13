@@ -19,8 +19,6 @@
     color: #1C1C24;
 }
 
-
-
 #dark {
     background-color: #13131A;
     color: whitesmoke;
@@ -74,6 +72,14 @@ label {
 #light .icon{
     color:#30303a;
 }
+#light p.channel-id {
+    color:#30303a;
+}
+
+#light .title h3{
+    color:#30303a;
+}
+
 
 #light .container .inputContainer .icons{
     color:#30303a;
