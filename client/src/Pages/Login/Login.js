@@ -45,14 +45,6 @@ function Login() {
         });
     }
 
-/*
-    if (user) {
-        history.replace("/Home");
-    }
-
-
- */
-
     return <div className = "login">
 
         <div className="container">
