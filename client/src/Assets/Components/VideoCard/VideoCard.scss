@@ -515,20 +515,22 @@ $video-card-suggestions-width: 100%;
 }
 
 .video-card {
-
-  margin-bottom: 1em;
+  border: 1px solid white;
   display: flex;
-  height: 50px;
+  width: 180px;
+  height: 150px;
   flex-direction: column;
   text-align: left;
-  border-radius: 20px;
-  background-color: $bg-color-1;
+  border-radius: 10px;
+  background-color: rgb(28, 28, 36);
 
   .thumbnail-container {
-    height: 10em;
+    height: 90px;
+    width: 180px;
     overflow: hidden;
     background-size: cover;
     background-repeat: no-repeat;
+    border-bottom: 1px solid white;
     background-position: center;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -561,15 +563,18 @@ $video-card-suggestions-width: 100%;
   }
 
   .username {
-    margin: .15em 0 0;
-    color: $text-color-1;
-    font-size: .8em;
+    margin: 1.46em 0 0;
+    color: white;
+    font-size: 0.8em;
+    padding-left: 6px;
   }
 
   .video-title {
-    color: $text-color-1;
-    font-size: .8em;
-    margin: .15em 0 0;
+      color: white;
+      margin-top: 99px;
+      margin-left: -175px;
+      font-size: 12px;
+      width: 102px;
   }
 
   .details-container {
