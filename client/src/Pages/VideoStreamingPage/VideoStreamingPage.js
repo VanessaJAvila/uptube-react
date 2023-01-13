@@ -72,6 +72,7 @@ const VideoStreamingPage = () => {
                 setVideos(response.data.video_info[0]);
                 setComments(response.data.video_comments);
                 setUrl(response.data.video_info[0].url_video);
+                setUserFollowedId(response.data.video_info[0].user_id);
                 //setUserFollowedId(response.data[0].user_id)
                 //setIsLoading(false);
             })
@@ -146,7 +147,6 @@ const VideoStreamingPage = () => {
                                             <Link to={"/canal"}>
                                                 <p className={"video-channel-username"}>{videos.username}</p>
                                             </Link>
-
                                         </div>
                                         <div className="video-info-container-row-2">
                                             <p className={"views-days-posted"}>
