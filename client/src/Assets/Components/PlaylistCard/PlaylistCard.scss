@@ -2,6 +2,7 @@
 .playlist{
   width:30%;
   height: 20%;
+  margin: 10px;
   .card {
     display: flex;
     border: 1px solid lightgrey;
@@ -20,6 +21,7 @@
         border-radius: 10px 10px 0 0;
         width: 100%;
         height: 90px;
+
       }
     }
   }
@@ -53,8 +55,8 @@
   border-radius: 100%;
   position: absolute;
   z-index: 1;
-  margin-left: 9rem;
-  margin-top: -1.5rem;
+  margin-left: 8rem;
+  margin-top: 0.5rem;
 }
 .card_img img {
   width: 100%;

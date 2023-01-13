@@ -127,6 +127,7 @@ function PlaylistCard(props){
             .then((res) => {
                 // alert("Playlist deleted successfully");
                 console.log("Playlist deleted successfully");
+                window.location.reload();
             }).catch((error) => {
             console.log(error, "messagem delete playlist erro");
         });
@@ -137,9 +138,10 @@ function PlaylistCard(props){
                     <Link to={"/Playlist/" + props.id} >
                         <img src={props.thumbnail}/>
                     </Link>
-                    <div className="card_img">
+                    {props.photo && <div className="card_img">
                         <img src={props.photo}/>
-                    </div>
+                    </div>}
+
                     <div className="card_info">
                         <Link to={"/UserChannel"} >
                             <h2>{props.name}</h2>
