@@ -19,8 +19,6 @@ function getHoursDiff(startDate, endDate) {
 }
 
 
-
-
 function splitTime(numberOfHours){
     let days=Math.floor(numberOfHours/24);
     let remainder=numberOfHours % 24;
