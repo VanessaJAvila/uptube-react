@@ -203,6 +203,10 @@ label {
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
 }
 
+#light .video-title{
+    color: #1C1C24;
+}
+
 #light .menu-last-item {
     color: #1C1C24;
     background-color: white;

@@ -173,7 +173,7 @@ if(!channel){
                  {!videos && <p>Este canal não têm videos</p>}
                  {videos && <>
                      {videos.length === 0 && <p className={"no results"}>Partilha o teu 1º video?</p>}
-                     {videos.slice(0, 4).map((v, idx) => (<VideoCard type="channel"  {...v}/>))}
+                     {videos.slice(0, 4).map((v, idx) => (<div className={"channel-video"}><VideoCard type="channel"  {...v}/></div>))}
                  </>}
              </div>
             <div className={"playlist"}><h2>Playlists</h2></div>
@@ -183,7 +183,7 @@ if(!channel){
                     let filteredGuest=  GuestPlaylists.filter(guestP => guestP.playlist_id === p.playlist_id)
                     gpf.push(filteredGuest);
 
-                    return <PlaylistCard  key={p.playlist_id+1500}
+                    return <div className={"channel-video"}><PlaylistCard  key={p.playlist_id+1500}
                                           id = {p.playlist_id}
                                           creator_id = {p.creator_id}
                                           thumbnail = {p.thumbnail}
@@ -193,7 +193,7 @@ if(!channel){
                                           duration = {p.duration}
                                           timestamp = {p.timestamp}
                                           guestPlaylists={filteredGuest}
-                    />}
+                    /></div>}
                 )}
             </div>
         <div className={"container-stats"}>
