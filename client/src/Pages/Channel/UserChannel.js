@@ -10,8 +10,8 @@ import beloved from "../../Assets/beloved.svg";
 import rocket from "../../Assets/rocket.svg";
 import influencer from "../../Assets/influencer.svg";
 import VideoCard from "../../Assets/Components/VideoCard/VideoCard"
-import {faBookmark, faEyeSlash, faTrashCan} from "@fortawesome/free-regular-svg-icons";
-import {faPenToSquare, faPen, faUser, faGear, faX, faXmark} from "@fortawesome/free-solid-svg-icons";
+import { faEyeSlash} from "@fortawesome/free-regular-svg-icons";
+import {faPenToSquare, faPen, faXmark} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import {Link, useHistory, useParams} from "react-router-dom";
 import PlaylistCard from "../../Assets/Components/PlaylistCard/PlaylistCard";

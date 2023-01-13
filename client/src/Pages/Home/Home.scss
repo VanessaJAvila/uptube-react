@@ -82,45 +82,66 @@
             width: 87px;
           }
 
-          .channel {
-            font-size: 9pt;
-            color: lightgray;
-          }
 
-          .photo-channel {
-            display: flex;
-            width: 20%;
-            height: 26px;
-
-            .photo-chan {
-              border-radius: 50%;
-              width: 70%;
-              height: 70%;
-            }
-          }
         }
 
         .title {
+          display: flex;
+          flex-direction: column;
+
           margin-top: 15px;
-          text-align: left;
           width: 100%;
           color: lightgrey;
-          border-bottom: 1px solid dimgrey;
+
+          .channel-list {
+
+            .photo-channel {
+              display: flex;
+              width: 180px;
+              margin: auto;
+              padding-top: 7px;
+
+
+              .photo-chan {
+                object-fit: cover;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+              }
+
+              .channel {
+                font-size: 9pt;
+                color: lightgray;
+                margin-top: 9px;
+              }
+            }
+          }
+
+          .title-chan{
+            display: flex;
+            flex-direction: row;
+            border-bottom: 1px solid dimgrey;
+          }
 
           h3 {
             margin-top: 0;
             margin-left: 11px;
             font-size: 14px;
           }
+
+          .suggestions-icon {
+            margin-left: 40px;
+          }
         }
 
         .see-more-btn {
           background-color: #30303a;
           border-radius: 0 0 10px 10px;
-          width: 195px;
+          width: 198px;
           margin-left: -1px;
+          margin-top: 12px;
           padding-bottom: 1px;
-          padding-top: 5px;
+          padding-top: 3px;
         }
 
         .pagination {

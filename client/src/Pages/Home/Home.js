@@ -26,7 +26,7 @@ function Home() {
     const [topChannel, setTopChannel] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const [currentPageRec, setCurrentPageRec] = useState(1);
-    const resultsPerPage = 5;
+    const resultsPerPage = 4;
     const resultsPerPageRec = 6;
     const indexOfLastRecord = currentPage * resultsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - resultsPerPage;
@@ -83,17 +83,16 @@ function Home() {
             <div className={"channels-containers-wrapper"}>
             <div className={"container-channels"}>
                 <div className={"title"}>
-                    <h3>Canais Sugeridos</h3>
-                    <FontAwesomeIcon className={'suggestions-icon'} icon={faEllipsis}/>
+                    <div className={"title-chan"}><h3>Canais Sugeridos</h3>
+                        <FontAwesomeIcon className={'suggestions-icon'} icon={faEllipsis} onClick={() => setCurrentPage(currentPage - 1)}/></div>
                     {currentChannels.map((c, idx) => {
                         return c.username ? (
-                            <div className={"list"} key={c + idx} onClick={() => {
+                            <div className={"channel-list"} key={c + idx} onClick={() => {
                                 history.push(`/Channel/${c.user_id}`)
                                 }}>
                                 <div className={'photo-channel'}>
                                     <img className={"photo-chan"} src={c.photo} alt="channel" />
-                                </div>
-                                <p className={"channel"}>{c.username}</p>
+                                <p className={"channel"}>{c.username}</p></div>
                             </div>
                         ) : null;
                     })}
@@ -102,7 +101,7 @@ function Home() {
                 <div className={"see-more-btn"}>
                     {currentPage &&
                         <div className={"pagination"} onClick={() => setCurrentPage(currentPage + 1)}>
-                            {topChannels.length > 0 && <h3>Mostrar Mais</h3>}
+                            { topChannels && (topChannels.length > 0 ) && <h3>Mostrar Mais</h3>}
                         </div>}
                 </div>
             </div>
