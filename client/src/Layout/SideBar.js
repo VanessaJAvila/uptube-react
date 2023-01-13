@@ -93,8 +93,10 @@ function SideBar() {
 
         {user && <div className={"container-home-2"}>
             <div className={"Estudio"}>
-                <Link to={"./Pages/Home"}><FontAwesomeIcon icon={faVideo}></FontAwesomeIcon></Link>
-                <p>Estúdio</p>
+                <Link to={"/studio"}><FontAwesomeIcon icon={faVideo}></FontAwesomeIcon>
+                    <p>Estúdio</p>
+
+                </Link>
             </div>
             <div className={"Definições"}>
                 <Link to={"/Profile"}><FontAwesomeIcon icon={faGear}></FontAwesomeIcon>
