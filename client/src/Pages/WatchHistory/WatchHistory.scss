@@ -22,8 +22,10 @@ $video-card-suggestions-width: 100%;
       padding-top: 3em;
       display: flex;
       flex-direction: column;
+      a{
+          text-decoration: none;
+      }
       .history-cards{
-
         .suggestions-wrapper {
           display: flex;
           flex-direction: row;

@@ -77,7 +77,7 @@ function VideoCard(props) {
                     <div className="video-card-suggestions">
                         <div className={"container-1-hist"}>
                             <div className={"thumbnail-container"}
-                                 style={{backgroundImage: `url(${img1}`}}>
+                                 style={{backgroundImage: `url(${API}${props.thumbnail})`}}>
                             </div>
                         </div>
                         <div className={"container-2-hist"}>
