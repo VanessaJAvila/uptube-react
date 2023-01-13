@@ -24,6 +24,7 @@ function Header() {
     const [unSeenNot, setUnSeenNot] = useState([]);
     const [popup, setPopUp] = useState(false);
     const {handleSearch} = React.useContext(SearchContext);
+    const [close, setClose] = useState(true);
 
 
     useEffect(() => {
@@ -46,19 +47,15 @@ function Header() {
 
     const togglePopUp = () => {
         setPopUp(!popup)
-        console.log(popup)
     }
 
     const toggleNot = () => {
         setOpenPopUp(!openPopUp)
-        console.log(openPopUp)
     }
 
-
-    console.log ("unseeNot", unSeenNot)
-    console.log("alert", alert)
-    console.log("viewed", viewed)
-    console.log("open message", openPopUp)
+    const toggleForm = () => {
+        setForm(!form)
+    }
 
 
     return <div className={"Header"}>
@@ -101,7 +98,7 @@ function Header() {
                 {popup && <div className={"dropdown-content"}>
                     <div className={"menu-item"}><Link to="/UserChannel">Canal</Link></div>
                     <div className={"menu-item"}><Link to="/studio">Estúdio</Link></div>
-                    <div className={"menu-last-item"} onClick={() => setForm(true)}>Enviar Feedback</div>
+                    <div className={"menu-last-item"} onClick={toggleForm}>Enviar Feedback</div>
                         { form && <FeedbackForm/>}
                 </div>}
             </div>

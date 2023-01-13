@@ -9,7 +9,6 @@ import risingstar from "../../Assets/risingstar.svg";
 import beloved from "../../Assets/beloved.svg";
 import rocket from "../../Assets/rocket.svg";
 import influencer from "../../Assets/influencer.svg";
-import socialite from "../../Assets/socialite.svg";
 import VideoCard from "../../Assets/Components/VideoCard/VideoCard"
 import {faBookmark, faEyeSlash, faTrashCan} from "@fortawesome/free-regular-svg-icons";
 import {faPenToSquare, faPen, faUser, faGear, faX, faXmark} from "@fortawesome/free-solid-svg-icons";

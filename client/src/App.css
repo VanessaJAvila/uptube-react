@@ -71,8 +71,6 @@ label {
     color:#30303a;
 }
 
-
-
 #light .goldStalker{
     background-color: rgba(105, 105, 105, 0.4);
     border:1px solid #1C1C24;
@@ -123,6 +121,32 @@ label {
     background-color: white;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
 }
+
+#light .uploads{
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
+}
+
+#light .container-form{
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
+}
+
+#light .container-form input{
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.32);
+    color:#1C1C24;
+}
+
+#light .close-icon{
+    color:#1C1C24;
+}
+
+#light input.radio{
+    color:#1C1C24;
+}
+
+
 
 #light h1{
     color:#1C1C24;
