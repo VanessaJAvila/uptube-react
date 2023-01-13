@@ -1,13 +1,11 @@
 
 .login{
   padding: 10%;
+  padding-bottom: 20em;
   .container{
-    padding: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #1C1C24;
-    color: white;
     border-radius: 25px;
     .img{
       width: 80%;
@@ -17,7 +15,6 @@
     }
     .inputContainer{
       margin-bottom: 15px;
-      background-color: #13131A;
       width: 100%;
       margin-top: 10px;
       display: flex;
@@ -28,6 +25,16 @@
       height: 30px;
       border: none;
       outline: none;
+      color:red;
+
+      #password {
+        width: 100%;
+        height: 25px;
+        margin-bottom: 10px;
+        padding: 10px;
+        margin-bottom: 1em;
+        background-color: #7e0707;
+      }
       input{
         width: 100%;
         border: none;
@@ -35,6 +42,13 @@
         margin-left: 10px;
         background-color: #13131A;
         color: white;
+        height: 1em;
+        -internal-autofill-selected {
+          background-image: none !important;
+          background-color: none;
+          color: fieldtext !important;
+        }
+
       }
       .icons{
         margin-right:5px;
@@ -84,6 +98,15 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      a{
+        color: white; /* desired color */
+        text-decoration: none;
+        outline: none;
+        & hover{
+        color: #1E75FF;
+
+      }
+      }
     }
   }
 }

@@ -73,11 +73,9 @@ function Login() {
                 </div>
                 <a id="forgotPw" href="/RecoverPassword">Esqueceu-se da Password?</a>
                 <button type="submit">Login</button>
-                <a href="/Register">Criar Conta</a>
+                <a class="myClass" href="/Register">Criar Conta</a>
 
-                <div className="google">
-                    <button type="submit" >Entrar com Google</button>
-                </div>
+
             </form>
 
 
