@@ -80,7 +80,6 @@ function Profile() {
         })
             .then((res) => {
                 //console.log(res, "upload res");
-
             }).catch((error) => {
             //console.log(error.response.data, "nao editaste a photo");
             alert("error: "+ error.response.data)
