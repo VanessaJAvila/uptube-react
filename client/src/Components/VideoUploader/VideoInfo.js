@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import "./VideoInfo.scss"
 import CreateNewTag from "./CreateNewTag/CreateNewTag";
-import {Redirect} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import VideoStreamingPage from "../../Pages/VideoStreamingPage/VideoStreamingPage";
 
 //localhost port for api
@@ -26,7 +26,7 @@ export default function VideoInfo( {videoData}){
     const [textLimit, setTextLimit] = useState(0)
     const [limitColor, setLimitColor] = useState('')
     const [imageLoaded, setImageLoaded] = useState(false);
-
+    const history = useHistory();
     const videoId = videoData.insertId;
 
     const sendVideoData = () => {
@@ -39,6 +39,7 @@ export default function VideoInfo( {videoData}){
                 withCredentials: true
             }).then(r =>{
                 console.log(r.request.statusText)
+                history.replace("/userChannel");
             });
         }catch(e){
             console.log('err', e.response)
@@ -62,8 +63,6 @@ export default function VideoInfo( {videoData}){
             });
 
     });
-
-    console.log("videoDetails: ", videoData)
 
     const handleNewTag = (newTag) => {
         setVideoTags((prevTags) => [...prevTags, newTag]);

@@ -42,7 +42,7 @@ function VideoCard(props) {
                             </div>
                             <Link to={`/channel/${props.user_id}`}>
                             <div className={"user-photo"}
-                                 style={{backgroundImage: `url(${props.photo}`}}>
+                                 style={{backgroundImage: `url(${API}${props.photo}`}}>
                             </div>
                             </Link>
                         </div>
@@ -100,7 +100,7 @@ function VideoCard(props) {
             return (
                 <div className={"video-card " + props.type}>
                     <div className={"thumbnail-container"}
-                         style={{backgroundImage: `url(${props.thumbnail})`}}>
+                         style={{backgroundImage: `url(${API}${props.thumbnail})`}}>
                         <p className={"length"}>{props.duration}</p>
                     </div>
                     <div className={"user-photo"}
