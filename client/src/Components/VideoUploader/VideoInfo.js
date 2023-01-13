@@ -33,7 +33,7 @@ export default function VideoInfo( {videoData}){
         try{
             axios.post(`${API}/video/${videoId}/update`, {
                 title: videoTitle,
-                thumbnail: activeThumb,
+                thumbnail: `/videos/${videoData.video_key}/${activeThumb}`,
                 description: videoDescription
             }, {
                 withCredentials: true

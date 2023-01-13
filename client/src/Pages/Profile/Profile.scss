@@ -1,157 +1,69 @@
 .Profile {
-  width: 90%;
-
-  .container-profile {
-    padding-left: 200px;
+  .container-profile{
     display: flex;
-    align-items: center;
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      color: white;
-      border-radius: 25px;
+  }
+  .container{
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    background-color: #1C1C24;
+    color: white;
+    border-radius: 25px;
+    width: 100%;
+    margin-left: 17%;
+    margin-top: 4%;
+    .inputContainer{
+      margin-bottom: 15px;
+      background-color: #13131A;
       width: 100%;
-      margin-left: 200px;
-      margin-top: 100px;
-
-      .title {
-        font-size: 1em;
-        display: flex;
-        align-content: flex-start;
+      margin-top: 10px;
+      display: flex;
+      align-content: center;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 6px;
+      height: 30px;
+      border: none;
+      outline: none;
+      img{
+        width: 220px;
+        height: 180px;
       }
-
-      .inputContainer {
-        margin-bottom: 15px;
+      input{
+        width: 100%;
+        border: none;
+        outline: none;
+        margin-left: 10px;
         background-color: #13131A;
-        width: 100%;
-        margin-top: 10px;
-        display: flex;
-        align-content: center;
-        justify-content: space-between;
-        align-items: center;
-        border-radius: 6px;
-        min-height: fit-content;
-        border: none;
-        outline: none;
-        overflow: scroll;
-
-        img {
-          width: 220px;
-          height: 180px;
-        }
-
-        input {
-          padding-left: 1em;
-          background-color: rgb(28, 28, 35);
-          outline: none;
-          color: white;
-          height: 3em;
-          width: 100%;
-          display: flex;
-          flex-wrap: wrap;
-          border: none;
-
-          #file-upload-button {
-            color: red;
-          }
-
-        }
-
-        .icons {
-          margin-right: 5px;
-          color: white;
-        }
+        color: white;
       }
-
-      .inputContainer-photo {
-        height: auto;
-        overflow: hidden;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-      }
-
-      form {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
+      .icons{
+        margin-right:5px;
+        color: white;
       }
     }
 
-    #avatar {
+    form{
       display: flex;
       flex-direction: column;
-      width: 45%;
-      height: 19em;
-      position: relative;
-      border-radius: 50%;
-
-      .formButton {
-        border-radius: 20px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        padding: 10px;
-        border-radius: 5px;
-        text-align: center;
-        font-size: 16px;
-      }
-
+      align-items: center;
     }
-
-    #uheader {
-      display: flex;
-      flex-direction: column;
-      height: 19em;
-      position: relative;
-      width: 100%;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-
-      .formButton {
-        width: 5em;
-        border-radius: 20px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        padding: 10px;
-        text-align: center;
-        font-size: 16px;
-
-      }
-      input {
-        padding-left: 1em;
-        outline: none;
-        color: white;
-        height: 3em;
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        border: none;
-
-        #file-upload-button {
-          color: red;
-        }
-      }
-
-
-    }
-
   }
 
-  input #header.formButton {
-    -moz-default-background-color: red;
+  #avatar{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
   }
 
-  .save {
+  #uheader{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+  button{
     margin-top: 10px;
     background-color: #1E75FF;
     border-radius: 20px;
@@ -159,53 +71,12 @@
     padding: 8px;
     width: 100%;
     color: white;
-    height: 3em;
   }
-
-  .password-button {
-    margin-top: 10px;
-    background-color: rgb(48, 48, 57);
-    border-radius: 20px;
-    border: none;
-    padding: 8px;
-    width: 100%;
-    color: white;
-    height: 3em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    a {
-      text-decoration: none;
-      color: white;
-    }
-  }
-
-  .delete {
-    margin-top: 10px;
-    background-color: rgb(143, 43, 37);
-    border-radius: 20px;
-    border: none;
-    padding: 8px;
-    width: 100%;
-    color: white;
-    height: 3em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    a {
-      text-decoration: none;
-      color: white;
-    }
-
-    #birthdate {
-      color-scheme: dark;
-
-      input {
-        font-size: 17px;
-        color: grey;
-      }
+  #birthdate {
+    color-scheme: dark;
+    input{
+      font-size:17px;
+      color: grey;
     }
   }
 

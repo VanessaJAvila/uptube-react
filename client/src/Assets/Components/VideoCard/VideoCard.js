@@ -22,7 +22,7 @@ function VideoCard(props) {
                     <div className="video-card-suggestions">
                         <Link to={`/player/${props.video_id}`}>
                             <div className={"thumbnail-container"}
-                                 style={{backgroundImage: `url(${API}${props.thumbnail}`}}>
+                                 style={{backgroundImage: `url(${API}${props.thumbnail})`}}>
 
                                 <p className={"length"}>{props.duration}</p>
                             </div>
