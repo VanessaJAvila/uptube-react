@@ -26,6 +26,7 @@ import AuthHandler from "./Assets/Components/AuthHandler";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import {createContext, useState} from "react";
 import ReactSwitch from "react-switch";
+import Administrador from "./Pages/Administrador/Administrador.js"
 
 export const ThemeContext = createContext(null);
 
@@ -43,6 +44,7 @@ function App() {
         setTheme((curr) =>(curr === "dark" ? "light" : "dark"));
     };
 
+    let Admin;
     return  <ThemeContext.Provider value={{ theme,toggleTheme}}>
     <UserProvider>
         <BrowserRouter>
@@ -55,6 +57,7 @@ function App() {
                         <AuthHandler
                             requireAuth={<>
                                 <Route path="/Profile" component={Profile}/>
+
                             </>}
                             requireAnonymous={<>
                                 <Route path="/Register" component={Register}/>
@@ -64,7 +67,7 @@ function App() {
                             <Route path="/Suggested" component={Suggested}/>
                             <Route path="/Recoverpassword" exact={true} component={Recover}/>
                             <Route path="/Recoverpassword/:token" component={RecoverBytoken}/>
-
+                            <Route path="/Admin" component={Administrador}/>
                             <SearchProvider>
                                 <Route path="/Home" component={Home}/>
                                 <Route path="/UserChannel" component={UserChannel}/>

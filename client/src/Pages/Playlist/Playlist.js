@@ -117,7 +117,7 @@ function Playlist() {
                 console.log(response.data[0].video_id,"ajfbkjdsnfkjdsnfkjdsnfkjn")
                 setMovie( `${API}${response.data[0].videoUrl}`)
                 setVideoId(response.data[0].video_id);
-                if(!videoId)return setMensagem("Sem videos")
+                if(!videoId)return;
                 axios.get(`${API}/video/${videoId}/tags`)
                     .then((response) => {
                         // Update the tags state variable with the video tags data
@@ -133,7 +133,7 @@ function Playlist() {
                         //setUserFollowedId(response.data[0].user_id)
                         console.log(videos,response.data.video_info[0])
                     })
-            }).catch(e => console.log(e, "erro playlist")) ;
+            }).catch(e => setMensagem("erro playlist")) ;
     }, [dropdownState,videoId,user]);
 
 
@@ -441,13 +441,16 @@ function Playlist() {
                                                                     }
                                                                 }
                                                                 let lists = [];
-                                                                if(gpmovies.length > 0){
+                                                                if(gpmovies.length > 0 && pmovies){
                                                                     if(pmovies.includes(play.playlist_id)){
                                                                         lists.push(<p  key={ix} onClick={handleChange}><strong>X</strong></p>)
                                                                     } else {
                                                                         lists.push(<p  key={ix} onClick={handleChange}><strong>+</strong></p>)
                                                                     }
                                                                 } else {
+                                                                    setDropdownState(null);
+                                                                    setAddMusicDropdown(false);
+                                                                    setGuestPlaylistDrop(false);
                                                                     lists.push(<p  key={ix} onClick={handleChange}><strong>+</strong></p>)
                                                                 }
 
